@@ -1,0 +1,130 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+
+            <div class="line">
+                <div class="label required">
+                    Логин/Email:
+                </div>
+                <div class="value">
+                    {% if edit==0 %}
+                    <input name="user_email" class="element required" type="text"  maxlength="250"  value="">
+                    {% else %}
+                        {{ info.user_email }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Роль:
+                </div>
+                <div class="value">
+                    <select name="user_role_id" class="element">
+                        <option value="1" {% if info.user_role_id==1 %}selected="selected"{% endif %}>Клиент</option>
+                        <option value="2" {% if info.user_role_id==2 %}selected="selected"{% endif %}>Админ</option>
+                        <option value="3" {% if info.user_role_id==3 %}selected="selected"{% endif %}>Менеджер</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Менеджер:
+                </div>
+                <div class="value">
+                    <select name="user_manager_id" class="element">
+                        <option value="0">Выберите</option>
+                        {% for manager in managers %}
+                        <option value="{{ manager.user_id }}" {% if info.user_manager_id==manager.user_id %}selected="selected"{% endif %}>{{ manager.profile_lastname }} {{ manager.profile_name }}</option>
+                       {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Имя:
+                </div>
+                <div class="value">
+                    <input name="profile_name" class="element " type="text"  maxlength="250"  value="{{ profile.profile_name }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Фамилия:
+                </div>
+                <div class="value">
+                    <input name="profile_lastname" class="element " type="text"  maxlength="250"  value="{{ profile.profile_lastname }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Телефон:
+                </div>
+                <div class="value">
+                    <input name="profile_phone" class="element " type="text"  maxlength="250"  value="{{ profile.profile_phone }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label required">
+                    Пароль:
+                </div>
+                <div class="value">
+                    <input name="user_password" class="element" type="text"  maxlength="250"  value="">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Пароль повторно:
+                </div>
+                <div class="value">
+                    <input name="user_password2" class="element " type="text"  maxlength="250"  value="">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Организация:
+                </div>
+                <div class="value">
+                    <input name="profile_company" class="element " type="text"  maxlength="250"  value="{{ profile.profile_company }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Город:
+                </div>
+                <div class="value">
+                    <input name="profile_city" class="element " type="text"  maxlength="250"  value="{{ profile.profile_city }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    ИНН:
+                </div>
+                <div class="value">
+                    <input name="profile_inn" class="element " type="text"  maxlength="250"  value="{{ profile.profile_inn }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Сайт:
+                </div>
+                <div class="value">
+                    <input name="profile_site" class="element " type="text"  maxlength="250"  value="{{ profile.profile_site }}">
+                </div>
+            </div>
+            {% if edit==1 %}
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="user_id" value="{{ info.user_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+        </div>
+        <div class="submit btn btn-primary">
+            {% if edit==1 %}
+                Сохранить
+            {% else %}
+                Добавить
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

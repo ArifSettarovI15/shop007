@@ -1,0 +1,213 @@
+.wrapper {
+    background-color:$color__light--1 ;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    &__top, &__bottom {
+        flex: 0 1 auto;
+        width: 100%;
+    }
+
+    //&__top {
+    //    padding-top: 82px;
+    //    margin-bottom: 14px;
+    //}
+
+    &__main {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    @include media('<xl') {
+        &__top {
+            padding-top: 58px;
+        }
+    }
+
+    @include media('<md') {
+        &__top {
+            padding-top: 48px;
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.container {
+    $root: &;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: $gutter;
+    padding-right: $gutter;
+
+    &-1 {
+        max-width: calc(1320px + 192px);
+        padding-left: 96px;
+        padding-right: 96px;
+    }
+
+    &-2 {
+        max-width: calc(1320px + 192px);
+        padding-left: 64px;
+        padding-right: 64px;
+    }
+
+    &_lg {
+        max-width: $container__width--lg;
+    }
+
+    &_md {
+        max-width: $container__width--md;
+    }
+
+    &_sm {
+        max-width: $container__width--sm;
+    }
+
+    @include media('<xl') {
+        &-2,
+        &-1 {
+            padding-left: $gutter;
+            padding-right: $gutter;
+        }
+    }
+
+
+    @include media('<lg') {
+        &,
+        &-2,
+        &-1 {
+            padding-left: $gutter/2;
+            padding-right: $gutter/2;
+        }
+    }
+}
+
+.m-1 {
+    margin: 80px 0;
+
+    @include media('<xl') {
+        margin: 64px 0;
+    }
+
+    @include media('<md') {
+        margin: 40px 0;
+    }
+}
+
+.mt-1 {
+    margin-top: 80px;
+
+    @include media('<xl') {
+        margin-top: 64px;
+    }
+
+    @include media('<md') {
+        margin-top: 40px;
+    }
+}
+
+.mb-2 {
+    margin-bottom: 80px;
+
+    @include media('<xl') {
+        margin-bottom: 64px;
+    }
+
+    @include media('<md') {
+        margin-bottom: 40px;
+    }
+}
+
+.mb-2 {
+    margin-bottom: 64px;
+
+    @include media('<md') {
+        margin-bottom: 40px;
+    }
+}
+
+.mb-hero {
+    margin-bottom: 64px;
+
+    @include media('<lg') {
+        margin-bottom: 32px;
+    }
+}
+
+.m-3 {
+    margin: 40px 0;
+
+    @include media('<xl') {
+        margin: 24px 0;
+    }
+}
+
+.mt-3 {
+    margin-top: 40px;
+
+    @include media('<xl') {
+        margin-top: 24px;
+    }
+}
+
+.mb-3 {
+    margin-bottom: 40px;
+
+    @include media('<xl') {
+        margin-bottom: 24px;
+    }
+}
+
+.p-1 {
+    padding: 80px 0;
+
+    @include media('<xl') {
+        padding: 64px 0;
+    }
+
+    @include media('<md') {
+        padding: 40px 0;
+    }
+}
+
+.pb-1 {
+    padding-bottom: 80px;
+
+    @include media('<xl') {
+        padding-bottom: 64px;
+    }
+
+    @include media('<md') {
+        padding-bottom: 40px;
+    }
+}
+
+.page {
+    &__main {
+        padding-top: 64px;
+    }
+
+    &__paging {
+        text-align: center;
+    }
+
+    @include media('<xl') {
+        &__main {
+            padding-top: 32px;
+        }
+    }
+
+    @include media('<md') {
+        &__main {
+            padding-top: 24px;
+
+            &_card {
+                .section-head__title {
+                    font-size: 18px;
+                    line-height: 1.1;
+                }
+            }
+        }
+    }
+}

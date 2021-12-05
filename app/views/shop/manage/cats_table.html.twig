@@ -1,0 +1,28 @@
+{% for item in list %}
+  <tr data-id="{{ item.cat_id }}">
+    <td class="data_id">{{ item.cat_id }}</td>
+    <td>
+      <div class="object_status  {% if item.cat_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.cat_id }}">
+        <span class="badge badge-danger">Скрыт</span>
+        <span class="badge badge-success">Активный</span>
+      </div>
+      <div data-type="top" class="badge_status  {% if item.cat_top!=1%}no{% else %}yes{% endif %}" data-value="{{ item.cat_id }}">
+        <span class="badge badge-danger">Популярно</span>
+        <span class="badge badge-success">Популярно</span>
+      </div>
+{#      <div data-type="new" class="badge_status  {% if item.cat_new!=1%}no{% else %}yes{% endif %}" data-value="{{ item.cat_id }}">#}
+{#        <span class="badge badge-danger">New</span>#}
+{#        <span class="badge badge-success">New</span>#}
+{#      </div>#}
+    </td>
+    <td class="image"><img src="{{ item.cat_icon_url }}"></td>
+    <td style="text-align: center">{{ item.cat_title }}{% if  item.cat_title!=item.cat_short_title%} ({{ item.cat_short_title }}){% endif %}</td>
+
+{#    <td>{{ item.parent_cat_title }}</td>#}
+    <td>
+      <a target="_blank" class="btn btn-success btn-xs" href="{{ global.base_url }}/{{ item.cat_url }}/"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+      <a target="_blank" href="{{ global.base_url }}/manager/shop/cats/edit/{{ item.cat_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+      <div data-value="{{ item.cat_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+    </td>
+  </tr>
+{% endfor %}

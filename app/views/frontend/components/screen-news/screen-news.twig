@@ -1,0 +1,47 @@
+{% import 'frontend/elements/link/link_macro.twig' as Link %}
+{% import "frontend/elements/badge/badge.twig" as Badge %}
+<div class="section anim-news">
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Свежие публикации',
+            section_link: 'Все публикации',
+            section_link_href: global.base_url~'/articles/',
+            section_slider: 'n-1',
+            mod: 'm-center'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container_lg">
+            <div class="rel-news anim-news-main">
+                <div class="table-list table-list_2">
+                    <div class="table-list__list js-slider-4" data-slider="n-1">
+                        {% for item in articles %}
+                            <div class="table-list__item table-list__item_main">
+                                <a href="{{ global.base_url }}/{{ item.content_type }}/{{ item.content_url }}.html" class="t-1 t-1_2">
+                                    <div class="t-1__wrapper">
+                                        <div class="t-1__image">
+                                            <img src="{% if item.thumb_url %}{{ item.thumb_url }}{% else %}{{ item.item_icon_url }}{% endif %}" class="image image_cover" alt="{{item.content_type}}">
+                                        </div>
+                                        <div class="t-1__left-top">
+                                            {{ Badge.element(item.unixtime|date('d.m.Y')) }}
+                                        </div>
+                                        <div class="t-1__bottom">
+                                            <div class="t-1__title">{{item.content_title}}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="section__link-mobile">
+                    <a href="{{ global.base_url }}/articles/" class="button button_md button_second">
+                    <span class="button__container">
+                        <span class="button__text">Все публикации</span>
+                    </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

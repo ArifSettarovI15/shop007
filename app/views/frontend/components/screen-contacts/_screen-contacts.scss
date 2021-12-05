@@ -1,0 +1,30 @@
+.section-map {
+  height: 600px;
+
+  .c-block,
+  .section-head__title {
+    width: 100%;
+    max-width: 418px;
+    z-index: 2;
+  }
+
+  @include media('<xl') {
+    .c-block,
+    .section-head__title {
+      max-width: 325px;
+    }
+  }
+
+  @include media('<md') {
+    height: auto;
+    .section-head__row {
+      justify-content: center;
+    }
+
+    .c-block,
+    .section-head__title {
+      width: auto;
+      max-width: none;
+    }
+  }
+}

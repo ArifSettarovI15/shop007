@@ -1,0 +1,18 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="table-list table-list_2">
+    <div class="table-list__list js-skills" data-sm-row="2">
+        {% for skill in skills.skills_list %}
+            <div class="table-list__item table-list__item_main">
+                <div class="ts-skill anim-skill-item">
+                    <div class="ts-skill__icon">
+                        <div class="ts-skill__icon-inner">
+                            {{ Svg.icon(skill.skills_list_icon, 1) }}
+                        </div>
+                    </div>
+                    <div class="ts-skill__text">{{skill.skills_list_title}}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="dots-container"></div>
+</div>

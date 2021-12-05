@@ -1,0 +1,33 @@
+{% for item in list %}
+    <tr>
+        <td class="image">
+            <img src="{{ item.item_icon_url }}">
+        </td>
+        <td>
+            {% spaceless %}
+                Артикул: {{ item.item_article }}, <b>{{ item.item_price }} руб.</b><br/>
+                <b>{{ item.vendor_name }}</b> {{ item.item_title }}<br/>
+            {% endspaceless %}
+        </td>
+
+            {% for group,group_data in item.compare_data %}
+        <td>
+            {% for el in group_data %}
+                <div style="margin-bottom: 3px;padding-bottom: 3px;border-bottom: 1px solid #cccccc">
+                    <div>
+                <img src="{{ item.item_icon_url }}" style="float: left;max-height: 50px;max-width: 50px;">
+                        <span style="color:{% if el.sum>=0.5 %}green{% else %}red{% endif %}"> {{ (el.sum*100)|round(2) }}% </span>  - <a href="{{ el.data.item_url }}" target="_blank">{{ el.data.item_title }}</a>
+                <div><b>{{ el.data.item_price }} руб</b> {% if item.item_price>el.data.item_price  %}<span style="color:red;">{{ ((item.item_price-el.data.item_price)/item.item_price*100)|round(2) }}%</span>{% else %}{% endif %} <span style="font-size: 11px">{{ el.data.item_date }}</span></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+            {% endfor %}
+        </td>
+            {% endfor %}
+        <td class="action_button_data">
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.item_full_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a><br/>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/products/edit/{{ item.item_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><br/>
+        </td>
+    </tr>
+{% endfor %}

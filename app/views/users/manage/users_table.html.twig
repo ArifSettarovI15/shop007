@@ -1,0 +1,45 @@
+{% for user in list %}
+  <tr>
+    <td class="data_id">{{ user.user_id }}</td>
+    <td>
+      <div data-type="status" class="badge_status   {% if user.user_active!=1%}no{% else %}yes{% endif %}" data-value="{{ user.user_id }}">
+        <span class="badge badge-danger">неакт</span>
+        <span class="badge badge-success">акт</span>
+      </div>
+      {% if user.user_role_id==1 %}
+          Клиент
+        {% elseif user.user_role_id==2 %}
+          Админ
+        {% elseif user.user_role_id==3 %}
+          Менеджер
+      {% endif %}
+    </td>
+      {% if global.user_info.user_role_id==2 %}
+    <td>
+    {% if user.user_manager_id %}
+        {{ user.manager_lastname }} {{ user.manager_name }}
+      {% endif %}
+    </td>
+    {% endif %}
+    <td>
+        {{ user.profile_company }}
+    </td>
+    <td> {{ user.profile_city }}</td>
+    <td>
+      Цена: {% if user.profile_price_id==1 %}Опт{% elseif user.profile_price_id==2 %}Опт vip{% else %}Розница{% endif %}<br/>
+        Скидка: {{ user.profile_discount }}
+      {% if user.profile_discounts %}
+      <br/>По брендам:<br/>
+          {% for ii in user.profile_discounts %}
+              {{ ii.v_name }}: {{ ii.value }}%<br/>
+          {% endfor %}
+      {% endif %}
+    </td>
+    <td>{{ format_money(user.profile_credit) }}/{{ format_money(user.profile_balance) }}/{{ user.profile_timeout }}</td>
+    <td><a class="btn btn-success btn-xs" href="{{ global.base_url }}/manager/users/view/{{ user.user_id  }}/"><i class="fa fa-eye" aria-hidden="true"></i></a><br/>
+        {% if global.user_info.user_role_id==2 %}
+      <a class="btn btn-danger btn-xs" href="{{ global.base_url }}/manager/users/edit/{{ user.user_id  }}/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      {% endif %}
+    </td>
+  </tr>
+{% endfor %}

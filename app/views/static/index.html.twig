@@ -1,0 +1,20 @@
+{% set is_home = 1 %}
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="">
+        {% include 'frontend/components/hero/hero.twig' %}
+    </div>
+    <div class="container container_sm catalog">
+        {% include 'frontend/components/cats/cats.twig' %}
+        {% include 'frontend/components/items_list/items_list.twig' %}
+    </div>
+{#    <div class="mb-1">#}
+{#        {% include 'frontend/components/screen-skills/screen-skills.twig' %}#}
+{#    </div>#}
+{#    {% if categories %}#}
+{#        <div class="m-1">#}
+{#            {% include 'frontend/components/screen-catalog/screen-catalog.twig' %}#}
+{#        </div>#}
+{#    {% endif %}#}
+
+{% endblock %}

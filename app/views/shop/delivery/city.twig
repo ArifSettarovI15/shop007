@@ -1,0 +1,26 @@
+{% extends "global.html.twig" %}
+{% block content %}
+
+
+            <div class="container container_white">
+                {% include 'frontend/components/city-delivery/city-delivery.twig' %}
+                {% if city_items %}
+                    {% set title_block='Хиты продаж в городе' %}
+                    {% if city.city_meta_title2 %}
+                        {% set title_block=city.city_meta_title2  %}
+                    {% endif %}
+                    <div class="padding">
+                        {% include 'frontend/components/best-price/best-price.twig' with {
+                            'sale_items':city_items,
+                            'block_title':title_block
+                        } %}
+                    </div>
+                {% endif %}
+
+
+            </div>
+
+    {% include 'frontend/components/advantages/advantages.twig' %}
+
+
+{% endblock %}

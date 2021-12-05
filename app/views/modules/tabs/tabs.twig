@@ -1,0 +1,7 @@
+<ul class="tabs tabs_theme_{{ theme }}" data-tab="{{ tab_id }}">
+    {% for tab in tabs %}
+        {% include 'modules/tabs/tabs_item.twig' with {
+            'info':tab
+        } %}
+    {% endfor %}
+</ul>

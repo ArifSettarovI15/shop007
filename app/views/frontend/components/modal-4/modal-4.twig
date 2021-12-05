@@ -1,0 +1,34 @@
+<div class="modal">
+    {% include 'frontend/components/modal-head/modal-head.twig' with {
+        title: 'Отзыв от '~review.review_uname
+    } %}
+    <div class="modal__body">
+        <div class="modal__block">
+            <div class="modal__img">
+                <img class="image image_cover" src="{{review.review_icon_url}}" alt="">
+            </div>
+        </div>
+       <div class="modal__block">
+           <div class="modal__input">
+               <div class="modal__block-row">
+                   <div class="modal-block-l">
+                       {% include 'frontend/components/stars/stars.twig' with {
+                           rating: review.review_rating
+                       } %}
+                   </div>
+                   <div class="modal__block-r">
+                       <div class="modal__block-date">{{review.review_unix_time|date('d.m.Y')}}</div>
+                   </div>
+               </div>
+           </div>
+           <div class="modal__input">
+               <div class="modal__block-text">{{ review.review_comment }}</div>
+           </div>
+           {% if review.review_admin_comment %}
+               <div class="modal__input">
+                   {% include 'frontend/components/comment/comment.twig' %}
+               </div>
+           {% endif %}
+       </div>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+.tm-info {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -16px;
+
+  &__l,
+  &__r {
+    width: 50%;
+    padding: 16px;
+  }
+
+  &__text {
+    color: $color__light;
+    h3 {
+      font-family: $font-family__second;
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: .04em;
+      margin-bottom: 24px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 24px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: $gradient__primary--1;
+    @include size(80px);
+    flex: 0 0 80px;
+    border-radius: 50%;
+    margin-right: 14px;
+  }
+
+  &__icon-inner {
+    @include size(64px);
+  }
+
+  &__descr {
+    font-family: $font-family__second;
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: .04em;
+    color: $color__light;
+  }
+
+  @include media('<xl') {
+    &__r,
+    &__l {
+      width: 100%;
+    }
+
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      margin: -12px -8px;
+    }
+
+    &__item {
+      width: (100%/2);
+      margin: 0;
+      padding: 12px 8px;
+    }
+
+    &__descr {
+      font-size: 21px;
+    }
+  }
+
+  @include media('<md') {
+    margin: -12px;
+    &__l,
+    &__r {
+      padding: 12px;
+    }
+
+    &__icon {
+      @include size(64px);
+      flex: 0 0 64px;
+    }
+
+    &__icon-inner {
+      @include size(56px);
+    }
+
+    &__text {
+      h3 {
+        font-size: 24px;
+        margin-bottom: 14px;
+      }
+
+      p {
+        font-size: 16px;
+        margin-bottom: 14px;
+      }
+    }
+  }
+
+  @include media('<sm') {
+    &__list {
+      margin: 0;
+    }
+
+    &__item {
+      width: 100%;
+      padding: 0;
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

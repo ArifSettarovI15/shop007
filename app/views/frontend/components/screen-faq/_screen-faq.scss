@@ -1,0 +1,90 @@
+.faq-main {
+  .table-list__list {
+    margin: -7px -16px;
+  }
+
+  .table-list__item {
+    padding: 7px 16px;
+  }
+
+  @include media('<xl') {
+    .table-list__list {
+      margin: -7px -8px;
+    }
+    .table-list__item {
+      padding: 7px 8px;
+    }
+  }
+
+  @include media('<md') {
+    .table-list__list {
+      margin: 0;
+    }
+    .table-list__item {
+      padding: 0;
+    }
+  }
+}
+
+
+.fq-item {
+  $root: &;
+  overflow: hidden;
+  border-radius: 14px;
+  @include transitions(box-shadow);
+
+  &__head {
+    @extend %flex-middle;
+    padding: 24px 14px;
+    background-color: $color__light;
+    cursor: pointer;
+  }
+
+  &__icon {
+    @include size(32px);
+    flex: 0 0 32px;
+    background-color: $color__primary--1;
+    border-radius: 50%;
+    @include transitions(background-color);
+  }
+
+  &__q {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.2;
+    color: $color__dark--3;
+    margin-left: 14px;
+  }
+
+  &__drop {
+    display: none;
+    padding: 14px;
+    background-color: $color__light--1;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 1.4;
+    color: $color__dark--3;
+  }
+
+  &.active {
+    box-shadow: 0 16px 24px rgba(29, 29, 27, 0.2);
+    z-index: 1;
+
+    #{$root}__icon {
+      background-color: $color__primary--3;
+      transform: rotate(180deg);
+    }
+  }
+
+  @include media('<md') {
+    &__head {
+      padding: 14px;
+    }
+
+    &__q {
+      font-size: 16px;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{% import 'frontend/elements/input/input_macro.twig' as Input %}
+{% import 'frontend/elements/box-input/box-input.twig' as Box %}
+<div id="modal_call" class="modal mfp-hide">
+    {% include 'frontend/components/modal-head/modal-head.twig' with {
+        title: 'Перезвоните мне'
+    } %}
+    <div class="modal__body">
+        <div class="form" data-url="{{ global.base_url }}/callbacks/" data-callback="modalSendDone">
+            <input type="hidden" name="action" class="element" value="process_callback">
+            <div class="modal__block">
+                <div class="modal__input">
+                    {{ Input.field('name', {
+                        required: 1,
+                        label: 'Ваше имя'
+                    }) }}
+                </div>
+                <div class="modal__input">
+                    {{ Input.field('phone', {
+                        required: 1,
+                        label: 'Ваш телефон',
+                        value: '+7',
+                        type: 'tel'
+                    }) }}
+                </div>
+            </div>
+            <div class="modal__block">
+                <div class="modal__input">
+                    {{ Box.cbs('rules', {
+                        name:'rules',
+                        label: 'Я принимаю <a href="'~global.base_url~'/privacy.html">условия передачи информации</a>'
+                    }) }}
+                </div>
+            </div>
+            <div class="modal__block">
+                <div class="modal__input">
+                    <button class="button button_primary button_lg submit">
+                    <span class="button__container">
+                        <span class="button__text">Отправить заявку</span>
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

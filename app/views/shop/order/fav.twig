@@ -1,0 +1,57 @@
+{% set aside='account' %}
+{% extends "content/custom_pages/custom_layout.twig" %}
+{% block c_content %}
+        {# Список покупок #}
+        <div class="container table-data" data-insert="1">
+            <div class="user-cabinet__list padding-bottom">
+                <div class="user-cabinet__text">Список покупок - это удобное дополнение, с помощью которого Вы можете отложить понравившиеся товары и позже легко их найти. Внимание, список покупок не является резервом заказа в Магазине!</div>
+                <div class="user-cabinet__sort">
+                    <div class="user-cabinet__sort-left">
+                        <a href="#" class="active" data-type="filter_value" data-value="0" data-name="nal" data-active="1">Все товары</a>
+                        <a href="#" data-type="filter_value" data-value="1" data-name="nal" data-active="-">В наличии</a>
+                    </div>
+                    <div class="user-cabinet__sort-right">
+                        <div>
+                            <a href="#popup-email-send" class="user-cabinet__list-btn user-cabinet__list-btn_yellow popup-modal">
+                                {% include 'frontend/elements/svg/svg.twig' with {
+                                    'name':'mail',
+                                    'class':'mail',
+                                    'embed':1,
+                                    'height':14,
+                                    'width': 20
+                                }%}
+                                Отправить на Email
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#" class="user-cabinet__list-btn user-cabinet__list-btn_black user-cabinet__list-btn_print">
+                                {% include 'frontend/elements/svg/svg.twig' with {
+                                    'name':'print',
+                                    'class':'print',
+                                    'embed':1,
+                                    'height':20,
+                                    'width': 20
+                                }%}
+                                Распечатать
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#" class="user-cabinet__list-btn user-cabinet__list-btn_gray user-cabinet__list-btn_reset">
+                                {% include 'frontend/elements/svg/svg.twig' with {
+                                    'name':'delete',
+                                    'class':'delete',
+                                    'embed':1,
+                                    'height':20,
+                                    'width': 16
+                                }%}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-cabinet__list-items table-content">
+                   {% include 'frontend/components/fav/list.twig' %}
+                </div>
+            </div>
+        </div>
+    {% include 'frontend/components/fav/email.twig' %}
+{% endblock %}

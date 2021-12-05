@@ -1,0 +1,60 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+{% if global.basket_total %}
+{% for item in global.basket_items %}
+   <div class="modal__item">
+        <div class="cart-item">
+            <div class="cart-item__wrapper">
+                <div class="cart-item__image">
+                    <div class="cart-item__img">
+                        <img class="image image_cover" src="{{ item.item_icon_url }}" alt="">
+                    </div>
+                </div>
+                <div class="cart-item__content">
+                    <div class="cart-item__content-main">
+                        <div class="cart-item__title">{{item.offer_title}}</div>
+                        {% if not order %}
+                        <div class="cart-item__row">
+                            <div class="cart-item__param">вес {{item.offer_weight}} кг</div>
+                        </div>
+                        {% endif %}
+                        <div class="cart-item__row">
+                            {% if not order %}
+                            <div class="cart-item__counter">
+                                
+                                {% include 'frontend/components/counter/counter.twig' with {
+                                    class: 'cart-counter',
+                                    update_basket: 1,
+                                    id: item.offer_id
+                                } %}
+                            </div>
+                            {% endif %}
+                            <div class="cart-item__price">
+                                {% if item.offer_price_sale %}
+                                    <div class="cart-item__price-new"><span>{{item.offer_price_sale}}</span> ₽</div>
+                                    <div class="cart-item__price-old"><span>{{item.offer_price}}</span> ₽</div>
+                                {% else %}
+                                    <div class="cart-item__price-current"><span>{{item.offer_price}}</span> ₽</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if not order %}
+                    <div class="cart-item__content-dop">
+                        <div class="cart-item__del js-basket-del" data-id="{{ item.offer_id }}">
+                            <div class="cart-item__icon">
+                                {{ Svg.icon('trash-icon-2', 1) }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+{% else %}
+    <div class="modal__empty">
+       <div class="cat-no-text">Корзина пуста</div>
+    </div>
+{% endif %}

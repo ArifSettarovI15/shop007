@@ -1,0 +1,11 @@
+.modal_feed {
+  .modal__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal__body {
+    flex-shrink: 0;
+    height: auto;
+  }
+}

@@ -1,0 +1,88 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+<div>
+    <div class="modal__wrapper">
+        <div class="modal__body">
+            {% if edit %}
+            <div class="modal__form form">
+            {% else %}
+            <div class="modal__form form" data-url="{{ global.base_url }}/reviews/" data-callback="showAdded">
+            {% endif %}
+                <div class="line">
+                    <div class="label required">
+                        Оценка:
+                    </div>
+                    <div class="value">
+                        <input type="number" class="element" name="rating" value="{{ review.review_rating }}" required>
+                    </div>
+                </div><div class="line">
+                    <div class="label required">
+                        Имя пользователя:
+                    </div>
+                    <div class="value">
+                        <input type="text" class="element" name="uname" value="{{ review.review_uname }}" required>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">
+                        Email пользователя:
+                    </div>
+                    <div class="value">
+                        <input type="text" class="element" name="uemail" value="{{ review.review_uemail }}">
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label required">
+                        Комментарий:
+                    </div>
+                    <div class="value">
+                        <textarea name="comment" class="textfield__field element required">{{ review.review_comment }}</textarea>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <div class="label required">
+                        Товар:
+                    </div>
+                    <div class="value">
+                        <input type="text" class="element" name="item_id" value="{{ review.review_item_id }}">
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label required">
+                        Статус:
+                    </div>
+                    <div class="value">
+                        <select name="review_status" class="element" id="">
+                            <option value="0" {% if review.review_status==0 %} selected {% endif %}>Модерация</option>
+                            <option value="1" {% if review.review_status==1 %} selected {% endif %}>Видимый</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">
+                        Ответ на комментарий:
+                    </div>
+                    <div class="value">
+                        <textarea name="admin_comment" class="textfield__field element">{{ review.review_admin_comment }}</textarea>
+                    </div>
+                </div>
+                <input name="action" type="hidden" value="process_review" class="element">
+                <div class="submit btn btn-primary">
+                        {% if edit==1 %}
+                            Сохранить
+                        {% else %}
+                            Добавить
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        function showAdded(response){
+            alert('Отзыв добавлен!');
+            window.location.replace("{{ global.base_url }}/manager/taxi/reviews");
+        }
+    </script>
+{% endblock %}

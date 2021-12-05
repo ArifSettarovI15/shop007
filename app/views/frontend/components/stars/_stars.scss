@@ -1,0 +1,53 @@
+.stars {
+  @extend %flex-middle;
+  display: inline-flex;
+
+  &__count {
+    color: $color__dark--1;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-left: 8px;
+  }
+
+  &_type {
+    display: inline-flex;
+    direction: rtl;
+    .s-star {
+      @extend %flex-center;
+      @include size(46px);
+      flex: 0 0 46px;
+      background-color: $color__light--1;
+      border-radius: 50%;
+      margin-left: 3px;
+      cursor: pointer;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.star {
+  &:checked ~ .s-star {
+    svg * {
+      fill: $color__primary--1;
+    }
+  }
+}
+
+.s-star {
+  @include size(24px);
+  flex: 0 0 24px;
+
+  &__icon {
+    display: block;
+    @include size(32px);
+  }
+
+  &.active {
+    svg * {
+      fill: $color__primary--1;
+    }
+  }
+}

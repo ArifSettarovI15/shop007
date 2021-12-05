@@ -1,0 +1,32 @@
+.slick-slide {
+  display: block !important;
+}
+
+.slick-track {
+  display: flex !important;
+  align-items: flex-start !important;
+  height: 100% !important;
+  margin-left: 0;
+}
+
+.slick-vertical .slick-track {
+  display: block !important;
+}
+
+.slick-dotted.slick-slider {
+  margin-bottom: inherit;
+}
+
+.dots-container {
+  display: none;
+  margin-top: 32px;
+
+  .slick-slider + & {
+    display: block;
+  }
+
+  @include media('<md') {
+    margin-top: 24px;
+  }
+}
+

@@ -1,0 +1,26 @@
+{% extends "global_raw.html.twig" %}
+{% block global_content %}
+    <div class="wrapper" id="main-container">
+        <div class="wrapper__top">
+            {% include 'frontend/sections/header/header.twig' %}
+        </div>
+        <div class="wrapper__main">
+            <div class="wrapper__main-top">
+                {% if not is_home and not global.error404%}
+                    {% include 'frontend/components/category-head/category-head.twig' %}
+                {% endif %}
+            </div>
+            {% block content %}
+
+            {% endblock %}
+            {% if global.seo_text %}
+                <div class="m-1">
+                    {% include 'frontend/components/st-block/st-block.twig' %}
+                </div>
+            {% endif %}
+        </div>
+       <div class="wrapper__bottom">
+           {% include 'frontend/sections/footer/footer.twig' %}
+       </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+{% import 'frontend/elements/link/link_macro.twig' as Link %}
+<header class="header js-main-header">
+
+        <div class="header__logo"></div>
+        <div class="header__links">
+            <a href="{{ global.base_url }}" class="header__links_item header__links_item_active">Магазин</a>
+            <a href="{{ global.base_url }}/payment.html" class="header__links_item">Оплата</a>
+            <a href="{{ global.base_url }}/delivery.html" class="header__links_item">Доставка</a>
+            <a href="{{ global.base_url }}/return.html" class="header__links_item">Возврат</a>
+            <a href="{{ global.base_url }}/contact.html" class="header__links_item">Контакты</a>
+            <a href="{{ global.base_url }}/basket/" class="header__links_basket">
+                {{ Svg.icon('cart_icon', 1, 35,35) }}
+                <span class="header__links_basket_count">0</span>
+            </a>
+        </div>
+    {% include 'frontend/components/menu/menu.twig' %}
+</header>

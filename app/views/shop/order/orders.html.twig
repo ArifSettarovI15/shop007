@@ -1,0 +1,69 @@
+{% set aside='account' %}
+{% block meta %}
+    <meta name="robots" content="noindex, follow"/>
+{% endblock %}
+{% extends "content/custom_pages/custom_layout.twig" %}
+{% block c_content %}
+
+        {% if variables.order_info %}
+            <div class="user-cabinet__order padding-bottom">
+                {% include 'frontend/components/order-info/order-info.twig' with {
+                    'item':variables.order_info
+                } %}
+            </div>
+        {% else %}
+        <div class="user-cabinet__order padding-bottom table-data" data-insert="1">
+            <div class="user-cabinet__title">Заказов: <i class="table-total">{{ paging_data.total }}</i></div>
+            <div class="user-cabinet__status">
+                <span>Закрыто: {{ variables.total_closed }}</span>
+                <span>/</span>
+                <span>Открыто: {{ variables.total_opened }}</span>
+            </div>
+            <div class="user-cabinet__sort">
+                <div class="user-cabinet__sort-left">
+                    <input type="hidden" data-name="status" data-type="filter_value" data-active="1" value="0">
+                    <a href="#" class="active" data-id="0">Все заказы</a>
+                    <a href="#" data-id="1">Открытые</a>
+                    <a href="#" data-id="2">Выкупленные</a>
+                    <a href="#" data-id="3">Отмененные</a>
+                </div>
+                <div class="user-cabinet__sort-right">
+                    <div>
+                        <input type='text' class='datepicker-new' data-name="date_start" data-type="filter_value" data-active="1" placeholder="От">
+                        {% include 'frontend/elements/svg/svg.twig' with {
+                            'name':'calendar',
+                            'class':'calendar',
+                            'embed':1
+                        }%}
+                    </div>
+                    <div>
+                        <input type='text' class='datepicker-new' data-name="date_end" data-type="filter_value" data-active="1"  placeholder="До">
+                        {% include 'frontend/elements/svg/svg.twig' with {
+                            'name':'calendar',
+                            'class':'calendar',
+                            'embed':1
+                        }%}
+                    </div>
+                </div>
+            </div>
+            <div class="user-cabinet__search">
+                <div class="user-cabinet__search-submit">
+                    {% include 'frontend/elements/svg/svg.twig' with {
+                        'name':'search',
+                        'class':'search',
+                        'embed':1,
+                        'height':20,
+                        'width': 20
+                    }%}
+                </div>
+                <input class="element" name="q" data-name="q" type="search" data-type="filter_value" autocomplete="off" placeholder="Поиск заказа по номеру">
+            </div>
+            <div  class="table-content">
+                {% include 'frontend/components/order-info/orders_list.twig' %}
+            </div>
+            <div class="table-navigation">
+            {% include 'frontend/components/paging/paging_ajax.twig' %}
+            </div>
+        </div>
+        {% endif %}
+{% endblock %}

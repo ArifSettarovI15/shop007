@@ -1,0 +1,158 @@
+.s-card-info {
+  padding-top: 32px;
+  &__row {
+    margin-bottom: 32px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .button_xs .button__text {
+      font-size: 16px;
+    }
+  }
+  &__text,
+  &__param {
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: $color__dark--3;
+
+    b {
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: bold;
+      color: $color__dark--3;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__text {
+    margin-bottom: 8px;
+  }
+
+  &__price {
+    display: inline-flex;
+
+    &-new {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 1.2;
+      color: $color__primary--1;
+    }
+    &-current {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 1.2;
+      color: $color__dark--3;
+    }
+
+    &-old {
+      font-size: 20px;
+      line-height: 1.2;
+      text-decoration: line-through;
+      color: $color__dark--3;
+      margin-left: 16px;
+    }
+  }
+
+  &__group {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__elem {
+    margin-left: 24px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &_2 {
+      display: flex;
+    }
+  }
+
+  &__elem-item {
+
+    .button {
+      min-width: auto;
+    }
+
+    &_m {
+      display: none;
+      margin-right: 8px;
+    }
+  }
+
+  // In modal
+  .modal & {
+    padding: 0;
+
+    &__row {
+      margin-bottom: 24px;
+    }
+  }
+
+  @include media('<xl') {
+    padding-top: 24px;
+    &__row {
+      margin-bottom: 24px;
+    }
+  }
+
+  @include media('<md') {
+    &__row {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    &__elem {
+      .counter__val {
+        width: 100%;
+        max-width: 196px;
+      }
+    }
+
+    &__elem_2 {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding: 8px 16px;
+      background-color: $color__light;
+      box-shadow: 0 -2px 8px rgba($color__dark, .1);
+      z-index: 10;
+    }
+
+    &__elem-item {
+      width: 50%;
+
+      .button {
+        width: 100%;
+      }
+      &_m {
+        display: block;
+      }
+    }
+  }
+
+  @include media('<sm') {
+    &__elem_2 {
+      flex-wrap: wrap;
+    }
+
+    &__elem-item {
+      width: 100%;
+
+      &_m {
+        margin-bottom: 8px;
+        margin-right: 0;
+      }
+    }
+  }
+}

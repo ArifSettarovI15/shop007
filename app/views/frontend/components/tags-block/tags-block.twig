@@ -1,0 +1,22 @@
+{% if variables.parts %}
+    {% set parts = variables.parts %}
+{% endif %}
+{% if global.parts and not variables.parts %}
+    {% set parts = global.parts %}
+{% endif %}
+
+<div class="c-tags-block">
+    <div class="c-tags-block__wrapper">
+        <div class="c-tags-block__list">
+            {% for item in parts %}
+                <div class="c-tags-block__item">
+                    <a href="{{item.part_full_url}}" class="button button_sm button_second">
+                        <span class="button__container">
+                            <span class="button__text">{{ item.part_title }}</span>
+                        </span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

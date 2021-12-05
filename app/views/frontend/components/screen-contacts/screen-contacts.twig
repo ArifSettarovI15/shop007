@@ -1,0 +1,13 @@
+{% import 'frontend/elements/link/link_macro.twig' as Link %}
+{% import "frontend/elements/badge/badge.twig" as Badge %}
+<div id="anchor_contacts" class="section section-map anim-contacts">
+    {% include 'frontend/sections/section-head/section-head.twig' with {
+        section_title: 'Наши контакты'
+    } %}
+    <div class="container container-1">
+        {% include 'frontend/components/contacts-block/contacts-block.twig' %}
+    </div>
+    <div class="section__map">
+        {% include 'frontend/components/map/map.twig' %}
+    </div>
+</div>

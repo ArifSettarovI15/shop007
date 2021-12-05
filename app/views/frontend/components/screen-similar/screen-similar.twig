@@ -1,0 +1,71 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+{% import "frontend/elements/badge/badge.twig" as Badge %}
+<div class="section">
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Похожие букеты',
+            section_slider: 's-2'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container_lg">
+            <div class="table-list table-list_second">
+                <div class="table-list__list table-list__list_slider js-slider-3" data-slider="s-2">
+                    {% if variables.similar %}
+                        {% set similar = variables.similar %}
+                    {% endif %}
+
+                    {% for item in similar %}
+                        <div class="table-list__item table-list__item_third">
+                            <div class="t-2">
+                                <div class="t-2__top">
+                                    {% if item.item_hit and not item.item_sale %}
+                                        <div class="t-2__badge">{{ Badge.element('ПОПУЛЯРНОЕ', { mod: 'primary3' }) }}</div>
+                                    {% endif %}
+                                    {% if item.item_sale %}
+                                        {% if item.item_sale_percent %}
+                                            <div class="t-2__badge"> {{ Badge.element('-'~item.item_sale_percent~'%', { mod: 'primary2' }) }}</div>
+                                        {% else %}
+                                            <div class="t-2__badge">{{ Badge.element('Акция', { mod: 'primary2' }) }}</div>
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="t-2__image">
+                                        <div class="t-2__image-inner">
+                                            <a href="{{global.base_url}}/{{item.cat_url}}/{{item.item_url}}/">
+                                                <img src="{{item.item_icon_url}}" class="image image_cover" alt="{{ product.item_title }}">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="t-2__main">
+                                    <div class="t-2__title">{{item.item_title}}</div>
+                                    <div class="t-2__bottom">
+                                        <div class="t-2__bottom-l">
+                                            <div class="t-2__sub">вес {{ item.offer_weight }} кг</div>
+                                            <div class="t-2__price">
+                                                {% if item.offer_price_sale %}
+                                                    <div class="t-2__price-new"><span class="product-sale">{{ item.offer_price_sale }}</span> ₽</div>
+                                                    <div class="t-2__price-old"><span class="product-price">{{ item.offer_price }}</span> ₽</div>
+                                                {% else %}
+                                                    <div class="t-2__price-current"><span class="product-price">{{ item.offer_price }}</span> ₽</div>
+                                                {% endif %}
+                                                {% set item_id = product.item_id %}
+                                            </div>
+                                        </div>
+                                        <div class="t-2__bottom-r">
+                                            <button class="button button_md button_iconic basket-add" data-id="{{ item.offer_id }}">
+                                                <span class="button__container">
+                                                    <span class="button__icon">{{ Svg.icon('cart-icon', 1) }}</span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

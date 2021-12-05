@@ -1,0 +1,12 @@
+{% extends "emails/global.html.twig" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <p style="font-size: 14px;line-height: 18px;">Для Вас создан аккаунт на сайте  <a href="{{ global.base_url }}">{{ global.fields.about.about_name }}</a>!<br/>
+        Если у Вас есть вопросы, напишите на <strong>{{ global.fields.about.about_email }}</strong> или позвоните нам на номер телефона <strong>  {{ global.fields.about.about_phone }}</strong>.</p>
+    <p style="font-size: 18px;"><b>Данные для доступа в кабинет:</b></p>
+<p><b style="font-size: 14px;">Логин:</b> {{login }}</p>
+    <p><b style="font-size: 14px;">Пароль:</b> {{password }}</p>
+{% endblock %}
+ {% block text_preview %}
+     <p style="font-size: 14px;line-height: 18px;">Поздравляем с регистрацией аккаунта!</p>
+ {% endblock %}

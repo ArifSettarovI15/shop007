@@ -1,0 +1,40 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+{% set order = 1 %}
+<div class="modal form modal_third animated fast slideInRight" data-url="{{ global.base_url }}/basket/" data-callback="modalSendDone">
+    {% include 'frontend/components/modal-head/modal-head.twig' with {
+        title: 'Оформление заказа №'~id
+    } %}
+    <div class="modal__body">
+        <div class="modal__main js-modal-scroll">
+            <div class="modal__list modal__list_2">
+                {% include 'frontend/components/cart-list/cart-list.twig' %}
+            </div>
+            <div class="modal__form">
+                {% include 'frontend/components/order-form/order-form.twig' %}
+            </div>
+        </div>
+    </div>
+    <div class="modal__bottom">
+        <div class="modal__input">
+            <div class="modal__block-title">Итого к оплате</div>
+            <div class="modal__block-value"><span class="order-price" data-price="{{ global.basket_sum }}" data-current-price="{{ global.basket_sum }}">{{ global.basket_sum }}</span> ₽</div>
+        </div>
+        <div class="modal__input modal__input_row">
+            <div class="modal__input-btn">
+                <button class="button button_lg button_iconic tooltip popup-open" data-mfp-src="#modal_basket">
+                    <span class="tooltip__text">назад в корзину</span>
+                    <span class="button__container">
+                        <span class="button__icon">{{ Svg.icon('arrow-left', 1) }}</span>
+                    </span>
+                </button>
+            </div>
+            <div class="modal__input-btn">
+                <button class="button button_lg button_primary submit">
+                      <span class="button__container">
+                        <span class="button__text">Отправить заказ</span>
+                      </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

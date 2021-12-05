@@ -1,0 +1,84 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<ul class="paging">
+{#    <li class="active">#}
+{#        <div class="paging__item">#}
+{#            <span class="paging__val">1</span>#}
+{#        </div>#}
+{#    </li>#}
+{#    <li>#}
+{#        <div class="paging__item js-paging">#}
+{#            <span class="paging__val">2</span>#}
+{#        </div>#}
+{#    </li>#}
+{#    {% if not product %}#}
+{#    <li>#}
+{#        <div class="paging__item paging__item_mock">#}
+{#            <span class="paging__val">...</span>#}
+{#        </div>#}
+{#    </li>#}
+{#    {% endif %}#}
+{#    <li>#}
+{#        <a href="#" class="paging__item paging__item_arrow js-paging" data-value="{{ page.value }}">#}
+{#          <span class="paging__icon">#}
+{#            {{ Svg.icon('arrow-right', 1) }}#}
+{#         </span>#}
+{#        </a>#}
+{#    </li>#}
+    {% for page in paging_data.pages %}
+        {% if page.name=='next' %}
+            <li>
+                {% if page.disabled %}
+                {% else %}
+                    <a href="{{ paging_data.page_link_main }}page/{{ page.value }}/"
+                       class="paging__item button button_iconic button_sm js-paging" data-value="{{ page.value }}">
+                        <span>
+                            <span class="button__icon">
+                            {{ Svg.icon('arrow-right', 1) }}
+                            </span>
+                        </span>
+                    </a>
+                {% endif %}
+            </li>
+        {% elseif page.name=='prev' %}
+            {% if page.disabled %}
+            {% else %}
+                <li>
+                    <a href="{{ paging_data.page_link_main }}{% if page.value>1 %}page/{{ page.value }}/{% endif %}"
+                       class="paging__item button button_iconic button_sm js-paging" data-value="{{ page.value }}">
+                        <span>
+                            <span class="button__icon">
+                            {{ Svg.icon('arrow-left', 1) }}
+                            </span>
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+        {% elseif paging_data.current_page==page.value %}
+            <li class="active">
+                <div class="paging__item">
+                    <span class="paging__val">{{ page.value }}</span>
+                </div>
+            </li>
+        {% elseif page.value=='...' %}
+            <li class="pagination__item pagination__item_more">
+                <span class="pagination__link">...</span>
+            </li>
+        {% elseif page.value>0 and page.disabled==false %}
+            {% if hide_links %}
+                <li>
+                    <div class="paging__item js-paging" data-value="{{ page.value }}">
+                        <span class="paging__val">{{ page.value }}</span>
+                    </div>
+                </li>
+            {% else %}
+                <li>
+                    <a data-value="{{ page.value }}"
+                       href="{{ paging_data.page_link_main }}{% if page.value!=1 %}page/{{ page.value }}/{% endif %}"
+                       class="paging__item js-paging">
+                        <span class="paging__val">{{ page.value }}</span>
+                    </a>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</ul>

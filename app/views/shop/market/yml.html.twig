@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<yml_catalog date="{{ "now"|date("Y-m-d H:i")  }}">
+  <shop>
+    <name>{{ global.fields.about.about_name }}</name>
+    <company>{{ global.fields.about.about_name2 }}</company>
+    <url>{{ global.base_url }}</url>
+    <agency>Веб-студия TigerWeb</agency>
+    <email>support@tigerweb.ru</email>
+    <currencies>
+      <currency id="RUR" rate="1"/>
+    </currencies>
+    <categories>
+      {% for cat in cats %}
+        <category id="{{ cat['cat_id'] }}"{% if cat['cat_parent_id']>0 %} parentId="{{ cat['cat_parent_id'] }}"{% endif %}>{{ cat['cat_title'] }}</category>
+      {% endfor %}
+    </categories>
+    <cpa>0</cpa>
+    <offers>
+      {% for product in products %}
+        {% if (product['item_price'])>0 and cats_ids[product['item_cat_id']]  %}
+
+      {% endif %}
+      {% endfor %}
+      {{ offers|raw }}
+    </offers>
+  </shop>
+</yml_catalog>

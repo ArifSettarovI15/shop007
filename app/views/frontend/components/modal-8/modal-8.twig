@@ -1,0 +1,16 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+<div class="modal modal_quatro animated fadeIn fast">
+    {% include 'frontend/components/modal-head/modal-head.twig' %}
+    <div class="modal__body">
+        {% include 'frontend/components/modal-8/modal-'~content~'.twig' %}
+        <div class="modal__block">
+            <div class="modal__input">
+                <button class="button button_lg button_second js-modal-close">
+                    <span class="button__container">
+                        <span class="button__text">Обратно к сайту</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

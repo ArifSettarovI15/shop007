@@ -1,0 +1,48 @@
+{% for item in list %}
+    <tr>
+        {% set object_status=item.item_status %}
+        {% set object_id=item.item_id %}
+{#        <td style="padding: 0;">#}
+{#            <input type="checkbox" class="mass-check-one" data-id="{{ item.item_id }}">#}
+{#        </td>#}
+        <td>
+            <div data-type="status" class="badge_status   {% if item.item_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">
+                <span class="badge badge-danger">неакт</span>
+                <span class="badge badge-success">акт</span>
+            </div>
+{#            <div data-type="new" class="badge_status   {% if item.item_new!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">#}
+{#                <span class="badge badge-danger">Новинка</span>#}
+{#                <span class="badge badge-success">Новинка</span>#}
+{#            </div>#}
+            <div data-type="sale" class="badge_status  {% if item.item_sale!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">
+                <span class="badge badge-danger">Скидка</span>
+                <span class="badge badge-success">Скидка</span>
+            </div>
+            <div data-type="hit" class="badge_status  {% if item.item_hit!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">
+                <span class="badge badge-danger">Популярный</span>
+                <span class="badge badge-success">Популярный</span>
+            </div>
+        </td>
+        <td class="image">
+            <img src="{{ item.item_icon_url }}">
+        </td>
+{#        <td>{{ item.vendor_name }}</td>#}
+        <td>
+            ID {{ item.item_id }} {% if item.item_is_model%} <span style="color:green;">Модель</span>{% else %}<span style="color:orange;">Единичный</span>{% endif %}<br/>
+            Название: <input type="text" style="max-width: 500px;" class="table_title_input" data-id="{{ item.item_id  }}" value="{{ item.item_title }}"><br/>
+{#            Модель: <input type="text" style="max-width: 500px;" class="table_title_input2" data-id="{{ item.item_id  }}" value="{{ item.item_short_title }}">#}
+        </td>
+        <td>{% if item.item_price %}{% if item.item_offers_total>1 %}от {% endif %}{{ item.item_price }}{% else %}-{% endif %}</td>
+        <td>{% if item.item_amount %}{{ item.item_amount }}{% else %}-{% endif %}</td>
+        <td>{{ item.cat_title }}</td>
+        <td><a target="_blank" href="/manager/shop/offers/{{ item.item_id }}/view/">Перейти</a></td>
+        <td class="action_button_data">
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.item_full_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a><br/>
+            {% if item.item_source_url  %}
+                <a target="_blank" class="btn btn-warning btn-xs" href="{{ item.item_source_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a><br/>
+            {% endif %}
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/products/edit/{{ item.item_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><br/>
+            <div data-value="{{ item.item_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

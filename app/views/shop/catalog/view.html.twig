@@ -1,0 +1,258 @@
+{% extends "global.html.twig" %}
+{% block meta %}
+    <link rel="canonical" href="{{ paging_data.page_link_main }}"/>
+    {% if global.error404 %}
+        <meta name="robots" content="noindex,nofollow"/>
+    {% elseif global.noindex %}
+        <meta name="robots" content="noindex,nofollow"/>
+        {% else %}
+            <meta name="robots" content="all"/>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="table-data catalog-main" data-insert="1" data-reload-icons="1" data-ajax2="1">
+        <div class="side-filters">
+            {%  include 'frontend/components/filter-menu/filter-menu.twig' %}
+        </div>
+        <div class="sidefilter-opener">
+            <i class="fa fa-sliders" aria-hidden="true"></i>
+        </div>
+        <div class="catalog-main container container_white">
+            <div class="catalog-main__inside">
+                <div class="left-filter">
+                    {% if global.menu_cats.levels[variables.data_info.cat_id] %}
+                            <div class="left-filter__sub">
+                                <div class="left-filter__item">
+                                    {{ variables.data_info['cat_title'] }}
+                                </div>
+                                <div class="left-filter__sub2"  style="display: block;">
+                                {% for item2 in global.menu_cats.levels[variables.data_info.cat_id] %}
+                                        <a href="{{ item2.cat_full_url }}">{{ item2.cat_short_title }}</a>
+                                {% endfor %}
+                                </div>
+                            </div>
+                                {% if variables.parts_list|length>0 %}
+                                    <div class="left-filter__sub">
+                                        <div class="left-filter__sub-item  left-filter__sub-item_link">
+                                            <div>
+                                                <div class="category-list__new ">
+                                                    {% include 'frontend/elements/svg/svg.twig' with {
+                                                        'name':'fire',
+                                                        'class':'fire'
+                                                    }%}
+                                                </div>
+                                                Популярные запросы
+                                            </div>
+                                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="left-filter__sub2">
+                                            {% for group_name,group_data in variables.parts_list_groups %}
+                                                {% if  variables.parts_list_groups|length>1%}
+                                                <div class="left-filter__b">{{ group_name }}</div>
+                                                {% endif %}
+                                                {% for cat in group_data %}
+                                                    <a href="{{ cat.part_full_url }}" {% if cat.part_id==variables.part_info.part_id %}class="active"{% endif %}>{{ cat.part_short_title|trim }}</a>
+                                                {% endfor %}
+                                            {% endfor %}
+
+
+                                        </div>
+                                    </div>
+                                {% endif %}
+                        {% elseif variables.up_cats and global.menu_cats.levels[variables.data_info.cat_parent_id] %}
+                            <div class="left-filter__sub">
+                                <div class="left-filter__item">
+                                    {{ variables.parent_cats[variables.parent_cats|length-1]['cat_title'] }}
+                                </div>
+                                <div class="left-filter__sub2"  style="display: block;">
+                                    {% for item2 in global.menu_cats.levels[variables.data_info.cat_parent_id] %}
+                                        <a href="{{ item2.cat_full_url }}" {% if variables.data_info.cat_id==item2.cat_id %}class="active"{% endif %}>{{ item2.cat_short_title }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% if variables.parts_list|length>0 %}
+                                <div class="left-filter__sub">
+                                    <div class="left-filter__sub-item  left-filter__sub-item_link">
+                                        <div>
+                                            <div class="category-list__new ">
+                                                {% include 'frontend/elements/svg/svg.twig' with {
+                                                    'name':'fire',
+                                                    'class':'fire'
+                                                }%}
+                                            </div>
+                                            Популярные запросы
+                                        </div>
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="left-filter__sub2">
+                                        {% for group_name,group_data in variables.parts_list_groups %}
+                                            {% if  variables.parts_list_groups|length>1%}
+                                                <div class="left-filter__b">{{ group_name }}</div>
+                                            {% endif %}
+                                            {% for cat in group_data %}
+                                                <a href="{{ cat.part_full_url }}" {% if cat.part_id==variables.part_info.part_id %}class="active"{% endif %}>{{ cat.part_short_title|trim }}</a>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                     {% else %}
+                         {% if variables.parts_list|length>0 %}
+                             <div class="left-filter__sub">
+                                 <div class="left-filter__sub-item  left-filter__sub-item_link">
+                                     <div>
+                                         <div class="category-list__new ">
+                                             {% include 'frontend/elements/svg/svg.twig' with {
+                                                 'name':'fire',
+                                                 'class':'fire'
+                                             }%}
+                                         </div>
+                                         Популярные запросы
+                                     </div>
+                                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                 </div>
+                                 <div class="left-filter__sub2">
+                                     {% for group_name,group_data in variables.parts_list_groups %}
+                                         {% if  variables.parts_list_groups|length>1%}
+                                             <div class="left-filter__b">{{ group_name }}</div>
+                                         {% endif %}
+                                         {% for cat in group_data %}
+                                             <a href="{{ cat.part_full_url }}" {% if cat.part_id==variables.part_info.part_id %}class="active"{% endif %}>{{ cat.part_short_title|trim }}</a>
+                                         {% endfor %}
+                                     {% endfor %}
+                                 </div>
+                             </div>
+                         {% endif %}
+
+                    {% endif %}
+
+                    {% for item in global.menu_cats.levels[0] %}
+                        {% if item.cat_url in global.server.REQUEST_URI %}
+                        <div class="left-filter__sub">
+                            <div class="left-filter__sub-item  {% if global.menu_cats.levels[item.cat_id] %}left-filter__sub-item_link{% endif %}">
+                                <a href="{{ item.cat_full_url }}">{{ item.cat_title }}</a>
+                                {% if global.menu_cats.levels[item.cat_id] %}
+                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                {% endif %}
+                            </div>
+                            {% if global.menu_cats.levels[item.cat_id] %}
+                                <div class="left-filter__sub2">
+                                    {% for item2 in global.menu_cats.levels[item.cat_id] %}
+                                        <a href="{{ item2.cat_full_url }}">{{ item2.cat_title }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for item in global.menu_cats.levels[0] %}
+                        {% if item.cat_url in global.server.REQUEST_URI %}
+                            {% else %}
+                                <div class="left-filter__sub">
+                                    <div class="left-filter__sub-item  {% if global.menu_cats.levels[item.cat_id] %}left-filter__sub-item_link {% endif %}">
+                                        <a href="{{ item.cat_full_url }}">{{ item.cat_title }}</a>
+                                        {% if global.menu_cats.levels[item.cat_id] %}
+                                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </div>
+                                    {% if global.menu_cats.levels[item.cat_id] %}
+                                        <div class="left-filter__sub2">
+                                            {% for item2 in global.menu_cats.levels[item.cat_id] %}
+                                                <a href="{{ item2.cat_full_url }}">{{ item2.cat_title }}</a>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    {% if variables.collections_groups %}
+                        <div class="left-filter__collection">
+                            <div class="left-filter__item">Коллекции брендов</div>
+                            <div class="left-filter__sub">
+                                {% for collection_group,collection_group_data in variables.collections_groups %}
+                                    {% if collection_group_data %}
+                                        <div class="left-filter__sub-item left-filter__sub-item_link">
+                                            <a href="{{ collection_group_data[0]['vendor_full_url'] }}">{{ collection_group_data[0]['vendor_name'] }}</a>
+                                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="left-filter__sub2">
+                                            {% for collection in collection_group_data %}
+                                                <a href="{{ collection.collection_full_url }}">{{ collection.collection_title }}</a>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+
+            <div style="width:100%;">
+
+				<div style="width: 100%;">
+			{% if global.menu_cats.levels[variables.data_info.cat_id] %}
+
+			 <div class="left-filter__sub">
+                        <div class="left-filter__item">
+                           Выберите подкатегорию
+                        </div>
+                        <div class="podkat">
+                        {% for item2 in global.menu_cats.levels[variables.data_info.cat_id] %}
+                                <a href="{{ item2.cat_full_url }}">{{ item2.cat_short_title }}</a>
+                        {% endfor %}
+                        </div>
+                    </div>
+                        {% elseif variables.up_cats and global.menu_cats.levels[variables.data_info.cat_parent_id] %}
+                            <div class="left-filter__sub">
+                                <div class="left-filter__item podkat_title">
+                                  Выберите подкатегорию
+                                </div>
+                                <div class="podkat">
+                                    {% for item2 in global.menu_cats.levels[variables.data_info.cat_parent_id] %}
+                                        <a href="{{ item2.cat_full_url }}" {% if variables.data_info.cat_id==item2.cat_id %}class="active"{% endif %}>{{ item2.cat_short_title }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                    {% endif %}
+
+	</div>
+
+
+                <div class="catalog-main__filter">
+                    {% if list_name!='fav-list' %}
+                        <div class="brands-filter brands-filter_2">
+                            <div class="brands-filter__item filters-main ">
+                                <div class="filter table-filters">
+                                    {%  include 'frontend/components/filter/filter.twig' %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <section class="main-section{% if list_name %} {{ list_name }}{% endif %} padding-bottom">
+                    <div class="table-content">
+                        {% include 'frontend/components/product/product_list.twig' %}
+                    </div>
+
+                    <div class="table-navigation">
+                        {% include 'frontend/components/paging/paging_ajax.twig' %}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+        {%  include 'frontend/components/recent-widget/recent-widget.twig' %}
+        {%  include 'frontend/components/bottom-info/bottom-info.twig' %}
+    </div>
+
+
+
+{% endblock %}

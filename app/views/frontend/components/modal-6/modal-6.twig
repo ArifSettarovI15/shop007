@@ -1,0 +1,59 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+<div id="modal_basket" class="modal modal_third mfp-hide">
+    {% include 'frontend/components/modal-head/modal-head.twig' with {
+        title: 'Корзина',
+        counter: global.basket_total,
+        basket: 1
+    } %}
+    <div class="modal__body">
+        <div class="modal__main js-basket-ajax js-modal-scroll">
+            {% include 'frontend/components/cart-list/cart-list.twig' %}
+        </div>
+        <div class="modal__body-bottom">
+            <div class="ts-skill">
+                <div class="ts-skill__icon">
+                    <div class="ts-skill__icon-inner">
+                        {{ Svg.icon('skill-4', 1) }}
+                    </div>
+                </div>
+                <div class="ts-skill__text">Фото собранного букета</div>
+            </div>
+            <div class="ts-skill">
+                <div class="ts-skill__icon">
+                    <div class="ts-skill__icon-inner">
+                        {{ Svg.icon('skill-5', 1) }}
+                    </div>
+                </div>
+                <div class="ts-skill__text">Топпер/Открытка в подарок</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal__bottom">
+        <div class="modal__input">
+            <div class="modal__block-title">Итого к оплате</div>
+            <div class="modal__block-value"><span class="total-sum"
+                                                  data-value="{{ global.basket_sum }}">{{ global.basket_sum }}</span> ₽
+            </div>
+        </div>
+        <div class="modal__input modal__input_row">
+            <div class="modal__input-btn">
+                <button class="button button_lg button_iconic tooltip js-basket-clear"
+                        {% if not global.basket_items %}disabled{% endif %}>
+                    <span class="tooltip__text">Очистить корзину</span>
+                    <span class="button__container">
+                        <span class="button__icon">{{ Svg.icon('refresh-icon', 1) }}</span>
+                    </span>
+                </button>
+            </div>
+            <div class="modal__input-btn">
+                <button class="button button_lg button_third send-offer" {% if not global.basket_items or global.basket_sum < 1 %}disabled{% endif %}>
+                    <span class="button__container">
+                        <span class="button__text">Оформить заказ</span>
+                  </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

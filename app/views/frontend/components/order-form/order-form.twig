@@ -1,0 +1,157 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+{% import 'frontend/elements/input/input_macro.twig' as Input %}
+{% import 'frontend/elements/box-input/box-input.twig' as Box %}
+<div class="order-form">
+    <input type="hidden" class="element" value="process_order" name="action">
+    <div class="order-form__block">
+        <div class="order-form__head js-accord" data-multiple="1" data-block="buyer">
+            <div class="order-form__title">
+                <div class="order-form__title-icon"></div>
+                <div class="order-form__title-text">Покупатель</div>
+            </div>
+            <div class="order-form__caret">
+                {{ Svg.icon('chevron', 1) }}
+            </div>
+        </div>
+        <div class="order-form__body js-accord-drop">
+            <div class="order-form__row">
+                <div class="order-form__row-elem">
+                    {{ Input.field('name', {
+                        required: 1,
+                        label: 'Ваше имя',
+                        data: [
+                            {name: 'label', value: 'buyer'}
+                        ]
+                    }) }}
+                </div>
+                <div class="order-form__row-elem">
+                    {{ Input.field('phone', {
+                        required: 1,
+                        type: 'tel',
+                        label: 'Ваш телефон',
+                        value: '+7',
+                        data: [
+                            {name: 'label', value: 'buyer'}
+                        ]
+                    }) }}
+                </div>
+                <div class="order-form__row-elem order-form__row-elem_full">
+                    <label class="field">
+                        <textarea name="note" class="field__input textarea element js-auto-size"></textarea>
+                        <span class="field__label">Текст открытки</span>
+                    </label>
+                </div>
+                <div class="order-form__row-elem order-form__row-elem_full">
+                    <label class="field">
+                        <textarea name="comment" class="field__input textarea element js-auto-size"></textarea>
+                        <span class="field__label">Комментарий к заказу</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-form__block">
+        <div class="order-form__head js-accord" data-multiple="1" data-label="delivery">
+            <div class="order-form__title">
+                <div class="order-form__title-icon"></div>
+                <div class="order-form__title-text">Доставка</div>
+            </div>
+            <div class="order-form__caret">
+                {{ Svg.icon('chevron', 1) }}
+            </div>
+        </div>
+        <div class="order-form__body js-accord-drop">
+            <div class="order-form__row">
+                <div class="order-form__row-elem">
+                    {{ Box.rbt('delivery', {
+                        label: 'Согласовать доставку',
+                        value: 'dostavkaplus',
+                        trigger: 'js-toggle-box',
+                        delivery_price: global.delivery.payment_price|number_format,
+                        id: 1,
+                        required: 1
+                    }) }}
+                </div>
+                <div class="order-form__row-elem">
+                    {{ Box.rbt('delivery', {
+                        label: 'Сделать сюрприз',
+                        value: 'surprise',
+                        trigger: 'js-toggle-box',
+                        delivery_price: global.delivery.payment_price|number_format,
+                        id: 2,
+                        required: 1
+                    }) }}
+                </div>
+                <div class="order-form__row-elem">
+                    {{ Box.rbt('delivery', {
+                        label: 'Самовывоз',
+                        value: 'pickup',
+                        trigger: 'js-toggle-box',
+                        delivery_price: 0,
+                        checked: 1,
+                        id: 3,
+                        required: 1
+                    }) }}
+                </div>
+            </div>
+            <div class="js-box-target">
+                <div class="order-form__text">Доставка по городу фиксированная — <b>{{ global.delivery.payment_price }} ₽</b> ({{ global.delivery.payment_delivery_time}})</div>
+                <div class="order-form__row">
+                    <div class="order-form__row-elem">
+                        {{ Input.field('delivery_addr', {
+                            required: 1,
+                            label: 'Адрес доставки'
+                        }) }}
+                    </div>
+                    <div class="order-form__row-elem">
+                        {{ Input.field('delivery_time', {
+                            required: 1,
+                            label: 'Дата доставки',
+                            classes: 'time-picker'
+                        }) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-form__block">
+        <div class="order-form__head js-accord" data-multiple="1" data-label="payment">
+            <div class="order-form__title">
+                <div class="order-form__title-icon"></div>
+                <div class="order-form__title-text">Оплата</div>
+            </div>
+            <div class="order-form__caret">
+                {{ Svg.icon('chevron', 1) }}
+            </div>
+        </div>
+        <div class="order-form__body js-accord-drop">
+            <div class="order-form__row">
+                <div class="order-form__row-elem">
+                    {{ Box.rbt('payment', {
+                        label: 'Наличными курьеру',
+                        value: 'cash',
+                        required: 1
+                    }) }}
+                </div>
+                <div class="order-form__row-elem">
+                    {{ Box.rbt('payment', {
+                        label: 'Перевод на карту',
+                        value: 'online',
+                        required: 1
+                    }) }}
+                </div>
+            </div>
+            <div class="order-form__dop">
+                {% include 'frontend/components/payments/payments.twig' %}
+            </div>
+        </div>
+    </div>
+    <div class="order-form__block2">
+        <div class="order-form__body">
+            {{ Box.cbs('rules', {
+                name:'rules',
+                label: 'Я принимаю условия передачи информации'
+            }) }}
+        </div>
+    </div>
+</div>

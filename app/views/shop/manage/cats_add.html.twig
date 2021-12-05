@@ -1,0 +1,180 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+  <div class="form">
+    <div class="fields">
+
+      <div class="line">
+        <div class="label required">
+          Полное название:
+        </div>
+        <div class="value">
+          <input name="cat_title" class="element required translit_from" type="text"  maxlength="250"  value="{{ info.cat_title }}">
+        </div>
+      </div>
+
+        <div class="line">
+            <div class="label">
+                Краткое название:
+            </div>
+            <div class="value">
+                <input name="cat_short_title" class="element" type="text"  maxlength="250"  value="{{ info.cat_short_title }}">
+            </div>
+        </div>
+{#        <div class="line">#}
+{#            <div class="label">#}
+{#                Код 1c:#}
+{#            </div>#}
+{#            <div class="value">#}
+{#                <input name="cat_code" class="element" type="text"  maxlength="250"  value="{{ info.cat_code }}">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="line">#}
+{#            <div class="label required">#}
+{#                Название 1c:#}
+{#            </div>#}
+{#            <div class="value">#}
+{#                <input name="cat_1c_title" class="element required" type="text"  maxlength="250"  value="{{ info.cat_1c_title }}">#}
+{#            </div>#}
+{#        </div>#}
+      <div class="line">
+        <div class="label required">
+          URL:
+        </div>
+        <div class="value">
+          <input name="cat_url" class="element required translit_to" type="text"  maxlength="250"  value="{{ info.cat_last_url_part }}">
+        </div>
+      </div>
+
+      <div class="line">
+        <div class="label">
+          Иконка:
+        </div>
+        <div class="value">
+            {% set image_data=image_data1 %}
+          {% include 'files/upload_image.html.twig' %}
+        </div>
+      </div>
+
+{#        <div class="line">#}
+{#            <div class="label ">#}
+{#                Расположение:#}
+{#            </div>#}
+{#            <div class="value cats_tree_select">#}
+{#                {{ cats_select|raw }}#}
+{#                {{ cats_select3|raw }}#}
+{#            </div>#}
+{#        </div>#}
+
+        <div class="line">
+
+            <div class="value">
+                <textarea class="element" hidden name="text">Описание категории </textarea>
+            </div>
+        </div>
+
+{#        <div class="line">#}
+{#            <div class="label ">#}
+{#                Рекомендуемые товары:#}
+{#            </div>#}
+
+{#            <div class="value">#}
+{#                <div class="aks_list">#}
+{#                    {% include 'backend/components/aks_list/aks_list.twig' with {#}
+{#                        'list':aks#}
+{#                    }%}#}
+{#                </div>#}
+{#                Добавить:<br/>#}
+{#                <div class="value cats_tree_select also_select">#}
+{#                    {{ cats_select2|raw }}#}
+{#                </div>#}
+{#                <div class="add_aks btn btn-primary">#}
+{#                    Добавить#}
+{#                </div>#}
+{#            </div>#}
+
+{#        </div>#}
+        <div class="line">
+            <div class="label">
+                Характеристики:
+            </div>
+            <div class="value">
+                <ul>
+                    {%  for item in parent_cat_filters %}
+                        <li data-id="{{ item.sprav_id }}">
+                            <span>{{ item.sprav_label }}</span> {% if item.sprav_filter %}(поиск){% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="filters_list">
+                    {% include 'backend/components/filters_list/filters_list.twig' with {
+                    'list':cat_filters
+                    }%}
+                </div>
+                Добавить:<br/>
+                <div class="value">
+                    <select class="filters_select">
+                        <option value="0">Выберите</option>
+                        {%  for item in filters %}
+                            {% if item.sprav_id not in parent_cat_filters_ids %}
+                                <option value="{{ item.sprav_id }}">{{ item.sprav_title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="add_filter btn btn-primary">
+                    Добавить
+                </div>
+            </div>
+        </div>
+
+{#        <div class="line">#}
+{#            <div class="label">#}
+{#                Meta title:#}
+{#            </div>#}
+{#            <div class="value">#}
+{#                <input name="meta_title" class="element" type="text"  maxlength="250"  value="{{ info.cat_head_title }}">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="line">#}
+{#            <div class="label">#}
+{#                Meta title ("Купить что в ед числе?"):#}
+{#            </div>#}
+{#            <div class="value">#}
+{#                <input name="meta_title2" class="element" type="text"  maxlength="250"  value="{{ info.cat_head_title2 }}">#}
+{#            </div>#}
+{#        </div>#}
+
+{#        <div class="line">#}
+{#            <div class="label">#}
+{#                Meta keywords:#}
+{#            </div>#}
+{#            <div class="value">#}
+{#                <input name="meta_keywords" class="element" type="text"  maxlength="250"  value="{{ info.cat_head_keywords }}">#}
+{#            </div>#}
+{#        </div>#}
+
+        <div class="line">
+{#            <div class="label">#}
+{#                Meta desc:#}
+{#            </div>#}
+{#            <div class="value">#}
+{#                <input name="meta_desc" class="element" type="text"  maxlength="250"  value="{{ info.cat_head_desc }}">#}
+{#            </div>#}
+{#        </div>#}
+
+      {% if edit==1 %}
+        <input type="hidden" class="element" name="action" value="process_edit">
+        <input type="hidden" class="element" name="cat_id" value="{{ info.cat_id }}">
+      {% else %}
+        <input type="hidden" class="element" name="action" value="process_add">
+      {% endif %}
+    </div>
+    <div class="submit btn btn-primary">
+      {% if edit==1 %}
+        Сохранить
+      {% else %}
+        Добавить
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

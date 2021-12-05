@@ -1,0 +1,64 @@
+.item-search {
+    &__result,&__result2 {
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    &__item {
+        cursor: pointer;
+        padding: 5px;
+        width: 33.33%;
+        display: flex;
+        height: 50px;
+        align-items: center;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #eeeeee;
+        .no-touchevents &:hover {
+            background: #eeeeee;
+        }
+    }
+    &__result2 {
+        .item-search__item {
+            cursor: inherit;
+        }
+    }
+
+    &__info {
+        width: 100%;
+    }
+    &__pic {
+        width: 50px;
+        flex: 0 0 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    &__price {
+        margin-left: 10px;
+    }
+
+    &__delete {
+        display: none;
+        margin-left:10px;
+        cursor: pointer;
+        .item-search__result2 & {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            justify-content: center;
+            i {
+                color:red;
+            }
+        }
+    }
+}
+
+.search-block-main {
+    &__result {
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}

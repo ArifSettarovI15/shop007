@@ -1,0 +1,24 @@
+{% import 'frontend/elements/link/link_macro.twig' as Link %}
+<div id="anchor_delivery" class="section main-delivery anim-delivery">
+    <div class="pattern-1"></div>
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Доставка & оплата',
+            mod: 'm-center'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container_md">
+            <div class="table-list">
+                <div class="table-list__list">
+                    <div class="table-list__item table-list__item_second">
+                        {% include 'frontend/components/delivery-block/delivery-block.twig' %}
+                    </div>
+                    <div class="table-list__item table-list__item_second">
+                        {% include 'frontend/components/delivery-block/price-block.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

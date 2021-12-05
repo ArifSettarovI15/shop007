@@ -1,0 +1,103 @@
+// Paths
+$image__path--root: '/assets/images/';
+$image__path--static: '/assets/images/static/';
+$image__path--svg: '/assets/images/svg';
+
+// Sizes
+/////////////////////////////////////////////
+$gutter: 32px;
+
+// Elements
+/////////////////////////////////////////////
+
+// Buttons
+$buttons__border-radius: 40px;
+$buttons__height--lg: 56px;
+$buttons__height--md: 46px;
+$buttons__height--sm: 32px;
+
+// Inputs
+$inputs__border-radius: 4px;
+$inputs__height: 48px;
+
+// Views
+/////////////////////////////////////////////
+$header__height: 62px;
+
+// Effects
+/////////////////////////////////////////////
+$transition-duration: .2s;
+$transition-timing-function: ease-in-out;
+$transition-delay: 0s;
+
+$animation-duration: $transition-duration * 3;
+
+// Colors
+/////////////////////////////////////////////
+
+// Palette
+$color__light: #ffffff;
+$color__dark: #000000;
+
+$color__light--1: #F4F8F4;
+$color__light--2: #ECEFF1;
+$color__light--3: #CFD8DC;
+
+$color__dark--1: #90A4AE;
+$color__dark--2: #607D8B;
+$color__dark--3: #263238;
+$color__dark--4: #1B1B1B;
+
+$color__primary--1: #B88626;
+$color__primary--2: #CB9734;
+$color__primary--3: #D32F2F;
+$color__primary--4: #C4D5BC;
+
+$color__secondary--1: #1C4E29;
+$color__secondary--2: #6B7A6B;
+$color__secondary--3: #E8EDE6;
+$color__secondary--4: #F9F3E9;
+$color__secondary--5: #F7F5F2;
+
+$color__danger: #F44336;
+
+// Grays
+$color__gray--1: #CFD8DC;
+$color__gray--2: #C2C2CB;
+
+// Gradients
+$gradient__primary--1: linear-gradient(180deg, $color__primary--1 0%, $color__primary--3 100%);
+$gradient__primary--2: linear-gradient(180deg, #6C9955 0%, #076E71 100%);
+$gradient__secondary--1: linear-gradient(0deg, #EF6101 0%, #F28134 100%);
+$gradient__secondary--2: #fff;
+$gradient__dop--1: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 21.3%);
+//
+// Breackpoints and containers
+/////////////////////////////////////////////
+
+// Minimum supported width
+$breackpoints__min: 320px;
+
+//Extra small screen / phone
+$breackpoints__xs: 480px;
+
+// Small screen / tablet
+$breackpoints__sm: 768px;
+
+// Medium small screen / mobile desktop
+$breackpoints__md: 1024px;
+
+// Large screen / large desktop
+$breackpoints__lg: 1366px;
+
+$breackpoints__xs--max: ($breackpoints__sm - 1);
+$breackpoints__sm--max: ($breackpoints__md - 1);
+$breackpoints__md--max: ($breackpoints__lg - 1);
+
+$container__width--lg: 1512px + ($gutter * 2);
+$container__width--md: 1320px + ($gutter * 2);
+$container__width--sm: 1170px + ($gutter * 2);
+
+// Fonts
+$font-family__main: 'NunitoSans', sans-serif;
+$font-family__second: 'Kurale', sans-serif;

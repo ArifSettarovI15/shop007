@@ -1,0 +1,24 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="container">
+        <div class="page__content">
+            <div class="page__info">
+                {% if fields.reg_photo %}
+                    <div class="page__info-top"  style="background-image: url('{{ fields.reg_photo.sizes_url.large }}');">
+                        {% if fields.reg_text  %}
+                            <div class="page__info-top-text">
+                                {{ fields.reg_text|nl2br }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% include 'frontend/components/reg-form/reg-form.twig' %}
+            </div>
+            {% if banners %}
+                <div class="page__side-slider">
+                    {% include 'frontend/components/side-slider/side-slider.twig' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

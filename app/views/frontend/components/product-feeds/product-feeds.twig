@@ -1,0 +1,23 @@
+<div class="product-feeds">
+    <div class="product-feeds__main">
+        <div class="table-data">
+            <div class="product-feeds__list" data-list="reviews">
+                {% if reviews.reviews_total or list %}
+                    {% include 'frontend/components/product-feeds/feeds_list.twig' %}
+                {% else %}
+                    <h3>Станьте первым кто оставит свое мнение о продукте!</h3>
+                {% endif %}
+            </div>
+            {% if paging_data.pages %}
+                <div class="mt-3">
+                    <div class="table-paging" data-list="paging" data-table="reviews">
+                        {% include 'frontend/components/paging/paging.twig' %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="product-feeds__side">
+        {% include 'frontend/components/common-rating/common-rating.twig' %}
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<ul>
+    {%  for item in list %}
+        <li>
+            {% if item.sif_key %}
+                <span>{{ item.sif_value }}</span> <i data-id="{{ item.sif_id }}" class="fa fa-times"></i>
+            {% else %}
+                <span>{{ item.svid_title }}</span> <i data-id="{{ item.sif_id }}" class="fa fa-times"></i>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

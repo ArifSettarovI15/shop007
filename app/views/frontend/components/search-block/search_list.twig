@@ -1,0 +1,22 @@
+{% for item in list %}
+    <div class="search-list__item">
+        <div class="search-product">
+            <div class="search-product__pic" style="background-image: url('{{ item.item_icon_url }}')"></div>
+            <div class="search-product__info">
+                <a href="{{ item.item_full_url }}" class="search-product__name">
+                    <span>{{ item.full_title }}</span>
+                </a>
+                <div class="search-product__price">
+                    {% if item.item_price_before %}
+                    <span class="search-product__price_sale">{{ item.item_price_f }} руб.</span>
+                    <span class="search-product__price_old">{{ item.item_price_before_f }} руб.</span>
+                    {% else %}
+                        <span class="search-product__price_current">{{ item.item_price_f }} руб.</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+

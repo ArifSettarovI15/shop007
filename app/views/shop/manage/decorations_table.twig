@@ -1,0 +1,23 @@
+{% for item in list %}
+
+    <tr data-id="{{ item.offer_id }}">
+        {% set object_status=item.item_status %}
+        {% set object_id=item.item_id %}
+        <td class="image">
+            <img src="{{ item.item_icon_url }}">
+        </td>
+        <td>
+            {{ item.offer_article }}{% if item.offer_1c%} <span style="color:green;">Код 1С</span>{% endif %}
+            {% if item.item_title%}
+                <b>{{ item.item_title }}</b>
+            {% endif %}<br/>
+            Название: <input type="text" style="max-width: 500px;" class="table_offer_title" data-id="{{ item.offer_id  }}" value="{{ item.offer_title }}"><br/>
+            Кратко: <input type="text" style="max-width: 500px;" class="table_offer_short_title" data-id="{{ item.offer_id  }}" value="{{ item.offer_short_title }}">
+        </td>
+        <td>{% if item.offer_price %}{{ item.offer_price1 }}{% else %}0{% endif %}</td>
+        <td class="action_button_data">
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.offer_full_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a><br/>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/decorations/edit/{{ item.offer_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><br/>
+        </td>
+    </tr>
+{% endfor %}

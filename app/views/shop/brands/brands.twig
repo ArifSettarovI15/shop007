@@ -1,0 +1,44 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="container container_white padding-bottom">
+        <div class="brands-all">
+            <div class="left-filter">
+                {% for item in global.menu_cats.levels[0] %}
+                    <div class="left-filter__element">
+                        <a href="{{ item.cat_full_url }}" class="left-filter__item">
+                            {{ item.cat_title }}
+                        </a>
+                        <div class="left-filter__sup">({{ item.cat_count }})</div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+            <div class="brands-all__right">
+                <div class="table-data" data-insert="1">
+                    <div class="brands-filter table-filters">
+                        <div class="brands-all__filter">
+                            {% include 'frontend/components/filter/top.twig' %}
+                        </div>
+                        <div class="brands-all__search">
+                            <div class="brands-all__search_submit">
+                                {% include 'frontend/elements/svg/svg.twig' with {
+                                    'name':'search',
+                                    'class':'search',
+                                    'embed':1
+                                }%}
+                            </div>
+                            <input class="brands-all__search-input" data-name="filters[q]" data-type="filter_value"  type="text" placeholder="Начните вводить название">
+                        </div>
+
+                    </div>
+                    <div class="table-content">
+                        {% include 'frontend/components/brand/brand_list.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {%  include 'frontend/components/bottom-info/bottom-info.twig' %}
+{% endblock %}

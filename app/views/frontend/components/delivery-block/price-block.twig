@@ -1,0 +1,12 @@
+<div class="dp-block dp-block_p anim-delivery-second">
+    <div class="dp-block__wrapper">
+        <ul class="dp-block__list">
+            {% for item in payment.payment_info %}
+                <li class="dp-block__item">{{item.payment_info_item}}</li>
+            {% endfor %}
+        </ul>
+        <div class="dp-block__bottom">
+            {% include 'frontend/components/payments/payments.twig' %}
+        </div>
+    </div>
+</div>

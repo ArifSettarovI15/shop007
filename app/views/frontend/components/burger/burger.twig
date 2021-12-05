@@ -1,0 +1,19 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<button class="burger js-burger">
+    {% if count %}
+        <span class="burger__counter">
+            <span class="burger__num">0</span>
+        </span>
+    {% endif %}
+    <span class="burger__wrapper">
+    <span class="burger__def">
+      <span class="burger__icon">{{ Svg.icon('burger-icon', 1) }}</span>
+    </span>
+     <span class="burger__hover">
+      <span class="burger__icon">{{ Svg.icon('burger-icon-2', 1) }}</span>
+    </span>
+     <span class="burger__active">
+      <span class="burger__icon">{{ Svg.icon('burger-icon-3', 1) }}</span>
+    </span>
+  </span>
+</button>

@@ -1,0 +1,74 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+
+            <div class="line">
+                <div class="label">
+                   Группа:
+                </div>
+                <div class="value">
+                    <select class="element" name="city_group_id" >
+                        <option value="0">Выберите</option>
+                        {% for id,title in groups %}
+                            <option value="{{ id }}" {% if id==info.delivery_city_id %}selected{% endif %}>{{ title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    День отправки:
+                </div>
+                <div class="value">
+                    <select class="element" name="delivery_go_day" >
+                        <option value="0">Выберите</option>
+                        {% for day,day_title in days %}
+                        <option value="{{ day }}" {% if day==info.delivery_go_day %}selected{% endif %}>{{ day_title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    День приема:
+                </div>
+                <div class="value">
+                    <select class="element" name="delivery_priem_day" >
+                        <option value="0">Выберите</option>
+                        {% for day,day_title in days %}
+                            <option value="{{ day }}" {% if day==info.delivery_priem_day %}selected{% endif %}>{{ day_title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Время приема:
+                </div>
+                <div class="value">
+                    <select class="element" name="delivery_priem_time" >
+                        <option value="0">Выберите</option>
+                        {% for day,day_title in time %}
+                            <option value="{{ day }}" {% if day==info.delivery_priem_time %}selected{% endif %}>{{ day_title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            {% if edit==1 %}
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="delivery_id" value="{{ info.delivery_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+        </div>
+        <div class="submit btn btn-primary">
+            {% if edit==1 %}
+                Сохранить
+            {% else %}
+                Добавить
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

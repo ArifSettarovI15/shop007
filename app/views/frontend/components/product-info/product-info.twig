@@ -1,0 +1,29 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="s-product-block">
+    <div class="s-product-block__head">
+        <div class="s-product-block__title">Состав букета</div>
+    </div>
+    <div class="s-product-block__text text text_2">{{info.item_full_composition|raw}}</div>
+    <div class="s-product-block__list">
+        {% if info.filters.upakovka %}
+            <div class="s-product-block__item">
+                <div class="s-product-block__key">Вид упаковки</div>
+                <div class="s-product-block__space"></div>
+                <div class="s-product-block__val">{{info.filters.upakovka|arr_string}}</div>
+            </div>
+        {% endif %}
+        {% if info.filters.color %}
+        <div class="s-product-block__item">
+            <div class="s-product-block__key">Цвет упаковки</div>
+            <div class="s-product-block__space"></div>
+            <div class="s-product-block__val">{{info.filters.color|arr_string}}</div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="s-product-block__notice">
+        <div class="inline-notification">
+            <div class="inline-notification__icon">{{ Svg.icon('alert-icon') }}</div>
+            <div class="inline-notification__text">Состав букета может быть частично изменён в зависимости от сезонности составляющих, при этом сохраняется стилевая концепция букета. Итоговое исполение букета может незначительно отличаться от фотографии размещенной на Сайте.</div>
+        </div>
+    </div>
+</div>

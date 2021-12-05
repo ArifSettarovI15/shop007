@@ -1,0 +1,18 @@
+{% for item in list %}
+    <tr data-id="{{ item.callback_id }}">
+        <td class="data_id">{{ item.callback_id }}</td>
+        <td>{{ item.callback_name }}</td>
+        <td>{{ item.callback_phone }}</td>
+        <td>
+            <div class="object_status  {% if item.callback_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.callback_id }}">
+                <span class="badge badge-danger">Не просмотрен</span>
+                <span class="badge badge-success">Просмотрен</span>
+            </div>
+        </td>
+        <td>{{ item.callback_time}}</td>
+        <td>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/callbacks/edit/{{ item.callback_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+{#            <div data-value="{{ item.callback_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>#}
+        </td>
+    </tr>
+{% endfor %}

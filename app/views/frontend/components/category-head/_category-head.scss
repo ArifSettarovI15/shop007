@@ -1,0 +1,163 @@
+.category-head {
+  & > .container {
+    padding: 0;
+    max-width: 1512px;
+  }
+
+  &__inner {
+    padding-top: 164px;
+  }
+
+  &__bc {
+    margin-bottom: 14px;
+  }
+
+  &__image-wrapper {
+    @extend %absolute-full;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100px;
+      background-image: url('/assets/images/static/angle.png');
+      @extend %background__cover;
+      transform: rotate(180deg) scale(-1, 1);
+    }
+  }
+
+  &__image {
+    @include size(100%);
+
+    img {
+      @include size(100%);
+      object-fit: cover;
+    }
+
+    &:after {
+      content: '';
+      @extend %absolute-full;
+      @include size(100%);
+      background-color: rgba($color__dark, .3);
+    }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__title {
+    max-width: 1052px;
+    @extend .section-head__title;
+    flex: 0 1 auto;
+    font-weight: bold;
+
+    span {
+      @include line-clamp(2, 37px);
+      min-height: auto;
+    }
+  }
+
+  &__back {
+    display: none;
+    margin-bottom: 14px;
+
+    .link {
+      &__text {
+        color: $color__light;
+      }
+
+      &_icon {
+        svg * {
+          fill: $color__light !important;
+        }
+      }
+
+      &:hover {
+        .link__text {
+          color: $color__light;
+        }
+
+        .link__icon {
+          svg * {
+            fill: $color__light;
+          }
+        }
+      }
+    }
+
+  }
+
+  &__media {
+    margin-left: 16px;
+    flex: 0 0 252px;
+  }
+
+  @include media('<xl') {
+    &__row {
+      align-items: flex-end;
+    }
+
+    &__inner {
+      padding-top: 84px;
+    }
+
+    &__media {
+      flex: 0 0 86px;
+      .m-list__text {
+        display: none;
+      }
+    }
+  }
+
+  @include media('<lg') {
+    &__image-wrapper {
+      &:after {
+        height: 64px;
+      }
+    }
+
+    &__inner {
+      padding-top: 47px;
+    }
+  }
+
+  @include media('<md') {
+
+    &__inner {
+      padding-top: 12px;
+    }
+
+    &__title {
+      font-size: 24px;
+
+      span {
+        @include line-clamp(2, 26px);
+        min-height: auto;
+      }
+    }
+
+    &__media {
+      display: none;
+    }
+
+    &__bc {
+      display: none;
+    }
+
+    &__back {
+      display: block;
+    }
+
+    &__image-wrapper {
+      &:after {
+        height: 32px;
+      }
+    }
+  }
+}

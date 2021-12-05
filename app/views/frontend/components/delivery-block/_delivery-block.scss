@@ -1,0 +1,151 @@
+.main-delivery {
+  .pattern-1 {
+    height: 900px;
+  }
+
+  @include media('<lg') {
+    .table-list__list {
+      margin: 0;
+    }
+
+    .table-list__item {
+      width: 100%;
+      padding: 0;
+      margin-bottom: 32px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @include media('<md') {
+    .table-list__item {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.dp-block {
+  $root: &;
+
+  &__wrapper {
+    padding: 32px 32px 0;
+  }
+
+  &__item {
+    margin-bottom: 24px;
+    padding-left: 32px;
+
+    font-size: 18px;
+    line-height: 1.4;
+    color: $color__dark--3;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include size(24px);
+      @extend %background__cover;
+    }
+
+    b {
+      font-weight: bold;
+      color: $color__dark--3;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__bottom {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__partners {
+    display: flex;
+  }
+
+  &__partner {
+    @include size(64px, 32px);
+    flex: 0 0 64px;
+    margin-left: 14px;
+    @extend %background__cover;
+
+    &:first-child {
+      margin-left: auto;
+    }
+
+    &_master {
+      background-image: url('/assets/images/static/mastercard.png');
+    }
+
+    &_visa {
+      background-image: url('/assets/images/static/visa.png');
+    }
+
+    &_mir {
+      background-image: url('/assets/images/static/mirpay.png');
+    }
+  }
+
+  &_d {
+    #{$root}__item:before {
+      background-image: url('/assets/images/svg/icon-list-1.svg');
+    }
+  }
+
+  &_p {
+    padding-bottom: 32px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 32px;
+      background-image: url('/assets/images/static/angle.png');
+      @extend %background__cover;
+    }
+
+    #{$root}__wrapper {
+      padding-bottom: 32px;
+      background-color: $color__light;
+    }
+
+    #{$root}__item:before {
+      background-image: url('/assets/images/svg/icon-list-2.svg');
+    }
+
+  }
+
+  @include media('<lg') {
+    &_d {
+      #{$root}__wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  @include media('<md') {
+    &__item {
+      font-size: 16px;
+    }
+
+    &__wrapper {
+      padding: 0 14px;
+    }
+
+    &_p {
+      #{$root}__wrapper {
+        padding: 24px 14px;
+      }
+    }
+  }
+}

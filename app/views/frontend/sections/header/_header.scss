@@ -1,0 +1,60 @@
+.header {
+  background-color: $color__light;
+  height: 76px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  &__links{
+    display: flex;
+    &_item{
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 16px;
+
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: $color__secondary--2;
+      padding: 0 25px;
+      @include transitions(all);
+
+      &_active{
+        background-color: $color__secondary--3;
+        color: $color__secondary--1;
+      }
+      &:not(&_active):hover{
+        transform: scale(1.03);
+        background-color: $color__light--1;
+        color:$color__secondary--1
+      }
+    }
+    &_basket{
+      height: 76px;
+      width: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &_count{
+        @include size(20px);
+        background-color: $color__primary--1;
+        color: $color__light;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        position: absolute;
+        top: 14px;
+        right: 12px;
+      }
+      @include transitions(all);
+      &:hover{
+        transform: scale(1.03);
+        background-color: $color__light--1;
+      }
+    }
+
+
+  }
+}

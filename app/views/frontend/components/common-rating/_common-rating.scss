@@ -1,0 +1,93 @@
+.common-rating {
+  background-color: $color__light;
+  padding: 32px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 32px;
+    background-color: $color__light;
+    clip-path: polygon(0% 0%, 100% 100%, 100% 0%);
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.2;
+    color: $color__dark;
+    margin-bottom: 24px;
+  }
+
+  &__main {
+    display: flex;
+    margin-bottom: 24px;
+  }
+
+  &__icon {
+    @include size(128px);
+  }
+
+  &__l,
+  &__r {
+    width: 50%;
+  }
+
+  &__r {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  &__val {
+    font-weight: bold;
+    font-size: 52px;
+    line-height: 1.25;
+    color: $color__primary--1;
+    margin-bottom: 14px;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 1.4;
+    color: $color__dark--1;
+    margin-bottom: 14px;
+  }
+
+  &__bottom {
+    .button {
+      width: 100%;
+    }
+  }
+
+  @include media('<md') {
+    padding: 0;
+    &__r {
+      display: none;
+    }
+
+    &__l {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__val,
+    &__text,
+    &__stars {
+      flex: 1;
+      margin-bottom: 0;
+      margin-left: 4px;
+    }
+    
+    &__val {
+      margin-left: 0;
+      font-size: 42px;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div id="anchor_feeds" class="section anim-feeds">
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Отзывы клиентов',
+            section_slider: 'f-1'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container_lg">
+            <div class="table-list table-list_second anim-feeds-main">
+                <div class="table-list__list table-list__list_slider js-slider-2" data-slider="f-1">
+                    {% for review in reviews %}
+                    <div class="table-list__item table-list__item_main">
+                        {% include 'frontend/components/screen-feeds/feed.twig' %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

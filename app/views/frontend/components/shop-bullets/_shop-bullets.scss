@@ -1,0 +1,13 @@
+.s-bullets {
+  .table-list {
+    &__item {
+      width: (100%/3);
+    }
+  }
+
+  @include media('<md') {
+    .table-list__item {
+      width: 100%;
+    }
+  }
+}

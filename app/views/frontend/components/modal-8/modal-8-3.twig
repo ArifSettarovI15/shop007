@@ -1,0 +1,13 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+<div class="modal__block">
+    <div class="modal__img">
+        <div class="modal__img-inner">{{ Svg.icon('skill-2', 1) }}</div>
+    </div>
+</div>
+<div class="modal__block">
+    <div class="modal__block-title">Спасибо за заявку!</div>
+    <div class="modal__block-text2">
+        <p>Данные по заявке отправлены на обработку. В ближейшее время мы с вами свяжемся</p>
+        <p>Если возникли проблемы или вам не перезвонили, позвоните по номеру: <a href="tel:{{ global.fields.info.info_phone|replace({'(':'',')':'',' ':'','-':''})}}">{{ global.fields.info.info_phone }}</a></p>
+    </div>
+</div>

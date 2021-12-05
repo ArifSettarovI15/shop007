@@ -1,0 +1,17 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="m-list">
+    {% if not footer and not menu %}
+    <div class="m-list__text">Следите за нами</div>
+    {% endif %}
+    <ul class="m-list__list">
+        {% for social in global.fields.info.info_socials %}
+            <li class="m-list__item">
+                <a href="{{social.info_socials_url}}" target="_blank" class="button button_iconic button_md">
+                    <span class="button__container">
+                        <span class="button__icon">{{ Svg.icon('ml-icon-'~social.info_socials_icon, 1) }}</span>
+                    </span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,97 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+            <div class="line">
+                <div class="label required">
+                    Поставщик:
+                </div>
+                <div class="value">
+                    <input name="postav_name" class="element required" type="text"  value="{{ info.postav_name }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label required">
+                    Произодитель:
+                </div>
+                <div class="value">
+                    <input name="vendor" class="element required" type="text"  value="{{ info.options.vendor }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label required">
+                    Артикул:
+                </div>
+                <div class="value">
+                    <input name="article" class="element required" type="text"  value="{{ info.options.article }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Оригинальный номер:
+                </div>
+                <div class="value">
+                    <input name="o_article" class="element" type="text"  value="{{ info.options.o_article }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Разделитель ориг номера:
+                </div>
+                <div class="value">
+                    <input name="o_article_sep" class="element" type="text"  value="{{ info.options.o_article_sep }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label required">
+                    Цена:
+                </div>
+                <div class="value">
+                    <input name="price" class="element required" type="text"  value="{{ info.options.price }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label required">
+                    Кол-во:
+                </div>
+                <div class="value">
+                    <input name="amount" class="element required" type="text"  value="{{ info.options.amount }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label required">
+                    Описание:
+                </div>
+                <div class="value">
+                    <input name="desc" class="element required" type="text"  value="{{ info.options.desc }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Доп описание:
+                </div>
+                <div class="value">
+                    <input name="desc2" class="element" type="text"  value="{{ info.options.desc2 }}">
+                </div>
+            </div>
+            {% if edit==1 %}
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="postav_id" value="{{ info.postav_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+        </div>
+        <div class="submit btn btn-primary">
+            {% if edit==1 %}
+                Сохранить
+            {% else %}
+                Добавить
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

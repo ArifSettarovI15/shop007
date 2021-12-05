@@ -1,0 +1,41 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+            {% for block_id,block in blocks %}
+            <div class="line">
+                <div class="label">
+                    Название блока:
+                </div>
+                <div class="value">
+                    <input name="block_title[{{ block_id }}]" class="element" type="text"  maxlength="100"  value="{{ block.info.block_title }}">
+                </div>
+            </div>
+                <div class="line">
+                    <div class="label">
+                        Товары:
+                    </div>
+                    <div class="value">
+                       <div class="search-block-items" data-block="{{ block_id }}">
+                           Выбранные:
+                           <div class="item-search__result2 sortable_content_items">
+                               {% include 'frontend/components/search-block/search_list_simple.twig' with {
+                                   'list':block.items
+                               } %}
+                           </div>
+                           Поиск: <input type="text" class="item-search element">
+                           <div class="item-search__result">
+
+                           </div>
+                       </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <input type="hidden" class="element" name="action" value="process_edit">
+        <div class="submit btn btn-primary">
+                Сохранить
+        </div>
+    </div>
+{% endblock %}

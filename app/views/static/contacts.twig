@@ -1,0 +1,105 @@
+{% extends "content/custom_pages/custom_layout.twig" %}
+{% block c_content %}
+    <div class="contacts-block">
+        <div class="contacts-block__container">
+            <div class="contacts-block__small">
+                <h2>Отдел продаж</h2>
+                <div class="contacts-block__tel">
+                    <p>Позвоните нам по номеру:</p>
+                    <a href="tel:{{ global.fields.about.about_phone|replace({' ':'','(':'',')':''}) }}">
+                        {{ global.fields.about.about_phone }}
+                    </a>
+                    {% if global.fields.about.about_phone2 %}
+                        <a href="tel:{{ global.fields.about.about_phone2|replace({' ':'','(':'',')':''}) }}">
+                            {{ global.fields.about.about_phone2 }}
+                        </a>
+                    {% endif %}
+                    {% if global.fields.about.about_dop_phones %}
+                        {% for phone in global.fields.about.about_dop_phones %}
+                            {% if global.fields.about.about_phone|replace({' ':'','(':'',')':''})!=phone.about_dop_phone|replace({' ':'','(':'',')':''}) %}
+                            <a href="tel:{{ phone.about_dop_phone|replace({' ':'','(':'',')':''}) }}">
+                                {{ phone.about_dop_phone }}
+                            </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="contacts-block__worktime">
+                    <p>Режим работы:</p>
+                    <span>{{ global.fields.about.about_worktime }}</span>
+                </div>
+                <div class="contacts-block__email">
+                    <p>Email:</p>
+                    <a href="mailto:{{ global.fields.about.about_email }}"><span>{{ global.fields.about.about_email }}</span></a>
+                </div>
+            </div>
+            <div class="contacts-block__big">
+                <div class="contacts-block__right">
+                    <div class="contacts-block__callback form" data-url="{{ global.base_url }}/callback/"  data-callback="CallbackDone">
+                        <input class="element" name="action" value="process_callback" type="hidden">
+                        <p>... или оставьте номер и мы с радостью вам перезвоним</p>
+                        <div class="contacts-block__callback-inside">
+                            <input name="phone" class="element required" value="7">
+                            <div class="submit">Перезвоните мне</div>
+                        </div>
+                        <span>Нажимая кнопку "Перезвоните мне" я соглашаюсь
+                            с <a href="{{ global.base_url }}/privacy.html">Положением о персональных данных и конфиденциальности</a>.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dotted-divider"></div>
+
+            {% if fields.shops %}
+                {% include 'frontend/components/shop/shop.twig' with {
+                'shops':fields.shops
+                } %}
+            {% endif %}
+
+
+      <div class="contacts-block__shipping">
+          <div class="contacts-block__shipping-content contacts-block__desc">
+              <div class="contacts-block__shipping-content-item active" id="contacts-block__shipping1">
+                  {{ fields.contacts_text|raw }}
+              </div>
+              <div class="contacts-block__shipping-content-item" id="contacts-block__shipping2">
+                  {{ fields.contacts_text|raw }}
+              </div>
+          </div>
+      </div>
+        <div class="contacts-block__bottom">
+            <div class="contacts-block__feedback">
+                <h2>Обратная связь</h2>
+                <div class="contacts-block__form form" data-url="{{ global.base_url }}/callback/"  data-callback="CallbackDone">
+                    <input class="element" name="action" value="process_callback2" type="hidden">
+                        <div>
+                            <span>Имя и Фамилия <p>*</p></span>
+                            <input type="text" class="required element" name="name">
+                        </div>
+                        <div>
+                            <span>Номер телефона <p>*</p></span>
+                            <input name="phone" value="7" class="required element">
+                        </div>
+                        <div>
+                            <span>Электронная почта</span>
+                            <input type="text"  class="element" name="email">
+                        </div>
+                        <div>
+                            <span>Сообщение</span>
+                            <textarea name="comment" class="element"></textarea>
+                        </div>
+                        <div class="contacts-block__form-btn submit">Отправить</div>
+
+                    <div class="contacts-block__form-gray">
+                        Нажимая кнопку "Отправить" я соглашаюсь
+                        с <a href="{{ global.base_url }}/privacy.html">Положением о персональных данных и конфиденциальности</a>.
+                    </div>
+                </div>
+            </div>
+            <div class="contacts-block__rekvizitu">
+                <h2>Наши реквизиты</h2>
+                {% include 'frontend/components/rekvizitu/rekvizitu.twig'%}
+            </div>
+        </div>
+    </div>
+{% endblock %}

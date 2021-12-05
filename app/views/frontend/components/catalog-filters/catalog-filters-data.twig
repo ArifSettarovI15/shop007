@@ -1,0 +1,59 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="table-list__item">
+    <div class="select">
+        <div class="select__label">Категория</div>
+        <div class="select__field">
+            <select name="cat_cat" class="select2 filter-element select-submit">
+                <option value="all">Выберите</option>
+                {% if variables.categories %}
+                    {% set categories = variables.categories %}
+                    {% if variables.cat %}
+                        {% set cat = variables.cat %}
+                    {% endif %}
+                {% endif %}
+                {% for category in categories %}
+                    <option value="{{ category.cat_url }}" {% if cat and cat.cat_url == category.cat_url %} selected {% endif%}>{{ category.cat_title }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+    </div>
+</div>
+<input type="hidden" class="filter-element" value="{{ cat.cat_url }}" name="selected_cat">
+{% include 'frontend/components/catalog-filters/catalog-filters-sprav.twig' %}
+{% if global.max_price %}
+    {% if not price_from  %}
+        {% set price_from = global.min_price %}
+    {% endif %}
+    {% if not price_to  %}
+        {% set price_to = global.max_price %}
+    {% endif %}
+<div class="table-list__item">
+    {% if not price_from  %}
+        {% set price_from = global.min_price %}
+    {% endif %}
+    {% if not price_to  %}
+        {% set price_to = global.max_price %}
+    {% endif %}
+    {% include 'frontend/components/input-range/input-range.twig' with {
+        title: 'Цена',
+        min: global.min_price,
+        current_min: price_from,
+        current_max: price_to,
+        max: global.max_price,
+        name: 'price'
+    } %}
+</div>
+{% endif %}
+{% if not modal %}
+<div class="table-list__item table-list__item_s">
+    <div class="g-change" data-trigger="bouquets">
+        <div class="g-change__btn g-change__btn_1 js-display-change {% if layout!='inline' %}active {% endif %}">
+            <div class="g-change__icon">{{ Svg.icon('grid-icon', 1) }}</div>
+        </div>
+        <div class="g-change__btn g-change__btn_2 js-display-change {% if layout=='inline' %}active {% endif %}" data-mod="inline">
+            <div class="g-change__icon">{{ Svg.icon('list-icon', 1) }}</div>
+        </div>
+    </div>
+</div>
+{% endif %}

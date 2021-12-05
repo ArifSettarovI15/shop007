@@ -1,0 +1,18 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="modal-head">
+    {% if title %}
+    <div class="modal-head__title">{{ title }}</div>
+    {% endif %}
+    <div class="modal-head__right">
+        {% if basket %}
+        <div class="modal-head__count"><span class="total-count">{{ counter}} {{ counter|sklon_tovar}}</span></div>
+        {% endif %}
+        <div class="modal-head__close">
+            <button class="button button_sm button_iconic js-modal-close">
+            <span class="button__container">
+                <span class="button__icon">{{ Svg.icon('close-icon', 1) }}</span>
+            </span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="common-rating">
+    <div class="common-rating__title">Общая оценка</div>
+    <div class="common-rating__main">
+        <div class="common-rating__l">
+            <div class="common-rating__val">{{ reviews.reviews_sum|number_format(1) }}</div>
+            <div class="common-rating__text">на основании {{ reviews.reviews_total }} {{ reviews.reviews_total|sklon_review_rod }}</div>
+            <div class="common-rating__stars">
+                {% include 'frontend/components/stars/stars.twig' with{
+                    rating: reviews.reviews_sum
+                }%}
+            </div>
+        </div>
+        <div class="common-rating__r">
+            <div class="common-rating__icon">{{ Svg.icon('common-feed-icon', 1) }}</div>
+        </div>
+    </div>
+    <div class="common-rating__bottom">
+        <button class="button button_md button_primary popup-open" data-mfp-src="#modal_send_feed">
+            <span class="button__container">
+                <span class="button__text">Добавить отзыв</span>
+                <span class="button__icon">{{ Svg.icon('mess-icon', 1) }}</span>
+            </span>
+        </button>
+    </div>
+    {% include 'frontend/components/modal-3/modal-3.twig' %}
+</div>

@@ -1,0 +1,17 @@
+{% if list %}
+  <div class="orders-content__list">
+      {% include 'shop/order/order_table.html.twig' %}
+  </div>
+    <div class="orders-content__details">
+        {% include 'shop/order/order_details.html.twig' %}
+    </div>
+{% else %}
+  <div class="cat-no-result">
+    <div class="cat-no-result__title">
+      Список заказов пуст
+    </div>
+    <div class="cat-no-result__text">
+      Выберите товар и оформите свой первый заказ!
+    </div>
+  </div>
+{% endif %}

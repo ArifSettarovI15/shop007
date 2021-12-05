@@ -1,0 +1,95 @@
+{% extends "manager/global_raw.html.twig" %}
+{% block global_content %}
+    <div class="app">
+        <header>
+
+        </header>
+        <aside>
+            <div class="logo_block">
+                TheSmak
+            </div>
+            <div class="navigation-title">
+                Меню
+            </div>
+            <ul class="navigation">
+{#                <li>#}
+{#                    <a href="{{ global.base_url }}/manager/users/">Пользователи</a>#}
+{#                </li>#}
+                {% if global.user_info.user_role_id==3 %}
+                    <li>
+                        <a href="{{ global.base_url }}/manager/shop/orders/">Заказы</a>
+                    </li>
+                {% endif %}
+                {% if global.user_info.user_role_id==2 %}
+                    <li class="list">
+                        <a href="#">Магазин</a>
+                        {% include 'shop/manage/menu.html.twig' %}
+                    </li>
+                    <li>
+                        <a href="{{ global.base_url }}/manager/sprav/">Справочники</a>
+                    </li>
+
+                    <li class="list">
+                        <a href="{{ global.base_url }}/manager/content/">Контент</a>
+                        <ul class="navigation child">
+                            <li>
+                                <a href="{{ global.base_url }}/manager/content/pages/">Страницы</a>
+                            </li>
+                            <li>
+                                <a href="{{ global.base_url }}/manager/content/articles/">Статьи</a>
+                            </li>
+{#                            <li>#}
+{#                                <a href="{{ global.base_url }}/manager/content/news/">Новости</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="{{ global.base_url }}/manager/content/akcii/">Акции</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="{{ global.base_url }}/manager/content/gallery/">Галерея</a>#}
+{#                            </li>#}
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ global.base_url }}/manager/settings/">Группы полей</a>
+                    </li>
+                    <li>
+                        <a href="{{ global.base_url }}/manager/seo/">SEO</a>
+                    </li>
+                    <li>
+                        <a href=" {{ global.base_url }}/manager/shop/parts/">Выборки товаров</a>
+                    </li>
+                    <li>
+                        <a href="{{ global.base_url }}/manager/faqs/">FAQ</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </aside>
+        <div id="content">
+            <div id="breadcrumbs">
+                <h1>{{ global.page.title }}</h1>
+                <ul>
+                    <li><a href="{{ global.base_url }}">Панель управления</a></li>
+                    {% for item in global.page.breadcrumbs %}
+                        <li> {% if item.link %}
+                        <a href="{{ item.link }}">{{ item.title }}</a></li>
+                    {% else %}
+                        {{ item.title }}
+                    {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="wrapper">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+        <footer>
+            2015 © TigerWeb
+        </footer>
+    </div>
+    <div class="notify-admin">
+
+    </div>
+{% endblock %}

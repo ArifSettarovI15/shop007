@@ -1,0 +1,22 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="filters">
+    <div class="container container_md">
+        <div class="filters__main">
+            <div class="table-list table-list_filters">
+                <div class="table-list__list" data-list="filters" data-table="bouquets" data-insert="1">
+                    {% include 'frontend/components/catalog-filters/catalog-filters-data.twig' %}
+                </div>
+                {% include 'frontend/components/modal-2/modal-2.twig' %}
+            </div>
+        </div>
+        <div class="filters__dop">
+            <button class="button button_md button_second popup-open" data-mfp-src="#modal_filter">
+                <span class="button__container">
+                    <span class="button__icon">{{ Svg.icon('filter-icon', 1) }}</span>
+                    <span class="button__text">Фильтры</span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+

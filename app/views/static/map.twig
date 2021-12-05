@@ -1,0 +1,86 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <section class="main-section main-section_margin">
+        <div class="container container_white">
+            <div class="sitemap">
+                {% for cat in cats.levels['0'] %}
+                    <div class="sitemap__block">
+                        <div class="sitemap__block-title">
+                            <a href="{{ cat.full_cat_url }}">{{ cat.cat_title }}</a>
+                        </div>
+                        <div class="sitemap__list">
+                            {% for cat2 in cats.levels[cat.cat_id] %}
+                                <div class="sitemap__list-item">
+                                        <a href="{{ cat2.full_cat_url }}">{{ cat2.cat_title }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {#<div class="sitemap__list">
+                            {% for cat2 in cats.levels[cat.cat_id] %}
+                                {% for cat3 in cats.levels[cat2.cat_id] %}
+                                    <div class="sitemap__list-item sitemap__list-item_small">
+                                        <a href="{{ cat3.full_cat_url }}">{{ cat3.cat_title }}</a>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>#}
+                    </div>
+                {% endfor %}
+                <div class="sitemap__block">
+                    <div class="sitemap__block-title">
+                        <a href="{{ global.base_url }}/brands/">Бренды</a>
+                    </div>
+                    <div class="sitemap__list">
+                        {% for vendor in vendors %}
+                            <div class="sitemap__list-item">
+                                <a href="{{ vendor.vendor_full_url }}">{{ vendor.vendor_name }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="sitemap__block">
+                    <div class="sitemap__block-title">
+                        Информация
+                    </div>
+                    <div class="sitemap__list">
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/promo/">Акции</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/new/">Новинки</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/sale/">Sale %</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/contacts.html">Контакты</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/about.html">О магазине</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/faq.html">Частые вопросы</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/news/">Новости</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/payment-and-delivery.html">Оплата и доставка</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/return.html">Обмен и возврат</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/gifts.html">Подарочные сертификаты</a>
+                        </div>
+                        <div class="sitemap__list-item">
+                            <a href="{{ global.base_url }}/bonus.html">Бонусная программа</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="page__buffer"></div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% macro field(name, options={}) %}
+    {% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+    {% set clear = options.clear or 1 %}
+    <label
+            class="field {% if options.parent_mod %}field_{{ options.parent_mod }}{% endif %}{# {% if options.dropdown %}field_select{% endif %} #}">
+        {% if options.dropdown %}
+            <div class="field__input"></div>
+            <input type="hidden" name="{{ options.name }}" class="input-vv element">
+        {% else %}
+            <input
+                    type="{% if options.type %}{{ options.type }}{% else %}text{% endif %}"
+                    name="{{ name }}"
+                    class="field__input element {% if options.value %}focused{% endif %}{% if options.icon %}field__input_icon{% endif %} {% if options.required %}required{% endif %} {{ options.classes }}"
+                    placeholder=" "
+                    {% if options.value %}
+                        value="{{ options.value }}"
+                        data-default-val="{{ options.value }}"
+                    {% endif %}
+                    {% if options.disabled %}disabled{% endif %}
+                    {% if options.data %}
+                        {% for d in options.data %}
+                            data-{{ d.name }}="{{ d.value }}"
+                        {% endfor %}
+                    {% endif %}
+                    autocomplete="off"
+            >
+        {% endif %}
+        <span class="field__status"></span>
+        {% if options.icon %}<span class="field__icon">{{ Svg.icon(options.icon, 1) }}</span>{% endif %}
+        {% if options.label %}<span class="field__label {% if options.required %}field__label_required{% endif %}">{{ options.label }}</span>{% endif %}
+        {% if clear %}<span class="field__clean js-input-clean">{{ Svg.icon('close-icon', 1) }}</span>{% endif %}
+        {#        {% if options.dropdown %}{% include 'frontend/components/input-select/' ~ options.dropdown ~'.twig' with {#}
+        {#            list: options.list#}
+        {#        } %}{% endif %}#}
+    </label>
+{% endmacro %}

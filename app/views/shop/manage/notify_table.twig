@@ -1,0 +1,12 @@
+{% for item in list %}
+    <tr>
+        <td class="data_id">{{ item.notify_id }}</td>
+        <td>{{ item.notify_time }}</td>
+        <td>{{ item.notify_list_title }}</td>
+        <td>{{ item.notify_text }}</td>
+        <td>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/notify/edit/{{ item.notify_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+            <div data-value="{{ item.notify_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

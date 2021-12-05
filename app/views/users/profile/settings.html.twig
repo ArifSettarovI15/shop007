@@ -1,0 +1,195 @@
+{% set aside='account' %}
+{% extends "content/custom_pages/custom_layout.twig" %}
+{% block c_content %}
+
+    {# Cтраница главная #}
+
+        <section class="user-cabinet ">
+            <div class="user-cabinet__line user-cabinet__line_two">
+                <div class="user-cabinet__color-block user-cabinet__color-block_yellow">
+                    <div class="user-cabinet__color-block-icon">
+                        {% include 'frontend/elements/svg/svg.twig' with {
+                        'name':'cart3',
+                        'class':'cart3',
+                        'embed':1
+                        }%}
+                    </div>
+                    <div class="user-cabinet__color-block-title">
+                        Моя корзина
+                    </div>
+                    <div class="user-cabinet__color-block-content">
+                        {{ global.basket_items|length }} {{ global.basket_total_dop }}
+                    </div>
+                    <div class="user-cabinet__color-block-price">
+                        {{ global.basket_sum_f }} руб.
+                    </div>
+                    <div class="user-cabinet__color-block-btn">
+                        <a href="{{ global.base_url }}/basket/">Подробнее</a>
+                    </div>
+                </div>
+                <div class="user-cabinet__color-block user-cabinet__color-block_black">
+                    <div class="user-cabinet__color-block-icon">
+                        {% include 'frontend/elements/svg/svg.twig' with {
+                        'name':'car',
+                        'class':'car',
+                        'embed':1
+                        }%}
+                    </div>
+                    <div class="user-cabinet__color-block-title">
+                        Мои заказы
+                    </div>
+                    <div class="user-cabinet__color-block-content">
+                        Кол-во: {{ orders_total }}
+                    </div>
+                    <div class="user-cabinet__color-block-price">
+                        {{ orders_total_sum }} руб.
+                    </div>
+                    <div class="user-cabinet__color-block-btn">
+                        <a href="{{ global.base_url }}/orders/">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="user-cabinet__line">
+                <div class="user-cabinet__account">
+                    <div class="user-cabinet__account-top logout" data-url="{{ global.base_url }}/logout/">
+                        <div>
+                            {% include 'frontend/elements/svg/svg.twig' with {
+                            'name':'exit',
+                            'class':'exit',
+                            'embed':1,
+                            'height':19,
+                            'width':16
+                            }%}
+                        </div>
+                        <span>Выйти</span>
+                    </div>
+                    <div class="user-cabinet__account-middle">
+                        <span>{{ global.user_profile.profile_name }} {{ global.user_profile.profile_lastname }}</span>
+                        <div class="user-cabinet__account-middle-pic">
+                            <div class="user-cabinet__account-middle-pic-item">
+                                <span>{{ global.user_profile.profile_name|slice(0,1) }}{{ global.user_profile.profile_lastname|slice(0,1) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-cabinet__account-content">
+                        <div>
+                            {% if global.user_profile.profile_phone %}
+                            <div class="cabinet-block__line">
+                                <p>Телефон</p>
+                                <span>{{ global.user_profile.profile_phone }}</span>
+                            </div>
+                            {% endif %}
+
+                            {% if global.user_info.user_email %}
+                            <div class="cabinet-block__line">
+                                <p>Email</p>
+                                <span>{{ global.user_info.user_email }}</span>
+                            </div>
+                            {% endif %}
+                            {% if global.user_profile.profile_city %}
+                                <div class="cabinet-block__line">
+                                    <p>Город</p>
+                                    <span>{{ global.user_profile.profile_city }}</span>
+                                </div>
+                            {% endif %}
+                            {% if global.user_profile.profile_company %}
+                                <div class="cabinet-block__line">
+                                    <p>Город</p>
+                                    <span>{{ global.user_profile.profile_company }}</span>
+                                </div>
+                            {% endif %}
+                            <div class="cabinet-block__line">
+                                <p>Рассылка новостей</p>
+                                <span>{% if global.user_profile.profile_subscribed %}Да{% else %}Нет{% endif %}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-cabinet__account-bottom">
+                        <a href="{{ global.base_url }}/profile/" class="cabinet__btn-dotted">Посмотреть все данные</a>
+                    </div>
+                </div>
+            </div>
+            <div class="user-cabinet__line">
+                <div class="user-cabinet__stat">
+                    <div>
+                        <div class="user-cabinet__stat-icon">
+                            {% include 'frontend/elements/svg/svg.twig' with {
+                            'name':'list4',
+                            'class':'list4',
+                            'embed':1,
+                            'height':41,
+                            'width':32
+                            }%}
+                        </div>
+                        <div class="user-cabinet__stat-right">
+                            <div>
+                                <p>СПИСОК ПОКУПОК</p>
+                            </div>
+                            <div>
+                                <span>Товаров: </span>
+                                <b>{{ global.fav_total }}</b>
+                            </div>
+                            <div>
+                                <a href="{{ global.base_url }}/fav/" class="cabinet__btn-dotted">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="user-cabinet__stat-icon">
+                            {% include 'frontend/elements/svg/svg.twig' with {
+                            'name':'eye2',
+                            'class':'eye2',
+                            'embed':1,
+                            'height':24,
+                            'width':41
+                            }%}
+                        </div>
+                        <div class="user-cabinet__stat-right">
+                            <div>
+                                <p>ВЫ СМОТРЕЛИ</p>
+                            </div>
+                            <div>
+                                <span>Товаров:</span>
+                                <b>{{ last_total }}</b>
+                            </div>
+                            <div>
+                                <a href="{{ global.base_url }}/last-views/" class="cabinet__btn-dotted">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="user-cabinet__stat-icon">
+                            {% include 'frontend/elements/svg/svg.twig' with {
+                                'name':'bag',
+                                'class':'bag',
+                                'embed':1,
+                                'height':38,
+                                'width':41
+                            }%}
+                        </div>
+                        <div class="user-cabinet__stat-right">
+                            <div>
+                                <p>Новинки</p>
+                            </div>
+                            <div>
+                                <span>Кол-во: </span>
+                                <b>{{ new_items }}</b>
+                            </div>
+                            <div>
+                                <a href="{{ global.base_url }}/new/" class="cabinet__btn-dotted">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if last_order %}
+            <div class="user-cabinet__order padding-bottom">
+                <div class="user-cabinet__title">Активный заказ</div>
+                {% include 'frontend/components/order-info/order-info.twig' with {
+                    'item': last_order
+                } %}
+            </div>
+        {% endif %}
+
+{% endblock %}

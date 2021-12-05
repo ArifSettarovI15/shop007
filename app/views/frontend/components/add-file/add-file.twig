@@ -1,0 +1,53 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+<div class="add-file">
+    <input type="hidden" class="element" name="file_id">
+    <div class="add-file__row">
+        <div class="add-file__el">
+            <input
+                type="file"
+                class="add-file__upload visually-hidden js-upload"
+                name="user_file"
+                data-url="{{ global.base_url }}/files/upload/"
+                data-form-data='{"action": "upload_image","input_name":"user_file", "folder":"reviews"}'
+                tabindex="-1">
+            <button class="button button_md button_second js-upload-ref">
+                <span class="button__container">
+                    <span class="button__icon">{{ Svg.icon('upload-icon', 1) }}</span>
+                    <span class="button__text">загрузить</span>
+                </span>
+            </button>
+        </div>
+        <div class="add-file__el">
+            <div class="add-file__loader file-loader">
+                <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 40 40" enable-background="new 0 0 40 40"
+                     xml:space="preserve">
+                    <path opacity="0.2" fill="#D1C0A8" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+                    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+                    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+                    <path fill="#F28134" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+                    C22.32,8.481,24.301,9.057,26.013,10.047z">
+                        <animateTransform attributeType="xml"
+                                          attributeName="transform"
+                                          type="rotate"
+                                          from="0 20 20"
+                                          to="360 20 20"
+                                          dur="0.5s"
+                                          repeatCount="indefinite"/>
+
+                </svg>
+            </div>
+            <div class="add-file__preview">
+                <div class="file-preview">
+                    <div class="file-preview__img">
+                        <div class="file-preview__del js-del-img">
+                            <div class="file-preview__del-icon">{{ Svg.icon('trash-icon') }}</div>
+                        </div>
+                        <div class="file-preview__img-inner image-preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{% import "frontend/elements/link/link_macro.twig" as Link %}
+<div class="s-product-block">
+    <div class="s-product-block__head">
+        <div class="s-product-block__title">Описание</div>
+    </div>
+    <div class="s-product-block__text text text_2 {% if info.item_full_text|length > 500 %}js-overflow{% endif %}" data-height="134">
+        {{info.item_full_text|raw}}
+    </div>
+    {% if info.item_full_text|length > 500 %}
+    <div class="s-product-block__link">
+        {{ Link.link('#', 'Скрыть текст', {mod: 'iconic', icon_left: 'eye-icon', trigger: 'js-slide-text'}) }}
+    </div>
+    {% endif %}
+</div>

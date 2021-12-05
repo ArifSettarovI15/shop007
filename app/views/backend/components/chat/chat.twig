@@ -1,0 +1,19 @@
+<div class="chat">
+    <div class="chat__title">
+        Задайте вопрос менеджеру
+    </div>
+    <div class="chat__content">
+        <div class="chat__items">
+            {% include 'frontend/components/chat/items.twig' %}
+        </div>
+        <div class="chat__under">
+            <input class="chat__input" type="text" placeholder="Сообщение">
+            <div class="chat__send">
+                {% include 'frontend/elements/svg/svg.twig' with {
+                    'name':'send_arrow',
+                    'class':'send_arrow'
+                }%}
+            </div>
+        </div>
+    </div>
+</div>

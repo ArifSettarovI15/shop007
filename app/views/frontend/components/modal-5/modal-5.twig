@@ -1,0 +1,49 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+{% set modal = 1 %}
+
+<div class="modal modal_second">
+{#    {% set info = list|first %}#}
+    {% set offer = info.offers|first %}
+    <div class="modal__wrapper">
+        <div class="modal__head">
+            {% include 'frontend/components/modal-head/modal-head.twig' with {
+                title: info.item_title
+            } %}
+        </div>
+        <div class="modal__body js-modal-scroll">
+            <div class="modal__block">
+                <div class="modal__block-row">
+                    <div class="modal__block-row-elem">
+                        {% include 'frontend/components/card-prview/card-prview.twig' %}
+                    </div>
+                    <div class="modal__block-row-elem">
+                        {% include 'frontend/components/card-info/card-info.twig' %}
+                    </div>
+                </div>
+            </div>
+            <div class="modal__block">
+                {% include 'frontend/components/product-info/product-info.twig' %}
+            </div>
+            <div class="modal__block">
+                {% include 'frontend/components/tags-block/tags-block.twig' %}
+            </div>
+        </div>
+        <div class="modal__bottom">
+            <div class="modal__input">
+                <a href="{{ global.base_url }}/{{ info.cat_url }}/{{ info.item_url }}" class="button button_md button_second">
+            <span class="button__container">
+                <span class="button__text">Подробнее</span>
+            </span>
+                </a>
+            </div>
+            <div class="modal__input">
+                <button class="button button_md button_primary product-add basket-add" data-id="{{ offer.offer_id }}">
+            <span class="button__container">
+                <span class="button__icon">{{ Svg.icon('cart-icon', 1) }}</span>
+                <span class="button__text">В корзину</span>
+            </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

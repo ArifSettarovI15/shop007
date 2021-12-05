@@ -1,0 +1,23 @@
+{% if variables.filters %}
+    {% set filters = variables.filters %}
+{% endif %}
+{% if variables.svids_selected %}
+    {% set svids_selected = variables.svids_selected %}
+{% endif %}
+{% for filter in filters %}
+    {% if filter.filters|length>0 %}
+        <div class="table-list__item">
+            <div class="select">
+                <div class="select__label">{{filter.sprav_title}}</div>
+                <div class="select__field">
+                    <select name="filter_{{filter.sprav_name}}" class="select2 filter-element select-submit">
+                        <option value="0">Выберите</option>
+                        {% for value in filter.filters %}
+                            <option value="{{value.svid}}" {% if value.svid in svids_selected  %}selected{% endif %}>{{ value.svid_title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,15 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+{% import "frontend/elements/badge/badge.twig" as Badge %}
+<div class="section pb-1 p-feeds">
+    <div class="pattern-2"></div>
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Отзывы клиентов'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container-1">
+            {% include 'frontend/components/product-feeds/product-feeds.twig' %}
+        </div>
+    </div>
+</div>

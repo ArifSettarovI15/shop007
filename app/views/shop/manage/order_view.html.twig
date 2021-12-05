@@ -1,0 +1,241 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+  <div class="btn btn-primary print_action hide_print">Распечатать</div>
+  <div class="order_info">
+    <div class="summary">
+      <div class="head">Кратко о заказе</div>
+      <div class="data">
+        <div class="line">
+          <div class="label">Номер заказа</div>
+          <div class="value">{{ info.order_id }}</div>
+        </div>
+        <div class="line">
+          <div class="label">Дата</div>
+          <div class="value">{{info.order_time|date("d.m.Y, H:i") }}</div>
+        </div>
+        {% if info.order_reserv_time %}
+        <div class="line">
+          <div class="label">Резерв до</div>
+          <div class="value">{{info.order_reserv_time|date("d.m.Y, H:i") }}</div>
+        </div>
+        {% endif %}
+        <div class="line">
+          <div class="label">Статус</div>
+          <div class="value">
+            <div data-jq-dropdown="#dropdown_order_status_{{ info.order_id }}" class="badge badge-success order_status inline_dropdown inline_dropdown_{{ info.order_id }}"><span>{{statuses[info.order_status]['title']}}</span> <i class="fa fa-caret-down" aria-hidden="true"></i></div>
+            <div id="dropdown_order_status_{{ info.order_id }}" class="jq-dropdown-relative jq-dropdown jq-dropdown-tip">
+              <ul class="status_choose jq-dropdown-menu">
+                  {% for status_id,status in statuses %}
+                    <li><a data-id="{{ status_id }}" href="#">{{ status.title }}</a></li>
+                  {% endfor %}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="line">
+          <div class="label">Личный коммент</div>
+          <div class="value">{{info.order_comment}}</div>
+        </div>
+        {% if info.order_note %}
+          <div class="line">
+            <div class="label">Записка</div>
+            <div class="value">{{info.order_note}}</div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="user">
+      <div class="head">Информация о покупателе</div>
+      <div class="data">
+{#        <div class="line">#}
+{#          <div class="label">Аккаунт</div>#}
+{#          <div class="value">#}
+{#              {% if info.order_user_id %}#}
+{#                <span class="badge badge-success">да</span>#}
+{#              {% else %}#}
+{#                <span class="badge badge-danger">нет</span>#}
+{#              {% endif %}#}
+{#          </div>#}
+{#        </div>#}
+{#        <div class="line">#}
+{#          <div class="label">Фамилия</div>#}
+{#          <div class="value">{{info.order_user_lastname	 }}</div>#}
+{#        </div>#}
+        <div class="line">
+          <div class="label">Имя</div>
+          <div class="value">{{info.order_user_name}}</div>
+        </div>
+        <div class="line">
+          <div class="label">Телефон</div>
+          <div class="value">{{info.order_user_phone}}</div>
+        </div>
+        <div class="line">
+          <div class="label">Email</div>
+          <div class="value">{{info.order_user_email}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="head">Оплата</div>
+      <div class="data">
+        <div class="line">
+          <div class="label">Способ</div>
+          <div class="value">{{payments[info.order_payment]['title']}}</div>
+        </div>
+        <div class="line">
+          <div class="label">Статус</div>
+          <div class="value">
+            <div data-type="payment" class="badge_status   {% if info.order_payment_status!=1%}no{% else %}yes{% endif %}" data-value="{{ info.order_id }}">
+              <span class="badge badge-danger">Ждет оплаты</span>
+              <span class="badge badge-success">Оплачено</span>
+            </div>
+          </div>
+        </div>
+{#          {% if info.order_payment_date %}#}
+{#            <div class="line">#}
+{#              <div class="label">Дата</div>#}
+{#              <div class="value">{{ info.order_payment_date}}</div>#}
+{#            </div>#}
+{#          {% endif %}#}
+          {% if info.order_payment_type %}
+            <div class="line">
+              <div class="label">Способ оплаты</div>
+              <div class="value">
+                  {% for ip in payments %}
+                      {% if ip['yandex']==info.order_payment_type %}
+                          {{ ip['title'] }}
+                      {% endif %}
+                  {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+      </div>
+    </div>
+
+
+    <div class="summary">
+      <div class="head">Доставка</div>
+      <div class="data">
+        <div class="line">
+          <div class="label">Тип</div>
+          <div class="value">
+              {{ delivery[info.order_delivery]['title']}}
+          </div>
+        </div>
+          {% if info.order_delivery_city %}
+            <div class="line">
+              <div class="label">Город</div>
+              <div class="value">
+                  {{ info.order_delivery_city }}
+              </div>
+            </div>
+          {% endif %}
+          {% if info.order_delivery_addr %}
+          <div class="line">
+            <div class="label">Адрес</div>
+            <div class="value">
+               {{ info.order_delivery_addr }}
+            </div>
+          </div>
+          {% endif %}
+          {% if info.order_delivery_time %}
+            <div class="line">
+              <div class="label">Время</div>
+              <div class="value">
+                  {{ info.order_delivery_time }}
+              </div>
+            </div>
+          {% endif %}
+          {% if info.order_delivery_fast %}
+            <div class="line">
+              <div class="label">Срочная</div>
+              <div class="value">
+                 Да
+              </div>
+            </div>
+          {% endif %}
+      </div>
+    </div>
+
+  </div>
+    {% include 'shop/manage/delivery_content.html.twig' %}
+
+
+
+  <div class="items">
+  <div class="form">
+    <input type="hidden" class="element" name="action" value="add_basket">
+    <b>Добавить товар</b><br/>
+    <div class="line">
+      <div class="label">
+        ID товара:
+      </div>
+      <div class="value">
+        <input type="text" name="offer_id" class="element"><br/>
+        {% include 'backend/components/search-offer/search-offer.twig' %}
+      </div>
+    </div>
+    <div class="line">
+      <div class="label">
+        Кол-во:
+      </div>
+      <div class="value">
+        <input name="amount" class="element" type="text"  maxlength="250" >
+      </div>
+    </div>
+    <div class="submit btn btn-primary">
+          Добавить
+    </div>
+  </div>
+
+
+    <div class="data">
+      <table class="table_bordered table_data  table_striped">
+        <tbody class="table_content">
+        <tr>
+          <th style="width: 150px">Артикул</th>
+          <th style="width: 100px">Фото</th>
+          <th style="width: 100%">Название</th>
+          <th style="width: 100px">Цена</th>
+          <th style="width: 70px">Кол-во</th>
+          <th style="width: 100px">Итого</th>
+          <th class="action_button hide_print"></th>
+        </tr>
+        <tbody class="basket-offers-list">
+          {% include 'backend/components/order-basket/order-basket.twig' %}
+        </tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td  colspan="2">Общая сумма</td>
+          <td>{{ info.order_items_cost }}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td  colspan="2">Доставка</td>
+          <td>{{ info.order_total_cost - info.order_items_cost }}</td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2">К оплате</td>
+          <td>{{ info.order_total_cost }}</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{#    {% include 'backend/components/chat/chat.twig' %}#}
+{% endblock %}

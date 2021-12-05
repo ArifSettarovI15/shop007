@@ -1,0 +1,23 @@
+{% import "frontend/elements/link/link_macro.twig" as Link %}
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="st-block box-st">
+    <div class="container container_sm">
+        <div class="st-block__content">
+            {% if global.seo_text|length > 700 %}
+            <div class="st-block__overflow js-overflow" data-height="170">
+                {% endif %}
+                <div class="text">
+                    {{ global.seo_text|raw }}
+                </div>
+                {% if global.seo_text|length >700 %}
+            </div>
+            {% endif %}
+
+            {% if global.seo_text|length >700 %}
+                <div class="st-block__link">
+                    {{ Link.link('#', 'Показать целиком', {mod: 'iconic', icon_left: 'eye-icon', trigger: 'js-slide-text'}) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

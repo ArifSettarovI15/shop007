@@ -1,0 +1,228 @@
+// Placeholders
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+@import "../helpers/config.scss";
+
+%overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include size(100%);
+}
+
+// containers
+%med-container {
+  max-width: 770px;
+  margin: 0 auto;
+}
+
+// Text
+
+%text-color-gradient-2 {
+  background: $gradient__primary--2;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    color: #076E71 !important;
+    background: none !important;
+  }
+}
+
+%text-outline {
+  font-weight: bold;
+  font-size: 128px;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px $color__light;
+  -webkit-text-fill-color: transparent;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    color: #fff !important;
+  }
+}
+
+// Titles
+
+// Images
+
+%background__default {
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+%background__cover {
+  @extend %background__default;
+  background-size: cover;
+}
+
+%background__contain {
+  @extend %background__default;
+  background-size: contain;
+}
+
+// Flex
+
+%flex-middle {
+  display: flex;
+  align-items: center;
+}
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-center-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+%flex-center-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// Buttons
+// Sizes
+%btn--lg {
+  min-height: 56px;
+  min-width: 182px;
+  height: $buttons__height--lg;
+  padding: 12px 24px;
+}
+
+%btn--md {
+  min-height: 48px;
+  min-width: 158px;
+  padding: 12px 14px;
+  height: $buttons__height--md;
+}
+
+%btn--sm {
+  min-height: 36px;
+  min-width: 140px;
+  height: $buttons__height--sm;
+  padding: 8px 12px;
+}
+
+//Video-button
+%video-button {
+  text-align: center;
+  background-color: $color__light;
+  @include size(100px);
+  border-radius: 200px;
+  padding: 21px;
+}
+
+// Positions
+%absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+%absolute-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+// Decor
+
+%decor-primary {
+  &:before,
+  &:after {
+    content: '';
+    @include size(100%, 100px);
+    height: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-image: url('/assets/images/static/angle.png');
+    @extend %background__cover;
+    pointer-events: none;
+  }
+
+  &:before {
+    top: 0;
+  }
+
+  &:after {
+    bottom: 0;
+    transform: scale(1, -1);
+  }
+
+  @include media('<xl') {
+    &:before,
+    &:after {
+      height: 64px;
+    }
+  }
+
+  @include media('<md') {
+    &:before,
+    &:after {
+      height: 32px;
+    }
+  }
+}
+
+%decor-second {
+  &:before,
+  &:after {
+    content: '';
+    @include size(100%, 100px);
+    height: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-image: url('/assets/images/static/angle.png');
+    @extend %background__cover;
+  }
+
+  &:before {
+    top: 0;
+    transform: scale(-1, 1);
+  }
+
+  &:after {
+    bottom: 0;
+    transform: rotate(180deg);
+  }
+
+  @include media('<xl') {
+    &:before,
+    &:after {
+      height: 64px;
+    }
+  }
+
+  @include media('<md') {
+    &:before,
+    &:after {
+      height: 32px;
+    }
+  }
+}
+
+%pattern-1 {
+  clip-path: polygon(0% 0%, 100% 15.6%, 100% 84.4%, 0% 100%);
+}
+
+%linear-background {
+  &:before {
+    content: '';
+    @extend %absolute-full;
+    width: 100%;
+    background: linear-gradient(180deg, #F0FAFD 0%, rgba(240, 250, 253, 0) 100%);
+  }
+}

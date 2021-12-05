@@ -1,0 +1,38 @@
+.m-list {
+  @extend %flex-middle;
+  display: inline-flex;
+
+  &__text {
+    margin-right: 14px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: $color__dark--3;
+  }
+
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    margin-left: 14px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  @include media('<xl') {
+    &__item {
+      .button {
+        @include size(36px);
+        min-width: 36px;
+        min-height: 36px;
+
+        &__icon {
+          @include size(20px);
+          flex: 0 0 20px;
+        }
+      }
+    }
+  }
+}

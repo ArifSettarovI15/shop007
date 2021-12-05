@@ -1,0 +1,17 @@
+{% for item in list %}
+    <div class="table-list__item table-list__item_main" data-list="articles">
+        <a href="{{ global.base_url }}/{{ item.content_type }}/{{ item.content_url }}.html" class="t-1 t-1_2">
+            <div class="t-1__wrapper">
+                <div class="t-1__image">
+                    <img src="{% if item.thumb_url %}{{ item.thumb_url }}{% else %}{{ item.item_icon_url }}{% endif %}" class="image image_cover" alt="{{item.content_type}}">
+                </div>
+                <div class="t-1__left-top">
+                    {{ Badge.element(item.unixtime|date('d.m.Y')) }}
+                </div>
+                <div class="t-1__bottom">
+                    <div class="t-1__title">{{item.content_title}}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}

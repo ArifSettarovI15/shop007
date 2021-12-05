@@ -1,0 +1,16 @@
+<div class="cabinet-block__line">
+    <p>Ваше имя</p>
+    <span>{{ global.user_profile.profile_name }} {{ global.user_profile.profile_lastname }}</span>
+</div>
+<div class="cabinet-block__line">
+    <p>Телефон</p>
+    <span>{{ global.user_profile.profile_phone }}</span>
+</div>
+<div class="cabinet-block__line">
+    <p>Город</p>
+    <span>{% if global.user_profile.profile_city %}{{ global.user_profile.profile_city }}{% else %}-{% endif %}</span>
+</div>
+<div class="cabinet-block__line">
+    <p>Компания</p>
+    <span>{% if global.user_profile.profile_company %}{{ global.user_profile.profile_company }}{% else %}-{% endif %}</span>
+</div>

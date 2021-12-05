@@ -1,0 +1,36 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+    <div class="table_data">
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th style="width: 70px">ID</th>
+                <th style="width: 100px">Статус</th>
+                <th style="width: 100px">Дата</th>
+                <th >Отзыв</th>
+                <th style="width: 150px">Заказ</th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+            {% for item in order_comments %}
+                <tr>
+                    <td class="data_id">{{ item.chat_id }}</td>
+                    {% set object_status=item.chat_status %}
+                    {% set object_id=item.chat_id %}
+                    <td class="object_status  {% if object_status!=1%}no{% else %}yes{% endif %}" data-value="{{ object_id }}">
+                        <span class="badge badge-success">новое</span>
+                        <span class="badge badge-warning">прочитано</span>
+                    </td>
+                    <td class="admin_table_small">{{ item.chat_time }}</td>
+                    <td class="admin_table_small">
+                        {{ item.chat_text }}
+                    </td>
+                    <td><a href="/manager/shop/orders/view/{{ item.chat_order_id}}/">Заказ №{{ item.chat_order_id}}</a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

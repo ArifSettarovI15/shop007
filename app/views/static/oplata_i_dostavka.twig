@@ -1,0 +1,63 @@
+{% set aside='user' %}
+{% extends "content/custom_pages/custom_layout.twig" %}
+{% block c_content %}
+    <div class="about-block">
+        <div class="about-block__img" style="background-image: url('{{ fields.payment_photo1.sizes_url.large }}')"></div>
+        <h2>Оплата товара</h2>
+        <div class="about-block__warranty-out">
+            {% for item in  fields.payment_list1 %}
+                <div class="about-block__warranty">
+                    <div class="about-block__warranty-nav">
+                        <div>
+                            <div class="about-block__warranty-icon">
+                                {% include 'frontend/elements/svg/svg.twig' with {
+                                    'name':item.payment_icon1,
+                                    'class':item.payment_icon1,
+                                    'embed':1
+                                }%}
+                            </div>
+                            <div class="about-block__warranty-title">
+                                {{ item.payment_title1 }}
+                            </div>
+                        </div>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-block__warranty-text text">
+                        {{ item.payment_text1|replace({'REKV':rekv,'att_icon':att_icon})|raw }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="dotted-divider"></div>
+
+            <div class="about-block__img" style="background-image: url('{{ fields.payment_photo2.sizes_url.large  }}')"></div>
+
+        <h2>Доставка товара</h2>
+
+        <div class="about-block__warranty-out">
+            {% for item in  fields.payment_list2 %}
+                <div class="about-block__warranty">
+                    <div class="about-block__warranty-nav">
+                        <div>
+                            <div class="about-block__warranty-icon">
+                                {% include 'frontend/elements/svg/svg.twig' with {
+                                    'name':item.payment_icon2,
+                                    'class':item.payment_icon2,
+                                    'embed':1
+                                }%}
+                            </div>
+                            <div class="about-block__warranty-title">
+                                {{ item.payment_title2 }}
+                            </div>
+                        </div>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-block__warranty-text text">
+                        {{ item.payment_text2|replace({'att_icon':att_icon})|raw }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

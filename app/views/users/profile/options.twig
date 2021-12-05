@@ -1,0 +1,117 @@
+{% set aside='account' %}
+{% extends "content/custom_pages/custom_layout.twig" %}
+{% block c_content %}
+
+    {# Cтраница настроек #}
+    <div class="container">
+        <section class="user-cabinet">
+            <div class="user-cabinet__line">
+                <div class="user-cabinet__item">
+                    <div class="cabinet-block form">
+                        <div class="cabinet-block__title">
+                            Рассылки
+                        </div>
+                        <div class="cabinet-block__inner">
+                            <input class="element" name="action" value="process_subscribe" type="hidden">
+                            <span class="cabinet-block__inner-gray">
+                               Вы можете подписаться на следующие виды рассылок нашего магазина:
+                            </span>
+                            <div class="cabinet-block__inner-check">
+                                <div class="cabinet-block__title2 ">
+                                    Email рассылки
+                                </div>
+                                {% for item in s_lists %}
+                                    {% if item.subscribe_type=='email' %}
+                                        {% set checked=0 %}
+                                        {% if item.subscribe_list_id in user_lists %}
+                                            {% set checked=1 %}
+                                        {% endif %}
+                                        <div>
+                                            {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                                'checkbox_checked':checked,
+                                                'checkbox_name':'keys['~item.subscribe_list_id~']'
+                                            } %}
+                                            <span>{{ item.subscribe_list_title }}</span>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="cabinet-block__title2">
+                                    SMS рассылки
+                                </div>
+                                {% for item in s_lists %}
+                                    {% if item.subscribe_type=='sms' %}
+                                    {% set checked=0 %}
+                                    {% if item.subscribe_list_id in user_lists %}
+                                        {% set checked=1 %}
+                                    {% endif %}
+                                    <div>
+                                        {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                            'checkbox_checked':checked,
+                                            'checkbox_name':'keys['~item.subscribe_list_id~']'
+                                        } %}
+                                        <span>{{ item.subscribe_list_title }}</span>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="cabinet__btn-black submit">Сохранить</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-cabinet__item">
+                    <div class="cabinet-block form">
+                        <input class="element" name="action" value="process_subscribe2" type="hidden">
+                        <div class="cabinet-block__title">
+                            Уведомления
+                        </div>
+                        <div class="cabinet-block__inner">
+                            <div class="cabinet-block__inner-check">
+                                {% for item in s_lists2 %}
+                                    {% set checked=0 %}
+                                    {% if item.notify_list_id in user_lists2 %}
+                                        {% set checked=1 %}
+                                    {% endif %}
+                                    <div>
+                                        {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                            'checkbox_checked':checked,
+                                            'checkbox_name':'keys['~item.notify_list_id~']'
+                                        } %}
+                                        <span>{{ item.notify_list_title }}</span>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="cabinet__btn-black submit">Сохранить</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-cabinet__line user-cabinet__line_sm">
+                <div class="user-cabinet__item">
+                    <div class="cabinet-block table-data">
+                        <div class="cabinet-block__title">
+                            Полученные уведомления
+                        </div>
+                        <div class="cabinet-block__inner">
+                            <div class="cabinet-block__inner-alarm table-content">
+
+                                {% include 'frontend/components/notify/notify.twig'%}
+                            </div>
+                        </div>
+                        <div class="cabinet-block__pugination table-navigation">
+                            {% include 'frontend/components/paging/paging_numbers.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}

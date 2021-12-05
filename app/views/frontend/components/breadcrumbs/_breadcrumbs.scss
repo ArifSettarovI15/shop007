@@ -1,0 +1,21 @@
+.breadcrumbs {
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  &__link {
+    color: $color__light;
+  }
+
+  &__line {
+    margin: 0 8px;
+    color: $color__light;
+  }
+}

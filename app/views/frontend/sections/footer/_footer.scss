@@ -1,0 +1,140 @@
+.footer {
+  @extend %background__cover;
+  background-image: url('/assets/images/static/bg-1.jpg');
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include size(100%, 100px);
+    background-image: url('/assets/images/static/angle.png');
+    @extend %background__cover;
+  }
+
+  &__wrapper {
+    padding-top: 148px;
+  }
+
+  &__bottom {
+    @extend %flex-middle;
+    flex-wrap: wrap;
+    padding: 48px 0;
+  }
+
+  &__row {
+    width: 100%;
+    @extend %flex-center-between;
+  }
+
+  &__part {
+    flex: 1;
+    width: 100%;
+    margin-left: 32px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &__media {
+    .button_iconic {
+      border: 0;
+      background-color: $color__dark--1;
+      .button__icon {
+        svg * {
+          fill: $color__light;
+        }
+      }
+
+      &:hover {
+        background-color: $color__dark--2;
+      }
+    }
+  }
+
+  @include media('<xl') {
+    &:before {
+      height: 64px;
+    }
+
+    &__part {
+      margin-left: 16px;
+    }
+
+    &__wrapper {
+      padding-top: 96px;
+    }
+
+    &__bottom {
+      padding: 32px 0;
+    }
+  }
+
+  @include media('<md') {
+    &:before {
+      height: 32px;
+    }
+
+    &__wrapper {
+      padding-top: 56px;
+    }
+
+    &__bottom {
+      padding: 24px 0;
+    }
+
+    &__part {
+      flex: 0 0 auto;
+      margin-left: 0;
+
+      &:first-child {
+        margin-bottom: 14px;
+      }
+    }
+  }
+}
+
+.n-footer {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -7px -12px;
+  }
+
+  &__item {
+    padding: 7px 12px;
+
+    .link {
+      &__text {
+        color: $color__light;
+      }
+
+      &:hover {
+        .link__text {
+          color: $color__light;
+        }
+      }
+    }
+  }
+}
+
+.r-footer {
+  &__text {
+    font-size: 16px;
+    line-height: 1.4;
+    color: $color__light--2;
+  }
+
+  @include media('<md') {
+    &__text {
+      font-size: 14px;
+    }
+  }
+}
+
+.t-dev {
+  @include size(126px, 30px);
+  flex: 0 0 126px;
+}

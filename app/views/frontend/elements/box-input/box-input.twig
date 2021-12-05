@@ -1,0 +1,33 @@
+{% macro cbs(name, options={}) %}
+    <label class="cbs cbs_{% if options.mod %}{{ options.mod }}{% else %}primary{% endif %}">
+        <input type="checkbox" name="{{ name }}" data-type="checkbox" class="element js-cbs" {% if options.value %}value="{{ options.value }}"{% endif%} {% if options.checked %}checked{% endif %} {% if options.disabled %}disabled{% endif %} {% if options.chain %}data-chain="{{ options.chain }}"{% endif %}>
+        {% if options.label %}
+            <span class="cbs__label">{{ options.label|raw }}</span>
+        {% endif %}
+    </label>
+{% endmacro %}
+
+{% macro rbt(name, options={}) %}
+    <label class="cbs cbs_{% if options.mod %}{{ options.mod }}{% else %}primary{% endif %}">
+        <input
+                type="radio"
+                name="{{ name }}"
+                data-type="radio"
+                class="element {% if options.required %}required{% endif%} js-cbs {% if options.trigger %}{{ options.trigger }}{% endif %}"
+                {% if options.id %}
+                data-id="{{ options.id }}"
+                {% endif %}
+                {% if options.value %}
+                    value="{{ options.value }}"
+                {% endif%}
+                {% if options.checked %}checked{% endif %}
+                {% if options.disabled %}disabled{% endif %}
+                {% if options.delivery_price %}
+                    data-price="{{ options.delivery_price }}"
+                {% endif %}
+        >
+        {% if options.label %}
+            <span class="cbs__label">{{ options.label|raw }}</span>
+        {% endif %}
+    </label>
+{% endmacro %}

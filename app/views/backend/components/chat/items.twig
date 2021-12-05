@@ -1,0 +1,15 @@
+{% for item in order_comments %}
+    <div class="chat__item{% if item.chat_admin %} chat__item_admin{% endif %}">
+        <div class="chat__ava">
+            {% if item.chat_admin %}
+                АС
+            {% else %}
+                {{ global.user_profile.profile_name|slice(0,1) }}{{ global.user_profile.profile_lastname|slice(0,1) }}
+            {% endif %}
+        </div>
+        <div class="chat__text">
+            {{ item.chat_text }}
+            <div class="chat__date">{{ item.chat_time }}</div>
+        </div>
+    </div>
+{% endfor %}

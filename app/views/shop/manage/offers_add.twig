@@ -1,0 +1,186 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+    <div class="form">
+        <div class="fields">
+            <div class="line">
+                <div class="label">
+                    Товар:
+                </div>
+                <div class="value search-block-main" data-block="main-item">
+                        <div class="search-block-main__value">
+
+                            {% if value %}
+                                {{ value }}
+                            {% else %}
+                                #{{ info.item_id }} {{ info.item_title }}
+                            {% endif %}
+                            <input type="hidden" class="element item_id" name="item_id" value="{{ item_id }}">
+                        </div>
+{#                        Поиск: <input type="text" class="search-block-main__input element">#}
+{#                        <div class="search-block-main__result">#}
+
+{#                        </div>#}
+                </div>
+            </div>
+
+{#            <div class="line">#}
+{#                <div class="label">#}
+{#                    Артикул:#}
+{#                </div>#}
+{#                <div class="value">#}
+{#                    <input name="offer_article" class="element " type="text"  maxlength="250"  value="{{ info.offer_article }}">#}
+{#                </div>#}
+{#            </div>#}
+            <div class="line">
+                <div class="label">
+                    Название:
+                </div>
+                <div class="value">
+                    <input name="offer_title" class="element translit_from" type="text"  maxlength="250"  value="{{ info.offer_title }}">
+                </div>
+            </div>
+{#            <div class="line">#}
+{#                <div class="label">#}
+{#                    Краткое название:#}
+{#                </div>#}
+{#                <div class="value">#}
+{#                    <input name="offer_short_title" class="element translit_from" type="text"  maxlength="100"  value="{{ info.offer_short_title }}">#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="line">#}
+{#                <div class="label">#}
+{#                    Код 1c:#}
+{#                </div>#}
+{#                <div class="value">#}
+{#                    <input name="offer_1c" class="element" type="text"  maxlength="100"  value="{{ info.offer_1c }}">#}
+{#                </div>#}
+{#            </div>#}
+
+            <div class="line">
+                <div class="label">
+                    Url:
+                </div>
+                <div class="value">
+                    <input name="offer_url" class="element translit_to" type="text"  maxlength="250"  value="{{ info.offer_url }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Фото:
+                </div>
+                <div class="value">
+                    {% set image_data=image_data1 %}
+                    {% include 'files/upload_image.html.twig' %}
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Буква размера (латиницей):
+                </div>
+                <div class="value">
+                    <input name="offer_key" class="element" type="text"  maxlength="2"  value="{{ info.offer_key }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label required">
+                    Диаметр букета :
+                </div>
+                <div class="value">
+                    <input name="offer_diam" required class="element" type="text"  maxlength="250"  value="{{ info.offer_diam }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label required">
+                    Вес букета :
+                </div>
+                <div class="value">
+                    <input name="offer_weight" class="element" type="text"  maxlength="250"  value="{{ info.offer_weight }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Цена :
+                </div>
+                <div class="value">
+                    <input style="width:150px;" name="offer_price" class="element" type="text"  maxlength="250"  value="{{ info.offer_price }}"><br/>
+
+                </div>
+            </div>
+            {% if item_info.item_sale %}
+                <div class="line">
+                    <div class="label required">
+                        Цена по скидке:
+                    </div>
+                    <div class="value">
+                        <input style="width:150px;" name="offer_price_sale"  class="element required" type="text"  maxlength="250"  value="{{ info.offer_price_sale }}"><br/>
+
+                    </div>
+                </div>
+            {% endif %}
+
+            <input type="hidden" class="element offer_id" name="offer_id" value="">
+
+
+            {% if edit==1 %}
+{#            <div class="line">#}
+{#                <div class="label">#}
+{#                    Характеристики:#}
+{#                </div>#}
+{#                <div class="value">#}
+{#                    {% for filter in sprav_filters %}#}
+
+{#                        <div class="item_filter_title">{{ filter.sprav_label }}</div>#}
+{#                        <div class="item_filter_data" data-sprav="{{ filter.sprav_id }}">#}
+{#                            {% if filter.sprav_style=='text' %}#}
+
+{#                            {% else %}#}
+{#                                <div class="filters_values_list">#}
+{#                                    {% include 'backend/components/filter_values_list/filter_values_list.twig' with {#}
+{#                                        'list':item_filter_values[filter.sprav_id],#}
+{#                                        'filter':filter#}
+{#                                    }%}#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            <div class="value" >#}
+{#                                {% if filter.sprav_style=='text' %}#}
+{#                                    <input  class="filters_values_text" style="width:250px;"  type="text"   value="{{ item_filter_values[filter.sprav_id][0].sif_value  }}"> {{ filter.sprav_ext }}#}
+{#                                    <div class="save_filter_value btn btn-primary">#}
+{#                                        Сохранить#}
+{#                                    </div>#}
+{#                                {% else %}#}
+{#                                    <select class="filters_values_select">#}
+{#                                        <option value="0">Выберите</option>#}
+{#                                        {%  for item in filter_values[filter.sprav_id] %}#}
+{#                                            <option value="{{ item.svid }}">{{ item.svid_title }}</option>#}
+{#                                        {% endfor %}#}
+{#                                    </select>#}
+{#                                    <div class="add_filter_value btn btn-primary">#}
+{#                                        Добавить#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                            </div>#}
+
+{#                        </div>#}
+
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="offer_id" value="{{ info.offer_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+            <div class="submit btn btn-primary">
+                {% if edit==1 %}
+                    Сохранить
+                {% else %}
+                    Добавить
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

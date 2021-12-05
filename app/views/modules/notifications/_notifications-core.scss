@@ -1,0 +1,81 @@
+@import '../../../../source/src/css/frontend/helpers/variables';
+@import '../../../../source/src/css/frontend/helpers/config';
+@import '../../../../source/src/css/frontend/helpers/mixins';
+@import '../../../../source/src/css/frontend/elements/placeholders';
+.notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999999999999;
+    padding: 8px 14px;
+    background-color: $color__light--2;
+    min-width: 320px;
+    max-width: 320px;
+    @extend %flex-center-between;
+    min-height: 40px;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 60px;
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    &__wrapper {
+        @extend %flex-center-between;
+    }
+
+    &__text {
+        font-size: 14px;
+        line-height: 1.20;
+        color: $color__light;
+        margin-left: 8px;
+        font-family: $font-family__main;
+    }
+
+    &__icon {
+        @include size(24px);
+        flex: 0 0 24px;
+    }
+
+    &__close {
+        @extend %flex-center;
+        @include size(24px);
+        flex: 0 0 24px;
+        margin-left: 8px;
+        cursor: pointer;
+    }
+}
+
+#notification.default {
+    .notification__text {
+        color: $color__dark--1;
+    }
+
+    svg * {
+        fill: $color__dark--1;
+    }
+}
+
+#notification.message {
+    background-color: $color__secondary--1;
+}
+
+#notification.decline {
+    background-color: $color__dark--3;
+
+    .notification__text {
+        color: $color__light--3;
+    }
+
+    svg * {
+        fill: $color__light--3;
+    }
+}
+
+#notification.wait {
+    background-color: $color__primary--1;
+}
+
+#notification.error, .inline_notification.error {
+    background-color: $color__primary--2;
+}

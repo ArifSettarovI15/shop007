@@ -1,0 +1,54 @@
+{% for item in list %}
+    <tr data-id="{{ item.offer_id }}">
+        {% set object_status=item.item_status %}
+        {% set object_id=item.item_id %}
+        <td style="padding: 0;">
+            <input type="checkbox" class="mass-check-one" data-id="{{ item.item_id }}">
+        </td>
+        <td>
+            <div data-type="status" class="badge_status   {% if item.item_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">
+                <span class="badge badge-danger">неакт</span>
+                <span class="badge badge-success">акт</span>
+            </div>
+{#            <div data-type="new" class="badge_status   {% if item.item_new!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">#}
+{#                <span class="badge badge-danger">Новинка</span>#}
+{#                <span class="badge badge-success">Новинка</span>#}
+{#            </div>#}
+            <div data-type="sale" class="badge_status  {% if item.item_sale!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">
+                <span class="badge badge-danger">Скидка</span>
+                <span class="badge badge-success">Скидка</span>
+            </div>
+            <div data-type="hit" class="badge_status  {% if item.item_hit!=1%}no{% else %}yes{% endif %}" data-value="{{ item.item_id }}">
+                <span class="badge badge-danger">Популярное</span>
+                <span class="badge badge-success">Популярное</span>
+            </div>
+{#            {% if item.offer_price_before!=0 or item.offer_price_opt_before!=0 or item.offer_price_opt_vip_before!=0 %}#}
+{#                <span class="badge badge-success">Акция</span>#}
+{#            {% else %}#}
+{#                <span class="badge badge-danger">Акция</span>#}
+{#            {% endif %}#}
+        </td>
+        <td class="image">
+            <img src="{{ item.item_icon_url }}">
+        </td>
+        <td>{{ item.vendor_name }}</td>
+        <td>
+            {{ item.offer_article }}{% if item.offer_1c%} <span style="color:green;">Код 1С</span>{% endif %}
+            {% if item.item_title%}
+            <b>{{ item.item_title }}</b>
+            <a href="/manager/shop/products/edit/{{ item.item_id }}/" target="_blank">ред</a>
+            <a href="/manager/shop/offers/{{ item.item_id }}/view/" target="_blank">оф</a>
+            {% endif %}<br/>
+            Название: <input type="text" style="max-width: 500px;" class="table_offer_title" data-id="{{ item.offer_id  }}" value="{{ item.offer_title }}"><br/>
+            Кратко: <input type="text" style="max-width: 500px;" class="table_offer_short_title" data-id="{{ item.offer_id  }}" value="{{ item.offer_short_title }}">
+        </td>
+        <td>{% if item.offer_price %}{{ item.offer_price1 }}{% else %}-{% endif %}</td>
+        <td>{% if item.offer_amount %}{{ item.offer_amount }}{% else %}-{% endif %}</td>
+        <td>{{ item.cat_title }}</td>
+        <td class="action_button_data">
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.offer_full_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a><br/>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/offers/edit/{{ item.offer_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a><br/>
+            <div data-value="{{ item.offer_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

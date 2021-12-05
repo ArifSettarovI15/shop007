@@ -1,0 +1,47 @@
+{% extends "global.html.twig" %}
+{% block content %}
+
+    <div class="table-data catalog-main" data-insert="1" data-reload-icons="1" data-ajax2="1">
+        <div class="side-filters">
+            {%  include 'frontend/components/filter-menu/filter-menu.twig' %}
+        </div>
+
+        <div class="container container_white">
+            <div class="catalog-main__inside">
+                <div class="left-filter">
+                    {% for item in global.menu_cats.levels[0] %}
+                        <div class="left-filter__sub">
+                            <div class="left-filter__sub-item  {% if global.menu_cats.levels[item.cat_id] %}left-filter__sub-item_link active{% endif %}">
+                                <a href="{{ item.cat_full_url }}">{{ item.cat_title }}</a>
+                                {% if global.menu_cats.levels[item.cat_id] %}
+                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                {% endif %}
+                            </div>
+                            {% if global.menu_cats.levels[item.cat_id] %}
+                                <div class="left-filter__sub2"  style="display: block;">
+                                    {% for item2 in global.menu_cats.levels[item.cat_id] %}
+                                        <a href="{{ item2.cat_full_url }}">{{ item2.cat_title }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div style="width:100%;">
+                    <section class="main-section{% if list_name %} {{ list_name }}{% endif %} padding-bottom">
+                        <div class="table-content">
+                            {% include 'frontend/components/product/product_list.twig' %}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        {% include 'frontend/components/advantages/advantages.twig' %}
+    </div>
+
+
+
+{% endblock %}

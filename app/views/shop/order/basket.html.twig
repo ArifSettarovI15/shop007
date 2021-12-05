@@ -1,0 +1,350 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    {% if items %}
+        <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <section class="process-basket  {% if order==1 %}process-basket_hide{% endif %} main-section main-section_margin">
+            <div class="container container_white">
+                <div class="cart-block padding-bottom">
+                    {% include 'frontend/components/basket/basket-top.twig'%}
+                    {#Первый шаг #}
+
+                    <div class="cart-block__inside cart-block__inside_active" data-id="1">
+                        <div class="cart-block__left">
+                            {% for item in items %}
+                               {% include 'frontend/components/basket/item.twig' %}
+                            {% endfor %}
+                        </div>
+                        <div class="cart-info">
+                            <div class="cart-info__inside">
+                                <div class="cart-info__title">
+                                    В вашей корзине
+                                </div>
+                                <div class="cart-info__sum">
+                                    <div>
+                                        <span>Кол-во</span>
+                                        <p><i class="basket-count">{{ global.basket_total }}</i> шт.</p>
+                                    </div>
+                                    <div>
+                                        <span>На сумму</span>
+                                        <p> <i class="basket-total-before">{{ global.basket_sum2_f }}</i> руб.</p>
+                                    </div>
+                                   {# {% if global.basket_eco>0 %}
+                                    <div>
+                                        <span>На сумму</span>
+                                        <p> <i class="basket-total-before">{{ global.basket_sum_before_f }}</i> руб.</p>
+                                    </div>
+                                    {% endif %}#}
+                                    <div>
+                                        <span>Доп. услуги</span>
+                                        <p> <i class="basket-dop">{{ global.basket_dop }}</i> руб.</p>
+                                    </div>
+                                </div>
+                                {% if global.basket_comp>0 %}
+                                    <div class="cart-info__sum-economy">
+                                        <span>Выгодный комплект</span>
+                                        <p><i class="basket-discount">-{{ global.basket_comp }}</i> руб.</p>
+                                    </div>
+                                {% endif %}
+
+
+                                <div class="cart-info__sum-total">
+                                    <span>Итого</span>
+                                    <p><i class="basket-total">{{ global.basket_sum_f }}</i> руб.</p>
+                                </div>
+                            </div>
+                            <div class="cart-info__btns">
+                                <a href="#" class="cart-info__btns_yellow basket-step-go" data-value="2" data-status="1">
+                                    <span>Оформить заказ</span>
+                                </a>
+
+                                <a href="{{ global.base_url }}" class="cart-info__btns_gray">
+                                    <span>Продолжить покупки</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {#Второй шаг #}
+                    <div class="cart-block__inside" data-id="2">
+                        {#Второй шаг часть 1#}
+                        <div class="cart-block__left">
+                            <div class="cart-block__title">
+                                Укажите контактную информацию
+                            </div>
+                            {% if global.user_info.user_id==0 %}
+                                <div class="cart-block__enter">
+                                    <a href="#popup-enter" class="popup-modal">Войдите в личный кабинет</a> для автоматического заполнения данных
+                                </div>
+                            {% endif %}
+                            <div class="cart-block__form">
+                                <div>
+                                    <span>Имя <p>*</p></span>
+                                    <input type="text" class="element" name="name" value="{{ global.user_profile.profile_name }}">
+                                </div>
+                                <div>
+                                    <span>Фамилия <p>*</p></span>
+                                    <input type="text" class="element" name="lastname" value="{{ global.user_profile.profile_lastname }}">
+                                </div>
+                                <div>
+                                    <span>Номер телефона <p>*</p></span>
+                                    <input name="phone"  class="element" value="{% if global.user_info.user_id%}{{ global.user_profile.profile_phone }}{% else %}7{% endif %}">
+                                </div>
+                                <div>
+                                    <span>Email адрес</span>
+                                    <input type="email"  class="element" name="email" value="{{ global.user_info.user_email }}">
+                                </div>
+                            </div>
+                            {% if global.user_info.user_id==-100 %}
+                            <div class="cart-block__chekbox cart-block__subscribe">
+                                {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                    'checkbox_name': 'udarnik_club'
+                                }%}
+                                <div>
+                                    <p>Вступить в клуб Ударник</p>
+                                    <span>Вы будете получать рассылку по эксклюзивным предложениям, акциям, скидкам и товарам по персональной цене, будете видеть историю заказов.</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        {% include 'frontend/components/cart-info/cart-info.twig' with {
+                            'next_class':'basket_step_2'
+                        } %}
+                    </div>
+                    <div class="cart-block__inside" data-id="3">
+
+                        {#Второй шаг часть 2#}
+                        <div class="cart-block__left">
+                            <div class="cart-block__title">
+                                Выберите способ получения
+                            </div>
+
+                            <div class="cart-block__line" data-type="delivery">
+                                {% for d_key,d_value in delivery %}
+                                    {% set cc=0 %}
+                                    {% if loop.index==1 %}
+                                        {% set cc=1 %}
+                                    {% endif %}
+                                <div class="cart-block__chekbox cart-block__chekbox_ship {% if loop.index==1 %}cart-block__chekbox_active{% endif %}" data-id="delivery_{{ loop.index }}">
+                                    {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                        'checkbox_name':'delivery',
+                                        'checkbox_value':d_key,
+                                        'checkbox_checked':cc
+                                    }%}
+                                    <div>
+                                        <p>{{ d_value.title }}</p>
+                                        <span>{{ d_value.desc }}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="cart-block__hr"></div>
+                            {#Второй шаг часть 2,1#}
+                            {% for item in contacts.shops %}
+                            <div class="cart-block__shipping cart-block__shipping_shop cart-block__shipping_active" data-id="delivery_1">
+                                <div class="map-container map-container_active">
+                                    <div class="contact-map" id="map_{{ loop.index }}" data-coor="{{ item.shop_coor }}">
+                                    </div>
+                                </div>
+
+                                <div class="cart-block__shipping-adress">
+                                    <div>
+                                        <p>Наш адрес:</p>
+                                        <span>
+                                        {{ item.shop_index }}, {{ item.shop_city }},
+                                            {{ item.shop_street }}, {{ item.shop_number }}
+                                            {% if item.shop_flat %}, офис {{ item.shop_flat }}{% endif %}
+                                    </span>
+                                    </div>
+                                    <div>
+                                        <p>Режим работы</p>
+                                        <span> {{ item.shop_time }} </span>
+                                    </div>
+                                    <div class="alarm alarm_yellow">
+                                        Заказ хранится в пункте самовывоза 3 дня с момента заказа
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+                            {#Второй шаг часть 2,2#}
+                            <div class="cart-block__shipping cart-block__shipping_home" data-id="delivery_2">
+                                {% if addr %}
+                                    <div class="cart-block__title">
+                                        Выберите адрес доставки
+                                    </div>
+
+                                    <div class="cart-block__line cart-block__line_select-del" data-type="delivery">
+                                        {% for item in addr %}
+                                            <div class="cart-block__chekbox  cart-block__chekbox_ship2 my-delivery" data-id="{{ item.delivery_id }}">
+                                                {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                                    'checkbox_name':'basket-my-delivery',
+                                                    'checkbox_value':item.delivery_id
+                                                }%}
+                                                <div>
+                                                    <span>{% if item.delivery_index %}{{ item.delivery_index }}, {% endif %}{{ item.delivery_country }}, {{ item.delivery_region }}, {{ item.delivery_city }}, {{ item.delivery_addr }}, {{ item.delivery_to_name }}
+</span>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="cart-block__chekbox  cart-block__chekbox_ship2 my-delivery" data-id="0">
+                                            {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                                'checkbox_name':'basket-my-delivery',
+                                                'checkbox_value':0
+                                            }%}
+                                            <div>
+                                                <p>Другой адрес</p>
+                                                <span>Вы сможете указать другой адрес ниже</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+
+                                    <div class="order-delivery-custom {% if addr %}order-delivery-custom_hidden{% endif %}">
+                                        <div class="cart-block__title_sm">
+                                            Укажите адрес доставки
+                                        </div>
+                                        <div class="cart-block__form">
+                                            <div>
+                                                <span>Индекс</span>
+                                                <input type="text" class="element" name="index">
+                                            </div>
+                                            <div>
+                                                <span>Страна <p>*</p></span>
+                                                <input type="text" class="element" disabled name="country" value="Российская Федерация">
+                                            </div>
+                                            <div>
+                                                <span>Регион <p>*</p></span>
+                                                <input type="text" class="element" disabled name="region" value="Республика Крым">
+                                            </div>
+                                            <div>
+                                                <span>Город <p>*</p></span>
+                                                <div>
+                                                    <select class="element my-select" name="city">
+                                                        <option value="">Выберите населенный пункт</option>
+                                                        {% for city in cdek_cities %}
+                                                            <option value="{{ city.title }}">{{ city.title }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top: 20px;">
+                                                <span>Адрес <p>*</p></span>
+                                                <input type="text" class="element" name="street">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="cart-block__title_sm">
+                                        Выберите удобное время доставки
+                                        <div class="cart-block__shipping_home-data">
+                                            <div class="cart-block__shipping-sort">
+                                                <div class="cart-block__shipping-date">
+                                                    <input type="text" class="element datepicker-select-date" name="delivery_date" placeholder="Дата доставки">
+                                                </div>
+                                                {#
+                                                <div class="cart-block__shipping-time">
+                                                    <div data-jq-dropdown="#cart-block__shipping-time" class="cart-block__shipping-link">
+                                                        <span>Выберите время</span>
+                                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div id="cart-block__shipping-time" class="dropdown_perpage jq-dropdown-relative jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right">
+                                                        <ul class="jq-dropdown-menu">
+                                                            <li><a href="#">08:00 - 09:00</a></li>
+                                                            <li><a href="#">09:00 - 10:00</a></li>
+                                                            <li><a href="#">10:00 - 11:00</a></li>
+                                                            <li><a href="#">11:00 - 12:00</a></li>
+                                                            <li><a href="#">12:00 - 13:00</a></li>
+                                                            <li><a href="#">13:00 - 14:00</a></li>
+                                                            <li><a href="#">14:00 - 15:00</a></li>
+                                                            <li><a href="#">15:00 - 16:00</a></li>
+                                                            <li><a href="#">16:00 - 17:00</a></li>
+                                                            <li><a href="#">17:00 - 18:00</a></li>
+                                                            <li><a href="#">18:00 - 19:00</a></li>
+                                                            <li><a href="#">19:00 - 20:00</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>#}
+                                                <div class="cart-block__shipping_quick">
+                                                    {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                                        'checkbox_name': 'fast_delivery'
+                                                    }%}
+                                                    <p> Срочная доставка <span>+ 350 руб.</span></p>
+                                                    <div class="question tooltip" title="Доставка в течении 3 часов в рабочее время">?</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include 'frontend/components/cart-info/cart-info.twig' with {
+                                'next_class':'basket_step_3'
+                            } %}
+                        </div>
+                        <div class="cart-block__inside" data-id="4">
+
+                            {#Второй шаг часть 2.3#}
+                        <div class="cart-block__left cart-block__st2_3">
+                            <div class="cart-block__title">
+                                Выберите способ оплаты
+                            </div>
+                            <div class="cart-block__line">
+                                {% for d_key,d_value in payments %}
+                                    {% set cc=0 %}
+                                    {% if loop.index==1 %}
+                                        {% set cc=1 %}
+                                    {% endif %}
+                                    <div class="cart-block__chekbox {% if loop.index==1 %}cart-block__chekbox_active{% endif %}" data-id="payment_{{ loop.index }}">
+                                        {% include 'frontend/components/checkbox/checkbox.twig' with {
+                                            'checkbox_name':'payment',
+                                            'checkbox_value':d_key,
+                                            'checkbox_checked':cc
+                                        }%}
+                                        <div>
+                                            <p>{{ d_value.title }}</p>
+                                            <span>{{ d_value.desc }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="cart-block__hr"></div>
+
+                            <div class="cart-block__title">
+                                Оставьте комментарий к заказу
+                            </div>
+                            <div class="cart-block__message">
+                                {% include 'frontend/components/fast-comment/fast-comment.twig' %}
+                            </div>
+                        </div>
+
+                        {% include 'frontend/components/cart-info/cart-info.twig' with {
+                            'next_class':'basket_step_4',
+                            'b_title': 'Оформить заказ'
+                        } %}
+
+
+                    </div>
+
+                    <div class="cart-block__inside" data-id="5">
+                        <div class="cart-block__left cart-block__st2_4">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% else %}
+        <div class="cat-no-result">
+            <div class="cat-no-result__title">
+                Корзина пуста
+            </div>
+            <div class="cat-no-result__text">
+                Выберите интересующие товары и добавьте в корзину
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

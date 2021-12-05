@@ -1,0 +1,72 @@
+.shop-card {
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
+  }
+  &__info,
+  &__preview {
+    flex: 1;
+    width: 100%;
+  }
+
+  &__info {
+    margin-left: 32px;
+  }
+
+  .pattern-4 {
+    height: 588px;
+    top: -110px;
+  }
+
+  @include media('<xl') {
+    &__preview {
+      width: 100%;
+      flex: 1;
+    }
+
+    &__info {
+      width: 309px;
+      flex: 0 0 309px;
+      margin-left: 16px;
+    }
+  }
+
+  @include media('<lg') {
+    &__preview,
+    &__info {
+      width: 50%;
+      flex: 1;
+    }
+
+    &__info {
+      width: 50%;
+    }
+  }
+
+  @include media('<md') {
+    &__preview,
+    &__info {
+      margin: 0;
+      width: 100%;
+      flex: none;
+    }
+
+    .pattern-4 {
+      display: none;
+    }
+
+    &__row {
+      padding-bottom: 24px;
+      border-bottom: 1px solid $color__light--3;
+    }
+
+    .table-list__list {
+      margin: -4px;
+    }
+
+    .table-list__item {
+      padding: 4px;
+    }
+  }
+}

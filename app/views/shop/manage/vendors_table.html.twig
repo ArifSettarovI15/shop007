@@ -1,0 +1,35 @@
+{% for item in list %}
+    <tr>
+        <td>
+            {{ item.vendor_id }}
+        </td>
+        <td>
+            <div class="object_status  {% if item.vendor_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.vendor_id }}">
+                <span class="badge badge-danger">статус</span>
+                <span class="badge badge-success">статус</span>
+            </div>
+            <div data-type="pop" class="badge_status  {% if item.vendor_pop!=1%}no{% else %}yes{% endif %}" data-value="{{ item.vendor_id }}">
+                <span class="badge badge-danger">Поп</span>
+                <span class="badge badge-success">Поп</span>
+            </div>
+            <div data-type="minus" class="badge_status  {% if item.vendor_new!=1%}no{% else %}yes{% endif %}" data-value="{{ item.vendor_id }}">
+                <span class="badge badge-danger">Minus</span>
+                <span class="badge badge-success">Minus</span>
+            </div>
+        </td>
+        <td style="background: #cccccc">
+            <img style="width:75px;" src="{{ item.vendor_icon_url }}">
+        </td>
+        <td style="background: #cccccc">
+            <img style="width:75px;" src="{{ item.vendor_bg_url }}">
+        </td>
+        <td>
+           {{ item.vendor_name }}
+        </td>
+        <td class="action_button_data">
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.vendor_full_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/vendors/edit/{{ item.vendor_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+            <div data-value="{{ item.vendor_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

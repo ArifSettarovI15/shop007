@@ -1,0 +1,10 @@
+{% for item in list %}
+  <div data-id="{{ item.order_id }}" class="order{% if item.order_id==variables.order_id %} active{% endif %}">
+    <div>
+      <div class="status {{ variables.statuses[item.order_status]['type'] }}">
+        <i class="fa fa-{{ variables.statuses[item.order_status]['icon'] }}"></i>
+          {{ variables.statuses[item.order_status]['title']}}</div>
+      <div class="info">Заказ #{{ item.order_id }}  /  Товаров: {{ item.items|length }}  /  <span>{{ item.total }}</span> руб.</div>
+    </div>
+  </div>
+{% endfor %}

@@ -1,0 +1,28 @@
+<div class="s-tabs">
+    {% set index = 1 %}
+    {% if info.offers %}
+        {% set offers = info.offers %}
+        {% set default_icon = info.item_icon_url %}
+    {% else %}
+        {% set offers = product.offers %}
+        {% set default_icon = product.item_icon_url %}
+    {% endif %}
+
+    {% for offer in offers %}
+        <div class="s-tabs__tab">
+            <button class="button button_second button_xs js-size-change {% if index %}active {% set index = 0 %}{% endif %}"
+                    data-id="{{ offer.offer_id }}"
+                    data-price="{{ offer.offer_price }}"
+                    data-icon="{% if offer.offer_icon %}{{ offer.item_icon_url }} {% else %} {{ default_icon}} {% endif %}"
+                    data-weight="{{ offer.offer_weight }}"
+                    data-size="{{ offer.offer_diam }}"
+                    {% if offer.offer_price_sale %}
+                        data-price-sale="{{ offer.offer_price_sale }}"
+                    {% endif %}>
+                        <span class="button__container">
+                            <span class="button__text">{{ offer.offer_key}}</span>
+                        </span>
+            </button>
+        </div>
+    {% endfor %}
+</div>

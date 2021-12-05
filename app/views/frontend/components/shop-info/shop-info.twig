@@ -1,0 +1,13 @@
+<div class="s-info">
+    <div class="s-info__l">
+        <div class="mb-3">
+            {% include 'frontend/components/product-desc/product-desc.twig' %}
+        </div>
+        {% include 'frontend/components/product-info/product-info.twig' %}
+    </div>
+    <div class="s-info__r">
+        {% if info.decorations %}
+            {% include 'frontend/components/top-add/top-add.twig' %}
+        {% endif %}
+    </div>
+</div>

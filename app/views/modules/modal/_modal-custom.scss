@@ -1,0 +1,490 @@
+@import '../../../../source/src/css/frontend/helpers/variables';
+@import '../../../../source/src/css/frontend/helpers/mixins';
+@import '../../../../source/src/css/frontend/elements/placeholders';
+
+.modal {
+  $root: &;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: $color__light;
+  box-shadow: 0 16px 24px rgba(8, 35, 48, 0.16);
+
+  &__body {
+    height: 100%;
+    padding: 24px 32px 32px;
+    background-color: $color__light;
+  }
+
+  &__img {
+    padding-bottom: 75.0025%;
+
+    img {
+      @extend %absolute-full;
+      @include size(100%);
+    }
+  }
+
+  &__block {
+    margin-bottom: 24px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__block-title {
+    font-size: 18px;
+    line-height: 1.4;
+    color: $color__dark--3;
+    margin-bottom: 14px;
+  }
+
+  &__block-value {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.25;
+    color: $color__dark;
+  }
+
+  &__block-row {
+    @extend %flex-center-between;
+  }
+
+  &__block-row-elem {
+    width: 50%;
+    margin-right: 16px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    .button_xs .button__text {
+      font-size: 16px;
+    }
+  }
+
+  &__empty {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__block-text {
+    font-size: 16px;
+    line-height: 1.4;
+    color: $color__dark--3;
+  }
+
+  &__block-date {
+    color: $color__dark--1;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 32px 32px;
+    background-color: $color__light;
+    box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
+
+    #{$root}__input {
+      margin-bottom: 0;
+
+      &:first-child {
+        margin-right: 7px;
+      }
+
+      &:last-child {
+        margin-left: 7px;
+      }
+    }
+  }
+
+  &__input {
+    margin-bottom: 14px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .button {
+      width: 100%;
+
+      &__text {
+        font-size: 16px;
+      }
+    }
+
+    &_row {
+      display: flex;
+    }
+
+    #{$root}__block-title {
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+  }
+
+  &__input-btn {
+    margin-right: 14px;
+
+    .button {
+      &.button_lg .button__text {
+        font-size: 18px;
+        white-space: nowrap;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .table-list {
+    &__list {
+      flex-direction: column;
+      margin: 0;
+    }
+
+    &__item {
+      width: 100%;
+      padding: 0;
+      margin-bottom: 14px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &_second {
+    max-width: 590px;
+
+    #{$root}__body {
+      //max-height: 500px;
+    }
+
+    #{$root}__block-row {
+      align-items: flex-start;
+    }
+
+    #{$root}__block-row-elem {
+      .s-card-info {
+        margin-top: 14px;
+      }
+    }
+
+    #{$root}__bottom {
+      #{$root}__input {
+        width: 50%;
+
+        .button {
+          min-width: auto;
+        }
+      }
+    }
+
+    #{$root}__block {
+      .c-tags-block {
+        &__list {
+          margin: -4px;
+        }
+
+        &__item {
+          padding: 4px;
+        }
+      }
+    }
+  }
+
+  &_third {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 100vh;
+    max-width: 575px;
+    margin-right: 0;
+
+    #{$root}__body {
+      padding: 0;
+      flex-grow: 1;
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 190px);
+    }
+
+    #{$root}__main {
+      height: 100%;
+    }
+
+    #{$root}__bottom {
+      padding: 24px 32px;
+    }
+
+    #{$root}__body-bottom {
+      margin-top: auto;
+      @extend %flex-middle;
+      background-color: $color__light--1;
+      padding: 14px 32px;
+
+      .ts-skill {
+        @extend %flex-middle;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &__icon {
+          @include size(64px);
+          flex: 0 0 64px;
+          margin-bottom: 0;
+          margin-right: 14px;
+        }
+
+        &__icon-inner {
+          @include size(54px);
+        }
+
+        &__text {
+          font-size: 21px;
+          line-height: 1.15;
+          letter-spacing: .04em;
+        }
+      }
+    }
+
+    #{$root}__list {
+      background-color: $color__light--1;
+      #{$root}__item {
+        border: 0;
+      }
+    }
+
+    #{$root}__item {
+      border-top: 2px dotted $color__light--3;
+
+      &:first-child {
+        border-top: 0;
+      }
+    }
+  }
+
+  &_quatro {
+    background-color: $color__light--2;
+    .modal-head,
+    #{$root}__body {
+      background-color: transparent;
+      border: 0;
+    }
+
+    #{$root}__img {
+      padding: 0;
+      @extend %flex-center-end;
+      @include size(128px);
+      background-color: $color__light;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+    }
+
+    #{$root}__img-inner {
+      @include size(96px);
+    }
+
+    #{$root}__block {
+      text-align: center;
+    }
+
+    #{$root}__block-title {
+      font-family: $font-family__second;
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: .04em;
+      color: $color__dark;
+      margin-bottom: 14px;
+    }
+
+    #{$root}__block-text {
+      font-size: 16px;
+      line-height: 1.4;
+      color: $color__dark--3;
+    }
+
+    #{$root}__block-text2 {
+      p {
+        font-size: 16px;
+        line-height: 1.4;
+        color: $color__dark--2;
+        margin-bottom: 14px;
+
+        a {
+          font-weight: bold;
+          color: $color__dark--3;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      strong {
+        display: block;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 1.2;
+        color: $color__primary--1;
+        margin-bottom: 14px;
+      }
+    }
+
+    .button_lg .button__text {
+      font-size: 18px;
+    }
+  }
+
+  @include media('<md') {
+    height: 100vh;
+    min-height: 100%;
+    max-width: 100%;
+
+    &__body,
+    &__bottom {
+      padding: 14px 16px;
+    }
+
+    &__input {
+      .button {
+        height: 48px;
+        min-height: 48px;
+
+        &__text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &__body {
+      flex-grow: 1;
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+    }
+
+    &__bottom {
+      .button {
+        height: 48px;
+        min-height: 48px;
+
+        &.button_lg .button__text {
+          font-size: 16px;
+        }
+
+        &__icon {
+          @include size(24px);
+          flex: 0 0 24px;
+        }
+      }
+    }
+
+    &__block-title {
+      font-size: 16px;
+    }
+
+    &_second {
+      height: calc(100vh - 60px);
+      #{$root}__wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      #{$root}__bottom,
+      #{$root}__head {
+        flex-shrink: 1;
+      }
+
+      #{$root}__body {
+        flex: 1;
+        height: calc(100vh - 150px);
+      }
+
+      #{$root}__block-row {
+        flex-wrap: wrap;
+      }
+
+      #{$root}__block-row-elem {
+        margin: 0;
+        width: 100%;
+      }
+    }
+
+    &_third {
+
+      #{$root}__body-bottom {
+        display: none !important;
+      }
+
+      #{$root}__bottom {
+        flex-direction: column;
+        padding: 14px 16px;
+
+        #{$root}__block-title {
+          margin-bottom: 0;
+          color: $color__dark--2;
+        }
+
+        #{$root}__input {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 14px;
+          margin-left: 0;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        #{$root}__input-btn:first-child {
+          width: 48px;
+          flex: 0 0 48px;
+
+          .button {
+            min-width: 48px;
+            width: 48px;
+            border-width: 2px;
+
+            &__icon {
+              @include size(24px);
+              flex: 0 0 24px;
+            }
+          }
+        }
+
+        #{$root}__input-btn:last-child {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+#modal_filter .modal__bottom {
+  .modal__input {
+    width: 50%;
+
+    .button_lg {
+      min-width: auto;
+    }
+  }
+
+  @include media('<md') {
+    .modal__input {
+
+    }
+  }
+}

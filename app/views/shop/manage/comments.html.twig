@@ -1,0 +1,41 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+  <div class="table_data">
+    <div class="table_data_navigation">
+      {% include 'parts/paging.html.twig' %}
+    </div>
+    <table class="table_bordered table_striped">
+      <thead>
+      <tr>
+        <th style="width: 70px">ID</th>
+        <th style="width: 100px">Статус</th>
+        <th style="width: 100px">Дата</th>
+        <th style="width: 120px">Имя</th>
+        <th >Отзыв</th>
+        <th style="width: 80px">Рейт</th>
+      </tr>
+      <tr>
+        <th><input data-name="comment_id" data-type="filter_value" min="0" type="text"></th>
+        <th>
+          <select data-name="comment_status" data-type="filter_value">
+            <option value="-1">Все</option>
+            <option value="0">Выкл</option>
+            <option value="1">Вкл</option>
+          </select>
+        </th>
+        <th>
+          <input data-name="date_from" data-type="filter_value" class="date_from" type="text">
+          <input data-name="date_to" data-type="filter_value" class="date_to" type="text">
+        </th>
+        <th><input data-name="comment_author" data-type="filter_value" type="text"></th>
+        <th><input data-name="comment_text" data-type="filter_value" type="text"></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody class="table_content">
+      {% include 'shop/manage/comments_table.html.twig' %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

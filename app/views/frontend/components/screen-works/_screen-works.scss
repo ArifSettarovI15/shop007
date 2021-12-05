@@ -1,0 +1,11 @@
+.s-works {
+  @include media('<md') {
+    .table-list__item {
+      display: none;
+
+      &:nth-child(-n + 1) {
+        display: block;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.bg-map {
+  @include size(100%);
+  max-width: 100%;
+}
+
+.placemark {
+  width: 93px;
+  height: 80px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: url('/assets/images/svg/map-logo-icon.svg');
+  @extend %background__cover;
+}

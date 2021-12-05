@@ -1,0 +1,22 @@
+@import '../../../../source/src/css/frontend/helpers/variables';
+@import '../../../../source/src/css/frontend/helpers/mixins';
+@import '../../../../source/src/css/frontend/elements/placeholders';
+
+.inline-notification {
+  display: flex;
+  padding: 14px;
+  border: 2px solid $color__primary--1;
+  border-radius: 14px 0 14px 14px;
+
+  &__icon {
+    @include size(24px);
+    flex: 0 0 24px;
+    margin-right: 14px;
+  }
+
+  &__text {
+    font-size: 13px;
+    line-height: 1.4;
+    color: $color__dark--3;
+  }
+}

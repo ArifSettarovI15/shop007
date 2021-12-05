@@ -1,0 +1,17 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="container">
+        <div class="page__content">
+            <div class="page__info">
+                <div class="forgot-form">
+                    {% include 'users/auth/forgot_form.html.twig'%}
+                </div>
+            </div>
+            {% if banners %}
+                <div class="page__side-slider">
+                    {% include 'frontend/components/side-slider/side-slider.twig' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

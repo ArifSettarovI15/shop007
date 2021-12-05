@@ -1,0 +1,89 @@
+{% import 'frontend/elements/link/link_macro.twig' as Link %}
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="footer">
+    <div class="container container_sm">
+        <div class="footer__wrapper">
+            <nav class="footer__nav n-footer">
+                <ul class="n-footer__list">
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/', 'Главная', {
+                            mod: 'second'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/catalog/', 'Каталог букетов', {
+                            mod: 'second'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/#anchor_feeds', 'Отзывы', {
+                            mod: 'second',
+                            trigger: 'js-anchor'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/#anchor_about', 'О нас', {
+                            mod: 'second',
+                            trigger: 'js-anchor'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/#anchor_delivery', 'Доставка и оплата', {
+                            mod: 'second',
+                            trigger: 'js-anchor'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/#anchor_faq', 'Вопросы', {
+                            mod: 'second',
+                            trigger: 'js-anchor'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/articles/', 'Блог', {
+                            mod: 'second'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/#anchor_contacts', 'Контакты', {
+                            mod: 'second',
+                            trigger: 'js-anchor'
+                        }) }}
+                    </li>
+                    <li class="n-footer__item">
+                        {{ Link.link(global.base_url~'/privacy.html', 'Персональные данные', {
+                            mod: 'second'
+                        }) }}
+                    </li>
+                </ul>
+            </nav>
+            <div class="footer__bottom">
+                <div class="footer__part r-footer">
+                    <div class="r-footer__text">© 2016{% if "now"|date("Y")!=2020 %}-{{ "now"|date("Y") }}{% endif %} THE SMAK — Мастерская съедобных подарков в Симферополе.</div>
+                </div>
+                <div class="footer__part">
+                    <div class="footer__row">
+                        <div class="footer__media m-list">
+                            <ul class="m-list__list">
+                                {% for social in global.fields.info.info_socials %}
+                                    <li class="m-list__item">
+                                        <a href="{{social.info_socials_url}}" target="_blank" class="button button_iconic button_sm">
+                                            <span class="button__container">
+                                                <span class="button__icon">{{ Svg.icon('ml-icon-'~social.info_socials_icon, 1) }}</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="t-dev">
+                            <a href="https://tigerweb.ru/" target="_blank" class="t-dev__link">
+                                <img src="/assets/images/svg/tigerweb.svg" alt="Веб студия TigerWeb" title="Веб студия TigerWeb">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

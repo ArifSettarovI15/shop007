@@ -1,0 +1,38 @@
+{% import "frontend/elements/badge/badge.twig" as Badge %}
+<div class="table-list table-list_second">
+    <div class="table-list__list {% if not catalog %}table-list__list_slider2 js-slider-1{% endif %}"
+         {% if not catalog %}data-slider="c-1"{% endif %}>
+        {% for category in categories %}
+            {% set i = loop.index %}
+            <div
+                class="table-list__item
+                {% if not catalog %}
+                    table-list__item_main
+                    {% if i % 2 == 0 %}
+                        anim-catalog-item-2
+                    {% else %}
+                        anim-catalog-item
+                    {% endif %}
+                    {% else %}
+                    table-list__item_quatro
+                {% endif %}">
+                <a href="{{ global.base_url }}/{{ category.cat_url }}/" class="t-1">
+                    <div class="t-1__wrapper">
+                        <div class="t-1__image">
+                            <img src="{{ category.cat_icon_url }}" class="image image_cover"
+                                 alt="{{ category.cat_title }}">
+                        </div>
+                        {% if category.cat_top %}
+                            <div class="t-1__left-top">
+                                {{ Badge.element('популярно', {mod:'primary3'}) }}
+                            </div>
+                        {% endif %}
+                        <div class="t-1__bottom">
+                            <div class="t-1__title">{{ category.cat_title|prepare_title|raw }}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,84 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+    <div class="table_data">
+        <div class="sorting">
+            Сортировка:
+            <select data-name="order" data-type="filter_value">
+                <option value="name">По названию</option>
+                <option value="date">По дате поступления</option>
+                <option value="price">По цене (дороже)</option>
+                <option value="price2">По цене (дешевле)</option>
+                <option value="views">По популярности</option>
+                <option value="rate">По рейтингу</option>
+            </select>
+        </div>
+
+        <div>
+            Фильтры:<br/>
+            Статус: <select data-name="item_status" data-type="filter_value">
+                <option value="-1" {% if variables.item_status==-1 %}selected="selected"{% endif %}>Все</option>
+                <option value="0" {% if variables.item_status==0 %}selected="selected"{% endif %}>Выкл</option>
+                <option value="1" {% if variables.item_status==1 %}selected="selected"{% endif %}>Вкл</option>
+            </select><br/>
+            Метка: <select data-name="badge" data-type="filter_value">
+                <option value="">Выберите</option>
+                <option value="tag">С МЕТКОЙ</option>
+                <option value="new">Новинка</option>
+                <option value="sale">Распродажа</option>
+                <option value="hit">Хит</option>
+                <option value="recommend">Рекомендуем</option>
+                <option value="promo">Акция</option>
+                <option value="hit_month">Товар месяца</option>
+            </select><br/>
+            Фото: <select data-name="item_icon_isset" data-type="filter_value">
+                <option value="-1">Все</option>
+                <option value="0">Нет</option>
+                <option value="1">Есть</option>
+            </select><br/>
+            Бренд: <select data-name="item_vendor_id" data-type="filter_value">
+                <option value="0">Выберите</option>
+                <option value="-1">Без бренда</option>
+                {% for vendor in variables.vendors %}
+                    <option value="{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</option>
+                {% endfor %}
+            </select><br/>
+            Поиск:    <input data-name="q" data-type="filter_value" type="text"><br/>
+
+            Категория:  <div class="value cats_tree_select">
+                {{ variables.cats_select|raw }}
+                </div>
+
+            Цена:  <input data-name="item_price_min" placeholder="От" data-type="filter_value" type="text" value="{{ variables.item_amount_min }}">
+            <input data-name="item_price_max" placeholder="До" data-type="filter_value" type="text"><br/>
+            Кол-во:  <input data-name="item_amount_min" placeholder="От" data-type="filter_value" type="text">
+            <input data-name="item_amount_max" placeholder="До" data-type="filter_value" type="text">
+        </div>
+
+        <div class="table_data_navigation">
+            {% include 'parts/paging.html.twig' %}
+        </div>
+
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th style="width: 100px">Фото</th>
+                <th>О товаре</th>
+                <th>
+                    santeh.guru
+                </th>
+                <th>
+                    magbo.ru
+                </th>
+                <th>
+                    shpatel-ok.ru
+                </th>
+                <th class="action_button"></th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+            {% include 'shop/manage/price_compare_table.twig' %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+.pattern-1 {
+  position: absolute;
+  left: 0;
+  @include size(100%, 900px);
+  background-color: $color__light--2;
+  background-image: url('/assets/images/static/bg-3.png');
+  background-size: 50%;
+  @extend %decor-primary;
+
+  @include media('<md') {
+    height: 600px;
+    background-size: cover;
+  }
+}
+
+.pattern-2 {
+  @extend %absolute-full;
+  top: 0;
+  left: 0;
+  @include size(100%);
+  background-color: $color__light--2;
+  @extend %background__cover;
+  @extend %decor-primary;
+}
+
+.pattern-3 {
+  @extend %absolute-full;
+  left: 0;
+  width: 100%;
+  background-image: url('/assets/images/static/bg-1.jpg');
+  @extend %background__cover;
+  @extend %decor-primary;
+  top: 64px;
+
+  @include media('<xl') {
+    top: 32px;
+  }
+
+  @include media('<md') {
+    top: 0;
+  }
+}
+
+.pattern-4 {
+  @extend %absolute-full;
+  @include size(100%, calc(100% + 85px));
+  background-color: $color__light--2;
+  background-image: url('/assets/images/static/ptrn-2.png');
+  @extend %background__contain;
+  @extend %decor-second;
+  background-repeat: repeat-x;
+
+  @include media('<md') {
+    height: calc(100% + 42px);
+  }
+}

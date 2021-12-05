@@ -1,0 +1,112 @@
+.error404 {
+  &__wrapper {
+    @extend %med-container;
+  }
+
+  &__block {
+    margin: 0 auto 40px;
+    @include size(360px);
+  }
+
+  &__pattern-wrapper {
+
+  }
+
+  &__block-text {
+    @extend %absolute-center;
+    @include size(288px, 152px);
+    z-index: 1;
+  }
+
+  &__block-text-img {
+    animation: pulse 1.3s infinite ease-in;
+    @include size(100%);
+
+    svg {
+      filter: drop-shadow(0 16px 24px rgba(29, 29, 27, 0.2));
+    }
+  }
+
+  &__block-img {
+    @include size(100%);
+
+    //clip-path: url(#mask);
+  }
+
+  .svg-g-404 {
+    overflow: hidden;
+  }
+
+  .svg-image-404 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__content {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: $font-family__second;
+    font-size: 32px;
+    line-height: 1.15;
+    color: $color__dark;
+    letter-spacing: .04em;
+    margin-bottom: 14px;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 1.4;
+    color: $color__dark--3;
+    margin-bottom: 32px;
+  }
+
+  @include media('<md') {
+    &__block {
+      @include size(288px);
+      margin-bottom: 24px;
+    }
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__text {
+      margin-bottom: 24px;
+    }
+
+    &__link {
+      .button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.pattern-404 {
+  margin: 64px;
+  @extend %absolute-full;
+  background-image: url('/assets/images/static/bg-2.png');
+  background-position: 0 0;
+
+  @include media('<md') {
+    display: none;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.06),
+  }
+  100% {
+    transform: scale(1);
+  }
+}

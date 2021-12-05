@@ -1,0 +1,269 @@
+<div >
+  <div class="title">Информация о заказе #{{ variables.order_info.info.order_id }}</div>
+
+    {% if variables.order_info.show_payment %}
+        {% set order_info=variables.order_info.info %}
+        {% set data=variables.order_info.data %}
+        {% set payments=variables.order_info.payments_yandex %}
+        {% include 'shop/payments/payment_form.html.twig' %}
+    {% endif %}
+  <div class="basket_list">
+    <div class="table_body">
+        {% for item in variables.order_info.items %}
+          <div class="row">
+            <div class="image">
+                <a href="{{ item.item_full_url }}">
+                    <img  src="{{ item.item_icon_url }}" alt="">
+                </a>
+
+            </div>
+            <div class="title">
+              <a href="{{ item.item_full_url }}" class="product_name">{{ item.item_full_title }}</a>
+              <div class="article"><b>Артикул:</b>  {{ item.item_article }}</div>
+            </div>
+            <div class="number">
+                {{ item.oid_item_count }} шт
+            </div>
+            <div class="total" style="width:150px;"><span>{{ item.oid_item_price_f }}</span> руб.</div>
+          </div>
+        {% endfor %}
+      <div class="row">
+        <div class="image">
+
+        </div>
+        <div class="title">
+
+        </div>
+        <div class="number">
+          Итого
+        </div>
+        <div class="total"><span>  {{ variables.order_info.info.order_items_cost_f }}</span> руб.</div>
+      </div>
+        {% if variables.order_info.info.order_user_delivery_cost %}
+        <div class="row">
+            <div class="image">
+
+            </div>
+            <div class="title">
+
+            </div>
+            <div class="number">
+                Доставка
+            </div>
+            <div class="total"><span>  {{ variables.order_info.info.order_user_delivery_cost_f }}</span> руб.</div>
+        </div>
+        {% endif %}
+        {#
+        {%  if variables.order_info.info.order_promo_sum %}
+        <div class="row">
+            <div class="image">
+
+            </div>
+            <div class="title">
+
+            </div>
+            <div class="number">
+                Скидка по промо-коду
+            </div>
+            <div class="total"><span>  {{ variables.order_info.info.order_promo_sum_f }}</span> руб.</div>
+        </div>
+        {% endif %}
+        {%  if variables.order_info.info.order_bonus_payment %}
+        <div class="row">
+            <div class="image">
+
+            </div>
+            <div class="title">
+
+            </div>
+            <div class="number">
+                Оплата бонусами
+            </div>
+            <div class="total"><span>  {{ variables.order_info.info.order_bonus_payment_f }}</span> руб.</div>
+        </div>
+        {% endif %}#}
+        <div class="row">
+            <div class="image">
+
+            </div>
+            <div class="title">
+
+            </div>
+            <div class="number">
+                К оплате
+            </div>
+            <div class="total"><span>  {{ variables.order_info.info.order_total_cost_f }}</span> руб.</div>
+        </div>
+    </div>
+  </div>
+
+  <div class="order_details">
+    <div class="tt_data">
+      <div class="title">Кратко о заказе</div>
+      <div class="data">
+        <div>
+          <div>Дата:</div>
+          <div>{{variables.order_info.info.order_time|date("d.m.Y, H:i") }}</div>
+        </div>
+        <div>
+          <div>Статус:</div>
+          <div class="order-status">{{variables.order_info.statuses[variables.order_info.info.order_status]['title']}}</div>
+        </div>
+
+        <div>
+          <div>ФИО:</div>
+          <div>{{variables.order_info.info.order_user_lastname}} {{variables.order_info.info.order_user_name}}</div>
+        </div>
+        <div>
+          <div>Телефон:</div>
+          <div>{{variables.order_info.info.order_user_phone}}</div>
+        </div>
+        <div>
+          <div>Email:</div>
+          <div>{{variables.order_info.info.order_user_phone}}</div>
+        </div>
+          {% if variables.order_info.info.order_comment  %}
+            <div>
+              <div>Комментарий:</div>
+              <div>{{variables.order_info.info.order_comment}}</div>
+            </div>
+          {% endif %}
+
+          {% if variables.order_info.info.order_payment_type %}
+            <div class="line">
+              <div class="label">Способ оплаты</div>
+              <div class="value">
+                  {% for ip in variables.order_info.payments %}
+                      {% if ip['yandex']==variables.order_info.info.order_payment_type %}
+                          {{ ip['title'] }}
+                      {% endif %}
+                  {% endfor %}
+              </div>
+            </div>
+
+          {% else %}
+            <div class="line">
+              <div class="label">Способ оплаты:</div>
+              <div class="value">
+                  {{ variables.order_info.payments[variables.order_info.info.order_payment]['title'] }}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if variables.order_info['payments'][variables.order_info.info['order_payment_type']]['yandex']!='' %}
+            <div>
+              <div>Статус оплаты:</div>
+              <div>
+                  {% if variables.order_info.info.order_payment_status %}
+                    Оплачено
+                  {% else %}
+                    Ожидает оплаты
+                  {% endif %}
+              </div>
+            </div>
+              {% if variables.order_info.info.order_payment_status %}
+                <div>
+                  <div>Время оплаты</div>
+                  <div>{{ variables.order_info.info.payment_date_raw|date('d.m.Y H:i:s')}}</div>
+                </div>
+              {% endif %}
+          {% endif %}
+      </div>
+    </div>
+    <div class="tt_data">
+      <div class="title">Доставка</div>
+      <div class="data">
+        <div>
+          <div>Способ:</div>
+          <div>{{variables.order_info.delivery[variables.order_info.info.order_delivery]['title']}}</div>
+        </div>
+          {% if variables.order_info.delivery_info %}
+              {% if variables.order_info.delivery_info.DispatchNumber %}
+                <div>
+                  <div>Накладная:</div>
+                  <div>{{ variables.order_info.delivery_info.DispatchNumber }}</div>
+                </div>
+              {% endif %}
+              {% if variables.order_info.n_data %}
+                <div>
+                  <div>
+                    Статус:
+                  </div>
+                  <div>
+                      {% for item in variables.order_info.n_data %}
+                          {{ item.status_date|date("d.m.Y H:i:s") }}<br/>
+                          {{ item.status_name}}<br/>
+                          {{ item.status_city}}
+                      {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if variables.order_info.delivery_info.Weight %}
+                <div>
+                  <div>Вес:</div>
+                  <div>{{ variables.order_info.delivery_info.Weight }} кг</div>
+                </div>
+              {% endif %}
+              {% if variables.order_info.delivery_info.DeliveryModeName %}
+                <div>
+                  <div>Режим доставки:</div>
+                  <div>{{ variables.order_info.delivery_info.DeliveryModeName }}</div>
+                </div>
+              {% endif %}
+          {% endif %}
+
+          {% if variables.order_info.info.order_delivery=='company'   %}
+            <div>
+              <div>Город:</div>
+              <div> {{variables.order_info.delivery_cities['cities'][variables.order_info.info['order_delivery_city_id']]['title']}}</div>
+            </div>
+              <div>
+                  <div>Склад:</div>
+                  <div>{{ variables.order_info.info.order_delivery_sklad }}</div>
+              </div>
+              {% for p in variables.order_info.pvz %}
+                  {% if p.sklad_id==variables.order_info.delivery_info.PvzCode %}
+                    <div>
+                      <div>Адрес:</div>
+                      <div>{{ p.sklad_addr }}</div>
+                    </div>
+                    <div>
+                      <div>Время работы:</div>
+                      <div>{{ p.sklad_time }}</div>
+                    </div>
+                    <div>
+                      <div>Телефоны:</div>
+                      <div>{{ p.sklad_phone }}</div>
+                    </div>
+                    <div>
+                      <div>На карте:</div>
+                      <div><a href="https://yandex.ru/maps/?mode=search&text={{ p.coordY }}%20{{ p.coordX }}" target="_blank" class="link link_1 ">показать</a></div>
+                    </div>
+                  {% endif %}
+              {% endfor %}
+          {% else %}
+            <div>
+              <div>Адрес доставки:</div>
+              <div>
+                  {% if variables.order_info.info['order_delivery_city_id'] %}
+                      {{variables.order_info.delivery_cities['cities'][variables.order_info.info['order_delivery_city_id']]['title']}}
+                  {% endif %}
+                  {% if variables.order_info.info['order_delivery_street'] %}, {{variables.order_info.info['order_delivery_street']}}{% endif %}
+                  {% if variables.order_info.info['order_delivery_house'] %}, {{variables.order_info.info['order_delivery_house']}}{% endif %}
+                  {% if variables.order_info.info['order_delivery_flat'] %}, {{variables.order_info.info['order_delivery_flat']}}{% endif %}
+              </div>
+            </div>
+          {% endif %}
+      </div>
+    </div>
+      {% if global.user_info.user_id>0 %}
+          <div class="actions">
+              <div>
+                  {% if variables.order_info.info.order_status==1 %}
+                      <div class="button button_1 cancel_order_action" data-id="{{ variables.order_info.info.order_id }}">Отменить заказ</div>
+                  {% endif %}
+              </div>
+          </div>
+      {% endif %}
+  </div>
+</div>

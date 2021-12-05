@@ -1,0 +1,14 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+{% set count = 1 %}
+{% if item.basket_count %}
+    {% set count = item.basket_count|round %}
+{% endif %}
+<div class="counter {{ class }}" data-min="1" data-max="10" data-step="1" data-value="{{ count }}" data-id="{{ id }}" data-value-real="{{ count }}" {% if update_basket %}data-update="1"{% endif %}>
+    <button class="counter__elem js-counter-minus" {% if count == 1 %}disabled{% else %}{% endif %}>
+        <span class="counter__icon">{{ Svg.icon('minus-icon', 1) }}</span>
+    </button>
+    <input class="counter__val js-counter-val" value="{{ count }}">
+    <button class="counter__elem js-counter-plus" {% if count == 10 %}disabled{% else %}{% endif %}>
+        <span class="counter__icon">{{ Svg.icon('plus-icon', 1) }}</span>
+    </button>
+</div>

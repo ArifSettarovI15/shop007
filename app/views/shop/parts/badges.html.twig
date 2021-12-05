@@ -1,0 +1,19 @@
+{% if badge_info.badge_isset %}
+  <div class="item-labels">
+    {% if badge_info.item_new %}
+      <small class="item-label_new" data-text="new">новинка</small>
+    {% endif %}
+    {% if badge_info.item_sale %}
+      <small class="item-label_sale" data-text="sale">скидка</small>
+    {% endif %}
+    {% if badge_info.item_hit %}
+      <small class="item-label_top" data-text="top">лучшее предложение</small>
+    {% endif %}
+    {% if badge_info.item_gift %}
+      <small class="item-label_gift" data-text="подарок">подарок</small>
+    {% endif %}
+    {% if badge_info.item_sale_id %}
+      <small class="item-label_sale" data-text="акция">Акция</small>
+    {% endif %}
+  </div>
+{% endif %}

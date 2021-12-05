@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+{% block content_center %}
+    {% block c_content %}{% endblock %}
+
+
+    {% if variables.last_views %}
+        {% set last_views=variables.last_views %}
+    {% endif %}
+
+    {% if last_views %}
+        <div class="gray-title">
+            {% include 'frontend/components/recent-widget/recent-widget.twig' with {
+                'items':last_views
+            }%}
+        </div>
+    {% endif %}
+{% endblock %}

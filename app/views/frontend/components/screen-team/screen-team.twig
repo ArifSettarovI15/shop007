@@ -1,0 +1,24 @@
+{% set section_wrapper = 1 %}
+<div id="anchor_about" class="section anim-team">
+    <div class="pattern-3"></div>
+    <div class="container container-2">
+        <div class="section__wrapper">
+            <div class="section__img">
+                <div class="section__img-container anim-team-img">
+                    <img class="image image_cover" src="{{ about.about_icon.big_thumb }}" alt="">
+                </div>
+            </div>
+            <div class="section__block">
+                <div class="section__header">
+                    {% include 'frontend/sections/section-head/section-head.twig' with {
+                        section_title: 'Наша команда',
+                        mod: 'm-center'
+                    } %}
+                </div>
+                <div class="section__content">
+                    {% include 'frontend/components/team-info/team-info.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

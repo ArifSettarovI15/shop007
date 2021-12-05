@@ -1,0 +1,73 @@
+.add-file {
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__el {
+    margin-left: 14px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &__loader {
+    @include size(40px);
+    vertical-align: middle;
+  }
+
+  &__preview,
+  &__loader {
+    display: none;
+  }
+}
+
+.file-preview {
+  $root: &;
+  @extend %flex-middle;
+  border-radius: 50%;
+  @include size(48px);
+  border: 1px solid $color__light;
+  box-shadow: 0 1px 2px rgba(29, 29, 27, 0.1);
+  overflow: hidden;
+
+  &__img {
+    @include size(100%);
+
+
+    canvas,
+    video {
+      @include size(100%);
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    &:hover {
+      #{$root}__del {
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__img-inner {
+    @include size(100%);
+  }
+
+  &__del {
+    @extend %flex-center;
+    @include size(100%);
+    @extend %absolute-full;
+    background-color: rgba($color__primary--1, .8);
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    @include transitions(opacity, visibility);
+
+    &-icon {
+      @include size(24px);
+    }
+  }
+}

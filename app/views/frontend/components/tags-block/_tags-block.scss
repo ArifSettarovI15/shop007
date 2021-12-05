@@ -1,0 +1,55 @@
+.c-tags-block {
+  &__wrapper {
+    padding-top: 41px;
+    border-top: 1px solid $color__light--3;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -7px;
+  }
+
+  &__item {
+    padding: 7px;
+
+    .button {
+      padding: 0 12px;
+      min-width: auto;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  //@include media('<xl') {
+  //  &__wrapper {
+  //    padding-top: 33px;
+  //  }
+  //}
+
+  @include media('<md') {
+    &__wrapper {
+      padding-top: 25px;
+    }
+  }
+}
+
+.catalog-tags {
+  .c-tags-block {
+    margin-top: 40px;
+  }
+
+  @include media('<xl') {
+    .c-tags-block {
+      margin-top: 32px;
+    }
+  }
+
+  @include media('<md') {
+    .c-tags-block {
+      margin-top: 24px;
+    }
+  }
+}

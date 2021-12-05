@@ -1,0 +1,15 @@
+<div class="main-content-area__row5">
+      <span class="recently-viewed-title" data-class-text="group2_bold size20">
+       {{ slider_title }}
+      </span>
+    {% set buttonDelete = false %}
+
+    <div>
+        <!--items col list-->
+        <ul class="items-row-list recently-viewed__list {% if simple_list!=1 %}slider{% endif %} {{ slider_name }}"  data-class-unit="list_type5_5cols">
+            {% include './parts/items-row-list.html.twig' %}
+        </ul>
+
+    </div>
+
+</div>

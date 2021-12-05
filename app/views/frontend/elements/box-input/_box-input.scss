@@ -1,0 +1,177 @@
+.cbs {
+  $root: &;
+  display: flex;
+  align-items: center;
+
+  // Checkboxes
+
+  .icheckbox,
+  .iradio {
+    @extend %flex-center;
+    @include size(24px);
+    flex: 0 0 24px;
+    @include transitions(border-width, border-color, box-shadow, background-color);
+
+    &.disabled {
+      background-color: transparent !important;
+      border-color: $color__light--3 !important;
+      border-width: 2px !important;
+      cursor: not-allowed;
+
+      & + #{$root}__label {
+        color: $color__light--3 !important;
+      }
+
+      #{$root}__check {
+        opacity: 0;
+      }
+
+      &.checked {
+        &:before,
+        #{$root}__check {
+          opacity: 1;
+          svg * {
+            fill: $color__light--3;
+          }
+        }
+      }
+
+      &:before {
+        border-color: $color__gray--1 !important;
+      }
+    }
+  }
+
+  &__label {
+    font-family: $font-family__main;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.15;
+    color: $color__dark--3;
+    margin-left: 8px;
+    cursor: pointer;
+
+    a {
+      color: inherit;
+    }
+  }
+
+  &__check {
+    @include size(16px);
+    svg * {
+      fill: $color__light--2;
+      @include transitions(fill);
+    }
+  }
+
+  &_primary {
+
+    .icheckbox,
+    .iradio {
+      border: 2px solid $color__dark--3;
+      border-radius: 50%;
+
+      &.focus {
+        border-color: $color__primary--1;
+        box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.3);
+      }
+
+      &.checked {
+        background-color: $color__primary--1;
+        border-color: $color__primary--1;
+      }
+    }
+
+    // Checkboxes
+    .icheckbox {
+      &.checked {
+        #{$root}__check {
+          svg * {
+            color: $color__light;
+          }
+        }
+      }
+    }
+
+    // Radio
+    .iradio {
+      &:before {
+        content: '';
+        @include size(16px);
+        border-radius: 50%;
+        border: 2px solid $color__light--2;
+        @include transitions(border-color);
+      }
+
+      &.checked:before {
+        border-color: $color__light;
+      }
+    }
+  }
+
+  &_second {
+    .iradio {
+      border-radius: 50%;
+    }
+
+    // Checkbox
+    .icheckbox {
+      border: 2px solid $color__light--3;
+
+      #{$root}__check {
+        svg * {
+          fill: $color__secondary--4;
+        }
+      }
+
+      &.focus {
+        border-color: $color__light--2;
+        box-shadow: 0 0 0 2px $color__secondary--5;
+
+        #{$root}__check {
+          transform: scale(1);
+        }
+      }
+
+      &.checked {
+        background-color: $color__light--2;
+        border-width: 0;
+        box-shadow: none;
+
+        #{$root}__check {
+          transform: scale(1);
+
+          svg * {
+            fill: $color__light;
+          }
+        }
+      }
+    }
+
+    // Radiobutton
+    .iradio {
+      border: 2px solid $color__dark--3;
+
+      &:before {
+        content: '';
+        @include size(16px);
+        border-radius: 50%;
+        border: 2px solid $color__light--2;
+        @include transitions(border-color);
+      }
+
+      &.focus {
+        box-shadow: 0 0 0 3px rgba(38, 50, 56, 0.3);
+      }
+
+      &.checked {
+        box-shadow: 0 0 0 3px rgba(38, 50, 56, 0.3);
+        background-color: $color__dark--3;
+
+        &:before {
+          border-color: $color__light;
+        }
+      }
+    }
+  }
+}

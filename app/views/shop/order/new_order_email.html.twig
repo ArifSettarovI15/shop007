@@ -1,0 +1,15 @@
+{% extends "emails/global.html.twig" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    {% include 'frontend/components/order-done/order_done.twig' %}
+{% endblock %}
+ {% block text_preview %}
+     {% if user %}
+         {% if new==1 %}
+             <p style="font-size: 14px;line-height: 18px;">Благодарим Вас за покупку на сайте {{ global.fields.about.about_name }}!</p>
+         {% endif %}
+         {% if changed %}
+             <p style="font-size: 14px;line-height: 18px;">В заказе произошли изменения!</p>
+         {% endif %}
+     {% endif %}
+ {% endblock %}
