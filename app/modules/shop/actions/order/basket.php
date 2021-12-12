@@ -476,9 +476,9 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
     $total_count = $Main->template->global_vars['basket_total'];
     $items = $Main->template->global_vars['basket_items'];
     $html = $Main->template->Render(
-        "frontend/components/cart-list/cart-list.twig",
+        "frontend/components/basket/basket.twig",
         [
-            $Main->template->global_vars['basket_items'],
+            'items'=>$Main->template->global_vars['basket_items'],
         ]
     );
     $Main->template->DisplayJson(

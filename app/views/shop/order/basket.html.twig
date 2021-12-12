@@ -1,8 +1,11 @@
 {% extends "global.html.twig" %}
 {% block content %}
     {% if items %}
-        {% include 'frontend/components/basket/basket.twig' %}
-        {% else %}
+        <div class="js_basket_wrapper">
+            {% include 'frontend/components/basket/basket.twig' %}
+        </div>
+
+    {% else %}
         <div class="basket_noitems">
             В корзине пока нет товаров
         </div>

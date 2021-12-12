@@ -17,12 +17,12 @@
                     <div class="basket_table_item_cell basket_table_item_cell_title"><h6>{{ item.item_title }}</h6></div>
                     <div class="basket_table_item_cell basket_table_item_cell_price">{{item.item_price}} ₽</div>
                     <div class="basket_table_item_cell basket_table_item_cell_count">
-                        <input type="number" class="basket_count" data-id="{{ item.item_id }}" value="{{item.basket_count|number_format}}">
+                        <input type="number" min="1" max="10" class="basket_count js_update_basket_item" data-id="{{ item.item_id }}" value="{{item.basket_count|number_format}}">
 
                     </div>
                     <div class="basket_table_item_cell basket_table_item_cell_total">{{item.item_price * item.basket_count|number_format}} ₽</div>
                     <div class="basket_table_item_cell basket_table_item_cell_delete">
-                        <div class="delete_item" data-id="{{ item.item_id }}">{{ Svg.icon('delete', 1, 15,15)}}</div>
+                        <div class="delete_item js_delete_basket_item" data-id="{{ item.item_id }}">{{ Svg.icon('delete', 1, 15,15)}}</div>
                     </div>
                 </div>
             {% endfor %}
