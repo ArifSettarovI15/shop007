@@ -19,18 +19,7 @@
         width: 100%;
     }
 
-    @include media('<xl') {
-        &__top {
-            padding-top: 58px;
-        }
-    }
 
-    @include media('<md') {
-        &__top {
-            padding-top: 48px;
-            margin-bottom: 8px;
-        }
-    }
 }
 
 .container {

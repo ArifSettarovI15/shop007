@@ -1,60 +1,7 @@
 {% import "frontend/elements/badge/badge.twig" as Badge %}
 {% import "frontend/elements/svg/svg_macros.twig" as Svg %}
-<div class="s-card-preview">
-    {% set item = list|first %}
-    {% set offer = info.offers|first %}
-    {% if offer.offer_icon %}
-        {% set first_image = offer.item_icon_url  %}
-    {% else %}
-        {% set first_image = item.item_icon_url  %}
-    {% endif %}
-    {% if not modal %}
-    <div class="s-card-preview__dop">
-        <div class="s-card-preview__arrow s-card-preview__arrow_prev">
-            <div class="s-card-preview__icon">{{ Svg.icon('chevron-2', 1) }}</div>
-        </div>
-        <div class="s-card-preview__dop-list js-slider-card-1">
-            {% for item in image_data2.files %}
-                <div class="s-card-preview__dop-item">
-                    <img class="image image_cover" src="{{ item.item_icon_url }}" alt="">
-                </div>
-            {% endfor %}
-        </div>
-        <div class="s-card-preview__arrow s-card-preview__arrow_next">
-            <div class="s-card-preview__icon">{{ Svg.icon('chevron-2', 1) }}</div>
-        </div>
-    </div>
-    {% endif %}
-    <div class="s-card-preview__main">
-        <div class="s-card-preview__badge">
-            {% if info.item_hit %}
-            {{ Badge.element('ПОПУЛЯРНОЕ', { mod: 'primary3' }) }}<br><br>
-            {% endif %}
-            {% if info.item_sale %}
-                {% if info.item_sale_percent %}
-                    {{ Badge.element('-'~info.item_sale_percent~'%', { mod: 'primary2' }) }}
-                {% else %}
-                        {{ Badge.element('Акция', { mod: 'primary2' }) }}
-                {% endif %}
-            {% endif %}
-        </div>
-        <div class="s-card-preview__list {% if modal %}js-slider-card-2{% endif %}">
-            {% if modal %}
-                {% for item in image_data2.files %}
-                    <div class="s-card-preview__item">
-                        <div class="s-card-preview__item-inner">
-
-                            <img class="image image_cover" src="{{ item.item_icon_url }}" alt="">
-                        </div>
-                    </div>
-                {% endfor %}
-                {% else %}
-                    <div class="s-card-preview__item">
-                        <div class="s-card-preview__item-inner">
-                            <img class="image image_cover product_icon" src="{{ offer.item_icon_url }}" alt="">
-                        </div>
-                    </div>
-            {% endif %}
-        </div>
+<div class="card-preview">
+    <div class="card-preview__main">
+        <img src="{{ info.item_icon_url }}" alt="{{ info.item_title }}">
     </div>
 </div>

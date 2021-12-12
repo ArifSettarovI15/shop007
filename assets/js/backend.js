@@ -20157,8 +20157,7 @@ function ShowNotification (text,class_name) {
 }
 
 function HideNotification () {
-    $("#notification").removeClass('animated bounceInDown');
-    $("#notification").addClass('animated bounceOutUp');
+    $("#notification").remove();
 }
 var notification_id;
 function ShowNotificationAndHide (text,class_name,sec) {
@@ -20167,8 +20166,8 @@ function ShowNotificationAndHide (text,class_name,sec) {
     var hide_time=sec*1000;
 
     ShowNotification (text,class_name);
-    clearTimeout(notification_id)
-    notification_id=setTimeout(
+
+    setTimeout(
         function()
         {
             HideNotification();
@@ -20547,11 +20546,6 @@ $( document ).on( 'click', '.filters_list i', function() {
 $( document ).on( "click", ".cat_gab_action", function() {
     ChangeCatGab($(this));
 });
-getAdminNotify();
-
-admin_notify_pid = setInterval(function() {
-  getAdminNotify();
-}, 60000);
 
 
 $( document ).on( "click", ".notify-admin__close", function(e) {
@@ -20838,23 +20832,6 @@ function ChangeCatGab(obj) {
             'data': data
         }
     );
-}
-var notify_items=[];
-
-function getAdminNotify() {
-  var data={};
-  data['action']='get';
-
-  var options={};
-  options['AfterDone']=getAdminNotifyDone;
-  SendAjaxRequest(
-    {
-      'url':'/manager/notify_admin/',
-      'data':data,
-      'options':options,
-      'ShowLoading2':true
-    }
-  );
 }
 
 var browser_alert;

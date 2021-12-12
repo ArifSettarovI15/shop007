@@ -57,8 +57,7 @@ function ShowNotification (text,class_name) {
 }
 
 function HideNotification () {
-    $("#notification").removeClass('animated bounceInDown');
-    $("#notification").addClass('animated bounceOutUp');
+    $("#notification").remove();
 }
 var notification_id;
 function ShowNotificationAndHide (text,class_name,sec) {
@@ -67,8 +66,8 @@ function ShowNotificationAndHide (text,class_name,sec) {
     var hide_time=sec*1000;
 
     ShowNotification (text,class_name);
-    clearTimeout(notification_id)
-    notification_id=setTimeout(
+
+    setTimeout(
         function()
         {
             HideNotification();

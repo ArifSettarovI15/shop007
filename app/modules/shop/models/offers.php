@@ -883,14 +883,12 @@ class ShopOffers extends  DbData
 		if ($result_item['item_id']) {
 
 			$result_item['item_full_url'] = BASE_URL.'/goods/'.$result_item['item_id'].'/';
-			if ($result_item['offer_id']) {
-				$result_item['offer_full_url'] = $result_item['item_full_url'].'id-'.trim($result_item['offer_id']).'/';
-			}
+
 
 
 			if ($result_item['cat_url'] and $result_item['item_url'] and $result_item['vendor_url']) {
 
-				$result_item['item_full_url'] = BASE_URL.'/'.trim($result_item['cat_url']).'/'.trim($result_item['vendor_url']).'/'.trim($result_item['item_url']).'/';
+				$result_item['item_full_url'] = BASE_URL.'/'.trim($result_item['cat_url']).'/'.trim($result_item['item_url']).'.html';
 				if ($result_item['offer_url']) {
                     $result_item['offer_url_ok']=true;
 					$result_item['offer_full_url'] = BASE_URL.'/'.trim($result_item['cat_url']).'/'.trim($result_item['vendor_url']).'/'.trim($result_item['item_url']).'/'.trim($result_item['offer_url']).'/';

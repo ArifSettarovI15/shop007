@@ -14,16 +14,6 @@ $contacts = $SettingsClass->GetGroupValues($filter_s);
 
 $statuses = $ShopClass->GetOrderStatus();
 $basket_data = $ShopClass->products->GetBasket();
-if ($Main->GPC['action'] == 'get_order_modal') {
-    $order = $ShopClass->orders->GetLastId();
-
-    $array['status'] = true;
-    $array['html'] = $Main->template->Render(
-        'frontend/components/modal-7/modal-7.twig',
-        ['id' => $order['order_id'] + 1]
-    );
-    $Main->template->DisplayJson($array);
-}
 if ($Main->GPC['action'] == 'process_order' or $Main->GPC['action'] == 'process_temp') {
     $Main->input->clean_array_gpc(
         'r',
@@ -320,37 +310,7 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
     if ($Main->GPC['item_id'] == 0) {
         $error = 'Товар не найден';
     } else {
-        $item_info = $ShopClass->offers->getAsDecoration($Main->GPC['item_id']);
-
-        if (!(int)$item_info['offer_is_decoration']) {
-            $item_info = $ShopClass->offers->GetItemById($Main->GPC['item_id']);
-
-        }
-        else{
-            if($basket_data['total']==0){
-                $Main->template->DisplayJson(['status'=>false, 'text'=>"Сначала выберите букет!"]);
-            }
-            else{
-                if ($Main->GPC['action'] != "delete"){
-                    $items_count = 0;
-                    $decors_count = 0;
-                    foreach ($basket_data['items'] as $item){
-                        if((int)$item['offer_is_decoration']){
-                            $decors_count += $item['basket_count'];
-                        }
-                        else{
-                            $items_count +=$item['basket_count'];
-                        }
-                    }
-                    if ($decors_count >= $items_count and $Main->GPC['count'] and (int)$Main->GPC['count']>=$basket_data['items'][$Main->GPC['item_id']]['basket_count']){
-                            $Main->template->DisplayJson(['status'=>false, 'text'=>"Вы превысили лимит украшений, для букета!", 'count'=>(int)$basket_data['items'][$Main->GPC['item_id']]['basket_count']]);
-                    }
-                    elseif($decors_count >= $items_count and !$Main->GPC['count']){
-                        $Main->template->DisplayJson(['status'=>false, 'text'=>"Вы превысили лимит украшений, для букета!", 'count'=>(int)$basket_data['items'][$Main->GPC['item_id']]['basket_count']]);
-                    }
-                }
-            }
-        }
+        $item_info = $ShopClass->products->GetItemById($Main->GPC['item_id']);
 
 
         if ($item_info == false) {
@@ -403,10 +363,13 @@ if ($Main->GPC['action'] == 'update') {
     }
 }
 if ($Main->GPC['action'] == 'add') {
+
+
     if (!$Main->GPC['count'] or $Main->GPC['count'] == '') {
         $Main->GPC['count'] = 1;
     }
     if ($error != '') {
+
     } elseif ($basket_item_info) {
         $ShopClass->basket->CreateModel();
         $ShopClass->basket->model->columns_update->getCount()->setValue(
@@ -525,6 +488,7 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
             'html'        => $html,
             'total_price' => $total_price,
             'total_count' => $total_count,
+            'items_count' => $Main->template->global_vars['basket_items_count'],
         ]
     );
 }
@@ -548,7 +512,7 @@ $Main->template->SetPageAttributes(
                 'title' => $page_name,
             ],
         ],
-        'title'       => '',
+        'title'       => 'Корзина',
     ]
 );
 
@@ -564,7 +528,8 @@ $ShopClass->delivery_cities->model->setOrderBy('city_title');
 $cities = $ShopClass->delivery_cities->GetList();
 
 $user_addr = array_values($ShopClass->delivery_user->GetUserAddr($Main->user_info['user_id']));
-$Main->error->PageNotFound();
+
+
 $Main->template->Display(
     [
         'items'              => $items,

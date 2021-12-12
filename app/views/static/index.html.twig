@@ -4,17 +4,20 @@
     <div class="">
         {% include 'frontend/components/hero/hero.twig' %}
     </div>
-    <div class="container container_sm catalog">
+    <div class="container container_sm catalog mb-2">
         {% include 'frontend/components/cats/cats.twig' %}
         {% include 'frontend/components/items_list/items_list.twig' %}
     </div>
-{#    <div class="mb-1">#}
-{#        {% include 'frontend/components/screen-skills/screen-skills.twig' %}#}
-{#    </div>#}
-{#    {% if categories %}#}
-{#        <div class="m-1">#}
-{#            {% include 'frontend/components/screen-catalog/screen-catalog.twig' %}#}
-{#        </div>#}
-{#    {% endif %}#}
+
+    <div class="skills">
+        <div class="container container_sm">
+            {% include 'frontend/components/screen-skills/skills.twig' %}
+        </div>
+    </div>
+    <div class="about_wrapper">
+        <div class="container container_sm">
+            {% include 'frontend/components/about/about.twig' %}
+        </div>
+    </div>
 
 {% endblock %}

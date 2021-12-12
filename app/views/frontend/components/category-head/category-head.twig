@@ -1,50 +1,21 @@
 {% import 'frontend/elements/link/link_macro.twig' as Link %}
 <div class="category-head">
-    <div class="container container_lg">
-        <div class="category-head__wrapper">
-            <div class="category-head__image-wrapper">
-                <div class="category-head__image">
-                    {% if variables.header_image %}
-                        {% set header_image = variables.header_image %}
-                    {% endif %}
-
-                    {% if header_image %}
-                        {% if header_image=="blog" %}
-                            <img src="/assets/images/static/header_blog.jpg" alt="">
-                        {% else %}
-                            <img src="/assets/images/static/page-1.jpg" alt="">
-                        {% endif %}
-                    {% else %}
-                        <img src="/assets/images/static/page-1.jpg" alt="">
-                    {% endif %}
-
-                </div>
+    <div class="hero">
+        <div class="container container_sm">
+            <div class="hero__title">
+                {{ global.page.title }}
             </div>
-            <div class="category-head__inner">
-                <div class="container container_md">
-                    <div class="category-head__main">
-                        <div class="category-head__back">
-                            {{ Link.link(back_url, 'Назад', {
-                                mod: 'iconic',
-                                icon_left: 'arrow-left'
-                            }) }}
-                        </div>
-                        <div class="category-head__bc">
-                            {% include 'frontend/components/breadcrumbs/breadcrumbs.twig' %}
-                        </div>
-                        <div class="category-head__row">
-                            {% if global.page.title %}
-                                <h1 class="category-head__title">
-                                    <span>{{ global.page.title }}</span>
-                                </h1>
-                            {% endif %}
-                            <div class="category-head__media">
-                                {% include 'frontend/components/social-block/social-block.twig' %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
+    <div class="category-head__main">
+        <div class="category-head__back">
+            {{ Link.link(back_url, 'Назад', {
+                mod: 'iconic',
+                icon_left: 'arrow-left'
+            }) }}
+        </div>
+        <div class="category-head__bc">
+{#            {% include 'frontend/components/breadcrumbs/breadcrumbs.twig' %}#}
         </div>
     </div>
 </div>

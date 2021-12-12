@@ -1,20 +1,3 @@
-var notify_items=[];
-
-function getAdminNotify() {
-  var data={};
-  data['action']='get';
-
-  var options={};
-  options['AfterDone']=getAdminNotifyDone;
-  SendAjaxRequest(
-    {
-      'url':'/manager/notify_admin/',
-      'data':data,
-      'options':options,
-      'ShowLoading2':true
-    }
-  );
-}
 
 var browser_alert;
 var browser_alert_count=0;

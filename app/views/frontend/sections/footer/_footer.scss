@@ -1,140 +1,143 @@
+.wrapper__bottom {
+  overflow: hidden;
+}
+
 .footer {
-  @extend %background__cover;
-  background-image: url('/assets/images/static/bg-1.jpg');
+  padding-top: 134px;
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    @include size(100%, 100px);
-    background-image: url('/assets/images/static/angle.png');
-    @extend %background__cover;
-  }
-
-  &__wrapper {
-    padding-top: 148px;
-  }
-
-  &__bottom {
-    @extend %flex-middle;
-    flex-wrap: wrap;
-    padding: 48px 0;
-  }
-
-  &__row {
-    width: 100%;
-    @extend %flex-center-between;
-  }
-
-  &__part {
-    flex: 1;
-    width: 100%;
-    margin-left: 32px;
-
-    &:first-child {
-      margin-left: 0;
-    }
-  }
-
-  &__media {
-    .button_iconic {
-      border: 0;
-      background-color: $color__dark--1;
-      .button__icon {
-        svg * {
-          fill: $color__light;
-        }
-      }
-
-      &:hover {
-        background-color: $color__dark--2;
-      }
-    }
-  }
-
-  @include media('<xl') {
-    &:before {
-      height: 64px;
-    }
-
-    &__part {
-      margin-left: 16px;
-    }
-
-    &__wrapper {
-      padding-top: 96px;
-    }
-
-    &__bottom {
-      padding: 32px 0;
-    }
-  }
-
-  @include media('<md') {
-    &:before {
-      height: 32px;
-    }
-
-    &__wrapper {
-      padding-top: 56px;
-    }
-
-    &__bottom {
-      padding: 24px 0;
-    }
-
-    &__part {
-      flex: 0 0 auto;
-      margin-left: 0;
-
-      &:first-child {
-        margin-bottom: 14px;
-      }
-    }
-  }
-}
-
-.n-footer {
-  &__list {
+  &_items {
     display: flex;
-    flex-wrap: wrap;
-    margin: -7px -12px;
+    justify-content: space-between;
+    margin-bottom: 66px;
   }
 
-  &__item {
-    padding: 7px 12px;
+  &_item {
+    width: 310px;
+  }
 
-    .link {
-      &__text {
-        color: $color__light;
+  &_name {
+    font-family: $font-family__second;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 100%;
+    color: $color__secondary--1;
+  }
+
+  &_title {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.04em;
+    color: $color__secondary--1;
+    margin-bottom: 12px;
+  }
+
+  &_desc {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    color: #030404;
+    margin-bottom: 16px;
+  }
+
+  &_payment {
+    display: flex;
+    align-items: center;
+
+    &_item {
+      margin-right: 12px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &_item {
+    &_title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 150%;
+      color: #000000;
+      margin-bottom: 16px;
+    }
+
+    &_link {
+      margin-left: 20px;
+      margin-bottom: 26px;
+
+      a {
+        font-size: 16px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #6B7A6B;
+        @include transitions(color);
+
+        &:hover {
+          color: #B88626;
+        }
       }
 
-      &:hover {
-        .link__text {
-          color: $color__light;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &_addr {
+      font-size: 18px;
+      line-height: 100%;
+      color: #6B7A6B;
+      margin-bottom: 20px;
+    }
+
+    &_phone {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 100%;
+      margin-bottom: 20px;
+      a {
+        color: #6B7A6B;
+        @include transitions(color);
+        &:hover {
+          color: #B88626;
         }
       }
     }
-  }
-}
-
-.r-footer {
-  &__text {
-    font-size: 16px;
-    line-height: 1.4;
-    color: $color__light--2;
-  }
-
-  @include media('<md') {
-    &__text {
-      font-size: 14px;
+    &_social{
+      display: flex;
+      align-items: center;
+      color: #CB9734;
+      margin-bottom: 12px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+      &_title{
+        margin-left: 12px;
+      }
+      &:hover {
+        color: #B88626;
+      }
     }
   }
-}
+  &_decor{
+    width: 100%;
+    height: 1px;
+    background: #c4c4c4;
+  }
+  &_copy{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    color: #6B7A6B;
+    margin: 35px 0;
 
-.t-dev {
-  @include size(126px, 30px);
-  flex: 0 0 126px;
+  }
 }

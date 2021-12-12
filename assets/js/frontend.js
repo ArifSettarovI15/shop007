@@ -19782,8 +19782,7 @@ function ShowNotification (text,class_name) {
 }
 
 function HideNotification () {
-    $("#notification").removeClass('animated bounceInDown');
-    $("#notification").addClass('animated bounceOutUp');
+    $("#notification").remove();
 }
 var notification_id;
 function ShowNotificationAndHide (text,class_name,sec) {
@@ -19792,8 +19791,8 @@ function ShowNotificationAndHide (text,class_name,sec) {
     var hide_time=sec*1000;
 
     ShowNotification (text,class_name);
-    clearTimeout(notification_id)
-    notification_id=setTimeout(
+
+    setTimeout(
         function()
         {
             HideNotification();
@@ -19847,7 +19846,8 @@ function openTab(tab,item_id) {
   tabs_content.elem('content').filter( '[data-id="'+tab_id+'"]' ).mod('active',true);
 }
 
-$(function() {$(document).on('click', '.js-upload-ref', function() {
+$(function() {
+$(document).on('click', '.js-upload-ref', function() {
     $('.js-upload').trigger('click')
 })
 
@@ -19966,6 +19966,23 @@ $(window).on('load', function () {
 
 
 
+$(document).on('click', '.js_add_to_cart', function(){
+    var item_id =  $(this).attr('data-id')
+    var count = $(this).parent().find('.js_items_count').val()
+    SendAjaxRequest({
+        url: '/basket/',
+        data: {'action':'add', 'item_id':item_id, 'count':count},
+        onComplete: BasketUpdateDone
+    })
+})
+
+function BasketUpdateDone(response){
+    if (response.status){
+        console.log(response.items_count)
+        $('.header__links_basket_count').html(response.total_count)
+    }
+
+}
 function initCardNav() {
     var slider = $('.js-slider-card-1')
     if (slider.length > 0) {
@@ -20164,7 +20181,16 @@ $(document).on('click', '.js-dropdown-trigger', function() {
 
 initRange()
 
-
+$(document).on('click', '.js_add_cart', function (e){
+    e.preventDefault()
+    var item_id = $(this).attr('data-id')
+    var count = 1
+    SendAjaxRequest({
+        url: '/basket/',
+        data: {'action':'add', 'item_id':item_id, 'count':count},
+        onComplete: BasketUpdateDone
+    })
+})
 
 if ($('#map').length) {
     ymap()
@@ -20511,6 +20537,7 @@ $(document).ready(function() {
         })
     })
 })});
+
 function delFileDone(response,ajax_config,textStatus,jqXHR) {
     if (response.status) {
         ajax_config.options.block.parent().fadeOut()
@@ -20651,6 +20678,7 @@ function initScrollTriggerTl(selector) {
         end: 'bottom center'
     })
 }
+
 
 
 

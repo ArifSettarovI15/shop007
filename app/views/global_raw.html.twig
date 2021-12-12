@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="{{ global.base_url }}/assets/images/icons/apple-touch-icon-144x144.png" />
   <link rel="apple-touch-icon" sizes="152x152" href="{{ global.base_url }}/assets/images/icons/apple-touch-icon-152x152.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{ global.base_url }}/assets/images/icons/apple-touch-icon-180x180.png" />
-  <script type="text/javascript" src="{{ global.base_url }}/assets/js/libs/modernizr.js"></script>
+
   <script src="{{ global.base_url }}/assets/images/sprites/grunticon.loader.js"></script>
   <script>
       grunticon(["{{ global.base_url }}/assets/images/sprites/icons.data.svg.css", "{{ global.base_url }}/assets/images/sprites/icons.data.png.css", "{{ global.base_url }}/assets/images/sprites/icons.fallback.css"], grunticon.svgLoadedCallback);
@@ -48,28 +48,14 @@
   {% endif %}
 {% endfor %}
 <body {% if global.page.page_class %}class="page"{% endif %}>
-{% include 'frontend/components/ajax-loading/ajax-loading.twig' %}
+
 {% block global_content %}{% endblock %}
 <script type="text/javascript" src="{{ global.base_url }}/assets/js/lang/ru.js?{{ assets_version }}"></script>
 <script type="text/javascript" src="{{ global.base_url }}/assets/js/frontend.min.js?{{ assets_version }}"></script>
-{% if not global.mes_cookie %}
-  {% include 'frontend/components/cookie-mess/cookie-mess.twig' %}
-{% endif %}
+
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-  ym(71294872, "init", {
-    clickmap:true,
-    trackLinks:true,
-    accurateTrackBounce:true,
-    webvisor:true
-  });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/71294872" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 </body>
 </html>

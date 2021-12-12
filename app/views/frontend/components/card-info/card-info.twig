@@ -1,73 +1,15 @@
 {% import "frontend/elements/svg/svg_macros.twig" as Svg %}
-<div class="s-card-info">
-    <div class="s-card-info__row">
-        {% include 'frontend/components/stars/stars.twig' with {
-            count: reviews.reviews_total,
-            rating: reviews.reviews_sum
+<div class="item-info">
+    <h1 class="item-info_title">{{ info.item_title }}</h1>
+    <div class="item-info_decor"></div>
+    <div class="item-info_line">
+        <div class="item-info_price">{{ info.item_price }} ₽</div>
+        <div class="item-info_article">Арт. {{ info.item_article }}</div>
+    </div>
+    <div class="item-info_desc">{{ info.item_short_text }}</div>
 
-        } %}
-    </div>
-    {% if modal %}
-        <div class="s-card-info__row">
-            <div class="s-card-info__price">
-                {% if offer.offer_price_sale %}
-                    <div class="s-card-info__price-new"><span class="product-sale">{{ offer.offer_price_sale }}</span> ₽</div>
-                    <div class="s-card-info__price-old"><span class="product-price">{{ offer.offer_price }}</span> ₽</div>
-                {% else %}
-                    <div class="s-card-info__price-current"><span class="product-price">{{ offer.offer_price }}</span> ₽</div>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
-    <div class="s-card-info__row">
-        <div class="s-card-info__text">Выберите размер:</div>
-        {% include 'frontend/components/size-tabs/size-tabs.twig' %}
-    </div>
-    {% set offer = info.offers|first %}
-    <div class="s-card-info__row">
-        <div class="s-card-info__param"><span>Диаметр букета:</span> <b><span class="product-diam">{{ offer.offer_diam }}</span> см</b></div>
-        <div class="s-card-info__param"><span>Вес букета:</span> <b><span class="product-weight">{{ offer.offer_weight }}</span> кг</b></div>
-    </div>
-    {% if not modal %}
-    <div class="s-card-info__row">
-        <div class="s-card-info__price">
-            {% if offer.offer_price_sale %}
-
-                <div class="s-card-info__price-new"><span class="product-sale">{{ offer.offer_price_sale }}</span> ₽</div>
-                <div class="s-card-info__price-old"><span class="product-price">{{ offer.offer_price }}</span> ₽</div>
-
-            {% else %}
-                <div class="s-card-info__price-current"><span class="product-price">{{ offer.offer_price }}</span> ₽</div>
-            {% endif %}
-        </div>
-    </div>
-    {% endif %}
-    <div class="s-card-info__row">
-        <div class="s-card-info__group">
-            <div class="s-card-info__elem">
-                {% include 'frontend/components/counter/counter.twig' with {
-                    id: offer.offer_id
-                } %}
-            </div>
-            {% if not modal %}
-            <div class="s-card-info__elem s-card-info__elem_2">
-                <div class="s-card-info__elem-item s-card-info__elem-item_m">
-                    <button class="button button_md button_second basket-add product-add" data-id="{{ offer.offer_id }}" data-order="1">
-                        <span class="button__container">
-                            <span class="button__text">Купить сейчас</span>
-                        </span>
-                    </button>
-                </div>
-                <div class="s-card-info__elem-item">
-                    <button class="button button_md button_primary basket-add product-add" data-id="{{ offer.offer_id }}">
-                        <span class="button__container">
-                            <span class="button__icon">{{ Svg.icon('cart-icon', 1) }}</span>
-                            <span class="button__text">В корзину</span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            {% endif %}
-        </div>
+    <div class="item-info_cart">
+        <input type="number" class="js_items_count" value="1" min="1" max="10">
+        <div class="add_to_cart js_add_to_cart" data-id="{{ info.item_id }}">В корзину</div>
     </div>
 </div>

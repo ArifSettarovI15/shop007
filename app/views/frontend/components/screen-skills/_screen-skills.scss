@@ -1,168 +1,29 @@
-.skills {
-  @include media('<lg') {
-    .table-list {
-      &__item {
-        display: none;
-        width: (100%/3);
-
-        &:nth-child(-n + 3) {
-          display: block;
-        }
-      }
-    }
-  }
-
-  @include media('<md') {
-    .table-list {
-      &__item {
-        width: calc(100%/2);
-
-        &:nth-child(-n + 2) {
-          display: none;
-        }
-
-        &:nth-child(-n + 2) {
-          display: block;
-        }
-      }
-    }
-  }
-
-  @include media('<sm') {
-    .table-list {
-      &__item {
-        width: 100%;
-
-        &:nth-child(-n + 3) {
-          display: none;
-        }
-
-        &:nth-child(-n + 2) {
-          display: block;
-        }
-      }
-    }
+.skills{
+  background: $color__light;
+  padding: 100px 0;
+  &_list{
+    display: flex;
+    justify-content: space-between;
   }
 }
-
-.ts-skill {
-  $root: &;
-  &__icon {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    @include size(80px);
-    flex: 0 0 80px;
-    background-color: $color__light;
-    border-radius: 50%;
-    margin-bottom: 14px;
-  }
-
-  &__icon-inner {
-    @include size(64px);
-  }
-
-  &__text {
+.skill{
+  width: 325px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ &__icon{
+   @include size(80px);
+   margin-bottom: 35px;
+ }
+  &__text{
     font-family: $font-family__second;
+    font-style: normal;
+    font-weight: normal;
     font-size: 24px;
-    line-height: 1.15;
-    letter-spacing: .04em;
-    padding-right: 32px;
-  }
-
-  &_2 {
+    line-height: 100%;
     text-align: center;
-    #{$root}__icon {
-      @include size(80px);
-      flex: 0 0 80px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 24px;
-    }
 
-    #{$root}__icon-inner {
-      @include size(64px);
-      right: -8px;
-    }
+    color: $color__secondary--1;
 
-    #{$root}__icon-count {
-      font-family: $font-family__second;
-      font-size: 42px;
-      line-height: 1.1;
-      position: absolute;
-      width: 32px;
-      height: 42px;
-      @extend %flex-center;
-      top: 0;
-      left: 0;
-      color: $color__primary--1;
-    }
-
-    #{$root}__text {
-      font-size: 32px;
-      line-height: 1.15;
-      letter-spacing: .04em;
-      margin-bottom: 8px;
-      padding-right: 0;
-    }
-
-    #{$root}__dop {
-      font-size: 16px;
-      line-height: 1.4;
-    }
-  }
-
-  &_3 {
-    display: flex;
-    align-items: center;
-
-    #{$root}__icon {
-      margin-bottom: 0;
-      margin-right: 14px;
-    }
-
-  }
-
-  @include media('<=xl') {
-    &__text {
-      font-size: 21px;
-    }
-  }
-
-  @include media('<xl') {
-    &_2 {
-      #{$root}__text {
-        font-size: 24px;
-      }
-    }
-  }
-
-  @include media('<md') {
-    &:not(&_2) {
-      display: flex;
-      align-items: center;
-    }
-
-    &__icon {
-      @include size(64px);
-      flex: 0 0 64px;
-      margin-bottom: 0;
-      margin-right: 14px;
-    }
-
-    &__icon-inner {
-      @include size(56px);
-    }
-
-    &__text {
-      padding-right: 0;
-    }
-
-    &_2 {
-      &__icon {
-        margin-bottom: 14px;
-        margin-right: 0;
-      }
-    }
   }
 }

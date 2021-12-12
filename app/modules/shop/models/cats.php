@@ -7,6 +7,7 @@ class ShopCatsColumns extends DbDataColumns
     private $status;
     private $new;
     private $title;
+    private $title2;
     private $short_title;
     private $url;
     private $parent_id;
@@ -38,6 +39,10 @@ class ShopCatsColumns extends DbDataColumns
         $this->setTitle();
         $this->getTitle()->setName('title');
         $this->getTitle()->setType(TYPE_STR);
+
+        $this->setTitle2();
+        $this->getTitle2()->setName('title2');
+        $this->getTitle2()->setType(TYPE_STR);
 
         $this->setShortTitle();
         $this->getShortTitle()->setName('short_title');
@@ -151,6 +156,18 @@ class ShopCatsColumns extends DbDataColumns
     private function setTitle()
     {
         $this->title = new DbColumn();
+    }
+    /**
+     * @return DbColumn
+     */
+    public function getTitle2()
+    {
+        return $this->title2;
+    }
+
+    private function setTitle2()
+    {
+        $this->title2 = new DbColumn();
     }
 
     /**
@@ -485,6 +502,18 @@ class ShopCats extends DbData
     }
 
 
+    public function GetItemByUrl($url, $full = 0)
+    {
+        $this->CreateModel();
+        if ($full) {
+            $this->model->setSelectField($this->model->getTableName() . '.*');
+            $this->model->SetJoinImage('icon', $this->model->GetTableItemName('icon'));
+        }
+        $this->model->columns_where->getUrl()->setValue($url);
+        return $this->GetItem($full);
+    }
+
+
     public function PrepareData($result_item, $full = 0)
     {
         $result_item = $this->registry->files->FilePrepare($result_item, 'icon_');
@@ -553,7 +582,31 @@ class ShopCats extends DbData
 
     }
 
-    public function MakeUiTree($CatsData, $parent = 0, $ex_id = -999)
+    public function MakeUiTree($CatsData,$parent=0,$ex_id=-999) {
+        $list='<ul>';
+        if (is_array($CatsData) && is_array($CatsData['levels']) && is_array($CatsData['levels'][$parent])) {
+            foreach ($CatsData['levels'][$parent] as $cat_data) {
+                if ($ex_id!=$cat_data['cat_id']) {
+                    $keys='';
+                    if ($cat_data['cat_status']==0) {
+                        $keys.=' DEL';
+                    }
+
+                    $list.='<li id="node_'.$cat_data['cat_id'].'" data-status="'.$cat_data['cat_status'].'">
+		                        <a href="'.'/manager/shop/cats/edit/'.$cat_data['cat_id'].'/">'.$cat_data['cat_title'].$keys.'</a>
+		               ';
+                    if ($CatsData['levels'][$cat_data['cat_id']]) {
+                        $list.=$this->MakeUiTree($CatsData,$cat_data['cat_id'],$ex_id);
+
+                    }
+                    $list.='</li>';
+                }
+            }
+        }
+        $list.='</ul>';
+        return $list;
+    }
+    public function MakeUiTree2($CatsData, $parent = 0, $ex_id = -999)
     {
         $list = '<ul>';
         if (is_array($CatsData) && is_array($CatsData['levels']) && is_array($CatsData['levels'][$parent])) {
@@ -570,10 +623,10 @@ class ShopCats extends DbData
 </svg>';
                     }
                     $list .= '<li id="node_' . $cat_data['cat_id'] . '" data-status="' . $cat_data['cat_status'] . '" >
-		                        <a href="' . '/manager/shop/cats/edit/' . $cat_data['cat_id'] . '/"><span>' . $cat_data['cat_title'] . $keys . '</span>' . $icon . '</a>
+		                        <a href="' . $cat_data['cat_full_url'].'"><span>' . $cat_data['cat_title'] . $keys . '</span>' . $icon . '</a>
 		               ';
                     if ($CatsData['levels'][$cat_data['cat_id']]) {
-                        $list .= $this->MakeUiTree($CatsData, $cat_data['cat_id'], $ex_id);
+                        $list .= $this->MakeUiTree2($CatsData, $cat_data['cat_id'], $ex_id);
 
                     }
                     $list .= '</li>';

@@ -1,46 +1,6 @@
 {% extends "global.html.twig" %}
 {% block content %}
-    {% if variables.info%}
-        {% set info = variables.info %}
-    {% endif %}
-    {% if variables.similar%}
-        {% set similar = variables.similar %}
-    {% endif %}
-    {% if variables.parts%}
-        {% set parts = variables.parts %}
-    {% endif %}
-    {% if variables.last_viewed%}
-        {% set last_viewed = variables.last_viewed %}
-    {% endif %}
-    {% if variables.reviews%}
-        {% set reviews = variables.reviews %}
-    {% endif %}
-    {% if variables.image_data2%}
-        {% set image_data2 = variables.image_data2 %}
-    {% endif %}
 
-    {% set product = 1 %}
-    <div class="page__main page__main_card">
-        {% include 'frontend/components/shop-cart/shop-cart.twig' %}
-        {% if variables.similar or similar %}
-            <div class="m-1">
-{#                {% include 'frontend/components/screen-similar/screen-similar.twig' %}#}
-            </div>
-        {% endif %}
-        <div class="m-1">
-            {% include 'frontend/components/screen-product-feeds/screen-product-feeds.twig' %}
-        </div>
-        {% if variables.last_viewed or last_viewed %}
-            <div class="m-1">
-                {% include 'frontend/components/screen-watch/screen-watch.twig' %}
-            </div>
-        {% endif %}
-        <div class="m-1">
-            {% include 'frontend/components/screen-callback/screen-callback.twig' %}
-        </div>
-        <div class="m-1">
-            {% include 'frontend/components/st-block/st-block.twig' %}
-        </div>
-    </div>
+    {% include 'frontend/components/shop-cart/shop-cart.twig' %}
 {% endblock %}
 

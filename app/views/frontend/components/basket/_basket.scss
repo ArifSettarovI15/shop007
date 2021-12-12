@@ -1,0 +1,138 @@
+.basket_table{
+  margin-top: 100px;
+  border-left: 1px solid #E5E5D4;
+  border-right: 1px solid #E5E5D4;
+  background-color: $color__light;
+  &_head, &_item{
+    display: flex;
+    align-items: center;
+  }
+  &_head{
+    border-top: 1px solid #E5E5D4;
+    border-bottom: 1px solid #E5E5D4;
+
+    padding: 12px 22px;
+    &_cell{
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000000;
+      &_image{
+        width: 132px;
+      }
+      &_title{
+        width: 324px;
+      }
+      &_price,
+      &_count,&_total{
+        width: 180px;
+      }
+
+    }
+  }
+  &_item{
+    padding: 22px;
+    height: 160px;
+    border-bottom: 1px solid #E5E5D4;
+    &_cell{
+      &_image{
+        width: 132px;
+        img{
+
+        }
+      }
+      &_title{
+        padding-left: 11px;
+        width: 324px;
+        font-family: $font-family__second;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 100%;
+        color: #1C4E29;
+      }
+      &_price,
+      &_count,&_total{
+        width: 180px;
+        text-align: center;
+      }
+      &_count,&_total{
+
+        display: flex;
+        justify-content: center;
+        input{
+          width: 71px;
+          background: #F4F8F4;
+          border: 1px solid #E5E5D4;
+          box-sizing: border-box;
+          font-size: 16px;
+          line-height: 150%;
+          height: 53px;
+
+          display: flex;
+          align-items: center;
+          text-align: center;
+
+          color: #6B7A6B;
+        }
+      }
+      &_price,&_total{
+        font-size: 16px;
+        line-height: 150%;
+        text-align: center;
+        color: #B88626;
+      }
+      &_delete{
+        display: flex;
+        justify-content: center;
+        flex: auto;
+        cursor: pointer;
+        .delete_item{
+          @include size(30px);
+          background-color: #CB9734;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @include transitions(all);
+          &:hover{
+            background-color: #B88626;
+          }
+        }
+      }
+    }
+  }
+}
+
+.basket_confirm{
+
+  float: right;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 600px;
+  background-color: #E8EDE6;
+  border: 1px solid #E5E5D4;
+  &_price{
+    font-family: $font-family__second;
+    font-size: 24px;
+    color: #1C4E29;
+  }
+  &_button{
+    cursor: pointer;
+    background-color: #CB9734;
+    width: 225px;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include transitions(all);
+    color: $color__light;
+    &:hover{
+      background-color: #B88626;
+    }
+  }
+}
