@@ -1,0 +1,14 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="container container_sm">
+        {% if global.basket_items %}
+            <div class="order__wrapper">
+                {% include 'frontend/components/order_data/order_data.twig' %}
+            </div>
+        {% else %}
+            <div class="basket_noitems">
+                Нет товаров для оформления заказа
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

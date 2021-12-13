@@ -20268,6 +20268,7 @@ $(document).on('click', '.js-burger', function() {
 
 
 
+
 $(document).on('ifChecked', '.js-toggle-box', function() {
     checkDeliveryMethod($(this))
 })
@@ -21292,6 +21293,7 @@ function throttle( fn, threshhold, scope ) {
 function menuClose() {
     $('html body').removeClass('menu-open')
 }
+
 
 
 
