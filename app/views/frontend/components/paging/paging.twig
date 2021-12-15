@@ -24,6 +24,7 @@
 {#         </span>#}
 {#        </a>#}
 {#    </li>#}
+
     {% for page in paging_data.pages %}
         {% if page.name=='next' %}
             <li>
@@ -33,7 +34,7 @@
                        class="paging__item button button_iconic button_sm js-paging" data-value="{{ page.value }}">
                         <span>
                             <span class="button__icon">
-                            {{ Svg.icon('arrow-right', 1) }}
+                            {{ Svg.icon('chevron-right', 1,24,24) }}
                             </span>
                         </span>
                     </a>
@@ -47,7 +48,7 @@
                        class="paging__item button button_iconic button_sm js-paging" data-value="{{ page.value }}">
                         <span>
                             <span class="button__icon">
-                            {{ Svg.icon('arrow-left', 1) }}
+                            {{ Svg.icon('chevron-left', 1) }}
                             </span>
                         </span>
                     </a>

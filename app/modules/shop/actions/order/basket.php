@@ -14,279 +14,64 @@ $contacts = $SettingsClass->GetGroupValues($filter_s);
 
 $statuses = $ShopClass->GetOrderStatus();
 $basket_data = $ShopClass->products->GetBasket();
-if ($Main->GPC['action'] == 'process_order' or $Main->GPC['action'] == 'process_temp') {
+if ($Main->GPC['action'] == 'process_order') {
     $Main->input->clean_array_gpc(
         'r',
         [
-            'delivery'      => TYPE_STR,
-            'delivery_addr' => TYPE_STR,
-            'delivery_time' => TYPE_STR,
-            'comment'       => TYPE_STR,
-            'payment'       => TYPE_STR,
-            'name'          => TYPE_STR,
-            'phone'         => TYPE_STR,
-            'email'         => TYPE_STR,
-            'note'          => TYPE_STR,
-            'rules'          => TYPE_BOOL,
+            'delivery_type' => TYPE_UINT,
+            'name' => TYPE_STR,
+            'address' => TYPE_STR,
+
         ]
     );
-
-
-    if ($Main->GPC['delivery'] == 'dostavkaplus' and $Main->GPC['delivery_id']) {
-        $user_addr = $ShopClass->delivery_user->GetUserAddr($Main->user_info['user_id']);
-
-        if ($user_addr[$Main->GPC['delivery_id']]) {
-            $Main->GPC['delivery_city_id'] = $user_addr[$Main->GPC['delivery_id']]['delivery_city'];
-            $Main->GPC['delivery_addr'] = $user_addr[$Main->GPC['delivery_id']]['delivery_addr'];
-        }
+    $delivery_price = 0;
+    if ($Main->GPC['delivery_type'] == 2) {
+        $delivery_price = 500;
     }
+    $items_data = [];
+    foreach ($Main->template->global_vars['basket_items'] as $item){
+        $items_data[] = [
+            "ItemCount" => (int)$item['basket_count'],
+            "ItemSum" => (int)$item['basket_count'] * $item['item_price'],
+            "Price"=>$item['item_price'],
+            "ProductName" =>$item['item_title'],
+            "StockProductId"=>$item['item_id'],
 
-    if ($basket_data['sum'] < 5) {
-        $error = 'Выберите товар, нельзя выбрать только украшение!';
+        ];
     }
-    $reg_error = '';
-    $new_user = 0;
-    $register_data = [];
-    $user_id = 0;
+    $array = [
+        "DeliveryInfo" => [
+            "Address" => $Main->GPC['address'],
+            "DeliveryType" => $Main->GPC['delivery_type'],
+            "Price" => $delivery_price,
+            "RecipientInfo" => $Main->GPC['name'],
+        ],
+        "IsReserved" => false,
+        "NdsPositionType" => 1,
+        "Number" => time(),
+        "OrderDate"=>date('d-m-YTH:i:sZ', time()),
+        "OrderState"=>1,
+        "OrderType"=>1,
+        "PaymentType"=>2,
 
-    $lastname = $Main->GPC['lastname'];
-    $name = $Main->GPC['name'];
-    $email = $Main->GPC['email'];
-    $phone = $Main->GPC['phone'];
+    ];
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://restapi.moedelo.org/stockorders/api/v1/CustomerOrder',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_HTTPHEADER => array(
+            'md-api-key: 51a76ae4-9fe9-44dc-8206-021012504a20'
+        ),
+    ));
 
-    if ($Main->user_info['user_id'] > 0) {
-        $user_id = $Main->user_info['user_id'];
-    } else {
-        $Main->GPC['action'] = 'process_order';
-    }
-
-    if ($Main->GPC['action'] == 'process_order') {
-        if ($name == '') {
-            $error = 'Введите имя';
-        }
-        elseif ($phone == '') {
-            $error = 'Введите телефон';
-        }
-        elseif ($Main->GPC['delivery'] == '' or !$delivery[$Main->GPC['delivery']]) {
-            $error = 'Выберите способ доставки';
-        }
-        elseif ($Main->GPC['delivery_addr'] == '' && $Main->GPC['delivery'] != 'pickup') {
-            $error = 'Введите адрес доставки';
-        }
-        elseif ($Main->GPC['payment'] == '' or !$Main->GPC_exists['payment']) {
-            $error = 'Выберите способ оплаты';
-        }
-        elseif ($Main->GPC['rules']==false) {
-            $error = 'Вы не приняли условия передачи информации';
-        }
-
-        $Main->GPC['phone'] = preg_replace('/[^0-9]/', '', $Main->GPC['phone']);
-        if (!preg_match($Main->global_data['phone_reg'], $Main->GPC['phone'])) {
-            $error = 'Введите корректный номер телефона';
-        }
-
-        if ($Main->GPC['delivery'] == 'pickup') {
-            $Main->GPC['delivery_addr'] = "Самовывоз";
-        }
-
-
-    } elseif (count($basket_data['items']) == 0) {
-        $error = 'В корзине нет товаров';
-    }
-
-    if ($error == '') {
-        $items_cost = $basket_data['sum'];
-
-        $Main->template->global_vars['delivery_cities'] = $ShopClass->delivery_cities->getDeliveryCities();
-        if ($Main->GPC['delivery'] != 'pickup'){
-            $delivery_cost =(int)$Main->template->global_vars['delivery']['payment_price'];
-        }
-        else{
-            $delivery_cost =0;
-        }
-        $cancel_payment_cost = false;
-
-        $total_cost = $items_cost + $delivery_cost;
-
-        $delivery_city = '';
-        $delivery_addr = '';
-
-        if ($error == '') {
-            $ShopClass->orders->CreateModel();
-            $ShopClass->orders->model->columns_update->getUserId()->setValue($user_id);
-            $ShopClass->orders->model->columns_update->getUserLastname()->setValue($lastname);
-            $ShopClass->orders->model->columns_update->getUserName()->setValue($name);
-            $ShopClass->orders->model->columns_update->getUserPhone()->setValue($phone);
-            $ShopClass->orders->model->columns_update->getUserEmail()->setValue($email);
-
-
-            $ShopClass->orders->model->columns_update->getTime()->setValue(TIMENOW);
-            if ($Main->GPC['action'] == 'process_temp') {
-                $ShopClass->orders->model->columns_update->getStatus()->setValue(1);
-                $ShopClass->orders->model->columns_update->getGroupId()->setValue(1);
-            } else {
-                if ($Main->GPC['payment'] == 'online') {
-                    $st = 4;
-                } else {
-                    $st = 2;
-                }
-                $ShopClass->orders->model->columns_update->getStatus()->setValue($st);
-                $ShopClass->orders->model->columns_update->getGroupId()->setValue(3);
-            }
-
-
-            $ShopClass->orders->model->columns_update->getPayment()->setValue($Main->GPC['payment']);
-            $ShopClass->orders->model->columns_update->getDelivery()->setValue($Main->GPC['delivery']);
-
-            $ShopClass->orders->model->columns_update->getDeliveryAddr()->setValue($Main->GPC['delivery_addr']);
-            $ShopClass->orders->model->columns_update->getDeliveryTime()->setValue($Main->GPC['delivery_time']);
-
-            $ShopClass->orders->model->columns_update->getComment()->setValue($Main->GPC['comment']);
-            $ShopClass->orders->model->columns_update->getNote()->setValue($Main->GPC['note']);
-
-            $ShopClass->orders->model->columns_update->getItemsCost()->setValue($items_cost);
-            $ShopClass->orders->model->columns_update->getTotalCost()->setValue($total_cost);
-
-            $key = '';
-            if ($user_id == 0) {
-                $key = GenerateName(32, 2);
-            }
-            $ShopClass->orders->model->columns_update->getKey()->setValue($key);
-            $order_id = $ShopClass->orders->Insert();
-            if ($order_id) {
-                foreach ($basket_data['items'] as $info) {
-                    $ShopClass->order_items->CreateModel();
-                    $ShopClass->order_items->model->columns_update->getOrderId()->setValue($order_id);
-                    $ShopClass->order_items->model->columns_update->getItemId()->setValue($info['basket_item_id']);
-                    $ShopClass->order_items->model->columns_update->getTitle()->setValue($info['full_title']);
-                    $ShopClass->order_items->model->columns_update->getArticle()->setValue($info['offer_article']);
-                    $ShopClass->order_items->model->columns_update->getItemPrice()->setValue($info['basket_price']);
-                    $ShopClass->order_items->model->columns_update->getItemCount()->setValue($info['basket_count']);
-                    $ShopClass->order_items->Insert();
-
-
-                    $ShopClass->basket->CreateModel();
-                    $ShopClass->basket->model->columns_where->getId()->setValue($info['basket_id']);
-                    $ShopClass->basket->Delete();
-                }
-
-                $ShopClass->order_history->CreateModel();
-                if ($Main->GPC['action'] == 'process_temp') {
-                    $ShopClass->order_history->model->columns_update->getOrderStatusId()->setValue(1);
-                } else {
-                    if ($Main->GPC['payment'] == 'online') {
-                        $st = 4;
-                    } else {
-                        $st = 2;
-                    }
-                    $ShopClass->order_history->model->columns_update->getOrderStatusId()->setValue($st);
-                }
-                $ShopClass->order_history->model->columns_update->getOrderId()->setValue($order_id);
-                $ShopClass->order_history->Insert();
-
-                $mail_to = $Main->template->global_vars['fields']['about']['email_notify'];
-
-                $from_array = [
-                    $Main->config['system']['email_addr'] => $Main->template->global_vars['fields']['about']['about_name'],
-                ];
-                $to_array = [
-                    $mail_to,
-                ];
-
-                $user_manager = false;
-                if ($Main->user_info['user_manager_id']) {
-                    $user_manager = $Main->user->GetUserById($Main->user_info['user_manager_id']);
-                }
-
-                if ($user_manager and $user_manager['user_email']) {
-                    $to_array[] = $user_manager['user_email'];
-                }
-
-                $order_info = $ShopClass->orders->GetItemById($order_id);
-
-                $order_items = $ShopClass->products->GetOrderItems($order_id);
-                $total = 0;
-                $array['products'] = [];
-
-                foreach ($order_items as $item) {
-                    $total = $total + $item['oid_item_price'] * $item['oid_item_count'];
-                    $array['products'][] = [
-                        'id'       => $item['offer_id'],
-                        'name'     => $item['full_title'],
-                        'price'    => $item['oid_item_price'],
-                        'brand'    => $item['vendor_name'],
-                        'category' => $item['cat_title'],
-                        'quantity' => $item['oid_item_count'],
-                    ];
-                }
-                $total = format_money($total);
-
-                if ($Main->GPC['action'] == 'process_order') {
-                    $content = $Main->template->Render(
-                        'shop/order/new_order_email.html.twig',
-                        [
-                            'title'         => 'Заказ #' . $order_id,
-                            'info'          => $order_info,
-                            'items'         => $order_items,
-                            'order_id'      => $order_id,
-                            'payments'      => $payments,
-                            //'delivery_cost' => format_money($delivery_cost),
-                            'total'         => $total,
-                            'total_cost'    => format_money($total_cost),
-                            'user'          => 0,
-                            'statuses'      => $statuses,
-                            'delivery_data' => $delivery,
-                        ]
-                    );
-                    $title = 'Заказ #' . $order_id;
-                    $mail_to = $Main->template->global_vars['fields']['info']['email_notify'];
-                    $body = $Main->template->Render(
-                    'static/email_write.twig',
-                        [
-                           'type' => 'order',
-                           'title' => $title,
-                           'info' => $order_info,
-                           'items' => $order_items,
-                           'order_id' => $order_id,
-                           'payments' => $payments,
-                           'total' => $total,
-                           'total_cost' => format_money($total_cost),
-                           'delivery_data'=>$delivery
-                        ]
-                    );
-
-
-                    $aa = [$Main->config['system']['email_addr'] => $Main->template->global_vars['fields']['info']['info_name']];
-
-                    $message = (new Swift_Message($title))
-                      ->setFrom($aa)
-                      ->setTo([$mail_to])
-                      ->setBody($body, 'text/html');
-
-                  try {
-                      $result = $Main->mailer->send($message);
-                  } catch (\Swift_TransportException $e) {
-                      $response = $e->getMessage();
-                  }
-
-
-                    $array['order_id'] = $order_id;
-                    $array['total_cost'] = $total_cost;
-                    $array['complete'] = true;
-                    $array['html'] = $Main->template->Render(
-                        'frontend/components/modal-8/modal-8.twig',
-                        [
-                            'content'  => '8-4',
-                            'order_id' => $order_id,
-                            'items'    => $order_items,
-                        ]
-                    );
-                }
-            } else {
-                $error = 'Ошибка оформления заказа';
-            }
-        }
-    }
+    $response = curl_exec($curl);
+    curl_close($curl);
 
     if ($error != '') {
         $array['status'] = false;
@@ -301,7 +86,7 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
         'r',
         [
             'item_id' => TYPE_UINT,
-            'count'   => TYPE_UINT,
+            'count' => TYPE_UINT,
         ]
     );
 
@@ -423,7 +208,7 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
             $array['result3'] = $Main->template->Render(
                 'frontend/components/popup-product/popup-product.twig',
                 [
-                    'item'       => $bbb,
+                    'item' => $bbb,
                     'also_items' => $also_items,
                 ]
             );
@@ -450,10 +235,10 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
             $text = 'Товар добавлен в корзину';
             $array['products'] = [
                 [
-                    'id'       => $item_info['item_id'],
-                    'name'     => $item_info['item_title'],
-                    'price'    => $item_info['item_price'],
-                    'brand'    => $item_info['vendor_name'],
+                    'id' => $item_info['item_id'],
+                    'name' => $item_info['item_title'],
+                    'price' => $item_info['item_price'],
+                    'brand' => $item_info['vendor_name'],
                     'category' => $item_info['cat_title'],
                     'quantity' => $Main->GPC['count'],
                 ],
@@ -462,8 +247,8 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
             $text = 'Товар удален и корзины';
             $array['products'] = [
                 [
-                    'id'       => $item_info['item_id'],
-                    'name'     => $item_info['item_title'],
+                    'id' => $item_info['item_id'],
+                    'name' => $item_info['item_title'],
                     'category' => $item_info['cat_title'],
                     'quantity' => 1,
                 ],
@@ -478,14 +263,14 @@ if ($Main->GPC['action'] == 'delete' or $Main->GPC['action'] == 'update' or $Mai
     $html = $Main->template->Render(
         "frontend/components/basket/basket.twig",
         [
-            'items'=>$Main->template->global_vars['basket_items'],
+            'items' => $Main->template->global_vars['basket_items'],
         ]
     );
     $Main->template->DisplayJson(
         [
-            'text'        => $text,
-            'status'      => true,
-            'html'        => $html,
+            'text' => $text,
+            'status' => true,
+            'html' => $html,
             'total_price' => $total_price,
             'total_count' => $total_count,
             'items_count' => $Main->template->global_vars['basket_items_count'],
@@ -502,9 +287,9 @@ if ($Main->GPC['order']) {
 }
 $Main->template->SetPageAttributes(
     [
-        'title'    => $page_name,
+        'title' => $page_name,
         'keywords' => '',
-        'desc'     => '',
+        'desc' => '',
     ],
     [
         'breadcrumbs' => [
@@ -512,7 +297,7 @@ $Main->template->SetPageAttributes(
                 'title' => $page_name,
             ],
         ],
-        'title'       => 'Корзина',
+        'title' => 'Корзина',
     ]
 );
 
@@ -532,15 +317,15 @@ $user_addr = array_values($ShopClass->delivery_user->GetUserAddr($Main->user_inf
 
 $Main->template->Display(
     [
-        'items'              => $items,
-        'payments'           => $payments,
-        'delivery'           => $delivery,
-        'order'              => $Main->GPC['order'],
-        'contacts'           => $contacts,
-        'cdek_cities'        => $ShopClass->delivery_cities->getCdekCities(),
-        'banners'            => $banners,
+        'items' => $items,
+        'payments' => $payments,
+        'delivery' => $delivery,
+        'order' => $Main->GPC['order'],
+        'contacts' => $contacts,
+        'cdek_cities' => $ShopClass->delivery_cities->getCdekCities(),
+        'banners' => $banners,
         'show_profile_links' => true,
-        'user_addr'          => $user_addr,
-        'cities'             => $cities,
+        'user_addr' => $user_addr,
+        'cities' => $cities,
     ]
 );

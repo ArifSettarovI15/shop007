@@ -6,7 +6,8 @@
     </div>
     <div class="container container_sm catalog mb-2">
         {% include 'frontend/components/cats/cats.twig' %}
-        {% include 'frontend/components/items_list/items_list.twig' %}
+        {% set list = items %}
+        {% include 'frontend/components/items_list/items_list.twig' with {catalog : 0}%}
     </div>
 
     <div class="skills">

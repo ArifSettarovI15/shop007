@@ -92,10 +92,12 @@
     }
 
     #{$root}__icon {
-      @include size(20px);
+      @include size(24px);
       min-width: 20px;
       flex: 0 0 20px;
-
+      svg * {
+        fill: $color__secondary--1;
+      }
       & + #{$root}__text {
         margin-left: 4px;
       }
@@ -124,7 +126,7 @@
     }
 
     &:hover {
-      background-color: $color__dark--3;
+      background-color: $color__secondary--1;
     }
 
     &:focus {
@@ -156,7 +158,7 @@
 
   &_second {
     background-color: transparent;
-    border: 2px solid $color__dark--1;
+    border: 2px solid $color__secondary--1;
 
     &#{$root}_lg {
       border-width: 3px;
@@ -168,21 +170,21 @@
 
     #{$root}__icon {
       svg * {
-        fill: $color__dark--3;
+        fill: $color__secondary--1;
       }
     }
 
     &:hover {
-      background-color: $color__dark--2;
-      border-color: $color__dark--2;
+      //background-color: $color__primary--1;
+      border-color: $color__primary--1;
 
       #{$root}__text {
-        color: $color__light;
+        color: $color__secondary--1;
       }
 
       #{$root}__icon {
         svg * {
-          fill: $color__light;
+          fill: $color__primary--1;
         }
       }
     }

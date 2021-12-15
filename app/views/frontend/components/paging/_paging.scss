@@ -26,13 +26,15 @@
     cursor: pointer;
     padding: 0;
     background-color: transparent;
+
+    border-color: $color__secondary--1;
     margin: 0 7px;
     box-shadow: none;
 
     &_mock {
 
       #{$root}__val {
-        color: $color__light--3;
+        color: $color__primary--1;
         font-size: 16px;
       }
     }
@@ -51,7 +53,7 @@
     font-weight: bold;
     font-size: 20px;
     line-height: 1.2;
-    color: $color__dark--3;
+    color: $color__secondary--1;
     @include transitions(color);
   }
 

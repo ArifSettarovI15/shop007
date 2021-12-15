@@ -606,7 +606,7 @@ class ShopCats extends DbData
         $list.='</ul>';
         return $list;
     }
-    public function MakeUiTree2($CatsData, $parent = 0, $ex_id = -999)
+    public function MakeUiTree2($CatsData, $parent = 0,$selected=0, $ex_id = -999)
     {
         $list = '<ul>';
         if (is_array($CatsData) && is_array($CatsData['levels']) && is_array($CatsData['levels'][$parent])) {
@@ -622,7 +622,11 @@ class ShopCats extends DbData
 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.0858 5.50001L0.292908 1.70712L1.70712 0.292908L6.91423 5.50001L1.70712 10.7071L0.292908 9.29291L4.0858 5.50001Z" fill="#6B7A6B"/>
 </svg>';
                     }
-                    $list .= '<li id="node_' . $cat_data['cat_id'] . '" data-status="' . $cat_data['cat_status'] . '" >
+                    $class = '';
+                    if ($selected and $selected == $cat_data['cat_id']) {
+                        $class='active';
+                    }
+                    $list .= '<li class="'.$class.'" id="node_' . $cat_data['cat_id'] . '" data-status="' . $cat_data['cat_status'] . '" >
 		                        <a href="' . $cat_data['cat_full_url'].'"><span>' . $cat_data['cat_title'] . $keys . '</span>' . $icon . '</a>
 		               ';
                     if ($CatsData['levels'][$cat_data['cat_id']]) {

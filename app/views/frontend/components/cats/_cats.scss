@@ -31,6 +31,14 @@
         position: absolute;
         left: 100%;
       }
+      &.active{
+        background-color: $color__primary--1;
+        border: 1px solid $color__primary--1;
+        &>a{
+          color: $color__light;
+          svg * {fill: $color__light}
+        }
+      }
       &:hover{
         background-color: $color__primary--1;
         border: 1px solid $color__primary--1;
