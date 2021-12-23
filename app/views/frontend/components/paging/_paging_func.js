@@ -34,7 +34,7 @@ function FilterTableData(page,obj) {
 
     var options={};
     options['table'] = obj.closest('.table-paging').attr('data-table')
-    options['AfterDone'] = filterSelectDone
+    options['AfterDone'] = FilterTableDataDone
 
     SendAjaxRequest(
         {
@@ -48,38 +48,15 @@ function FilterTableData(page,obj) {
 
 
 function FilterTableDataDone(response,ajax_config,textStatus,jqXHR) {
-    if (ajax_config['options']['obj'].attr('data-insert')==1) {
-        ajax_config['options']['obj'].closest('.table-data').find('.table-content').append(response.html);
-        if (ajax_config['data']['page']>1) {
-            if ($('.table-content-part').length>0) {
-                $("html, body").animate({scrollTop: $('.table-content-part:last-child').offset().top-50}, 750);
-            }
-        }
-        else {
-            ajax_config['options']['obj'].closest('.table-data').find('.table-content').html(response.html);
-            if ($('.table-data').length>0) {
-                ScrollTop();
-            }
 
-        }
-        ajax_config['options']['obj'].closest('.table-data').find('.table-paging').html(response.paging);
-        if (ajax_config['options']['obj'].closest('.table-data').find('.table-filters').hasMod('empty')) {
-            ajax_config['options']['obj'].closest('.table-data').find('.sidefilter-list').html(response.filters);
-        }
-        else {
-            ajax_config['options']['obj'].closest('.table-data').find('.table-filters').html(response.filters);
-        }
+    $(document).find('.table-paging').html(response.paging);
+    $(document).find('.table-content').html(response.html);
 
-    }
-    else {
-        ajax_config['options']['obj'].find('.table-paging').html(response.paging);
-        ajax_config['options']['obj'].find('.table-content').html(response.html);
+    // if (ajax_config['options']['obj'].closest('.table-data').length>0) {
+    //     var v= ajax_config['options']['obj'].closest('.table-data').offset().top-60;
+    //     $("html, body").animate({scrollTop: v}, 750);
+    // }
 
-        if (ajax_config['options']['obj'].closest('.table-data').length>0) {
-            var v= ajax_config['options']['obj'].closest('.table-data').offset().top-60;
-            $("html, body").animate({scrollTop: v}, 750);
-        }
-    }
     // $('.table-total').html(response.total);
     grunticon.embedIcons(grunticon.getIcons(grunticon.href));
 }

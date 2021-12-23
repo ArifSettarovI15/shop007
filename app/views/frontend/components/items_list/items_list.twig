@@ -1,10 +1,6 @@
-<div class="products__list">
-    <div class="products__list_items js_table_data">
-        {% for item in list %}
-            <div class="products__list_item">
-                {% include 'frontend/components/item-thumb/item-thumb.twig' with {is_catalog: catalog} %}
-            </div>
-        {% endfor %}
+<div class="products__list ">
+    <div class="products__list_items js_table_data table-content">
+        {% include 'frontend/components/items_list/items-list-table.twig' %}
     </div>
     <div class="products__list_paging table-paging">
         {% include 'frontend/components/paging/paging.twig' %}

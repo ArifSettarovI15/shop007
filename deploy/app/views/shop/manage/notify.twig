@@ -1,0 +1,27 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/notify/add/">Добавить</a>
+    </div>
+
+    <div class="table_data">
+        <div class="table_data_navigation">
+            {% include 'parts/paging.html.twig' %}
+        </div>
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th style="width: 100px">ID</th>
+                <th style="width: 100px">Время</th>
+                <th style="width: 150px">Список</th>
+                <th>Текст</th>
+                <th class="action_button_3"></th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+            {% include 'shop/manage/notify_table.twig' %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

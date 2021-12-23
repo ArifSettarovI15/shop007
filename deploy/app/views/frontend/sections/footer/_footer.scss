@@ -1,0 +1,143 @@
+.wrapper__bottom {
+  overflow: hidden;
+}
+
+.footer {
+  padding-top: 134px;
+
+  &_items {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 66px;
+  }
+
+  &_item {
+    width: 310px;
+  }
+
+  &_name {
+    font-family: $font-family__second;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 100%;
+    color: $color__secondary--1;
+  }
+
+  &_title {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.04em;
+    color: $color__secondary--1;
+    margin-bottom: 12px;
+  }
+
+  &_desc {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    color: #030404;
+    margin-bottom: 16px;
+  }
+
+  &_payment {
+    display: flex;
+    align-items: center;
+
+    &_item {
+      margin-right: 12px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &_item {
+    &_title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 150%;
+      color: #000000;
+      margin-bottom: 16px;
+    }
+
+    &_link {
+      margin-left: 20px;
+      margin-bottom: 26px;
+
+      a {
+        font-size: 16px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #6B7A6B;
+        @include transitions(color);
+
+        &:hover {
+          color: #B88626;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &_addr {
+      font-size: 18px;
+      line-height: 100%;
+      color: #6B7A6B;
+      margin-bottom: 20px;
+    }
+
+    &_phone {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 100%;
+      margin-bottom: 20px;
+      a {
+        color: #6B7A6B;
+        @include transitions(color);
+        &:hover {
+          color: #B88626;
+        }
+      }
+    }
+    &_social{
+      display: flex;
+      align-items: center;
+      color: #CB9734;
+      margin-bottom: 12px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+      &_title{
+        margin-left: 12px;
+      }
+      &:hover {
+        color: #B88626;
+      }
+    }
+  }
+  &_decor{
+    width: 100%;
+    height: 1px;
+    background: #c4c4c4;
+  }
+  &_copy{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    color: #6B7A6B;
+    margin: 35px 0;
+
+  }
+}

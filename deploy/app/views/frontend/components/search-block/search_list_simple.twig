@@ -1,0 +1,16 @@
+{% for item in list %}
+    <div class="item-search__item" data-id="{{ item.item_id }}" data-offer-id="{{ item.offer_id }}">
+        <div class="item-search__pic">
+            <img src="{{ item.item_icon_url }}">
+        </div>
+        <div class="item-search__info">
+        {{ item.full_title }} (ID {{ item.offer_id }})
+        </div>
+        <div class="item-search__price">
+            {{ format_money(item.item_price) }} руб.
+        </div>
+        <div class="item-search__delete">
+            <i class="fa fa-close"></i>
+        </div>
+    </div>
+{% endfor %}

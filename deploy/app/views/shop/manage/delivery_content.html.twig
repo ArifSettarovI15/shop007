@@ -1,0 +1,18 @@
+{% if list %}
+    <div class="delivery_status_data">
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th>Инфо</th>
+                <th>Статус</th>
+                <th>Доп статус</th>
+                <th>Задержка</th>
+                <th>История</th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+            {% include 'shop/manage/delivery_table.html.twig' %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}

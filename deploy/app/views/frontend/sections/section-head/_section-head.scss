@@ -1,0 +1,69 @@
+.section-head {
+  $root: &;
+
+  &__row,
+  &__right {
+    @extend %flex-center-between;
+  }
+
+  &__title {
+    position: relative;
+    padding: 24px;
+    font-size: 32px;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: $color__light;
+    background-color: $color__dark;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  &__controls {
+    margin-left: 24px;
+  }
+
+  &_center {
+    #{$root}__row {
+      justify-content: center;
+    }
+  }
+
+  @include media('<md') {
+    &__title {
+      font-size: 24px;
+      padding: 8px 14px;
+    }
+
+    &__link {
+      display: none;
+    }
+
+    &_m-center {
+      #{$root}__row {
+        justify-content: center;
+      }
+    }
+  }
+
+  @include media('<sm') {
+    &__row {
+      justify-content: center;
+    }
+
+    &__controls {
+      display: none !important;
+    }
+
+    &_second {
+      #{$root}__row {
+        justify-content: space-between;
+      }
+
+      #{$root}__controls {
+        display: block !important;
+      }
+    }
+  }
+}

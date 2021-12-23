@@ -1,0 +1,22 @@
+{% for item in list %}
+    <tr data-id="{{ item.banner_id }}">
+        <td class="data_id">{{ item.banner_id }}</td>
+        <td>
+            <div class="object_status  {% if item.banner_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.banner_id }}">
+                <span class="badge badge-danger">нет</span>
+                <span class="badge badge-success">да</span>
+            </div>
+        </td>
+        <td class="image"><img src="{{ item.banner_icon_url }}"></td>
+        <td>{{ item.cat_title }}</td>
+        <td>
+            {% if item.banner_pos==1 %}Под товарами{% endif %}
+            {% if item.banner_pos==2 %}Над товарами{% endif %}
+        </td>
+        <td>
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.banner_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/banners/edit/{{ item.banner_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+            <div data-value="{{ item.banner_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

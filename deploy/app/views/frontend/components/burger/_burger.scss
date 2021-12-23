@@ -1,0 +1,91 @@
+.burger {
+  $root: &;
+  position: relative;
+  display: inline-block;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  background-color: transparent;
+  @include size(100%);
+
+  &__wrapper {
+    position: relative;
+    @include size(100%);
+    @extend %flex-center;
+  }
+
+  &__icon {
+    display: block;
+    @include size(32px);
+  }
+
+  &__counter {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: block;
+    border-radius: 50%;
+    background-color: $color__danger;
+    min-width: 10px;
+    min-height: 10px;
+  }
+
+  &__num {
+    display: none;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 1.1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color__light;
+  }
+
+  &__def,
+  &__hover,
+  &__active {
+    @include size(32px);
+    @extend %absolute-center;
+    @include transitions(opacity, visibility);
+  }
+
+  &__hover,
+  &__active {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &:hover {
+    #{$root}__counter {
+      top: 1px;
+      right: 1px;
+      padding: 3px 6px;
+    }
+
+    #{$root}__num {
+      display: block;
+    }
+
+    #{$root}__def {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #{$root}__hover {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .menu-open & {
+    #{$root}__def,
+    #{$root}__hover {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #{$root}__active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

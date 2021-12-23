@@ -1,0 +1,54 @@
+.p-feeds {
+  @include media('<md') {
+    padding-bottom: 0;
+    .pattern-2 {
+      display: none;
+    }
+  }
+}
+
+.product-feeds {
+  display: flex;
+  &__main {
+    width: 100%;
+  }
+
+  &__side {
+    width: 368px;
+    flex: 0 0 368px;
+    margin-left: 32px;
+  }
+
+  &__item {
+    margin-bottom: 32px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include media('<xl') {
+    &__side {
+      margin-left: 16px;
+    }
+  }
+
+  @include media('<md') {
+    flex-wrap: wrap;
+
+    &__main,
+    &__side {
+      margin: 0;
+      width: 100%;
+      flex: 0 0 auto;
+    }
+
+    &__main {
+      margin-bottom: 24px;
+    }
+
+    &__item {
+      margin-bottom: 24px;
+    }
+  }
+}

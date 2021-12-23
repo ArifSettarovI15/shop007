@@ -1,0 +1,25 @@
+.hero{
+  background-color: $color__secondary--3;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 55px 0 140px;
+  &__title{
+    font-family: $font-family__second;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 56px;
+    line-height: 100%;
+    color: #1C4E29;
+  }
+  &:after{
+    content: '';
+    background:  url("/assets/images/svg/head_decor.svg");
+    background-repeat: repeat-x;
+    height: 43px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

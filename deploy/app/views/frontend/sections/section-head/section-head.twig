@@ -1,0 +1,29 @@
+{% import "frontend/elements/link/link_macro.twig" as Link %}
+<div class="section-head {% if mod %}section-head_{{ mod }}{% endif %}">
+    {% if not section_wrapper %}
+    <div class="container container-1">
+    {% endif %}
+        <div class="section-head__row">
+            <h2 class="section-head__title">{{ section_title|prepare_title|raw }}</span></h2>
+            {% if section_link or section_slider %}
+                <div class="section-head__right">
+                    {% if section_link %}
+                        {% if link_trigger %}
+                            {% set trigger = link_trigger %}
+                        {% endif %}
+                        <div class="section-head__link">
+                            {{ Link.link(section_link_href, section_link, { mod: 'second',  trigger: trigger}) }}
+                        </div>
+                    {% endif %}
+                    {% if section_slider %}
+                        <div class="section-head__controls" data-control-slider="{{ section_slider }}">
+                            {% include 'modules/slider/slider_nav.twig' %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    {% if not section_wrapper %}
+    </div>
+    {% endif %}
+</div>

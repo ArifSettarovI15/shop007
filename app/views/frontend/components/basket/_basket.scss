@@ -136,3 +136,28 @@
     }
   }
 }
+
+.basket_noitems, .order_noitems{
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-family: $font-family__second;
+  font-weight: bold;
+  color: $color__secondary--2;
+}
+
+@include media("<=768px"){
+  .basket_table_head_cell_image, .basket_table_item_cell_image{
+    display: none;
+  }
+  .basket_table_head_cell_title,.basket_table_item_cell_title{
+    width: 280px;
+  }
+}
+@include media("<=320px"){
+  .basket_table_head_cell_price, .basket_table_head_cell_count, .basket_table_item_cell_price,.basket_table_item_cell_count{
+    display: none;
+  }
+}

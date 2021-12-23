@@ -1,0 +1,25 @@
+{% import "frontend/elements/input/input_macro.twig" as Input %}
+<div class="m-1" style="max-width: 770px; margin-left: auto; margin-right: auto; background-color: #F9F3E9; padding: 32px;" >
+    <div class="form-block form" data-url="{{ global.base_url }}/login/">
+        <input type="hidden" name="action" class="element" value="process_login">
+        <div class="form-block__item">
+            {{ Input.field('login', {
+                label: 'Имя пользователя',
+                required: 1
+            }) }}
+        </div>
+        <div class="form-block__item">
+            {{ Input.field('password', {
+                label: 'Пароль',
+                required: 1,
+                type: 'password'
+            }) }}
+        </div>
+        <div class="form-block__item">
+            <button class="button button_lg button_second submit">
+                <span class="button__text">Войти</span>
+            </button>
+        </div>
+    </div>
+</div>
+

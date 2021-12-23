@@ -1,0 +1,70 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/vendors/add/">Добавить</a>
+    </div>
+
+    <div class="table_data">
+        <div class="sort_block">
+            Сортировка:<br/>
+            <select data-name="order" data-type="filter_value">
+                <option value="name" {% if variables.order=='name' %}selected="selected"{% endif %}>По названию</option>
+            </select>
+        </div>
+        <div class="table_data_navigation">
+            {% include 'parts/paging.html.twig' %}
+        </div>
+
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th style="width: 100px">ID</th>
+                <th style="width: 100px">Фильтры</th>
+                <th style="width: 100px">Иконка</th>
+                <th style="width: 100px">Bg</th>
+                <th>Название</th>
+                <th class="action_button"></th>
+            </tr>
+            <tr>
+                <th><input data-name="vendor_id" data-type="filter_value" min="0" type="text"></th>
+                <th>
+                    <select data-name="vendor_status" data-type="filter_value">
+                        <option value="-1" {% if variables.vendor_status==-1 %}selected="selected"{% endif %}>Статус</option>
+                        <option value="0" {% if variables.vendor_status==0 %}selected="selected"{% endif %}>Выкл</option>
+                        <option value="1" {% if variables.vendor_status==1 %}selected="selected"{% endif %}>Вкл</option>
+                    </select><br/>
+                    <select data-name="vendor_pop" data-type="filter_value">
+                        <option value="-1" {% if variables.vendor_pop==-1 %}selected="selected"{% endif %}>Поп</option>
+                        <option value="0" {% if variables.vendor_pop==0 %}selected="selected"{% endif %}>Выкл</option>
+                        <option value="1" {% if variables.vendor_pop==1 %}selected="selected"{% endif %}>Вкл</option>
+                    </select><br/>
+                    <select data-name="vendor_new" data-type="filter_value">
+                        <option value="-1" {% if variables.vendor_new==-1 %}selected="selected"{% endif %}>New</option>
+                        <option value="0" {% if variables.vendor_new==0 %}selected="selected"{% endif %}>Выкл</option>
+                        <option value="1" {% if variables.vendor_new==1 %}selected="selected"{% endif %}>Вкл</option>
+                    </select>
+                </th>
+                <th>
+                    <select data-name="vendor_icon" data-type="filter_value">
+                        <option value="-1" {% if variables.vendor_icon==-1 %}selected="selected"{% endif %}>Все</option>
+                        <option value="0" {% if variables.vendor_icon==0 %}selected="selected"{% endif %}>Выкл</option>
+                        <option value="1" {% if variables.vendor_icon==1 %}selected="selected"{% endif %}>Вкл</option>
+                    </select>
+                </th>
+                <th>
+                    <select data-name="vendor_bg" data-type="filter_value">
+                        <option value="-1" {% if variables.vendor_bg==-1 %}selected="selected"{% endif %}>Все</option>
+                        <option value="0" {% if variables.vendor_bg==0 %}selected="selected"{% endif %}>Выкл</option>
+                        <option value="1" {% if variables.vendor_bg==1 %}selected="selected"{% endif %}>Вкл</option>
+                    </select>
+                </th>
+                <th><input data-name="vendor_name" data-type="filter_value" type="text"></th>
+                <th class="action_button"></th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+            {% include 'shop/manage/vendors_table.html.twig' %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

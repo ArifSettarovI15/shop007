@@ -1,0 +1,61 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/cats/add/">Добавить</a>
+    <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/cats/tree/">Дерево</a>
+  </div>
+
+  <div class="table_data">
+    <div class="table_data_navigation">
+      {% include 'parts/paging.html.twig' %}
+    </div>
+    <input type="hidden" value="0" data-name="sort_filter" data-type="filter_value">
+    <div class="sort_block">
+      Сортировка:<br/>
+      <select data-name="order" data-type="filter_value">
+        <option value="id" {% if variables.order=='id' %}selected="selected"{% endif %}>По дате добавления</option>
+        <option value="short_title" {% if variables.order=='short_title' %}selected="selected"{% endif %}>По названию</option>
+          <option value="sort" {% if variables.order=='sort' %}selected="selected"{% endif %}>По сортировке</option>
+      </select>
+    </div>
+
+    <table class="table_bordered table_striped">
+      <thead>
+      <tr>
+        <th style="width: 100px">ID</th>
+        <th style="width: 150px">Фильтры</th>
+        <th style="width: 100px">Фото</th>
+        <th>Название</th>
+{#        <th style="width: 250px">Парент</th>#}
+        <th class="action_button_3"></th>
+      </tr>
+      <tr>
+        <th><input data-name="cat_id" data-type="filter_value" min="0" type="text"></th>
+        <th>
+          <select data-name="cat_status" data-type="filter_value">
+            <option value="-1" {% if variables.cat_status==-1 %}selected="selected"{% endif %}>Активность</option>
+            <option value="0" {% if variables.cat_status==0 %}selected="selected"{% endif %}>Выкл</option>
+            <option value="1" {% if variables.cat_status==1 %}selected="selected"{% endif %}>Вкл</option>
+          </select><br/>
+          <select data-name="cat_top" data-type="filter_value">
+            <option value="-1" {% if variables.cat_top==-1 %}selected="selected"{% endif %}>Популярные</option>
+            <option value="0" {% if variables.cat_top==0 %}selected="selected"{% endif %}>Выкл</option>
+            <option value="1" {% if variables.cat_top==1 %}selected="selected"{% endif %}>Вкл</option>
+          </select>
+        </th>
+        <th></th>
+        <th><input data-name="cat_title" data-type="filter_value" type="text"></th>
+
+{#          <th>#}
+{#              {{ variables.cats_select|raw }}#}
+{#          </th>#}
+        <th class="action_button"></th>
+      </tr>
+      </thead>
+      <tbody class="table_content sortable">
+      {% include 'shop/manage/cats_table.html.twig' %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,3 +1,6 @@
+.shop-card__info{
+  flex: 1;
+}
 .item-info{
   &_title{
     font-family: $font-family__second;
@@ -68,6 +71,18 @@
   &:hover{
     background-color: $color__primary--1;
   }
+    }
+  }
+}
+
+@include media('<=480px'){
+
+  .item-info{
+    &_title{
+      font-size: 24px;
+    }
+    &_price{
+      font-size: 22px;
     }
   }
 }

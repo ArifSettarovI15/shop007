@@ -28,7 +28,7 @@ $response = json_decode($response);
 $response = $response->ResourceList;
 $cats = [];
 $parents = [];
-echo('GUN');
+
 foreach ($response as $item) {
     $title2 = '';
     if ($item->Id == 13483079 or $item->Id == 13555972 or $item->Id == 13483079 or $item->Id == 13555973 or $item->Id == 13483078) {
@@ -85,11 +85,9 @@ foreach ($response as $item) {
     $ShopClass->cats->model->columns_update->getTitle2()->setValue($title2);
 
     if ($cat) {
-        echo('2');
         $ShopClass->cats->model->columns_where->getId()->setValue($cat['cat_id']);
         $ShopClass->cats->Update();
     } else {
-        echo('3');
         $ShopClass->cats->model->columns_update->getId()->setValue($item->Id);
         $ShopClass->cats->Insert();
     }

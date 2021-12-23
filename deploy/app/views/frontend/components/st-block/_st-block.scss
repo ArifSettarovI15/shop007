@@ -1,0 +1,45 @@
+.st-block {
+  $root: &;
+  &__overflow {
+    height: 170px;
+    overflow: hidden;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      @include size(100%, 32px);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, $color__light 100%);
+    }
+
+    &_show {
+      &:after {
+        content: none;
+      }
+
+      & + #{$root}__link {
+        .link__icon {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  &__link {
+    margin-top: 24px;
+  }
+
+  @include media('<xl') {
+    &__content {
+      max-width: 770px;
+      margin: 0 auto;
+    }
+  }
+
+  @include media('<md') {
+    &__link {
+      margin-top: 14px;
+    }
+  }
+}

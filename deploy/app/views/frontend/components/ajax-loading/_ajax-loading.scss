@@ -1,0 +1,76 @@
+.ajax-loading {
+  $root: &;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include size(100%);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1111111;
+
+  &__wrapper {
+    background-color: rgba($color__dark, .5);
+    margin: 0 auto;
+    @include size(100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &_preload,
+  &_show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &_preload {
+    #{$root}__wrapper {
+      background: rgba($color__light, .95);
+    }
+  }
+}
+
+.loader {
+  $root: &;
+  @include size(112px);
+
+  &__item {
+    @extend %absolute-full;
+    @include size(100%);
+    border-radius: 50%;
+    @extend %flex-center;
+    background-color: $color__primary--1;
+    animation-delay: 0s;
+    animation: animateLoader 1s ease-in infinite;
+    overflow: hidden;
+
+    &:nth-child(odd) {
+      background-color: $color__light;
+    }
+
+    @for $i from 1 to 9 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * (3s / 9);
+        z-index: 9 - $i;
+
+        #{$root}__icon {
+          background-image: url('/assets/images/svg/loader-#{$i}.svg');
+        }
+      }
+    }
+  }
+
+  &__icon {
+    @include size(64px);
+  }
+}
+
+@keyframes animateLoader {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

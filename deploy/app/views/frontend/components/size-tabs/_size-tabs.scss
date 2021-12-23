@@ -1,0 +1,31 @@
+.s-tabs {
+  display: inline-flex;
+
+  &__tab {
+    margin-right: 8px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    .button.active {
+      background-color: $color__dark--2;
+      border-color: $color__dark--2;
+
+      .button__text {
+        color: $color__light;
+      }
+    }
+  }
+
+  // Product info
+  .s-card-info & {
+    &__tab {
+      .button {
+        padding: 0 24px;
+        height: 36px;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,20 @@
+{% for item in list %}
+  <tr>
+    <td class="data_id">{{ item.comment_id }}</td>
+    {% set object_status=item.comment_status %}
+    {% set object_id=item.comment_id %}
+    {% include 'parts/object_status.html.twig' %}
+    <td class="admin_table_small">{{ item.comment_time|date("d.m.y") }}</td>
+    <td>
+        {% if item.user_id %}<a href="{{ global.base_url }}/manager/users/edit/{{ item.user_id }}/">{{ item.comment_author }}</a>{% else %}{{ item.comment_author }}{% endif %}
+      {% if item.data.email %}
+          <br/>{{ item.data.email }}
+          {% endif %}
+    </td>
+    <td class="admin_table_small">
+      <b><a href="{{ item.item_full_url }}" target="_blank">{{ item.vendor_name }} {{ item.item_title }}</a></b><br/>
+        {{ item.comment_text|nl2br }}
+    </td>
+    <td>{{ item.comment_rank}}</td>
+  </tr>
+{% endfor %}

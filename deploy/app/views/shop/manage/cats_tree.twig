@@ -1,0 +1,12 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/cats/add/">Добавить</a>
+        <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/cats/">Список</a>
+    </div>
+    <div id="jstree_div">
+        {{ tree|raw }}
+    </div>
+
+{% endblock %}

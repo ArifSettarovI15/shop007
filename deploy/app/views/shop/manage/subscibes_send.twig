@@ -1,0 +1,42 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+
+
+            <div class="line">
+                <div class="label">
+                    Список:
+                </div>
+                <div class="value">
+                    {% for item in list %}
+                        <input class="element" type="checkbox" name="list[{{ item.subscribe_list_id }}]" value="{{ item.subscribe_list_id }}"> {{ item.subscribe_list_name }}<br/>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="line">
+                <div class="label required">
+                    Заголовок:
+                </div>
+                <div class="value">
+                    <input name="title" class="element required" type="text"  maxlength="250" >
+                </div>
+            </div>
+            <div class="line">
+                <div class="label required">
+                    Содержание:
+                </div>
+                <div class="value">
+                    <textarea class="rich element required" name="text"></textarea>
+                </div>
+            </div>
+
+
+                <input type="hidden" class="element" name="action" value="process_send">
+
+            <div class="submit btn btn-primary">
+                    Начать рассылку
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="page__main">
+        <article class="view-block" >
+
+            <div class="container container_sm">
+                <div class="view-block__content text">
+                    {{ info.content_text|raw }}
+                </div>
+            </div>
+        </article>
+    </div>
+{% endblock %}

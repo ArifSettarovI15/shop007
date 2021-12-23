@@ -1,0 +1,16 @@
+{% macro link(href, label, options={}) %}
+  {% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+  <a
+    href="{{ href }}"
+    class="link {% if options.mod %}link_{{ options.mod }}{% endif %} {% if options.trigger %}{{ options.trigger }}{% endif %}"
+    {% for d in options.data %}data-{{ d.name }}="{{ d.val }}"{% endfor %}
+    {% if options.blank %}target="_blank" {% endif %}
+    {% if options.onClick %}onclick="{{ options.onClick }}"{% endif %}>
+    {% if options.icon_left %}<span class="link__icon">{{ Svg.icon(options.icon_left, 1) }}</span>{% endif %}
+    <span class="link__text">{{ label }}</span>
+    {% if options.icon_right %}<span class="link__icon">{{ Svg.icon(options.icon_right, 1) }}</span>{% endif %}
+    {% if options.mod == 'primary' %}
+    <span class="link__line"></span>
+    {% endif %}
+  </a>
+{% endmacro %}

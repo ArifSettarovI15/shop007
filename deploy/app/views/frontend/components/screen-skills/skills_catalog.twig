@@ -1,0 +1,36 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+
+<div class="table-list">
+    <div class="table-list__list">
+        <div class="table-list__item table-list__item_{% if product %}quatro{% else %}main{% endif %}">
+            <div class="ts-skill {% if product %}ts-skill_3{% endif %}">
+                <div class="ts-skill__icon">
+                    <div class="ts-skill__icon-inner">
+                        {{ Svg.icon('skill-4', 1) }}
+                    </div>
+                </div>
+                <div class="ts-skill__text">Фото собранного букета</div>
+            </div>
+        </div>
+        <div class="table-list__item table-list__item_{% if product %}quatro{% else %}main{% endif %}">
+            <div class="ts-skill {% if product %}ts-skill_3{% endif %}">
+                <div class="ts-skill__icon">
+                    <div class="ts-skill__icon-inner">
+                        {{ Svg.icon('skill-5', 1) }}
+                    </div>
+                </div>
+                <div class="ts-skill__text">Топпер/Открытка в подарок</div>
+            </div>
+        </div>
+        <div class="table-list__item table-list__item_{% if product %}quatro{% else %}main{% endif %}">
+            <div class="ts-skill {% if product %}ts-skill_3{% endif %}">
+                <div class="ts-skill__icon">
+                    <div class="ts-skill__icon-inner">
+                        {{ Svg.icon('skill-6', 1) }}
+                    </div>
+                </div>
+                <div class="ts-skill__text">Доставим во время</div>
+            </div>
+        </div>
+    </div>
+</div>

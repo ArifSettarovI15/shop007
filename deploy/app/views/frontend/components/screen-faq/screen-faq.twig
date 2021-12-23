@@ -1,0 +1,35 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div id="anchor_faq" class="section anim-faq">
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Частые вопросы',
+            mod: 'center'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container_sm">
+            <div class="faq-main">
+                <div class="table-list anim-faq-main">
+                    <div class="table-list__list">
+                        {% for faq in faqs %}
+                            <div class="table-list__item table-list__item_second">
+                                <div class="fq-item">
+                                    <div class="fq-item__head js-accord">
+                                        <div class="fq-item__icon">
+                                            {{ Svg.icon('chevron') }}
+                                        </div>
+
+                                        <div class="fq-item__q">{{faq.fitem_ask}}</div>
+                                    </div>
+                                    <div class="fq-item__drop js-accord-drop">
+                                        <div class="fq-item__text">{{faq.fitem_answer|raw}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

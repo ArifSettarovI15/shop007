@@ -1,0 +1,25 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="stars {% if type %}stars_type{% endif %}">
+    {% if type %}
+        {% set list = 5..1 %}
+    {% else %}
+        {% set list = 1..5 %}
+    {% endif %}
+    {% for item in list %}
+        {% if type %}
+            <input type="radio" id="{{ type }}-{{ item }}" class="star visually-hidden no-icheck element required" name="{{ type }}" value="{{ item }}">
+            <label for="{{ type }}-{{ item }}" class="s-star">
+                <span class="s-star__icon">
+                    {{ Svg.icon('star-icon', 1) }}
+                </span>
+            </label>
+        {% else %}
+            <div class="s-star {% if loop.index <= rating %}active{% endif %}">{{ Svg.icon('star-icon', 1) }}</div>
+        {% endif %}
+    {% endfor %}
+    {% if count %}
+        <div class="stars__count">
+            {{count}} {{ count|sklon_review }}
+        </div>
+    {% endif %}
+</div>

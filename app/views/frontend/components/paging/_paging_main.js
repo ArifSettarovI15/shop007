@@ -5,6 +5,7 @@ $( document ).on( "change keyup", ".table-data [data-type='filter_value']", func
 });
 $( document ).on( "click", ".js-paging", function(e) {
     e.preventDefault();
+    console.log(123123123)
     FilterTableData($(this).attr('data-value'),$(this));
 });
 

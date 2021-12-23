@@ -1,0 +1,106 @@
+{% extends "layout.twig" %}
+{% block content_center %}
+    <section class="main-section main-section_margin brand-single">
+        <div class="container container_white">
+            <div class="brand-single__inside padding2">
+                <div class="left-filter">
+                    <div class="left-filter__title">
+                       Категории
+                    </div>
+                    {% for item in cats %}
+                        <div class="left-filter__sub">
+                            <div class="left-filter__sub-item  {% if global.menu_cats.levels[item.cat_id] %}left-filter__sub-item_link{% endif %}">
+                                <a href="{{ item.cat_full_url }}brand/{{ vendor_info.vendor_url }}/">{{ item.cat_title }}</a>
+                                {% if global.menu_cats.levels[item.cat_id] %}
+                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                {% endif %}
+                            </div>
+                            {% if global.menu_cats.levels[item.cat_id] %}
+                                <div class="left-filter__sub2">
+                                    {% for item2 in global.menu_cats.levels[item.cat_id] %}
+                                        <a href="{{ item2.cat_full_url }}brand/{{ vendor_info.vendor_url }}/">{{ item2.cat_title }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div style="width: 100%">
+                    {% if vendor_info.vendor_text_id or (vendor_info.vendor_icon and vendor_info.vendor_bg) %}
+                    <div class="brand-single__info">
+                        {% if vendor_info.vendor_bg  %}
+                        <div class="brand-single__info-img brand-single__info-img_large" style="background-image: url('{{ vendor_info.vendor_bg_url }}')">
+                                {% if vendor_info.vendor_icon  %}
+                                    <div class="brand-single__info-logo" style="background-image: url('{{ vendor_info.vendor_icon_url }}')">
+
+                                    </div>
+                                {% endif %}
+                        </div>
+                            <div class="brand-single__info-img brand-single__info-img_small" style="background-image: url('{{ vendor_info.vendor_bg2_url }}')">
+                                {% if vendor_info.vendor_icon  %}
+                                    <div class="brand-single__info-logo" style="background-image: url('{{ vendor_info.vendor_icon_url }}')">
+
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if vendor_info.vendor_text_id %}
+                            <div class="brand-single__info-text text">
+                                    {{ vendor_info.vendor_full_text|raw }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                            {% if vendor_info.vendor_text_id %}
+                                <div class="brand-single__sep"></div>
+                            {% endif %}
+                    {% endif %}
+
+                    {% if cats %}
+                    <div class="brand-single__title">
+                        Категории производителя
+                    </div>
+                    <div class="brand-single__cat">
+                        {% for cat in cats %}
+                            <div class="brand-single__cat-wrapper">
+                                <a {% if seo_data[cat.cat_full_url ~'brand/'~ vendor_info.vendor_url~'/'] %}style="padding: 0" {% endif %} class="brand-single__cat-item" href="{{ cat.cat_full_url }}brand/{{ vendor_info.vendor_url }}/">
+                                        {% if seo_data[cat.cat_full_url ~'brand/'~ vendor_info.vendor_url~'/'] %}
+                                            <img src="{{ seo_data[cat.cat_full_url ~'brand/'~ vendor_info.vendor_url~'/'] }}" alt="{{ cat.cat_title }}" title="{{ cat.cat_title }}">
+                                        {% else %}
+                                            <div class="brand-single__cat-title">{{ cat.cat_title }} </div>
+                                            <sup class="brand-single__cat-count">({{ cat.cat_count }})</sup>
+                                        {% endif %}
+
+                                </a>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if collections %}
+                    <div class="brand-single__sep"></div>
+                    <div class="brand-single__collection  padding">
+                        <div class="brand-single__title">
+                            Коллекции бренда
+                        </div>
+                        <div class="brand-single__collection-inside">
+                            {% for collection in collections %}
+                                <a href="{{ collection.collection_full_url }}">{{ collection.collection_title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if  hit_items %}
+                        <div class="brand-single__sep"></div>
+                        <div class="brand-single__hits">
+                            {%  include 'frontend/components/hits/hits.twig' with {
+                                'nav_style':'gray'
+                            } %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {%  include 'frontend/components/bottom-info/bottom-info.twig' %}
+{% endblock %}

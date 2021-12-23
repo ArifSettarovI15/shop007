@@ -1,0 +1,23 @@
+{% for item in list %}
+    <tr data-id="{{ item.city_id }}">
+        <td class="data_id">{{ item.city_id }}</td>
+        <td>
+            <div class="object_status  {% if item.city_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.city_id }}">
+                <span class="badge badge-danger">нет</span>
+                <span class="badge badge-success">да</span>
+            </div>
+            <div data-type="show" class="badge_status   {% if item.city_show!=1%}no{% else %}yes{% endif %}" data-value="{{ item.city_id }}">
+                <span class="badge badge-danger">На сайте</span>
+                <span class="badge badge-success">На сайте</span>
+            </div>
+        </td>
+        <td class="image"><img src="{{ item.city_icon_url }}"></td>
+        <td>{{ item.city_title }}</td>
+        <td>{{ variables.groups[item.city_group_id] }}</td>
+        <td>
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.city_full_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/delivery/cities/edit/{{ item.city_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+            <div data-value="{{ item.city_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

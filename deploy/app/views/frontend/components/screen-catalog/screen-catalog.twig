@@ -1,0 +1,24 @@
+<div class="section anim-catalog">
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Каталог букетов',
+            section_link_href: global.base_url~'/catalog/',
+            section_slider: 'c-1',
+            section_link: 'Весь каталог'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container_lg">
+            <div class="catalog-main">
+                {% include 'frontend/components/catalog-list/catalog-list.twig' %}
+                <div class="section__link-mobile">
+                    <a href="{{ global.base_url }}/catalog/" class="button button_md button_second">
+                        <span class="button__container">
+                            <span class="button__text">Весь каталог</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

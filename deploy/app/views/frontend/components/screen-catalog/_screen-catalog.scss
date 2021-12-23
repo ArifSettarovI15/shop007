@@ -1,0 +1,34 @@
+.catalog-main {
+  .table-list__item {
+
+  }
+
+  @include media('<xl') {
+    .table-list__item {
+      width: (100%/3);
+    }
+  }
+
+  @include media('<sm') {
+    .table-list__list_slider2 .table-list__item_main:nth-child(-n + 8) {
+      display: none;
+    }
+
+    .table-list__list_slider2,
+    .table-list_second {
+      .table-list__list {
+        margin: -4px;
+      }
+
+      .table-list__item_main {
+        display: none;
+        width: 100%;
+        padding: 4px;
+
+        &:nth-child(-n + 4) {
+          display: block;
+        }
+      }
+    }
+  }
+}

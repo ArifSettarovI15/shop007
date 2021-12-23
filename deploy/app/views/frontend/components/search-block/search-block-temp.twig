@@ -1,0 +1,26 @@
+
+<div class="search-block form" data-name="temp" data-url="{{ global.base_url }}/search/" data-type="1" data-insert="[data-name='temp'].search-block .search-block__drop" data-one="1" data-callback="SearchDone">
+    <div class="search-block__placeholder">
+        Пример поиска: <span class="search-block__default">MICHELIN Primacy 4</span>
+    </div>
+
+
+    <div class="search-block__delete">
+        {% include 'frontend/elements/svg/svg.twig' with {
+            'name':'close',
+            'class':'close',
+            'embed':1
+        }%}
+    </div>
+    <div class="search-block__submit">
+        {% include 'frontend/elements/svg/svg.twig' with {
+            'name':'search',
+            'class':'search',
+            'embed':1
+        }%}
+    </div>
+    <input type="hidden" name="type" value="temp" class="element">
+    <input class="search-block__input element" name="q" type="text" autocomplete="off">
+    <div class="search-block__drop">
+    </div>
+</div>

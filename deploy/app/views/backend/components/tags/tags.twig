@@ -1,0 +1,5 @@
+<div class="tags-list">
+    {% for tag in list %}
+        <span class="tags-list__item" data-id="{{ tag.tag_id }}">{{ tag.tag_name }} <i data-id="{{ tag.tag_id }}" class="tags-list__delete fa fa-close"></i>,</span>
+    {% endfor %}
+</div>

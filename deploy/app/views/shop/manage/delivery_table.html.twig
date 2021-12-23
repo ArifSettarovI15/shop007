@@ -1,0 +1,30 @@
+{% for item in list %}
+    <tr>
+        <td>
+            Накладная {{ item.DispatchNumber }}<br/>
+            <a href="{{ global.base_url }}/manager/shop/orders/view/{{ item.order_id }}/">Заказ #{{ item.order_id }}</a><br/>
+            {% if item.RecipientName %}Получатель {{ item.RecipientName }}<br/>{% endif %}
+            {% if item.ReturnDispatchNumber %}Возврат {{ item.ReturnDispatchNumber }}<br/>{% endif %}
+        </td>
+        <td>
+            {{ item.status_date|date("d.m.Y H:i:s") }}<br/>
+            {{ item.status_name}}<br/>
+            {{ item.status_city}}
+        </td>
+        <td>
+            {% if item.reason_date %}{{ item.reason_date|date("d.m.Y H:i:s") }}<br/>{% endif %}
+            {% if item.reason_name %}{{ item.reason_name}}<br/>{% endif %}
+        </td>
+        <td>
+            {% if item.delay_date %}{{ item.delay_date|date("d.m.Y H:i:s") }}<br/>{% endif %}
+            {% if item.delay_name %}{{ item.delay_name}}<br/>{% endif %}
+        </td>
+        <td>
+            {% for hh in item.history  %}
+                {{ loop.index }}) {{ hh.date|date("d.m.Y H:i:s") }},
+                {{ hh.title}},
+                {{ hh.city}}<br/>
+            {% endfor %}
+        </td>
+    </tr>
+{% endfor %}

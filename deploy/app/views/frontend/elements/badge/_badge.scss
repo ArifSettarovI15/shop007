@@ -1,0 +1,113 @@
+.badge {
+  $root: &;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  // Core
+  &__icon {
+    @include size(16px);
+    flex: 0 0 16px;
+
+    & + #{$root}__text {
+      margin-left: 4px;
+    }
+  }
+
+  &__text {
+    font-family: $font-family__second;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    & + #{$root}__icon {
+      margin-left: 4px;
+    }
+  }
+
+  // Sizes
+  &_md {
+    padding: 6px 14px;
+    min-height: 32px;
+
+    #{$root}__text {
+      font-size: 14px;
+    }
+  }
+
+  &_sm {
+    min-height: 24px;
+    padding: 5px 8px;
+  }
+
+  // Colors
+
+  &_primary {
+    background-color: $color__dark;
+
+    #{$root}__text {
+      color: $color__light;
+    }
+
+    #{$root}__icon {
+      svg * {
+        fill: $color__primary--1;
+      }
+    }
+  }
+
+  &_primary2 {
+    background-color: $color__primary--1;
+
+    #{$root}__text {
+      color: $color__light;
+    }
+
+    #{$root}__icon {
+      svg * {
+        fill: $color__light;
+      }
+    }
+  }
+
+  &_primary3 {
+    background-color: $color__light;
+
+    #{$root}__text {
+      color: $color__primary--1;
+    }
+
+    #{$root}__icon {
+      svg * {
+        fill: $color__primary--1;
+      }
+    }
+  }
+
+  &_second {
+    background-color: $color__light--3;
+
+    #{$root}__text {
+      color: $color__light;
+    }
+  }
+
+  &_second2 {
+    background-color: transparent;
+    border: 1px solid $color__light--3;
+
+    &#{$root}_md {
+      border-radius: 2px;
+    }
+
+    #{$root}__text {
+      color: $color__light--3;
+    }
+
+    #{$root}__icon {
+      svg * {
+        fill: $color__light--3;
+      }
+    }
+  }
+}

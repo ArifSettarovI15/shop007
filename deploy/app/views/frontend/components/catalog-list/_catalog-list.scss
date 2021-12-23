@@ -1,0 +1,282 @@
+.t-1 {
+  $root: &;
+  display: block;
+  @include transitions(transform, box-shadow);
+
+  &__wrapper {
+    padding-bottom: 100%;
+  }
+
+  &__image {
+    @extend %absolute-full;
+    @include size(100%);
+
+    img {
+      @include size(100%);
+      background-image: url('/assets/images/static/bg-1.jpg');
+      @extend %background__cover;
+    }
+
+    &:before {
+      content: '';
+      @extend %absolute-full;
+      @include size(100%);
+      background: $gradient__dop--1;
+    }
+  }
+
+  &__bottom {
+    padding: 8px 14px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: $color__primary--1;
+      @include transitions(width, height);
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 1.15;
+    color: $color__light;
+    text-transform: uppercase;
+
+    span {
+      font-weight: 700;
+    }
+
+  }
+
+  &__left-top {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+  }
+
+  &__bottom {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 24px rgba(29, 29, 27, 0.2);
+
+    #{$root}__bottom:before {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &_2 {
+    #{$root}__title {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 1.2;
+      text-transform: none;
+      @include line-clamp(2, 24px);
+      min-height: auto;
+    }
+  }
+
+  &_3 {
+    #{$root}__title {
+      font-size: 16px;
+      text-transform: none;
+    }
+  }
+
+  @include media('<md') {
+    &__title {
+      font-size: 20px;
+    }
+
+    &_2 {
+      #{$root}__title {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @include media('<sm') {
+    &__wrapper {
+      padding-bottom: 50%;
+    }
+
+    &_3,
+    &_2 {
+      #{$root}__wrapper {
+        padding-bottom: 100%;
+      }
+    }
+  }
+}
+
+.t-2 {
+  $root: &;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &__image-inner {
+    position: relative;
+    display: block;
+    padding-bottom: 133.33333333333%;
+
+    &:before {
+      content: '';
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 21.3%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include size(100%);
+      z-index: 1;
+      opacity: 0;
+      @include transitions(opacity);
+    }
+
+    img {
+      @extend %absolute-full;
+      @include size(100%);
+    }
+  }
+
+  &__image-dop {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: 1;
+    @include transitions(visibility, opacity);
+
+    .link.link_iconic {
+      .link__text {
+        color: $color__light;
+        white-space: nowrap;
+      }
+
+      .link__icon {
+        svg * {
+          fill: $color__light;
+        }
+      }
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 1;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    background-color: $color__light--1;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 16px;
+    line-height: 1.2;
+    color: $color__dark--3;
+    margin-bottom: 14px;
+    flex: 1;
+    @include transitions(color);
+
+    &:hover {
+      color: $color__primary--1;
+    }
+  }
+
+  &__tabs {
+    margin-bottom: 14px;
+  }
+
+  &__bottom {
+    @extend %flex-center-between;
+
+    .button {
+      min-width: 48px;
+    }
+  }
+
+  &__sub {
+    font-size: 13px;
+    line-height: 1.4;
+    color: $color__dark--1;
+    margin-bottom: 4px;
+  }
+
+  &__price-current {
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: bold;
+    color: $color__dark;
+  }
+
+  &__price {
+    display: flex;
+  }
+
+  &__price-new {
+    font-weight: bold;
+    font-size: 20px;
+    color: $color__primary--1;
+    line-height: 1.2;
+  }
+
+  &__price-old {
+    font-size: 14px;
+    line-height: 1.45;
+    color: $color__dark--3;
+    margin-left: 8px;
+    text-decoration: line-through;
+  }
+
+  &:hover {
+    #{$root}__image-dop {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #{$root}__image-inner:before {
+      opacity: 1;
+    }
+  }
+
+  @include media('<xl') {
+    &__bottom-r {
+      .button {
+        @include size(48px);
+        min-width: auto;
+        padding: 0;
+        &__text {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @include media('<md') {
+    &__main {
+      padding: 8px;
+    }
+
+    &__price-new,
+    &__price-current {
+      font-size: 18px;
+    }
+  }
+}

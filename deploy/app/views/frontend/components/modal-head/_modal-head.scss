@@ -1,0 +1,31 @@
+.modal-head {
+  padding: 24px 32px;
+  @extend %flex-center-between;
+  border-bottom: 2px solid $color__light--3;
+  background-color: $color__light;
+
+  &__title {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.2;
+    color: $color__dark--3;
+    margin-right: 10px;
+  }
+
+  &__right {
+    margin-left: auto;
+    @extend %flex-middle;
+  }
+
+  &__count {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.2;
+    color: $color__dark--2;
+    margin-right: 10px;
+  }
+
+  @include media('<md') {
+    padding: 14px 16px;
+  }
+}

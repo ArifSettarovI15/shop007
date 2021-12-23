@@ -1,0 +1,8 @@
+.card-preview {
+  @include size(410px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color__light;
+  margin-right: 100px;
+}

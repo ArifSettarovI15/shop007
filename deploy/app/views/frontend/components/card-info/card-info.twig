@@ -1,0 +1,15 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="item-info">
+    <h1 class="item-info_title">{{ info.item_title }}</h1>
+    <div class="item-info_decor"></div>
+    <div class="item-info_line">
+        <div class="item-info_price">{{ info.item_price }} ₽</div>
+        <div class="item-info_article">Арт. {{ info.item_article }}</div>
+    </div>
+    <div class="item-info_desc">{{ info.item_short_text }}</div>
+
+    <div class="item-info_cart">
+        <input type="number" class="js_items_count" value="1" min="1" max="10">
+        <div class="add_to_cart js_add_to_cart" data-id="{{ info.item_id }}">В корзину</div>
+    </div>
+</div>

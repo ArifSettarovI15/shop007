@@ -1,0 +1,29 @@
+.jstree-node .jstree-anchor {
+    font-weight: bold;
+}
+.jstree-leaf .jstree-anchor {
+    font-weight: normal;
+    color: #047 !important;
+}
+.jstree-leaf .jstree-anchor i {
+    opacity: 0;
+}
+.jstree-leaf .jstree-anchor:hover {
+    background: none;
+    text-decoration: underline;
+    color: #518a9c !important;
+    border: 0;
+    box-shadow: none;
+}
+#jstree_div {
+    margin-top: 20px;
+    display: none;
+}
+
+#jstree_div.jstree  {
+    display: block;
+}
+
+[data-status="0"].jstree-node {
+   opacity: 0.5;
+}

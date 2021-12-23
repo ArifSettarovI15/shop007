@@ -141,3 +141,27 @@
 
   }
 }
+
+
+@include media('<=768px'){
+
+  .footer{
+
+    &_item{
+      width: 33%;
+    }
+  }
+}
+@include media('<=480px'){
+
+  .footer{
+    padding-top: 0;
+    &_items{
+      flex-wrap: wrap;
+    }
+    &_item{
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<div class="cabinet-block__item">
+    <div class="cabinet-block__subtitle">
+        Способ доставки
+    </div>
+    {% include 'frontend/components/delivery/delivery_type_1.twig' %}
+</div>
+<div class="cabinet-block__item">
+    <div class="delivery-data delivery-data_own "
+         data-status="{% if  (user_profile.profile_delivery=='own') %}active{% endif %}">
+        <span class="name  required_label">
+            Магазин
+        </span>
+        <div class="cabinet-block__value input">
+            {% include 'frontend/components/shops_delivery/shops_delivery.twig' %}
+        </div>
+    </div>
+    <div class="delivery-data delivery-data_city_delivery "
+         data-status="{% if  (user_profile.profile_delivery=='city_delivery') %}active{% endif %}">
+        <span class="name  required_label">
+            Город
+        </span>
+        <div class="cabinet-block__value input">
+            {% include 'frontend/components/delivery/delivery_city2.twig' %}
+        </div>
+    </div>
+
+    {% include 'frontend/components/delivery/delivery_city.twig' %}
+
+    <div class="delivery-data   delivery-data_company delivery-data_city_delivery"
+         data-status="{% if user_profile.profile_delivery=='company' or user_profile.profile_delivery=='city_delivery' %}active{% endif %}">
+        {% include 'frontend/components/delivery/delivery_contacts.twig' %}
+    </div>
+    {% include 'frontend/components/delivery/delivery_text.twig' %}
+</div>

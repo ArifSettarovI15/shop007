@@ -1,0 +1,7 @@
+<div class="tabs-content" data-tab="{{ tab_id }}">
+    {% for tab_content in tabs_content %}
+        <div class="tabs-content__item{% if tab_content.active %} tabs-content__item_active{% endif %}" data-id="{{ tab_content.id }}">
+            {{ tab_content.content }}
+        </div>
+    {% endfor %}
+</div>

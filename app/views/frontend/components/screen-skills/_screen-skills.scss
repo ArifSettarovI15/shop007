@@ -27,3 +27,13 @@
 
   }
 }
+
+@include media('<=768px'){
+
+  .skill{
+
+    &__text{
+      font-size: 18px;
+    }
+  }
+}

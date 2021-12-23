@@ -1,0 +1,48 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+
+
+            <div class="line">
+                <div class="label required">
+                    Название:
+                </div>
+                <div class="value">
+                    <input name="promo_title" class="element required" type="text"  maxlength="250"  value="{{ info.promo_title }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Скидка (%):
+                </div>
+                <div class="value">
+                    <input name="promo_percent" class="element" type="text"  value="{{ info.promo_percent }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    или сумма скидки:
+                </div>
+                <div class="value">
+                    <input name="promo_value" class="element" type="text" value="{{ info.promo_value }}">
+                </div>
+            </div>
+
+            {% if edit==1 %}
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="promo_id" value="{{ info.promo_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+            <div class="submit btn btn-primary">
+                {% if edit==1 %}
+                    Сохранить
+                {% else %}
+                    Добавить
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

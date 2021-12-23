@@ -1,0 +1,121 @@
+.cb-block {
+  &__content {
+    @extend %flex-middle;
+    padding: 0 64px;
+    @extend %background__cover;
+    background-image: url('/assets/images/static/bg-1.jpg');
+  }
+
+  &__content-inner {
+    width: 100%;
+  }
+
+  &__img {
+    width: 560px;
+    flex: 0 0 560px;
+    height: 296px;
+    margin-left: auto;
+
+    img {
+      @include size(100%);
+    }
+  }
+
+  &__title {
+    font-family: $font-family__second;
+    font-size: 52px;
+    line-height: 1.1;
+    letter-spacing: .04em;
+    color: $color__light;
+    margin-bottom: 14px;
+    text-shadow: 2px 2px 0 rgba($color__dark, 0.6);
+  }
+
+  &__text {
+    font-size: 18px;
+    line-height: 1.4;
+    color: $color__light;
+  }
+  
+  &__button {
+    margin-top: -28px;
+    text-align: center;
+
+    .button__text {
+      font-size: 18px;
+    }
+  }
+
+  @include media('<xl') {
+    &__content {
+      padding: 0 32px;
+    }
+
+    &__content-inner {
+      z-index: 1;
+    }
+
+    &__title {
+      font-size: 42px;
+    }
+  }
+
+  @include media('<lg') {
+    &__img {
+      width: 336px;
+      flex: 0 0 336px;
+      height: 260px;
+    }
+  }
+
+  @include media('<md') {
+
+    .container {
+      padding: 0;
+    }
+
+    &__content {
+      padding: 0 16px;
+    }
+
+    &__content-inner {
+      padding: 50px 0;
+    }
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+
+    &__button {
+      padding: 0 16px;
+      .button {
+        width: 100%;
+        height: 48px;
+        min-height: 48px;
+
+        &__text {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &__img {
+      position: absolute;
+      bottom: 0;
+      right: 16px;
+      width: 129px;
+      flex:0 0 129px;
+      height: 172px;
+    }
+  }
+
+  @include media('<sm') {
+    &__text {
+      max-width: 129px;
+    }
+  }
+}

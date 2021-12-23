@@ -1,0 +1,191 @@
+.view-block {
+  $root: &;
+  &__top {
+    max-width: 50%;
+    margin-left: auto;
+    margin-bottom: 40px;
+
+    &_full {
+      max-width: 100%;
+      margin-bottom: 40px;
+
+      #{$root}__top-container {
+        max-width: 100%;
+        padding-left: 0;
+      }
+    }
+  }
+
+  .c-tags-block {
+    margin-top: 40px;
+  }
+
+  &__top-container {
+    padding-left: 16px;
+    @extend %flex-center-between;
+    max-width: 368px;
+  }
+
+  @include media('<xl') {
+    .c-tags-block {
+      margin-top: 32px;
+    }
+
+
+    &__top {
+      margin-bottom: 32px;
+    }
+
+    &__top-container {
+      padding-left: 8px;
+    }
+
+  }
+
+  @include media('<md') {
+    .c-tags-block {
+      margin-top: 24px;
+    }
+
+    &__top {
+      max-width: 100%;
+      margin-bottom: 24px;
+    }
+
+    &__top-container {
+      padding: 0;
+      max-width: 100%;
+    }
+  }
+}
+
+.a-head {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -16px;
+
+  &__block {
+    width: 50%;
+    padding: 16px;
+  }
+
+  &__img {
+    margin-top: -64px;
+    padding-bottom: 132.9806678383128%;
+
+    img {
+      @extend %absolute-full;
+      @include size(100%);
+    }
+  }
+
+  &__content {
+    max-width: 368px;
+  }
+
+  @include media('<xl') {
+    margin: -12px -8px;
+    &__block {
+      padding: 12px 8px;
+    }
+
+    &__img {
+      margin-top: -50px;
+    }
+  }
+
+  @include media('<md') {
+    &__img {
+      margin-top: 0;
+    }
+
+    &__content {
+      max-width: 100%;
+    }
+
+    &__block {
+      width: 100%;
+    }
+  }
+}
+
+.bq {
+  display: flex;
+  padding: 32px;
+  border: 2px solid $color__primary--1;
+  border-radius: 24px 0 24px 24px;
+
+  &__icon {
+    @include size(46px);
+    flex: 0 0 46px;
+    margin-right: 14px;
+    background-image: url('/assets/images/svg/quote-icon.svg');
+    @extend %background__cover;
+  }
+
+  &__text {
+    font-family: $font-family__second;
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: .04em;
+  }
+
+  @include media('<md') {
+    padding: 14px;
+    &__text {
+      font-size: 21px;
+    }
+
+    &__icon {
+      @include size(32px);
+      flex: 0 0 32px;
+    }
+  }
+}
+
+.a-block {
+  @extend %med-container;
+}
+
+.a-images {
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -16px;
+  }
+
+  &__element {
+    width: (100%/3);
+    padding: 16px;
+  }
+
+  &__image {
+    padding-bottom: 100%;
+
+    img {
+      @extend %absolute-full;
+      @include size(100%);
+    }
+  }
+
+  @include media('<xl') {
+    &__wrapper {
+      margin: -8px;
+    }
+    &__element {
+      padding: 8px;
+    }
+  }
+
+  @include media('<md') {
+    &__element {
+      width: (100%/2);
+    }
+  }
+
+  @include media('<sm') {
+    &__element {
+      width: 100%;
+    }
+  }
+}

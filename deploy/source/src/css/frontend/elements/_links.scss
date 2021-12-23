@@ -1,0 +1,160 @@
+.link {
+  // Core style
+  $root: &;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__text {
+    font-family: $font-family__main;
+    color: $color__dark--3;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.2;
+    @include transitions(color);
+
+    & + #{$root}__icon {
+      margin-left: 6px;
+    }
+  }
+
+  &__icon {
+    display: inline-block;
+    @include size(24px);
+    flex: 0 0 24px;
+    svg * {
+      fill: $color__dark--1;
+      @include transitions(fill);
+    }
+
+    & + #{$root}__text {
+      margin-left: 6px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    #{$root}__text {
+      color: $color__primary--1;
+    }
+  }
+
+  &:active {
+    #{$root}__text {
+      color: $color__primary--2;
+    }
+  }
+
+  // Mod style
+  &_primary {
+    #{$root}__text {
+      padding-bottom: 6px;
+    }
+
+    #{$root}__line {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      @include size(100%, 6px);
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        @include size(2px, 6px);
+        left: 0;
+        transform: translateY(-50%);
+        background-color: $color__primary--2;
+        @include transitions(width, height);
+      }
+    }
+
+    &:hover {
+      #{$root}__text {
+        color: $color__dark--3;
+      }
+
+      #{$root}__line {
+        &:before {
+          @include size(100%, 2px);
+        }
+      }
+    }
+
+    &:active {
+      #{$root}__text {
+        color: $color__primary--2;
+      }
+
+      #{$root}__line {
+        &:before {
+          background-color: $color__light--3;
+        }
+      }
+    }
+  }
+
+  &_second {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -6px;
+      transform: translateY(-50%);
+      @include size(2px, 6px);
+      background-color: $color__primary--2;
+      @include transitions(width, background-color);
+    }
+
+    &:hover {
+      &:before {
+        width: calc(100% + 12px);
+      }
+
+      #{$root}__text {
+        color: $color__dark--3;
+        z-index: 0;
+      }
+    }
+
+    &:active {
+      #{$root}__text {
+        color: $color__primary--2;
+      }
+
+      &:before {
+        background-color: $color__dark;
+      }
+    }
+  }
+
+  &_iconic {
+    &:hover,
+    &:focus {
+      #{$root}__text {
+        color: $color__dark--3;
+      }
+
+      #{$root}__icon {
+        svg * {
+          fill: $color__primary--1;
+        }
+      }
+    }
+
+    &:active {
+      #{$root}__text {
+        color: $color__primary--2;
+      }
+
+      #{$root}__icon {
+        svg * {
+          fill: $color__primary--2;
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,60 @@
+{% import 'frontend/elements/input/input_macro.twig' as Input %}
+{% import 'frontend/elements/box-input/box-input.twig' as Box %}
+<div id="modal_send_feed" class="modal modal_feed mfp-hide">
+    <div class="modal__wrapper">
+        {% include 'frontend/components/modal-head/modal-head.twig' with {
+            title: 'Новый отзыв'
+        } %}
+        <div class="modal__body form" data-url="{{ global.base_url }}/reviews/" data-callback="modalSendDone">
+            <input type="hidden" class="element" name="action" value="process_review">
+            <input type="hidden" class="element" name="item_id" value="{{ info.item_id }}">
+            <div class="modal__block">
+                <div class="modal__input">
+                    <div class="modal__block-title">Оцените нашу работу</div>
+                    {% include 'frontend/components/stars/stars.twig' with {
+                        type: 'rating'
+                    } %}
+                </div>
+            </div>
+            <div class="modal__block">
+                <div class="modal__input">
+                    {{ Input.field('name', {
+                        required: 1,
+                        label: 'Ваше имя'
+                    }) }}
+                </div>
+                <div class="modal__input">
+                    {{ Input.field('email', {
+                        label: 'Ваш email'
+                    }) }}
+                </div>
+                <div class="modal__input">
+                    <label class="field">
+                        <textarea name="feed_text" class="field__input textarea element required js-auto-size"></textarea>
+                        <span class="field__label field__label_required">Комментарий</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal__block">
+                {% set image_data = image_data_review %}
+                {% include 'frontend/components/add-file/add-file.twig' %}
+            </div>
+            <div class="modal__block">
+                <div class="modal__input">
+                    {{ Box.cbs('rules', {
+                        label: 'Я принимаю <a href="'~global.base_url~'/privacy.html">условия передачи информации</a>'
+                    }) }}
+                </div>
+            </div>
+            <div class="modal__block">
+                <div class="modal__input">
+                    <button class="button button_primary button_lg submit">
+                    <span class="button__container">
+                        <span class="button__text">Отправить отзыв</span>
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="container container_sm mb-2">
+        <div class="catalog">
+            {% set cats_tree = variables.cats_tree %}
+            {% include 'frontend/components/cats/cats.twig' with {cats_tree: cats_tree} %}
+            {% include 'frontend/components/items_list/items_list.twig' with{'catalog':1} %}
+        </div>
+    </div>
+
+
+
+{% endblock %}

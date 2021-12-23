@@ -1,0 +1,68 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+{#  <div class="actions">#}
+{#    <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/orders/?action=get_emails">Скачать Emails</a>#}
+{#  </div>#}
+  <div class="table_data">
+    <div class="table_data_navigation">
+        {% include 'parts/paging.html.twig' %}
+    </div>
+    <table class="table_bordered table_striped">
+      <thead>
+      <tr>
+        <th style="width: 70px">ID</th>
+        <th style="width: 100px">Статус</th>
+        <th style="width: 100px">Оплата</th>
+        <th style="width: 150px">Дата</th>
+        <th style="width: 200px">Заказчик</th>
+          {% if global.user_info.user_role_id==2 %}
+        <th style="width: 200px">Менеджер</th>
+        {% endif %}
+        <th style="width: 200px">Город</th>
+        <th>Сумма</th>
+        <th class="action_button"></th>
+      </tr>
+      <tr>
+        <th><input data-name="order_id" data-type="filter_value" min="0" type="text"></th>
+        <th>
+          <select data-name="order_status" data-type="filter_value">
+            <option value="-1">Все</option>
+              {% for status_id,status in variables.statuses%}
+                <option value="{{ status_id }}">{{ status.title }}</option>
+              {% endfor %}
+          </select>
+        </th>
+        <th>
+          <select data-name="order_payment_status" data-type="filter_value">
+            <option value="-1">Все</option>
+            <option value="0">Нет</option>
+            <option value="1">Да</option>
+          </select>
+        </th>
+        <th>
+          <input data-name="date_from" data-type="filter_value" class="date_from" type="text">
+          <input data-name="date_to" data-type="filter_value" class="date_to" type="text">
+        </th>
+        <th><input data-name="order_name" data-type="filter_value" type="text"></th>
+          {% if global.user_info.user_role_id==2 %}
+        <th>
+          <select data-name="user_manager_id" data-type="filter_value">
+            <option value="-1">Все</option>
+            <option value="0">Без менеджера</option>
+              {% for manager in variables.managers %}
+                <option value="{{ manager.user_id }}">{{ manager.profile_lastname }} {{ manager.profile_name }}</option>
+              {% endfor %}
+          </select>
+        </th>
+        {% endif %}
+        <th></th>
+        <th class="action_button"></th>
+      </tr>
+      </thead>
+      <tbody class="table_content">
+      {% include 'shop/manage/orders_table.html.twig' %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

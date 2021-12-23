@@ -16,10 +16,10 @@
             <div class="footer_item">
                 <div class="footer_item_title">Навигация</div>
                 <div class="footer_item_link"><a href="/">Магазин</a></div>
-                <div class="footer_item_link"><a href="/">Оплата</a></div>
-                <div class="footer_item_link"><a href="/">Доставка</a></div>
-                <div class="footer_item_link"><a href="/">Возврат</a></div>
-                <div class="footer_item_link"><a href="/">Контакты</a></div>
+                <div class="footer_item_link"><a href="/payment.html">Оплата</a></div>
+                <div class="footer_item_link"><a href="/delivery.html">Доставка</a></div>
+                <div class="footer_item_link"><a href="/return.html">Возврат</a></div>
+                <div class="footer_item_link"><a href="/contacts.html">Контакты</a></div>
             </div>
             <div class="footer_item">
                 <div class="footer_item_title">Контакты</div>
@@ -38,7 +38,9 @@
         </div>
         <div class="footer_decor"></div>
         <div class="footer_copy">
-            {{ global.fields.info.info_copy }}
+            <div class="footer_item_link" style="display: flex; justify-content: center; align-items: center">
+                <a href="/policy.html">Политика конфеденциальности</a></div>
+            <div class="copy">   {{ global.fields.info.info_copy }}</div>
         </div>
     </div>
 </div>

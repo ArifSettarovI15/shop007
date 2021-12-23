@@ -1,0 +1,8 @@
+{% extends "global.html.twig" %}
+{% block header_title %}{{ page_name }}{% endblock %}
+{% block content %}
+    <div class="container container_white">
+{#        {% include 'global/message.html.twig' %}#}
+        {% include 'frontend/components/login-form/login-form.twig' %}
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% import 'frontend/elements/input/input_macro.twig' as Input %}
+{% import 'frontend/elements/box-input/box-input.twig' as Box %}
+{% set modal = 1 %}
+<div id="modal_filter" class="modal mfp-hide table-data">
+    {% include 'frontend/components/modal-head/modal-head.twig' with {
+        title: 'Фильтры'
+    } %}
+    <div class="modal__body">
+        <div class="modal__block">
+            <div class="table-list">
+                <div class="table-list__list" data-insert="1" data-list="filters" data-table="bouquets">
+                    {% include 'frontend/components/catalog-filters/catalog-filters-data.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal__bottom">
+        <div class="modal__input">
+            <button class="button button_second button_lg js-filter-reset">
+                <span class="button__container">
+                    <span class="button__text">Сбросить</span>
+                </span>
+            </button>
+        </div>
+        <div class="modal__input">
+            <button class="button button_primary button_lg js-filter-apply">
+                <span class="button__container">
+                    <span class="button__text">Применить</span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

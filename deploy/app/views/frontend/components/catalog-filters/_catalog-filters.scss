@@ -1,0 +1,87 @@
+.filters {
+  &__dop {
+    display: none;
+    .button {
+      width: 100%;
+    }
+  }
+
+  .table-list {
+    &__list {
+      margin: 0 -8px;
+    }
+
+    &__item {
+      padding: 0 8px;
+    }
+  }
+
+  @include media('<lg') {
+    .table-list {
+      &__item {
+        &:nth-child(-n + 3) {
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+
+  @include media('<md') {
+    &__main {
+      display: none;
+    }
+    
+    &__dop {
+      display: block;
+    }
+  }
+}
+
+.g-change {
+  $root: &;
+  display: flex;
+  align-items: flex-end;
+  width: 96px;
+  height: 100%;
+  margin-left: auto;
+
+  &__btn {
+    @include size(48px);
+    flex: 0 0 48px;
+    @extend %flex-center;
+    cursor: pointer;
+    border: 2px solid $color__dark--1;
+
+    &_1 {
+      border-right: 0;
+      border-bottom-left-radius: 40px;
+      border-top-left-radius: 40px;
+    }
+
+    &_2 {
+      border-left: 0;
+      border-bottom-right-radius: 40px;
+      border-top-right-radius: 40px;
+    }
+
+    &.active {
+      border-color: $color__dark;
+      background-color: $color__dark;
+
+      #{$root}__icon {
+        svg * {
+          fill: $color__light;
+        }
+      }
+    }
+  }
+
+  &__icon {
+    @include size(24px);
+
+    svg * {
+      fill: $color__dark--3;
+      @include transitions(fill);
+    }
+  }
+}

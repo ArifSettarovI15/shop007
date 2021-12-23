@@ -1,0 +1,21 @@
+.filters_values_list, .user_vendor_values_list {
+    li {
+        line-height: 22px;
+        font-size: 16px;
+        i{
+            cursor: pointer;
+            color:red;
+            margin-left: 10px;
+        }
+    }
+}
+
+
+.user-vendor-discount {
+    margin-bottom: 10px;
+    i{
+        cursor: pointer;
+        color:red;
+        margin-left: 10px;
+    }
+}

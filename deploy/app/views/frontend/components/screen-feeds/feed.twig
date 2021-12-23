@@ -1,0 +1,39 @@
+{% if variables.product %}
+    {% set product = 1 %}
+{% endif %}
+{% import 'frontend/elements/link/link_macro.twig' as Link %}
+<div class="fc-item {% if product %}fc-item_2{% endif %}">
+    <div class="fc-item__wrapper">
+        <div class="fc-item__top">
+            <div class="fc-item__top-l">
+                {% include 'frontend/components/stars/stars.twig' with {
+                    rating: review.review_rating
+                } %}
+            </div>
+            <div class="fc-item__top-r">
+                <div class="fc-item__date">{{ review.review_time|date('d.m.Y') }}</div>
+            </div>
+        </div>
+        <div class="fc-item__title">{{review.review_uname}}</div>
+        <div class="fc-item__text">{{review.review_comment}}</div>
+        {% if review.review_icon or review.review_comment|length>200%}
+            <div class="fc-item__msg">
+                {{ Link.link('#', 'Читать целиком', {
+                    mod: 'iconic',
+                    icon_left: 'eye-icon',
+                    trigger: 'js-full-feed',
+                    data: [
+                        {
+                            name: 'id',
+                            val: review.review_id
+                        }
+                    ]
+                }) }}
+
+            </div>
+        {% endif %}
+        {% if review.review_admin_comment %}
+            {% include 'frontend/components/comment/comment.twig' %}
+        {% endif %}
+    </div>
+</div>

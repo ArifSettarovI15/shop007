@@ -1,0 +1,5 @@
+.image {
+  &_cover {
+    @include object-fit(cover);
+  }
+}

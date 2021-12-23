@@ -1,0 +1,12 @@
+.ps-scrollbar-y-rail {
+  opacity: 1 !important;
+  width: 8px !important;
+  background-color: $color__light--2 !important;
+
+  .ps-scrollbar-y {
+    width: 4px !important;
+    right: 2px !important;
+    background-color: $color__dark--1 !important;
+    cursor: pointer;
+  }
+}

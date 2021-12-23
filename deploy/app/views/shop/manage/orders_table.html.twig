@@ -1,0 +1,28 @@
+{% for item in list %}
+  <tr>
+    <td class="data_id">{{ item.order_id }}</td>
+    <td>
+      <span class="badge badge-success order_status" style="background-color:{{ variables.statuses[item.order_status]['color'] }};">{{variables.statuses[item.order_status]['title']}}</span><br/>
+    </td>
+    <td>
+      <div data-type="payment" class="badge_status   {% if item.order_payment_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.order_id }}">
+        <span class="badge badge-danger">Ждет оплаты</span>
+        <span class="badge badge-success">Оплачено</span>
+      </div>
+    </td>
+    <td class="admin_table_small">{{ item.order_time|date("d.m.Y, H:i") }}</td>
+    <td>{{ item.order_user_lastname }} {{ item.order_user_name }}</td>
+      {% if global.user_info.user_role_id==2 %}
+    <td>  {{ item.manager_lastname }} {{ item.manager_name }} </td>
+    {% endif %}
+    <td>
+        {{ item.order_delivery_city }}
+    </td>
+    <td>
+        {{ item.order_items_cost_f }} руб.
+    </td>
+    <td>
+      <a class="btn btn-success btn-xs" href="{{ global.base_url }}/manager/shop/orders/view/{{ item.order_id  }}/"><i class="fa fa-eye" aria-hidden="true"></i></a>
+    </td>
+  </tr>
+{% endfor %}

@@ -1,0 +1,33 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+    {#<a href="{{ global.base_url }}/manager/shop/suppliers/add/" class="btn btn-primary">Добавить</a>#}
+
+    <div class="table_data">
+
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th style="width: 100px">ID</th>
+                <th>Название</th>
+                <th>Наценка %</th>
+                <th>Feed</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+                {% for item in list %}
+                <tr>
+                    <td class="data_id">{{ item.postav_id }}</td>
+                    <td><input type="text" name="postav_name" value="{{item.postav_name }}"></td>
+                    <td><input type="text" name="postav_up" value="{{item.postav_up }}"></td>
+                    <td><input type="text" name="postav_feed" value="{{item.postav_feed }}"></td>
+                    <td>
+                        <div type="button" class="postav_value_up btn btn-primary" data-id="{{ item.postav_id }}">Сохранить</div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

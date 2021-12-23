@@ -1,0 +1,16 @@
+.tabs {
+    position: relative;
+    &__item {
+        cursor: pointer;
+        z-index: 2;
+    }
+}
+
+.tabs-content {
+    &__item {
+        display: none;
+        &_active{
+            display: block;
+        }
+    }
+}

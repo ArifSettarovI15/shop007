@@ -1,0 +1,42 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+
+
+            <div class="line">
+                <div class="label required">
+                    Email:
+                </div>
+                <div class="value">
+                    <input name="subscribe_email" class="element required" type="text"  maxlength="250"  value="{{ info.subscribe_email }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Список:
+                </div>
+                <div class="value">
+                    {% for item in list %}
+                        <input {% if item.subscribe_list_id in list2 %}checked{% endif %} class="element" type="checkbox" name="list[{{ item.subscribe_list_id }}]" value="{{ item.subscribe_list_id }}"> {{ item.subscribe_list_name }}<br/>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if edit==1 %}
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="vendor_id" value="{{ info.subscribe_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+            <div class="submit btn btn-primary">
+                {% if edit==1 %}
+                    Сохранить
+                {% else %}
+                    Добавить
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

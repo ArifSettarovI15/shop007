@@ -1,0 +1,37 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/delivery/add/">Добавить</a>
+    </div>
+
+    <div class="table_data">
+
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th style="width: 100px">ID</th>
+                <th>Группа</th>
+                <th>Отправка</th>
+                <th>Прием</th>
+                <th class="action_button_3"></th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+            {% for item in list %}
+                <tr>
+                    <td class="data_id">{{ item.delivery_id }}</td>
+                    <td>{{ groups[item.delivery_city_id] }}</td>
+                    <td>{{ days[item.delivery_go_day] }}</td>
+                    <td>до {{ days[item.delivery_priem_day] }} {{ time[item.delivery_priem_time] }}</td>
+                    <td>
+                        <a target="_blank" href="{{ global.base_url }}/manager/shop/delivery/edit/{{ item.delivery_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <div data-value="{{ item.delivery_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

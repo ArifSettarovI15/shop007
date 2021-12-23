@@ -1,0 +1,9 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="f-comment">
+    <div class="f-comment__icon">
+        {{ Svg.icon('ok-icon-2') }}
+    </div>
+    <div class="f-comment__text">
+        {{review.review_admin_comment}}
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{% if (item_info.item_driver or item_info.item_instruction or item_info.item_site) %}
+    <li class="characteristic__row5_title">
+        Ссылки
+    </li>
+    {% if item_info.item_driver %}
+        <li class="characteristic__row2_unit">
+            <span class="name">Драйверы</span>
+            <span class="value"><a target="_blank" href="{{ item_info.item_driver }}" data-class-unit="item-title_type2 link_type2">Скачать</a></span>
+        </li>
+    {% endif %}
+    {% if item_info.item_instruction %}
+        <li class="characteristic__row2_unit">
+            <span class="name">Инструкция</span>
+            <span class="value"><a target="_blank" href="{{ item_info.item_instruction }}" data-class-unit="item-title_type2 link_type2">Читать</a></span>
+        </li>
+    {% endif %}
+    {% if item_info.item_site %}
+        <li class="characteristic__row2_unit">
+            <span class="name">Сайт производителя</span>
+            <span class="value"><a target="_blank" href="{{ item_info.item_site }}" data-class-unit="item-title_type2 link_type2">Перейти</a></span>
+        </li>
+    {% endif %}
+{% endif %}

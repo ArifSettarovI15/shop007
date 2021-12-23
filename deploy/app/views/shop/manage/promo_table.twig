@@ -1,0 +1,27 @@
+{% for item in list %}
+    <tr>
+        <td>
+            {{ item.promo_id }}
+        </td>
+        <td>
+            <div class="object_status  {% if item.promo_status!=1%}no{% else %}yes{% endif %}" data-value="{{ item.promo_id }}">
+                <span class="badge badge-danger">нет</span>
+                <span class="badge badge-success">да</span>
+            </div>
+        </td>
+        <td>
+            {{ item.promo_title }}
+        </td>
+        <td>
+            {{ item.promo_percent }}%
+        </td>
+        <td>
+            {{ item.promo_value }} руб
+        </td>
+        <td>{{ item.promo_count }}</td>
+        <td class="action_button_data">
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/promo/edit/{{ item.promo_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+            <div data-value="{{ item.promo_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

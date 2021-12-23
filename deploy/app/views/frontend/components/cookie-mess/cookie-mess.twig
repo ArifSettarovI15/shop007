@@ -1,0 +1,19 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="cookie-notification">
+    <div class="cookie-notification__container">
+        <div class="cookie-notification__wrapper">
+            <div class="cookie-notification__image">
+                <div class="cookie-notification__image-container">
+                    {{ Svg.icon('main-logo-icon-m', 1) }}
+                </div>
+            </div>
+            <div class="cookie-notification__text">Мы используем файлы cookie, разработанные нашими специалистами и третьими лицами для анализа событий на нашем веб‑сайте, что позволяет нам улучшать взаимодействие с пользователями и обслуживание. Продолжая просмотр страниц нашего сайта, вы принимаете условия его использования. Более подробные сведения смотрите в нашей Политике конфиденциальности.</div>
+            <div class="cookie-notification__slide js-cookie-slide">Развернуть</div>
+            <div class="cookie-notification__button">
+                <button class="button button_sm button_second js-cookie-close">
+                    <span class="button__text">Хорошо</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

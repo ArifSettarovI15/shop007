@@ -623,14 +623,16 @@ class ShopCats extends DbData
 </svg>';
                     }
                     $class = '';
-                    if ($selected and $selected == $cat_data['cat_id']) {
+                    if (is_array($selected) and in_array($cat_data['cat_id'], $selected)) {
+                        $class='active';
+                    }elseif($selected and $selected == $cat_data['cat_id']){
                         $class='active';
                     }
                     $list .= '<li class="'.$class.'" id="node_' . $cat_data['cat_id'] . '" data-status="' . $cat_data['cat_status'] . '" >
 		                        <a href="' . $cat_data['cat_full_url'].'"><span>' . $cat_data['cat_title'] . $keys . '</span>' . $icon . '</a>
 		               ';
                     if ($CatsData['levels'][$cat_data['cat_id']]) {
-                        $list .= $this->MakeUiTree2($CatsData, $cat_data['cat_id'], $ex_id);
+                        $list .= $this->MakeUiTree2($CatsData, $cat_data['cat_id'], $selected, $ex_id);
 
                     }
                     $list .= '</li>';

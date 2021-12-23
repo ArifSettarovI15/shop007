@@ -1,0 +1,9 @@
+<div class="dp-block dp-block_d anim-delivery-main">
+    <div class="dp-block__wrapper">
+        <ul class="dp-block__list">
+            {% for item in payment.payment_delivery_info %}
+                <li class="dp-block__item">{{item.payment_delivery_info_item|raw}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

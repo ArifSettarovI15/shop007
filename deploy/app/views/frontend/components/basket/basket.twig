@@ -1,0 +1,39 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+<div class="backet_wrapper">
+    <div class="container container_sm">
+        <div class="basket_table">
+            <div class="basket_table_head">
+                <div class="basket_table_head_cell basket_table_head_cell_image"></div>
+                <div class="basket_table_head_cell basket_table_head_cell_title">Товар</div>
+                <div class="basket_table_head_cell basket_table_head_cell_price">Цена</div>
+                <div class="basket_table_head_cell basket_table_head_cell_count">Количество</div>
+                <div class="basket_table_head_cell basket_table_head_cell_total">Итог</div>
+                <div class="basket_table_head_cell"></div>
+            </div>
+            {% for item in items %}
+                <div class="basket_table_item">
+                    <div class="basket_table_item_cell"></div>
+                    <div class="basket_table_item_cell basket_table_item_cell_image"><img src="{{ item.item_icon_url }}" alt=""></div>
+                    <div class="basket_table_item_cell basket_table_item_cell_title"><h6>{{ item.item_title }}</h6></div>
+                    <div class="basket_table_item_cell basket_table_item_cell_price">{{item.item_price}} ₽</div>
+                    <div class="basket_table_item_cell basket_table_item_cell_count">
+                        <input type="number" min="1" max="10" class="basket_count js_update_basket_item" data-id="{{ item.item_id }}" value="{{item.basket_count|number_format}}">
+
+                    </div>
+                    <div class="basket_table_item_cell basket_table_item_cell_total">{{item.item_price * item.basket_count|number_format}} ₽</div>
+                    <div class="basket_table_item_cell basket_table_item_cell_delete">
+                        <div class="delete_item js_delete_basket_item" data-id="{{ item.item_id }}">{{ Svg.icon('delete', 1, 15,15)}}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="basket_confirm">
+            <div class="basket_confirm_price">
+                Итого: {{ global.basket_sum }} ₽
+            </div>
+            <a href="{{ global.base_url }}/process_order/" class="basket_confirm_button">
+                Перейти к оплате
+            </a>
+        </div>
+    </div>
+</div>

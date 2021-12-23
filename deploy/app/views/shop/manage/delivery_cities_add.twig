@@ -1,0 +1,154 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+
+            <div class="line">
+                <div class="label required">
+                    Название:
+                </div>
+                <div class="value">
+                    <input name="city_title" class="element required translit_from" type="text"  maxlength="250"  value="{{ info.city_title }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    группа:
+                </div>
+                <div class="value">
+                    <select class="element" name="city_group_id" >
+                        <option value="0">Выберите</option>
+                        {% for id,title in groups %}
+                            <option value="{{ id }}" {% if id==info.city_group_id %}selected{% endif %}>{{ title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Название блока товаров:
+                </div>
+                <div class="value">
+                    <input name="meta_title2" class="element" type="text"  maxlength="250"  value="{{ info.meta_title2 }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label required">
+                    URL:
+                </div>
+                <div class="value">
+                    <input name="city_url" class="element required translit_to" type="text"  maxlength="250"  value="{{ info.city_last_url_part }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Иконка:
+                </div>
+                <div class="value">
+                    {% set image_data=image_data1 %}
+                    {% include 'files/upload_image.html.twig' %}
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Цена доставки:
+                </div>
+                <div class="value">
+                    <input name="city_price" class="element" type="text"  maxlength="250"  value="{{ info.city_price }}">
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Категория:
+                </div>
+                <div class="value cats_tree_select">
+                    {{ cats_select|raw }}
+                </div>
+            </div>
+            <div class="line">
+                <div class="label">
+                    Город:
+                </div>
+                <div class="value">
+                    <select class="element" name="city_related" >
+                        <option value="0">Выберите</option>
+                        {% for city in cities %}
+                            <option value="{{ city.city_id }}" {% if city.city_id==info.city_related %}selected{% endif %}>{{ city.city_title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="line">
+                <div class="label">
+                    Описание:
+                </div>
+                <div class="value">
+                    <textarea class="rich element" name="text">{{ info.city_text }}</textarea>
+                </div>
+            </div>
+            {% if edit==1 %}
+            <div class="line">
+                <div class="label">
+                    Товары:
+                </div>
+                <div class="value search-block-items" data-block="items">
+                    Выбранные:
+                    <div class="item-search__result2 sortable_content_items">
+                        {% include 'frontend/components/search-block/search_list_simple.twig' with {
+                            'list':city_items
+                        } %}
+                    </div>
+                    Поиск: <input type="text" class="item-search element">
+                    <div class="item-search__result">
+
+                    </div>
+
+                </div>
+            </div>
+            {% endif %}
+            <div class="line">
+                <div class="label">
+                    Meta title:
+                </div>
+                <div class="value">
+                    <input name="meta_title" class="element" type="text"  maxlength="250"  value="{{ info.city_head_title }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Meta keywords:
+                </div>
+                <div class="value">
+                    <input name="meta_keywords" class="element" type="text"  maxlength="250"  value="{{ info.city_head_keywords }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Meta desc:
+                </div>
+                <div class="value">
+                    <input name="meta_desc" class="element" type="text"  maxlength="250"  value="{{ info.city_head_desc }}">
+                </div>
+            </div>
+            {% if edit==1 %}
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="city_id" value="{{ info.city_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+        </div>
+        <div class="submit btn btn-primary">
+            {% if edit==1 %}
+                Сохранить
+            {% else %}
+                Добавить
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

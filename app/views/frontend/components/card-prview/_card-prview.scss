@@ -5,4 +5,18 @@
   justify-content: center;
   background-color: $color__light;
   margin-right: 100px;
+
+  @include media('<=1024px'){
+    @include size(350px);
+    margin-right: 50px;
+  }
+  @include media('<=480px'){
+    @include size(350px);
+    margin-right: 0;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  @include media('<=320px'){
+    @include size(310px);
+  }
 }

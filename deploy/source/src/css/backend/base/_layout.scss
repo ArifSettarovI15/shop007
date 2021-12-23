@@ -1,0 +1,25 @@
+.products-dop {
+  >div {
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px;
+  }
+}
+
+.table_price2_input {
+  text-decoration:line-through;
+}
+
+.fileinput-button input {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+
+}

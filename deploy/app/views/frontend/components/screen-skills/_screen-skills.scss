@@ -1,0 +1,29 @@
+.skills{
+  background: $color__light;
+  padding: 100px 0;
+  &_list{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.skill{
+  width: 325px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ &__icon{
+   @include size(80px);
+   margin-bottom: 35px;
+ }
+  &__text{
+    font-family: $font-family__second;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 100%;
+    text-align: center;
+
+    color: $color__secondary--1;
+
+  }
+}

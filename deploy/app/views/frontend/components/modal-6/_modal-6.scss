@@ -1,0 +1,27 @@
+.tooltip {
+  $root: &;
+  position: relative;
+  &__text {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    visibility: hidden;
+    width: 120px;
+    background-color: $color__dark--3;
+    font-size: 12px;
+    line-height: 1.15;
+    color: $color__light;
+    border-radius: 4px;
+    text-align: center;
+    padding: 6px;
+    transition: visibility .3s;
+    z-index: 1;
+  }
+
+  &:hover {
+    #{$root}__text {
+      visibility: visible;
+    }
+  }
+}

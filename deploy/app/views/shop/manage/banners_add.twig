@@ -1,0 +1,63 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="form">
+        <div class="fields">
+
+            <div class="line">
+                <div class="label required">
+                    URL:
+                </div>
+                <div class="value">
+                    <input name="banner_url" class="element required" type="text"  maxlength="250"  value="{{ info.banner_url }}">
+                </div>
+            </div>
+
+            <div class="line">
+                <div class="label">
+                    Фото:
+                </div>
+                <div class="value">
+                    {% set image_data=image_data1 %}
+                    {% include 'files/upload_image.html.twig' %}
+                </div>
+            </div>
+            <div class="line">
+                <div class="label ">
+                    Место:
+                </div>
+                <div class="value">
+                    <select class="element" name="banner_pos">
+                        <option value="0">Выберите</option>
+                        <option value="1" {% if info.banner_pos==1 %}selected="selected"{% endif %}>Под товарами</option>
+                        <option value="2" {% if info.banner_pos==2 %}selected="selected"{% endif %}>Над товарами</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="line">
+                <div class="label ">
+                    Категория:
+                </div>
+                <div class="value cats_tree_select">
+                    {{ cats_select|raw }}
+                    {{ cats_select3|raw }}
+                </div>
+            </div>
+
+            {% if edit==1 %}
+                <input type="hidden" class="element" name="action" value="process_edit">
+                <input type="hidden" class="element" name="banner_id" value="{{ info.banner_id }}">
+            {% else %}
+                <input type="hidden" class="element" name="action" value="process_add">
+            {% endif %}
+        </div>
+        <div class="submit btn btn-primary">
+            {% if edit==1 %}
+                Сохранить
+            {% else %}
+                Добавить
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

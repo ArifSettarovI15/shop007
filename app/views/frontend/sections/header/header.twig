@@ -1,18 +1,28 @@
 {% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
 {% import 'frontend/elements/link/link_macro.twig' as Link %}
 <header class="header js-main-header">
-
-        <div class="header__logo"></div>
+    <div class="container container_sm">
+        <div class="header_wrapper">
+        <a href="/" class="header__logo">
+            {{ Svg.icon('main-logo', 0, 275, 56) }}
+        </a>
         <div class="header__links">
-            <a href="{{ global.base_url }}" class="header__links_item header__links_item_active">Магазин</a>
-            <a href="{{ global.base_url }}/payment.html" class="header__links_item">Оплата</a>
-            <a href="{{ global.base_url }}/delivery.html" class="header__links_item">Доставка</a>
-            <a href="{{ global.base_url }}/return.html" class="header__links_item">Возврат</a>
-            <a href="{{ global.base_url }}/contact.html" class="header__links_item">Контакты</a>
-            <a href="{{ global.base_url }}/basket/" class="header__links_basket">
-                {{ Svg.icon('cart_icon', 1, 35,35) }}
+            <a href="{{ global.base_url }}" class="header__links_item {% if global.page.active == 'shop' %}header__links_item_active{% endif %}">Магазин</a>
+            <a href="{{ global.base_url }}/payment.html" class="header__links_item {% if global.page.active == 'payment' %}header__links_item_active{% endif %}">Оплата</a>
+            <a href="{{ global.base_url }}/delivery.html" class="header__links_item {% if global.page.active == 'delivery' %}header__links_item_active{% endif %}">Доставка</a>
+            <a href="{{ global.base_url }}/return.html" class="header__links_item {% if global.page.active == 'return' %}header__links_item_active{% endif %}">Возврат</a>
+            <a href="{{ global.base_url }}/contacts.html" class="header__links_item {% if global.page.active == 'contacts' %}header__links_item_active{% endif %}">Контакты</a>
+            <a href="{{ global.base_url }}/basket/" class="header__links_basket {% if global.page.active == 'basket' %}header__links_item_active{% endif %}">
+                {{ Svg.icon('cart_icon', 0, 35,35) }}
                 <span class="header__links_basket_count">{{ global.basket_total }}</span>
             </a>
+            <div class="menu_button js_menu_btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    {% include 'frontend/components/menu/menu.twig' %}
+    </div>
+    </div>
 </header>
+{% include 'frontend/components/menu/menu.twig' %}

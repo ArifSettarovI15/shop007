@@ -1,0 +1,157 @@
+.input-range {
+  &__label {
+    font-family: $font-family__main;
+    font-size: 14px;
+    line-height: 1.2;
+    color: $color__dark--2;
+    margin-bottom: 8px;
+  }
+}
+
+.range {
+  $root: &;
+  &__wrapper-top {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+    background-color: $color__light;
+    border: 2px solid $color__dark--1;
+    max-height: 48px;
+    @include transitions(border-color, box-shadow);
+  }
+
+  &__wrapper-bottom {
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    position: absolute;
+    @include size(100%, 80px);
+    padding: 16px 8px;
+    background-color: $color__light;
+    z-index: 1;
+    margin-top: 6px;
+    border: 2px solid $color__dark--2;
+    overflow: hidden;
+    border-radius: 8px;
+    @include transitions(opacity, max-height);
+  }
+
+  &__core {
+    width: calc(100% - 20px);
+  }
+
+  &__top {
+    width: 100%;
+    @extend %flex-center-between;
+  }
+
+  &__value {
+    //min-width: 75px;
+    padding: 16px 0;
+    user-select: none;
+
+    &-prev,
+    &-count {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 1.15;
+      color: $color__dark--3;
+    }
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  &__bottom {
+    border-radius: 4px;
+    background-color: $color__light--2;
+  }
+
+  &__icon {
+    @include size(24px);
+    flex: 0 0 24px;
+
+    svg * {
+      fill: $color__primary--2;
+    }
+  }
+
+  &.open {
+    #{$root}__wrapper-top {
+      border-color: $color__dark--2;
+      box-shadow: 0 0 0 2px rgba(144, 164, 174, 0.3);
+    }
+
+    #{$root}__wrapper-bottom {
+      opacity: 1;
+      visibility: visible;
+      max-height: 200px;
+    }
+  }
+}
+
+.noUi-target {
+  margin: 15px 0 20px;
+  border: 0;
+}
+
+.noUi-horizontal {
+  height: 6px;
+}
+
+.noUi-connects {
+  background-color: $color__light--2;
+  border-radius: 4px;
+}
+
+.noUi-connect {
+  background-color: $color__primary--1;
+}
+
+.noUi-handle-lower {
+}
+
+.noUi-handle-upper {
+
+}
+
+.noUi-horizontal .noUi-handle {
+  @include size(20px);
+  border-radius: 50%;
+  right: -20px;
+  border: 4px solid $color__primary--2;
+  cursor: pointer;
+
+  &:before,
+  &:after {
+    content: none;
+  }
+}
+
+.noUi-marker {
+  display: none !important;
+}
+
+.noUi-value {
+  font-size: 14px;
+  line-height: 1.15;
+  color: $color__dark;
+  transform: none;
+  &:last-child {
+    transform: translateX(-100%);
+  }
+}
+
+.noUi-pips-horizontal {
+  width: calc(100% + 20px);
+  padding-top: 18px;
+}
+
+.noUi-value-horizontal {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.2;
+  color: $color__dark--2;
+}

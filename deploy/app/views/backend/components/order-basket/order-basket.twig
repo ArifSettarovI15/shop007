@@ -1,0 +1,14 @@
+{% for item in items %}
+    <tr>
+        <td>{{ item.offer_article }}</td>
+        <td class="image"><img src="{{ item.item_icon_url }}"></td>
+        <td>{{ item.oid_name }}</td>
+        <td><input type="text" value="{{ item.oid_item_price }}" class="order-basket-price" data-id="{{ item.offer_id }}"></td>
+        <td><input type="text" value="{{ item.oid_item_count }}" class="order-basket-count" data-id="{{ item.offer_id }}"></td>
+        <td>{{ item.oid_item_price*item.oid_item_count }}</td>
+        <td class="hide_print">
+            <a target="_blank" class="btn btn-success btn-xs" href="{{ item.offer_full_url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a><br/>
+            <div data-id="{{ item.offer_id }}" class="btn btn-danger btn-xs  order-basket-del"><i class="fa fa-trash"></i></div>
+        </td>
+    </tr>
+{% endfor %}

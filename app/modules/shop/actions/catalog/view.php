@@ -3,7 +3,9 @@ $Main->user->PagePrivacy();
 
 
 $cat = $ShopClass->cats->GetItemByUrl($Main->GPC['cat_url']);
-
+if (!$cat['cat_id']) {
+    $Main->error->PageNotFound();
+}
 $ShopClass->cats->CreateModel();
 $ShopClass->cats->model->setSelectField( $ShopClass->cats->model->getTableName() . '.*' );
 $ShopClass->cats->model->SetJoinImage( 'icon', $ShopClass->cats->model->GetTableItemName( 'icon' ) );
@@ -13,23 +15,30 @@ $cats= $ShopClass->cats->GetList();
 
 $cats = $ShopClass->cats->MakeTree( $cat['cat_id'], $cats );
 
-$tree=$ShopClass->cats->MakeUiTree2($cats,$cat['cat_id'],$cat['cat_id']);
-
-if (!$tree or $tree=='<ul></ul>') {
-    $tree=$ShopClass->cats->MakeUiTree2($cats,$cat['cat_parent_id'], $cat['cat_id']);
-}
+$childs = $ShopClass->cats->GetAllCatsIds($cats, $cat['cat_id']);
 
 $cats_all = array(
     $cat['cat_id']
 );
 
-
-$childs = $ShopClass->cats->GetAllCatsIds($cats, $cat['cat_id']);
-
 if ($childs and count($childs) > 0)
     $cats_all = array_merge($cats_all, $childs);
 
+
+$parents = $ShopClass->cats->GetParentCatsIds($cats, $cat['cat_id']);
+$parents[] = $cat['cat_id'];
+
+$tree=$ShopClass->cats->MakeUiTree2($cats,0, $parents);
+
+
+
 $Paging = new ClassPaging($Main, 12, false, false);
+
+
+$Paging->template = 'frontend/components/paging/paging.twig';
+$Paging->template2 = 'frontend/components/paging/paging.twig';
+$Paging->template3 = 'frontend/components/paging/paging.twig';
+
 $ShopClass->products->CreateModel();
 $ShopClass->products->model->setSelectField($ShopClass->products->model->getTableName() . '.*');
 $ShopClass->products->model->SetJoinCats();
@@ -60,11 +69,12 @@ $Main->template->SetPageAttributes(
     array(
         'breadcrumbs'=>$breadcrumbs,
         'title'=>$cat['cat_title'],
-        'page_class'=>'page-catalog'
+        'page_class'=>'page-catalog',
+        'active'=>'shop'
     )
 );
 
 
-$Paging->Display('shop/catalog/view.html.twig', [
+$Paging->Display('frontend/components/items_list/items-list-table.twig', [
     'cats_tree' => $tree,
     ]);

@@ -1,0 +1,48 @@
+<div style="font-size: 14px;line-height:18px;color:#000000;" class="text text_sans order-done">
+    <p style="font-size: 22px;"><h3>Заказ #{{ order_id }}</h3></p>
+
+    <p style="font-size: 18px;"><b>Детали заказа</b></p>
+    <p><b style="font-size: 14px;">ID заказа:</b> {{info.order_id }}<br/>
+        <b style="font-size: 14px;">Дата:</b> {{info.order_time|date("d.m.Y, H:i") }}<br/>
+        <b style="font-size: 14px;">Статус:</b> {{statuses[info.order_status]['title']}}<br/>
+        <b style="font-size: 14px;">Имя:</b>  {{info.order_user_name}}<br/>
+        <b style="font-size: 14px;">Телефон:</b> {{info.order_user_phone}}<br/>
+        <b style="font-size: 14px;">Email:</b> {{info.order_user_email}}<br/>
+        {% if info.order_comment %}
+            <b style="font-size: 14px;">Комментарий:</b> {{info.order_comment}}<br/>
+        {% endif %}
+    </p>
+
+
+    <p style="font-size: 18px;"><b>Доставка</b></p>
+    <p><b style="font-size: 14px;">Название:</b> {{delivery_data['title']}}<br/>
+        <b style="font-size: 14px;">Населенный пункт:</b> {{info['order_delivery_city']}}<br/>
+        <b style="font-size: 14px;">Адрес:</b> {{info['order_delivery_addr']}}<br/>
+
+
+
+
+    </p>
+    <p style="font-size: 18px;"><b>Товары</b><br/><br/></p>
+    <table style="border-collapse: collapse;padding: 15px;" width="100%" border="0" cellpadding="5" cellspacing="0" align="center">
+        <tbody align="left" valign="top" style="font-size: 14px;">
+        {% for item in items %}
+            <tr>
+                <td style="vertical-align: top;"><img style="max-width: 100px;max-height: 100px;" src="{{ item.item_icon_url }}" height="100"></td>
+                <td style="vertical-align: top;">
+                    <a href="{{ item.offer_full_url }}" style="color:#000000;text-transform: uppercase;font-size: 16px;line-height: 26px;text-decoration: none;font-weight: bold;">{{ item.full_title }}</a><br>
+                    <b>Артикул:</b> {{ item.offer_article }}
+                </td>
+                <td style="vertical-align: top;" width="75">{{ item.oid_item_count }}&nbsp;шт.</td>
+                <td style="white-space: nowrap; vertical-align: top;"><strong style="font-size: 20px;">{{ format_money(item.oid_item_price) }}&nbsp;руб</strong></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br/><br/>
+    <p style="font-size: 24px;">
+        <b>Итого:</b> {{ total_cost }}&nbsp;руб (без учета доставки)
+    </p>
+</div>
+
+

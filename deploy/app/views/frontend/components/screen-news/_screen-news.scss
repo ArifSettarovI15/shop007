@@ -1,0 +1,11 @@
+.rel-news {
+  @include media('<sm') {
+    .table-list__item {
+      display: none;
+      
+      &:first-child {
+        display: block;
+      }
+    }
+  }
+}

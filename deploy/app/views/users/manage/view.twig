@@ -1,0 +1,170 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="order_info">
+        <div class="summary">
+            <div class="head">Информация</div>
+            <div class="data">
+                <div class="line">
+                    <div class="label">ID</div>
+                    <div class="value">{{ user.user_id }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">Дата регистрация</div>
+                    <div class="value">{{user.user_regtime|date("d.m.Y, H:i") }}</div>
+                </div>
+
+                <div class="line">
+                    <div class="label">Компания</div>
+                    <div class="value">{{profile.profile_company }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">Город</div>
+                    <div class="value">{{profile.profile_city }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">Сайт</div>
+                    <div class="value">{{profile.profile_site }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">Менеджер</div>
+                    <div class="value">{{profile.profile_lastname }} {{profile.profile_name }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">Email</div>
+                    <div class="value">{{user.user_email }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">Телефон</div>
+                    <div class="value">{{profile.profile_phone }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">ИНН</div>
+                    <div class="value">{{profile.profile_inn }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">КПП</div>
+                    <div class="value">{{profile.profile_kpp }}</div>
+                </div>
+                <div class="line">
+                    <div class="label">ОГРН</div>
+                    <div class="value">{{profile.profile_ogrn }}</div>
+                </div>
+            </div>
+        </div>
+        {% if global.user_info.user_role_id==2 %}
+        <div class="user">
+            <div class="head">Финансы</div>
+            <div class="data form">
+                <input class="element" name="action" value="update_info" type="hidden">
+                <div class="line">
+                    <div class="label">Персональная скидка</div>
+                    <div class="value">
+                        <input type="text" style="max-width: 250px" class="element" name="profile_discount" value="{{profile.profile_discount	 }}"> %
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">Кредитный лимит
+
+                    </div>
+                    <div class="value">
+                        <input type="text" style="max-width: 250px" class="element" name="profile_credit"  value="{{profile.profile_credit}}">
+                         руб.
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">Отсрочка платежа
+
+                    </div>
+                    <div class="value">
+                        <input type="text" style="max-width: 250px" class="element" name="profile_timeout"   value="{{profile.profile_timeout}}">
+                         дн
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">Баланс</div>
+                    <div class="value">{{format_money(profile.profile_balance)}} руб</div>
+                </div>
+                <div class="line">
+                    <div class="label">Тип цен</div>
+                    <div class="value">
+                        <select class="element" name="profile_price_id">
+                            <option value="0" {% if profile.profile_price_id==0 %}selected{% endif %}>Розница</option>
+                            <option value="1"  {% if profile.profile_price_id==1 %}selected{% endif %}>Опт</option>
+                            <option value="2"  {% if profile.profile_price_id==2 %}selected{% endif %}>Опт vip</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="btn btn-primary submit">
+                        Сохранить
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user">
+            <div class="head">Банковские реквизиты</div>
+            <div class="data">
+                <div class="line">
+                    <div class="label">Банк</div>
+                    <div class="value">
+                        {{profile.profile_bank	 }}
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">БИК
+
+                    </div>
+                    <div class="value">
+                        {{profile.profile_bik	 }}
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">Расчетный счет</div>
+                    <div class="value">
+                        {{profile.profile_bank_account}}
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="label">Корреспондентский счет</div>
+                    <div class="value">
+                        {{profile.profile_corr_account}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user user_vendor_data">
+            <div class="head">Скидки</div>
+            <div class="data">
+                <div class="user_vendor_values_list">
+                    {% include 'backend/components/filter_values_list/vendors.twig' with {
+                        'list': profile.profile_discounts
+                    }%}
+                </div>
+                <div class="line">
+                    <select class="user_vendor_values_select">
+                        <option value="0">Выберите</option>
+                       {% for vendor in brands %}
+                           <option value="{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <select class="element user_group_id" >
+                        <option value="0">Розница</option>
+                        <option value="1">Опт</option>
+                        <option value="2">Опт vip</option>
+                        <option value="3">Фактич</option>
+                    </select>
+                </div>
+                <div class="line">
+                    <div class="btn btn-primary add_user_vendor_value">
+                        Добавить
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}

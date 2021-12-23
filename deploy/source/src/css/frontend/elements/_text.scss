@@ -1,0 +1,123 @@
+.main-title{
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media(max-width: 768px){
+    height: 60px;
+  }
+
+  @media(max-width: 768px){
+    margin-bottom: 30px;
+  }
+
+   &__text{
+    font-size: 32px;
+    line-height: 40px;
+    color: #000000;
+    font-family: Gotham Pro, sans-serif;
+    display: block;
+    z-index: 30;
+
+    @media(max-width: 768px){
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+
+  &__icon{
+    width: 65px;
+    height: 80px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    svg *{
+      fill: #ffe132;
+    }
+
+    @media(max-width: 768px){
+      width: 45px;
+      height: 60px;
+    }
+  }
+
+
+  & p{
+    color: #303030;
+    font-size: 14px;
+    line-height: 21px;
+    font-family: MRegular;
+    padding-bottom: 30px;
+
+    &:last-child{
+      padding-bottom: 0;
+    }
+
+    @media(max-width: 768px){
+      font-size: 14px;
+      line-height: 21px;
+      padding-bottom: 20px;
+    }
+  }
+
+  & a{
+    color: #303030;
+    font-family: MSemiBold;
+  }
+
+  & h3{
+    color: #303030;
+    font-size: 21px;
+    line-height: 26px;
+    font-family: MMedium;
+    padding-bottom: 25px;
+  }
+
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+
+    & li {
+      width: 50%;
+      padding-right: 5px;
+
+      @media(max-width: 600px){
+        width: 100%;
+      }
+
+      & a{
+        color: #1b1b1b;
+        font-size: 14px;
+        line-height: 24px;
+        font-family: MRegular;
+        position: relative;
+        padding: 10px 0 10px 15px;
+
+        &:hover{
+          color: #ffda00;
+        }
+
+        &:after{
+          position: absolute;
+          content: '';
+          border-radius: 50%;
+          width: 5px;
+          height: 4px;
+          background: #ffda00;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,25 @@
+<div class="shop-card">
+    <div class="shop-card__main">
+        <div class="container container_sm">
+            <div class="shop-card__row product">
+                <div class="shop-card__preview">
+                    {% include 'frontend/components/card-prview/card-prview.twig' %}
+                </div>
+                <div class="shop-card__info">
+                    {% include 'frontend/components/card-info/card-info.twig' %}
+                </div>
+            </div>
+            <div class="shop-card__decor"></div>
+            <div class="shop-card__similar">
+                <h2>Из этой же категории</h2>
+                <div class="shop-card__similar_list">
+                    {% for item in similar %}
+                        <div class="shop-card__similar_item">
+                            {% include 'frontend/components/item-thumb/item-thumb.twig' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

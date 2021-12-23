@@ -1,0 +1,81 @@
+<div class="search-list">
+    {% if items %}
+        {% for item in items  %}
+            <a class="search-list__item" href="{{ item.offer_full_url }}">
+                <div class="search-list__item-img2">
+                    <div class="search-list__item-img" style="background-image: url('{% if offer.offer_icon %}{{ offer.offer_icon_url }}{% else %}{{ item.item_icon_url }}{% endif %}');">
+                        {{ item.full_title }}
+                    </div>
+                    {% if hide_label!=1 %}
+                    <div class="search-list__badge">
+                        {% include 'frontend/components/product-label/product-label.twig' with {
+                            'product': item,
+                            'label_style': 'single'
+                        } %}
+                    </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="search-list__item-info">
+                    <div class="search-list__item-main">
+                        {% if item.icons %}
+                            <div class="search-list__icons">
+                                {% include 'frontend/components/item-badge/item-badge.twig' with {
+                                    'product': item,
+                                    'badge_style': 'simple'
+                                }%}
+                            </div>
+                        {% endif %}
+                        <div class="search-list__item-name">
+                            <b>{{ item.full_title }}</b>
+                        </div>
+                    </div>
+                    <div class="search-list__item-amount">
+                        {% if item.offer_amount_nal %}
+                            В наличии: <span>{{ item.offer_amount_nal }}&nbsp;шт.</span><br/>
+                        {% endif %}
+                        {% if item.offer_amount_zak %}
+                            Под заказ: <span>{{ item.offer_amount_zak }}&nbsp;шт.</span><br/>
+                        {% endif %}
+
+                        {% if item.offer_amount %}
+
+                        {% else %}
+                            Под заказ: <span>Нет</span>
+                        {% endif %}
+                    </div>
+                    <div class="search-list__item-price">
+                        {% if item.offer_price>0 %}
+                            <div class="search-list__prices">
+                                    <div class="search-list__price"><span>{{  format_money(item.offer_price)}}</span>&nbsp;₽/шт.</div>
+
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="search-list__item-more">
+                        {% include 'frontend/elements/svg/svg.twig' with {
+                            'name':'arrow-right',
+                            'class':'arrow-right',
+                            'embed': 1
+                        }%}
+                        {% include 'frontend/elements/svg/svg.twig' with {
+                            'name':'arrow-right2',
+                            'class':'arrow-right2',
+                            'embed': 1
+                        }%}
+                    </div>
+                </div>
+            </a>
+
+        {% endfor %}
+    {% else %}
+        <div class="search-list__empty">Товары не найдены</div>
+    {% endif %}
+</div>
+{% if items %}
+    <div class="search-block__bottom">
+        <a href="{{ global.base_url }}/search/{{ q }}/" class="link link_1">Все результаты</a>
+        <div class="search-block__matching">Найдено: <span>{{ total }}</span></div>
+    </div>
+{% endif %}

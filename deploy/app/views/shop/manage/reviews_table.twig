@@ -1,0 +1,47 @@
+{% for reviews in list %}
+    <style>
+        .review_row{
+            height: 50px !important;
+        }
+        .review_status{
+            text-align: center;
+            padding: 0;
+            font-size: 12px;
+            color: white;
+            margin: 0 auto;
+            width: 100px;
+            height: 20px;
+            border-radius:5px;
+        }
+        .review_status_0{
+            background: #cc3300;
+        }.review_status_1{
+            background: #00d6b2;
+        }
+    </style>
+    <tr class="review_row" data-id="{{ reviews.review_id }}">
+        <td class="data_id">{{ reviews.review_id }}</td>
+        <td >{{ reviews.review_uname }}</td>
+        <td>{{ reviews.review_uemail}} </td>
+        <td style="max-width: 150px;"><div style="max-height: 55px; overflow: hidden">{{ reviews.review_comment}}</div></td>
+        <td style="text-align: center">{{ reviews.review_item_id }}</td>
+        <td style="text-align: center">{{ reviews.review_rating }}</td>
+
+        <td>{{ reviews.review_time }}</td>
+        <td>
+            <div data-type="status" class="badge_status {% if reviews.review_status!=1%}no{% else %}yes{% endif %}" data-value="{{ reviews.review_id }}">
+{#                {% if reviews.review_status==1 %}#}
+{#                {% else %}#}
+                <span class="badge badge-danger">Модерация</span>
+                <span class="badge badge-success">Видимый</span>
+{#                {% endif %}#}
+            </div>
+        </td>
+
+        <td>
+
+            <a target="_blank" href="{{ global.base_url }}/manager/shop/reviews/edit/{{ reviews.review_id  }}/" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+            <div data-value="{{ reviews.review_id }}" class="btn btn-danger btn-xs delete"><i class="fa"></i></div>
+        </td>
+    </tr>
+{% endfor %}

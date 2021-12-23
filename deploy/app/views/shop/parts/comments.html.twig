@@ -1,0 +1,135 @@
+<div class="comments">
+                    <span class="comments__title" data-class-text="group2_bold size20">
+                      Отзывы покупателей
+                    </span>
+
+    <div class="comments-list-wrapper">
+        <ul class="comments-list">
+            {% if comments %}
+                {% for comment in comments %}
+                    <li class="comment-_{{ loop.index }}" itemprop="review" itemscope itemtype="http://schema.org/Review">
+                        <meta itemprop="itemReviewed" content="{{ item_info.item_promo_title }}" />
+                        <div class="comment__header">
+                            <div class="comment__header-row1">
+                                <small class="comment__user-name" itemprop="author">
+                                    {{ comment.comment_author }}
+                                </small>
+                                <time class="comment__time">
+                                    <meta itemprop="datePublished" content="{{ comment.comment_time|date("Y-m-d") }} ">
+                                    {{ comment.comment_time|date("d.m.y") }}
+                                </time>
+                                {% if comment.comment_data.recommended %}
+                                    <strong class="comment__verdict_recommend">
+                                        Рекомендую товар
+                                    </strong>
+                                {% else %}
+                                    <strong class="comment__verdict_not-recommend">
+                                        Не рекомендую товар
+                                    </strong>
+                                {% endif %}
+                            </div>
+                            <span class="comment__header-row2" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                                            <meta itemprop="ratingValue" content="{{ comment.comment_rank }}">
+                                                          <span class="item-rating" data-rating="{{ comment.comment_rank }}"></span>
+                                                        </span>
+                        </div>
+                        <div class="comment__text edited-text-container" itemprop="description">
+                            {{ comment.comment_text }}
+                        </div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <!--no comment-->
+                <li class="comment-_ no-comments__note">
+                                                  <span class="no-comments__note-text" data-class-text="group2_bold">
+                                                    Будьте первым, оставьте отзыв о товаре!
+                                                  </span>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+
+<div class="write-comment">
+    <div class="write-comment__absolute-rows">
+        <div class="write-comment__absolute-row-_1">
+
+            <div class="input-wrapper">
+                <label for="" class="name">Ваше имя</label>
+                <div class="input-container" data-class-unit="input_type1">
+                    <input name="name" class="element required" type="text" data-class-unit="input-field_type1" value="{{ global.user_profile.profile_name }}">
+                </div>
+            </div>
+
+        </div>
+        <div class="write-comment__absolute-row-_2">
+
+            <div class="input-wrapper">
+                <label for="" class="name">Комментарий</label>
+                <div class="input-container textarea-container " data-class-unit="input_type1">
+                    <textarea name="comment" class="element js-auto-size required" data-class-unit="input-field_type1"></textarea>
+                    <input type="hidden" class="element" name="action" value="add_comment">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="write-comment__absolute-row-_3">
+
+            <span class="name">Ваша оценка</span>
+            <div class="stars action_stars element" data-type="switch" data-name="rate" >
+                {% for i in 1..5 %}
+                    <i data-value="{{ i }}" class="fa fa-star set clicked {% if i==5 %}active{% endif %}"></i>
+                {% endfor %}
+            </div>
+
+            <span class="name">Рекомендую товар</span>
+
+            <div class="buttonset">
+                <div class="check switch_check element" data-type="switch" data-name="recommended">
+                    <div data-value="1"  class="active buttonset__button1" data-class-unit="button_type2_theme2_left">
+                        Да
+                    </div>
+                    <div  data-value="0" class="buttonset__button2"
+                          data-class-unit="button_type2_theme2_right">
+                        Нет
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="write-comment__static-row">
+        {% if comments_pages %}
+            <div class="comments-paginate">
+                {% set hh=comments_pages %}
+                {% for page in comments_pages %}
+                    {% if  (page.name=='prev' and page.disabled!=1) %}
+                        <span data-value="{{ page.value }}" class="comments-paginate__button_prev" data-class-unit="button_type2_theme2_left_no-drop">
+                                                    </span>
+                    {% endif %}
+                    {% if  (page.name=='page' and page.disabled!=1) %}
+                        <span data-value="{{ page.value }}" class="comments-paginate__button"
+                              data-class-unit="button_type2_theme2_middle{% if hh[loop.index]['name']=='next' %}{% else %}_left{% endif %}{% if comments_current==page.value %}_active{% endif %}">
+                                                          {{ page.value }}
+                                                        </span>
+                    {% endif %}
+                    {% if  (page.name=='next' and page.disabled!=1) %}
+                        <span data-value="{{ page.value }}" class="comments-paginate__button_next"
+                              data-class-unit="button_type2_theme2_right">
+                                                 </span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="action_send_comment buttonset__button2 give-feedback__button" data-status="closed" data-class-unit="button_type2_theme2">
+            <span>Оставить отзыв</span>
+            <span>Отправить отзыв</span>
+        </div>
+    </div>
+
+</div>

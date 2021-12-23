@@ -1,0 +1,11 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="skills_list">
+    {% for skill in skills.skills_list %}
+        <div class="skill anim-skill-item">
+            <div class="skill__icon">
+                {{ Svg.icon(skill.skills_list_icon, 1, 80,80) }}
+            </div>
+            <div class="skill__text">{{ skill.skills_list_title }}</div>
+        </div>
+    {% endfor %}
+</div>

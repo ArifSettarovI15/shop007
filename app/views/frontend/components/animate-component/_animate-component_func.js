@@ -1,6 +1,5 @@
 function animateSkills() {
     var tl = initScrollTriggerTl('.anim-skills')
-    gsap.set('.anim-skill-item', {opacity: 0, y: 30})
 
     tl.to('.anim-skill-item', {
         opacity: 1, y: 0, stagger: {
@@ -14,48 +13,27 @@ function animateSkills() {
 function animateCatalog() {
     var tl = initScrollTriggerTl('.anim-catalog')
 
-    gsap.set(['.anim-catalog-item', '.anim-catalog-item-2'], {opacity: 0, y: 100})
+
     tl.to('.anim-catalog-item', .25, { opacity: 1, y: 0})
     tl.to('.anim-catalog-item-2', .25, { opacity: 1, y: 0})
 }
 
 function animateWorks() {
     var tl = initScrollTriggerTl('.anim-work')
-    gsap.set('.anim-work-item-elem', {opacity: 0, y: 10})
-    gsap.set('.anim-work-item-arrow', {opacity: 0, x: -20})
     tl.from('.anim-work-item', {
         autoAlpha: 1, stagger: {
             each: .5,
             onComplete: function() {
-                var arrOfChilds = gsap.utils.toArray(this.targets()[0].children)
-                gsap.to(arrOfChilds, {
-                    opacity: 1,
-                    y: 0,
-                    x: 0,
-                    stagger: .1,
-                    duration: .2
-                })
             }
         }
     })
 }
 
 function animateFaq() {
-    var tl = initScrollTriggerTl('.anim-faq')
 
-    gsap.set('.anim-faq-main', {y: 70, opacity: 0})
-    tl.to('.anim-faq-main', .3, {y: 0, opacity: 1})
 }
 
 function animateTeam() {
-    var tl = initScrollTriggerTl('.anim-team')
-
-    gsap.set('.anim-team-img', {y: -70, opacity: 0})
-    gsap.set('.anim-team-text', {y: 70, opacity: 0})
-    gsap.set('.anim-team-list', {x: 70, opacity: 0})
-    tl.to('.anim-team-img', .5, {y: 0, autoAlpha: 1}, 0)
-    tl.to('.anim-team-text', .5, {y: 0, autoAlpha: 1}, 0)
-    tl.to('.anim-team-list', .7, {x: 0, autoAlpha: 1})
 }
 
 function animateFeeds() {

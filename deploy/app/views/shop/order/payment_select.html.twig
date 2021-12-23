@@ -1,0 +1,20 @@
+<div class="cabinet-block__item">
+    <div class="cabinet-block__subtitle">
+        Способ оплаты
+    </div>
+    <div class="filter-checks">
+        {% set isset=0 %}
+        {% for delivery_method,delivery_data in delivery %}
+            {% for payment_method in delivery_data['payments'] %}
+                <div class="payment-item  cabinet-block__check" data-delivery="{{ delivery_method }}" {% if  global.user_profile.profile_delivery==delivery_method %}{% set isset=1 %} data-status="active"{% endif %}>
+                    <label class="custom-checkbox custom-checkbox_1 {% if  global.user_profile.profile_delivery==delivery_method and global.user_profile.profile_payment==payment_method %}custom-checkbox_color{% endif %}">
+                        <input data-delivery="{{ delivery_method }}" {% if  global.user_profile.profile_delivery==delivery_method and global.user_profile.profile_payment==payment_method %}checked{% endif %}  class="custom-checkbox__old element" autocomplete="off" type="radio" data-active="0" name="payment" value="{{ payment_method }}">
+                        <span class="custom-checkbox__new"></span>
+                        <span class="custom-checkbox__label">{{ payments[payment_method]['title'] }}</span>
+                    </label>
+                </div>
+            {% endfor %}
+        {% endfor %}
+            <div class="payment-none" {% if isset %}style="display: none"{% endif %}>Сначала выберите способ доставки</div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+{% macro element(text, options={}) %}
+    {% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+    <div class="badge badge_{% if options.mod %}{{ options.mod}}{% else %}primary{% endif%} badge_{% if options.size %}{{ options.size }}{% else %}sm{% endif %}">
+        {% if options.icon_left %}
+            <div class="badge__icon">{{ Svg.icon(options.icon_left, 1) }}</div>
+        {% endif %}
+        <div class="badge__text">{{ text }}</div>
+        {% if options.icon_right %}
+            <div class="badge__icon">{{ Svg.icon(options.icon_right, 1) }}</div>
+        {% endif %}
+    </div>
+{% endmacro %}

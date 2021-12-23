@@ -1,91 +1,11 @@
 {% import "frontend/elements/link/link_macro.twig" as Link %}
 {% set menu = 1 %}
-<div class="menu">
-    <div class="menu__wrapper">
-        <div class="menu__wrapper-top">
-            <div class="menu__top">
-                <div class="menu__container">
-                    <ul class="menu__list">
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/', 'Главная', { mod: 'second' }) }}
-                        </li>
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/catalog/', 'Каталог букетов', { mod: 'second' }) }}
-                        </li>
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/#anchor_feeds', 'Отзывы', {
-                                mod: 'second',
-                                trigger: 'js-anchor'
-                            }) }}
-                        </li>
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/#anchor_about', 'О нас', {
-                                mod: 'second',
-                                trigger: 'js-anchor'
-                            }) }}
-                        </li>
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/#anchor_delivery', 'Доставка и оплата', {
-                                mod: 'second',
-                                trigger: 'js-anchor'
-                            }) }}
-                        </li>
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/#anchor_faq', 'Вопросы', {
-                                mod: 'second',
-                                trigger: 'js-anchor'
-                            }) }}
-                        </li>
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/articles/', 'Блог', {
-                                mod: 'second'
-                            }) }}
-                        </li>
-                        <li class="menu__item">
-                            {{ Link.link(global.base_url~'/#anchor_contacts', 'Контакты', {
-                                mod: 'second',
-                                trigger: 'js-anchor'
-                            }) }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            {% if global.parts %}
-                <div class="menu__middle">
-                    <div class="menu__container">
-                            <div class="menu__title">Популярные букеты</div>
-                            {% include 'frontend/components/tags-block/tags-block2.twig' %}
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-        <div class="menu__wrapper-bottom">
-            <div class="menu__container">
-                <div class="menu__bottom">
-                    <ul class="menu__list">
-                        <li class="menu__item">
-                            <div class="menu-contact">
-                                <div class="menu-contact__title">{{global.fields.info.info_work_time}}</div>
-                                <div class="menu-contact__link">
-                                    {{ Link.link('tel:'~global.fields.info.info_phone|replace({'(':'',')':'',' ':'','-':''}),
-                                        global.fields.info.info_phone) }}
-                                </div>
-                            </div>
-                        </li>
-                        <li class="menu__item">
-                            <div class="menu-contact">
-                                <div class="menu-contact__title">Пишите сюда</div>
-                                <div class="menu-contact__link">
-                                    {{ Link.link('mailto:'~global.fields.info.info_email, global.fields.info.info_email) }}
-                                </div>
-                            </div>
-                        </li>
-                        <li class="menu__item">
-                            {% include 'frontend/components/social-block/social-block.twig' %}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="menu js_menu">
+  <div class="menu_links">
+      <a href="{{ global.base_url }}" class="menu_links_item {% if global.page.active == 'shop' %}header__links_item_active{% endif %}">Магазин</a>
+      <a href="{{ global.base_url }}/payment.html" class="menu_links_item {% if global.page.active == 'payment' %}header__links_item_active{% endif %}">Оплата</a>
+      <a href="{{ global.base_url }}/delivery.html" class="menu_links_item {% if global.page.active == 'delivery' %}header__links_item_active{% endif %}">Доставка</a>
+      <a href="{{ global.base_url }}/return.html" class="menu_links_item {% if global.page.active == 'return' %}header__links_item_active{% endif %}">Возврат</a>
+      <a href="{{ global.base_url }}/contacts.html" class="menu_links_item {% if global.page.active == 'contacts' %}header__links_item_active{% endif %}">Контакты</a>
+  </div>
 </div>

@@ -1,0 +1,210 @@
+.order {
+  &__title {
+    font-family: $font-family__second;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 56px;
+    line-height: 100%;
+    color: #1C4E29;
+    margin-top: 74px;
+    margin-bottom: 34px;
+  }
+
+  &__data {
+    background: #FFFFFF;
+    border: 1px solid #E5E5D4;
+    padding: 65px;
+  }
+
+  &__user-info {
+    display: flex;
+    justify-content: space-between;
+
+    &_item {
+      width: calc(50% - 60px);
+    }
+
+    &_addr {
+      margin-top: 24px;
+      margin-bottom: 70px;
+    }
+
+    &_label {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 8px;
+      line-height: 150%;
+      color: #000000
+    }
+
+    &_input {
+      height: 45px;
+      width: 100%;
+      background: #F4F8F4;
+      border: 1px solid #E5E5D4;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 150%;
+      padding-left: 18px;
+      display: flex;
+      align-items: center;
+      color: #1C4E29;
+
+      &::placeholder {
+        color: #6B7A6B;
+      }
+
+      @include transitions(border, color);
+
+      &:focus {
+        border: 1px solid #6B7A6B;
+
+      }
+    }
+  }
+
+  &__items {
+    width: 100%;
+
+    border-left: 1px solid #E5E5D4;
+    border-right: 1px solid #E5E5D4;
+
+    &_head {
+      border-top: 1px solid #E5E5D4;
+      border-bottom: 1px solid #E5E5D4;
+      display: flex;
+
+      &_cell {
+        padding: 8px 0;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 100%;
+
+        text-align: center;
+
+        color: #000000;
+        width: 150px;
+        flex: 0 0 150px;
+
+        &:first-child {
+          width: 100%;
+          flex: 1 100%;
+        }
+      }
+    }
+
+    &_row {
+      display: flex;
+
+      &_cell {
+        width: 150px;
+        padding: 12px 16px;
+        text-align: center;
+        flex: 0 0 150px;
+        font-size: 16px;
+        border-bottom: 1px solid #E5E5D4;
+        color: #6B7A6B;
+
+        &:not(&_total):first-child {
+          width: 100%;
+          flex: 1 100%;
+          font-family: $font-family__second;
+          font-style: normal;
+
+          text-align: left;
+          font-weight: normal;
+          font-size: 18px;
+          color: #1C4E29;
+
+        }
+
+        &:not(&_total_price):last-child {
+          font-size: 16px;
+          color: #B88626;
+        }
+
+        &_total {
+          width: 100%;
+          flex: 1 100%;
+          font-family: $font-family__main;
+          font-weight: bold;
+          text-align: left;
+          font-size: 18px;
+          color: #000000;
+        }
+
+        &_total_price {
+          font-weight: bold;
+          font-size: 18px;
+          color: #B88626;
+        }
+      }
+    }
+  }
+
+  &__delivery {
+    margin-top: 24px;
+
+    &_item {
+      display: flex;
+      margin-bottom: 12px;
+
+      input {
+        margin-right: 8px;
+        opacity: 0;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+        cursor: pointer;
+      }
+
+      .checkmark {
+        position: absolute;
+        border-radius: 50%;
+        width: 17px;
+        height: 17px;
+        border: 1px solid #6B7A6B;
+        box-sizing: border-box;
+
+
+      }
+
+      input:checked ~ .checkmark:after{
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        width: 11px;
+        top: 2px;
+        height: 11px;
+        background: #6B7A6B;
+        box-sizing: border-box;
+        left: 2px;
+
+      }
+
+    }
+  }
+
+  &__line{
+    margin: 20px 0;
+    width: 100%;
+    height: 1px;
+    background: #E5E5D4;
+  }
+  &__button{
+    height: 52px;
+    width: 225px;
+    font-size: 16px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #CB9734;
+    &:hover{
+      background-color: #B88626;
+    }
+  }
+}

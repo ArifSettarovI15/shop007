@@ -1,0 +1,35 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="section s-works anim-work">
+    <div class="section__header">
+        {% include 'frontend/sections/section-head/section-head.twig' with {
+            section_title: 'Как мы работаем',
+            mod: 'center'
+        } %}
+    </div>
+    <div class="section__content">
+        <div class="container container_md">
+            <div class="table-list table-list_arrow">
+                <div class="table-list__list js-skills">
+                    {% for step in steps.steps_steps %}
+                        <div class="table-list__item anim-work-item">
+                            <div class="ts-skill ts-skill_2 anim-work-item-elem">
+                                <div class="ts-skill__icon">
+                                    <div class="ts-skill__icon-count">{{ loop.index }}</div>
+                                    <div class="ts-skill__icon-inner">
+                                        {{ Svg.icon(step.steps_steps_icon, 1) }}
+                                    </div>
+                                </div>
+                                <div class="ts-skill__text">{{ step.steps_steps_title }}</div>
+                                <div class="ts-skill__dop">{{step.steps_steps_description}}</div>
+                            </div>
+                            <div class="arrow-skill anim-work-item-arrow">
+                                <div class="arrow-skill__icon"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="dots-container"></div>
+            </div>
+        </div>
+    </div>
+</div>

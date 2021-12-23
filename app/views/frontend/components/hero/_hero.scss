@@ -11,6 +11,7 @@
     font-size: 56px;
     line-height: 100%;
     color: #1C4E29;
+
   }
   &:after{
     content: '';
@@ -21,5 +22,26 @@
     left: 0;
     right: 0;
     bottom: 0;
+  }
+}
+@include media("<=768px"){
+  .hero{
+    &__title{
+      font-size: 36px;
+    }
+  }
+}
+@include media("<=480px"){
+  .hero{
+    &__title{
+      font-size: 36px;
+    }
+  }
+}
+@include media("<=320px"){
+  .hero{
+    &__title{
+      font-size: 32px;
+    }
   }
 }

@@ -1,0 +1,23 @@
+{% if items %}
+  <ul class="search-list" data-class-unit="list_type2">
+
+  {% for item in items %}
+    <li class="search-list__item-_1" data-class-unit="list-item_type2">
+      <a href="{{ item.item_full_url }}" class="search-list__item-link" data-class-unit="list-item-container_type2 link_type1">
+        {{ item.item_promo_title }}
+      </a>
+    </li>
+  {% endfor %}
+  </ul>
+  <div class="search-list__item-link search-list__more" data-class-unit="list-item_type2 list-item-container_type2">
+    <a href="{{ global.base_url }}/search/{{ q }}/{% if cat_id %}{{ cat_id }}/{% endif %}" class="search-list__more-link" data-class-unit="link_type2">
+      Показать все результаты
+    </a>
+    <span class="search-list__more-count" data-class-text="group1_regular size12 color1-6">
+    ({{ total }})
+  </span>
+
+  </div>
+{% else %}
+  <div class="error">Товары не найдены</div>
+{% endif %}

@@ -1,0 +1,7 @@
+<ul>
+    {%  for item in list %}
+        <li>
+            <span>{{ item.cat_title }}</span> <i data-id="{{ item.cat_id }}" class="fa fa-times"></i>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,49 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="container">
+        <div class="page__content">
+            <div class="page__info">
+                <div class="recover-form">
+                    {% if error=='' %}
+                        <div class="form" data-callback="RecoverDone">
+                            <div class="text">
+                                Установите Ваш новый пароль для входа в аккаунт
+                            </div>
+                            <div class="reg-form__fields">
+                                <input class="element" name="action" value="process_recover" type="hidden">
+                                <div class="form__data form__data_way_hor form__data_n_3">
+                                    <div class="form__element">
+                                       <div>
+                                           <div class="form__caption form__caption_required">Пароль</div>
+                                           <input type="password" class="form__input form__input_large element required" name="password" autocomplete="off">
+                                       </div>
+                                    </div>
+                                    <div class="form__element">
+                                       <div>
+                                           <div class="form__caption form__caption_required">Повторите пароль</div>
+                                           <input type="password" class="form__input form__input_large element required" name="password2" autocomplete="off">
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reg-form__under">
+                                <div class="reg-form__submit">
+                                    <div class="submit btn btn_preset_submit">
+                                        Отправить
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% include 'global/message.html.twig'%}
+                    {% endif %}
+                </div>
+            </div>
+            {% if banners %}
+                <div class="page__side-slider">
+                    {% include 'frontend/components/side-slider/side-slider.twig' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    {% set catalog = 1 %}
+    <div class="page__main">
+        <div class="container container_lg">
+            {% include 'frontend/components/catalog-list/catalog-list.twig' %}
+        </div>
+        <div class="m-1">
+            {% include 'frontend/components/screen-callback/screen-callback.twig' %}
+        </div>
+    </div>
+{% endblock %}

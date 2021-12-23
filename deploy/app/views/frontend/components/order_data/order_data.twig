@@ -1,0 +1,73 @@
+<h2 class="order__title">Детали оплаты</h2>
+
+<div class="order__data form" data-url="/basket/">
+    <input type="hidden" name="action" class="element" value="process_order">
+    <div class="order__user-info">
+        <div class="order__user-info_item order__name">
+            <div class="order__user-info_label">Ваше имя</div>
+            <input type="text" name="name" class="element order__user-info_input  required js_name_input" placeholder="Иванов Иван Иванович">
+
+        </div>
+        <div class="order__user-info_item order__phone">
+            <div class="order__user-info_label">Ваш телефон</div>
+            <input type="text" name="phone" class="element order__user-info_input required js_phone_input" placeholder="+7(937)-999-99-99">
+
+        </div>
+    </div>
+    <div class="order__user-info_addr">
+        <div class="order___name">
+            <div class="order__user-info_label">Укажете ваш адрес</div>
+            <input type="text" name="address" class="element required order__user-info_input js_name_input"
+                   placeholder="г. Москва, ул. Пушкина, д. 1, кв. 1">
+
+        </div>
+    </div>
+    <div class="order__items">
+        <div class="order__items_head">
+            <div class="order__items_head_cell">Товар</div>
+            <div class="order__items_head_cell">Количество</div>
+            <div class="order__items_head_cell">Стоимость</div>
+        </div>
+        {% for item in global.basket_items %}
+            <div class="order__items_row">
+                <div class="order__items_row_cell">{{ item.item_title }}</div>
+                <div class="order__items_row_cell">{{ item.basket_count|number_format }}</div>
+                <div class="order__items_row_cell">{{ item.item_price * item.basket_count|number_format }} ₽</div>
+            </div>
+        {% endfor %}
+
+        <div class="order__items_row">
+            <div class="order__items_row_cell order__items_row_cell_total">Итого:</div>
+            <div class="order__items_row_cell order__items_row_cell_total_price">{{ global.basket_sum }} ₽</div>
+        </div>
+    </div>
+
+    <div class="order__delivery">
+        <div class="order__delivery_item">
+
+            <input type="radio"  class=element" name="delivery_type" value="2" checked>
+            <div class="checkmark"></div>
+            <div class="order__delivery_item_label">
+                Доставка курьерской службой «SamSweets» по г. Москва в пределах МКАД 3 раб. дня (500 ₽).
+            </div>
+        </div>
+        <div class="order__delivery_item">
+
+            <input type="radio" class="element" name="delivery_type" value="1">
+            <div class="checkmark"></div>
+            <div class="order__delivery_item_label">
+                Доставка ТК «СДЭК» по России - до пункта выдачи заказов в Вашем городе.
+            </div>
+        </div>
+        <div class="order__delivery_item">
+            <input type="radio" class="element" name="delivery_type" value="3">
+            <div class="checkmark"></div>
+            <div class="order__delivery_item_label">
+                Доставка ТК «СДЭК» по России - курьером до адреса.
+            </div>
+        </div>
+    </div>
+    <div class="order__line"></div>
+    <div class="order__button submit">Оплатить</div>
+
+</div>

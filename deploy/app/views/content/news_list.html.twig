@@ -1,0 +1,26 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    {% import 'frontend/elements/badge/badge.twig' as Badge %}
+    <div class="page__main">
+        <div class="container container_lg">
+            <div class="table-data">
+                <div class="table-list table-list_second">
+                    <div class="table-list__list" data-list="articles">
+                        {% include 'frontend/components/news-item/list.twig' %}
+                    </div>
+                </div>
+                {% if paging_data.pages %}
+                    <div class="mt-3">
+                        <div class="page__paging table-paging" data-list="paging" data-table="articles">
+                            {% include 'frontend/components/paging/paging.twig' %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="m-1">
+            {% include 'frontend/components/screen-callback/screen-callback.twig' %}
+        </div>
+    </div>
+{% endblock %}
+

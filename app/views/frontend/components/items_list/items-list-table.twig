@@ -1,0 +1,5 @@
+{% for item in list %}
+    <div class="products__list_item">
+        {% include 'frontend/components/item-thumb/item-thumb.twig' with {is_catalog: catalog} %}
+    </div>
+{% endfor %}

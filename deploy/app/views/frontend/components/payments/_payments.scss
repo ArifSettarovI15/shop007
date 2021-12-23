@@ -1,0 +1,33 @@
+.payments {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -7px;
+
+  &__payment {
+    padding: 7px;
+  }
+
+  &__image {
+    @include size(64px, 32px);
+    @extend %background__cover;
+
+    &_master {
+      background-image: url('/assets/images/static/mastercard.png');
+    }
+
+    &_visa {
+      background-image: url('/assets/images/static/visa.png');
+    }
+
+    &_mir {
+      background-image: url('/assets/images/static/mirpay.png');
+    }
+    &_qiwi {
+      background-image: url("/assets/images/static/qiwipay.png");
+    }
+    &_youm {
+      background-image: url("/assets/images/static/youmpay.png");
+    }
+  }
+}
+

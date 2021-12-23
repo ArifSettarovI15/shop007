@@ -1,0 +1,27 @@
+<div class="payment_block">
+    <div class="title">Заказ ожидает оплаты</div>
+    <form action="{{ data.shop_url }}" method="post">
+        <!-- Обязательные поля -->
+        <input name="shopId" value="{{ data.shopId }}" type="hidden"/>
+        <input name="scid" value="{{ data.scId }}" type="hidden"/>
+        <input name="sum" value="{{ order_info.total_cost }}" type="hidden">
+        <input name="customerNumber" value="{% if order_info.order_user_id %}id{{ order_info.order_user_id }}{% else %}{{ order_info.order_user_email }}{% endif %}" type="hidden"/>
+        <input name="orderNumber" value="{{ order_info.order_id }}" type="hidden">
+        <input name="cps_email" value="{{ order_info.order_user_email }}" type="hidden">
+        <input name="cps_phone" value="{{ order_info.order_user_phone }}" type="hidden">
+        {% if payments %}
+            <div class="p_block">
+                <div class="p_types">
+                    Способ оплаты:<br>
+                {% for p in payments %}
+                    <div><input class="icheck" {% if order_info.order_payment==p.key%}checked="checked"{% endif %} name="paymentType" value="{{ p.yandex }}" type="radio"> {{ p.title }}
+                    </div>
+                {% endfor %}
+                </div>
+                <div>
+                    <input type="submit" class="button_1 button_1a" value="Оплатить"/>
+                </div>
+            </div>
+        {% endif %}
+    </form>
+</div>

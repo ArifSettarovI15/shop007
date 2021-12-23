@@ -1,0 +1,18 @@
+
+{%  for item in list %}
+    <div class="user-vendor-discount">
+        <input type="hidden" value="{{ item.v_id }}" class="user-d-id">
+        <span>{{ item.v_name }}:</span>
+        <select class="element user-g-value" >
+            <option value="0" {% if item.group_id==0  %}selected{% endif %}>Розница</option>
+            <option value="1" {% if item.group_id==1 %}selected{% endif %}>Опт</option>
+            <option value="2" {% if item.group_id==2  %}selected{% endif %}>Опт vip</option>
+            <option value="3" {% if item.group_id==3  %}selected{% endif %}>Фактич</option>
+        </select>
+        <i data-id="{{ item.v_id }}" class="fa fa-times"></i>
+        <div class="btn btn-primary save_user_vendor_value">
+            Сохранить
+        </div>
+    </div>
+{% endfor %}
+

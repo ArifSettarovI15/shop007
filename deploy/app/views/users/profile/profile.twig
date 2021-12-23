@@ -1,0 +1,168 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <div class="container">
+        <div class="page__content">
+            <div class="page__info">
+                <div class="form">
+                    <section class="user-cabinet">
+                        <div class="user-cabinet__line">
+                            <div class="user-cabinet__item">
+                                <div class="cabinet-block">
+                                    <div class="cabinet-block__title">
+                                        Персональные данные
+                                    </div>
+                                    <div class="cabinet-block__inner">
+                                        <input name="action" value="process_update_user" type="hidden">
+                                        <div>
+                                            <div class="cabinet-block__line">
+                                                <p>Логин/Email</p>
+                                                <span>{{ global.user_info.user_login }}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Ваше имя</p>
+                                                <span>{{ global.user_profile.profile_name }} {{ global.user_profile.profile_lastname }}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Телефон</p>
+                                                <span>{{ global.user_profile.profile_phone }}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Город</p>
+                                                <span>{% if global.user_profile.profile_city %}{{ global.user_profile.profile_city }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Компания</p>
+                                                <span>{% if global.user_profile.profile_company %}{{ global.user_profile.profile_company }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Сайт</p>
+                                                <span>{% if global.user_profile.profile_site %}{{ global.user_profile.profile_site }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>ИНН</p>
+                                                <span>{% if global.user_profile.profile_inn %}{{ global.user_profile.profile_inn }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>КПП</p>
+                                                <span>{% if global.user_profile.profile_kpp %}{{ global.user_profile.profile_kpp }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>ОГРН</p>
+                                                <span>{% if global.user_profile.profile_ogrn %}{{ global.user_profile.profile_ogrn }}{% else %}-{% endif %}</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <a href="#modal-personal-set" class="cabinet__btn popup-modal link link_2">Редактировать</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="user-cabinet__item">
+                                <div class="cabinet-block">
+                                    <div class="cabinet-block__title">
+                                        Пароль
+                                    </div>
+                                    <div class="cabinet-block__inner">
+                        <span class="cabinet-block__inner-gray">
+                            Здесь Вы можете изменить свой пароль для входа в личный кабинет
+                        </span>
+                                        <div>
+                                            <a href="#modal-personal-set2" class="cabinet__btn popup-modal  link link_2">Смена пароля</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="user-cabinet__line">
+                            <div class="user-cabinet__item">
+                                <div class="cabinet-block">
+                                    <div class="cabinet-block__title">
+                                        Финансы
+                                    </div>
+                                    <div class="cabinet-block__inner">
+                                        <div>
+                                            <div class="cabinet-block__line">
+                                                <p>Персональная скидка</p>
+                                                <span>{{ global.user_profile.profile_discount }} %</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Кредитный лимит</p>
+                                                <span>{{ format_money(global.user_profile.profile_credit) }} ₽</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Отсрочка платежа</p>
+                                                <span>{% if global.user_profile.profile_timeout %}{{ global.user_profile.profile_timeout }} дн.{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Баланс</p>
+                                                <span>{{ format_money(user_balance) }} ₽</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="user-cabinet__item">
+                                <div class="cabinet-block">
+                                    <div class="cabinet-block__title">
+                                        Банковские реквизиты
+                                    </div>
+                                    <div class="cabinet-block__inner">
+                                        <input name="action" value="process_update_user_bank" type="hidden">
+                                        <div>
+                                            <div class="cabinet-block__line">
+                                                <p>Банк</p>
+                                                <span>{% if global.user_profile.profile_bank %}{{ global.user_profile.profile_bank }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>БИК</p>
+                                                <span>{% if global.user_profile.profile_bik %}{{ global.user_profile.profile_bik }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Расчетный счет</p>
+                                                <span>{% if global.user_profile.profile_bank_account %}{{ global.user_profile.profile_bank_account }}{% else %}-{% endif %}</span>
+                                            </div>
+                                            <div class="cabinet-block__line">
+                                                <p>Корреспондентский счет</p>
+                                                <span>{% if global.user_profile.profile_corr_account %}{{ global.user_profile.profile_corr_account }}{% else %}-{% endif %}</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <a href="#modal-personal-set3" class="cabinet__btn popup-modal link link_2">Редактировать</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="user-cabinet__line">
+                            <div class="user-cabinet__item">
+                                <div class="cabinet-block">
+                                    <div class="cabinet-block__title">
+                                        Адрес доставки
+                                    </div>
+                                    <div class="cabinet-block__inner del-list">
+                                        {% include 'frontend/components/del-list/del-list.twig' %}
+                                    </div>
+                                    <div>
+                                        <a href="#modal-personal-ship" class="cabinet__btn popup-modal btn btn_preset_default">Добавить</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </section>
+                </div>
+
+                {% include 'frontend/components/modal-personal-set/modal-personal-set.twig' %}
+                {% include 'frontend/components/modal-personal-set/modal-personal-set2.twig' %}
+                {% include 'frontend/components/modal-personal-set/modal-personal-set3.twig' %}
+                {% include 'frontend/components/modal-personal-ship/modal-personal-ship.twig' %}
+        </div>
+    </div>
+{% endblock %}

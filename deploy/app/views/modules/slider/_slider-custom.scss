@@ -1,0 +1,103 @@
+@import '../../../../source/src/css/frontend/helpers/variables';
+@import '../../../../source/src/css/frontend/helpers/mixins';
+@import '../../../../source/src/css/frontend/elements/placeholders';
+
+// Arrows
+.slide-btn {
+  $root: &;
+  @extend %flex-center;
+  @include size(36px);
+  flex: 0 0 36px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  @include transitions(background-color);
+  &__icon {
+    @include size(32px);
+    svg * {
+      @include transitions(fill);
+    }
+  }
+
+  &:hover {
+    #{$root}__icon {
+      svg * {
+        fill: $color__primary--2;
+      }
+    }
+  }
+
+  &:active {
+    #{$root}__icon {
+      svg * {
+        fill: $color__dark--2;
+      }
+    }
+  }
+
+  &:disabled,
+  &.slick-disabled {
+    background-color: transparent;
+
+    #{$root}__icon {
+      svg * {
+        fill: $color__gray--1;
+      }
+    }
+  }
+}
+
+.slider-nav {
+  display: flex;
+
+  &__btn {
+    &:first-child {
+      margin-right: 14px;
+      padding-right: 15px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        width: 1px;
+        height: 18px;
+        background-color: $color__light--3;
+      }
+    }
+  }
+}
+
+.slick-dots {
+  position: relative;
+  bottom: auto;
+  li {
+    margin: 0 7px;
+    width: 10px !important;
+    height: 10px !important;
+    //@include transitions(width);
+  }
+
+  button {
+    height: 10px !important;
+    background-color: $color__light--3 !important;
+    border-radius: 10px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    @include transitions(padding);
+
+    &:before {
+      content: none !important;
+    }
+  }
+
+  .slick-active {
+    width: 36px!important;
+    button {
+      padding: 0 13px !important;
+      background-color: $color__primary--1 !important;
+    }
+  }
+}

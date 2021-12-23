@@ -1,0 +1,22 @@
+{% import 'frontend/elements/link/link_macro.twig' as Link %}
+<div class="category-head">
+    <div class="hero">
+        <div class="container container_sm">
+            <div class="hero__title">
+                {{ global.page.title }}
+            </div>
+            <div class="category-head__bc">
+                {% include 'frontend/components/breadcrumbs/breadcrumbs.twig' %}
+            </div>
+        </div>
+    </div>
+    <div class="category-head__main">
+        <div class="category-head__back">
+            {{ Link.link(back_url, 'Назад', {
+                mod: 'iconic',
+                icon_left: 'arrow-left'
+            }) }}
+        </div>
+
+    </div>
+</div>

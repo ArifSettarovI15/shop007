@@ -1,0 +1,20 @@
+{% import 'frontend/elements/svg/svg_macros.twig' as Svg %}
+<div class="item-thumb">
+    <div class="item-thumb_top">
+        <div class="item-thumb_image">
+            <img src="{{ item.item_icon_url }}" alt="">
+        </div>
+    </div>
+    <div class="item-thumb_links">
+
+        <a href="#" class="js_add_cart" data-id="{{ item.item_id }}">{{ Svg.icon('to_cart', 1, 50,50) }}</a>
+
+        <a href="{{ item.item_full_url }}">{{ Svg.icon('to_item', 1, 50,50) }}</a>
+    </div>
+    <div class="item-thumb_bottom">
+        <div class="item-thumb_title">
+            {{ item.item_title }}
+        </div>
+        <div class="item-thumb_price">{{ item.item_price }} ₽</div>
+    </div>
+</div>

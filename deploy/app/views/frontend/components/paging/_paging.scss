@@ -1,0 +1,63 @@
+.paging {
+  $root: &;
+  display: inline-flex;
+  margin: 0 -7px;
+
+  &__wrapper {
+    text-align: center;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-end;
+
+    &.active,
+    &.slick-active {
+      #{$root}__val {
+        color: $color__primary--1;
+      }
+    }
+  }
+
+  &__item {
+    @extend %flex-center;
+    @include size(36px);
+    flex: 0 0 36px;
+    cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+
+    border-color: $color__secondary--1;
+    margin: 0 7px;
+    box-shadow: none;
+
+    &_mock {
+
+      #{$root}__val {
+        color: $color__primary--1;
+        font-size: 16px;
+      }
+    }
+
+    &_arrow {
+      &:hover {
+        svg * {
+          fill: $color__primary--1;
+          @include transitions(fill);
+        }
+      }
+    }
+  }
+
+  &__val {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.2;
+    color: $color__secondary--1;
+    @include transitions(color);
+  }
+
+  &__icon {
+    @include size(32px);
+  }
+}

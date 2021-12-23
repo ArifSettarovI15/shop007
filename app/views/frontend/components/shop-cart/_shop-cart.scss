@@ -18,15 +18,43 @@
       line-height: 100%;
       color: #1C4E29;
       margin-bottom: 40px;
+      @include media('<=768px'){
+        font-size: 36px;
+      }
+      @include media('<=320px'){
+        font-size: 32px;
+      }
     }
     &_list{
       display: flex;
+      flex-wrap: wrap;
       margin: -20px;
       justify-content: space-between;
+
     }
     &_item{
       padding: 20px;
       width: calc(100%/4);
+
+      @include media('<=768px'){
+        width: calc(100%/3);
+      }
+      @include media('<=480px'){
+        width: calc(100%/2);
+      }
+      @include media('<=320px'){
+        width: calc(100%/1);
+      }
+    }
+  }
+}
+
+@include media('<=1024px'){
+  .shop-card{
+    margin-top: 30px;
+    &__row{
+      display: flex;
+      flex-direction: column;
     }
   }
 }

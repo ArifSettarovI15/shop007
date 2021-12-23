@@ -1,0 +1,41 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="s-product-block">
+    <div class="s-product-block__head">
+        <div class="s-product-block__title">Можно украсить</div>
+        <div class="s-product-block__controls" data-control-slider="t-1">
+            {% include 'modules/slider/slider_nav.twig' %}
+        </div>
+    </div>
+    <div class="table-list table-list_second">
+        <div class="table-list__list table-list__list_slider js-slider-product-3" data-slider="t-1">
+            {% for item in info.decorations %}
+                <div class="table-list__item table-list__item_second">
+                <div class="t-2">
+                    <div class="t-2__top">
+                        <div class="t-2__image">
+                            <div class="t-2__image-inner">
+                                <img src="{{ item.decoration_icon_url }}" class="image image_cover" alt="{{ item.offer_title }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="t-2__main">
+                        <div class="t-2__title">{{ item.offer_title }}</div>
+                        <div class="t-2__bottom">
+                            <div class="t-2__bottom-l">
+                                <div class="t-2__price">{{ item.offer_price }} ₽</div>
+                            </div>
+                            <div class="t-2__bottom-r">
+                                <button class="button button_md button_iconic basket-add" data-id="{{ item.offer_id }}">
+                                    <span class="button__container">
+                                        <span class="button__icon">{{ Svg.icon('cart-icon', 1) }}</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

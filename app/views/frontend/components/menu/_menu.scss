@@ -1,199 +1,28 @@
-.menu {
-  $root: &;
+.menu{
   position: absolute;
-  width: 100%;
+  top: -100vh;
+  bottom: 0;
   left: 0;
   right: 0;
-  visibility: hidden;
-  opacity: 0;
-  overflow: auto;
-  padding-bottom: 32px;
-  z-index: 100;
-  @include transitions(opacity, visibility);
-
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    @include size(100%, 32px);
-    background-image: url('/assets/images/static/menu-decor.png');
-    @extend %background__cover;
+  background-color: white;
+  z-index: 111;
+  height: 100vh;
+  @include transitions(top);
+  &.open{
+    top: 76px;
   }
-
-  &__wrapper {
-    background-color: $color__dark;
-    overflow: auto;
-
-    height: 100%;
-  }
-
-  &__container {
-    max-width: 100%;
-    padding: 32px;
-  }
-
-  &__wrapper-top {
-    padding-bottom: 32px;
-  }
-
-  &__wrapper-bottom {
-    border-top: 1px solid $color__light--3;
-  }
-
-  &__top {
-    #{$root}__container {
-      padding-bottom: 0;
-    }
-  }
-
-  &__middle {
-    #{$root}__container {
-      padding-bottom: 0;
-    }
-  }
-
-  &__title {
-    font-size: 14px;
-    line-height: 1.4;
-    color: $color__light--2;
-    margin-bottom: 14px;
-  }
-
-  &__list {
+  &_links{
     display: flex;
-    flex-wrap: wrap;
-    margin: -16px;
-  }
-
-  &__item {
-    width: (100%/4);
-    padding: 16px;
-
-    .link__text {
-      color: $color__light;
-      font-size: 14px;
-    }
-  }
-
-  .c-tags-block {
-    .button__text {
-      color: $color__light;
-    }
-  }
-
-  .m-list {
-    .button {
-      background-color: $color__primary--1;
-      border: 0;
-
-      svg * {
-        fill: $color__light;
-      }
-    }
-  }
-
-  @include media('<xl') {
-    //&__container {
-    //  padding: 32px;
-    //}
-
-    &__list {
-      margin: -12px -8px;
-    }
-
-    &__item {
-      padding: 12px 8px;
-    }
-
-    &__middle {
-      display: block;
-    }
-
-    &__title {
-      margin-bottom: 24px;
-    }
-  }
-
-  @include media('<lg') {
-    &__container {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-
-    &__item {
-      width: (100%/3);
-    }
-
-    &__bottom {
-      #{$root}__list {
-        margin: -7px -8px;
-      }
-
-      #{$root}__item {
-        padding: 7px 8px;
-      }
-    }
-  }
-
-  @include media('<md') {
-    height: calc(100vh - 46px);
-    min-height: calc(100vh - 46px);
-
-    &__container {
-      padding-top: 24px;
-      padding-bottom: 24px;
-    }
-
-    &__wrapper-top {
-      padding-bottom: 24px;
-    }
-
-    &__list {
-      margin: -12px -8px;
-    }
-
-    &__item {
-      width: (100%/2);
-      padding: 12px 8px;
-    }
-
-    &__bottom {
-      #{$root}__item {
-        width: 100%;
-        text-align: center;
-
-        .button {
-          width: 100%;
-        }
-      }
-    }
-  }
-
-  @include media('<sm') {
-    &__list {
-      margin: -7px;
-    }
-
-    &__item {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    &_item{
       width: 100%;
-      padding: 7px;
-    }
-  }
-}
-
-.menu-contact {
-  &__title {
-    font-size: 14px;
-    line-height: 1.4;
-    color: $color__light--2;
-    margin-bottom: 4px;
-  }
-
-  &__link {
-    .link__text {
+      text-align: center;
+      padding: 30px;
       font-size: 18px;
+      font-weight: 600;
+      color: #6B7A6B;
     }
   }
 }

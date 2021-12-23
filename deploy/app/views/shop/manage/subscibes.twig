@@ -1,0 +1,33 @@
+{% extends "manager/global.html.twig" %}
+{% block content %}
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/subscribes/send/">Создать рассылку</a>
+        <a class="btn btn-primary" href="{{ global.base_url }}/manager/shop/subscribes/add/">Добавить</a>
+    </div>
+
+    <div class="table_data">
+        <div class="table_data_navigation">
+            {% include 'parts/paging.html.twig' %}
+        </div>
+
+        <table class="table_bordered table_striped">
+            <thead>
+            <tr>
+                <th style="width: 100px">ID</th>
+                <th>Email</th>
+                <th>Список</th>
+                <th class="action_button"></th>
+            </tr>
+            <tr>
+                <th></th>
+                <th><input data-name="subscribe_email" data-type="filter_value" type="text"></th>
+                <th></th>
+                <th class="action_button"></th>
+            </tr>
+            </thead>
+            <tbody class="table_content">
+            {% include 'shop/manage/subscribes_table.twig' %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

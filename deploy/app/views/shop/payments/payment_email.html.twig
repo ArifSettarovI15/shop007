@@ -1,0 +1,9 @@
+{% extends "emails/global.html.twig" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+   <h1>{{ title }}</h1>
+    <p><b>Номер заказа:</b> {{ data['orderNumber'] }}</p>
+    <p><b>Дата:</b> {{ data['requestDatetime'] }}</p>
+    <p><b>Сумма:</b> {{ data['orderSumAmount'] }}</p>
+    <p><b>Плательщик:</b> {{ order_info['order_user_lastname'] }} {{ order_info['order_user_name'] }}</p>
+{% endblock %}

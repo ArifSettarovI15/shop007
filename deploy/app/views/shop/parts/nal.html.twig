@@ -1,0 +1,10 @@
+<div class="nal_info">
+  {% if nal_info.item_amount_simf %}
+    <span class="icon-yes">В наличии</span>
+  {% elseif nal_info.item_amount %}
+    <span class="icon-wait">Под заказ (3-7 дней)</span>
+  {% else %}
+    <span class="icon-wait">Под заказ</span>
+  {% endif %}
+
+</div>

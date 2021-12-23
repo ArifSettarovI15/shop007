@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+{% block content_center %}
+    <section class="main-section main-section_margin">
+      <div class="container container_white">
+        <div class="news-full">
+          <div class="news-full__item">
+            <div class="text">
+                {% block auth_content %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {%  include 'frontend/components/bottom-info/bottom-info.twig' %}
+
+
+{% endblock %}

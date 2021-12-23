@@ -1,0 +1,30 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="input-range">
+    <div class="input-range__label">{{ title }}</div>
+    <div class="input-range__range">
+        <div class="range js-input-select">
+            <div class="range__wrapper-top js-dropdown-trigger">
+                <div class="range__top">
+                    <div class="range__value">
+                        <span class="range__value-prev">От</span>
+                        <span class="range__value-count js-range-from">{{ min }}</span>
+                        <input class="{{ name }}-min filter-element" type="hidden" name="{{ name }}_range_from" data-type="filter_value" data-name="{{ name }}-range-from">
+                    </div>
+                    <div class="range__icon">
+                        {{ Svg.icon('arrow-right', 1) }}
+                    </div>
+                    <div class="range__value">
+                        <span class="range__value-prev">До</span>
+                        <span class="range__value-count js-range-to">{{ max }}</span>
+                        <input class="{{ name }}-max filter-element" type="hidden" name="{{ name }}_range_to" data-type="filter_value" data-name="{{ name }}-range-to">
+                    </div>
+                </div>
+            </div>
+            <div class="range__wrapper-bottom js-dropdown-content">
+                <div class="range__bottom">
+                    <div class="range__core js-input-range"  data-name="{{ name }}" data-min="{{ min }}" data-max="{{ max }}" data-v-min="{{ current_min }}" data-v-max="{{ current_max }}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

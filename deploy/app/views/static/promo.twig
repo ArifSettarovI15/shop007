@@ -1,0 +1,29 @@
+{% extends "global.html.twig" %}
+{% block content %}
+    <section class="main-section main-section_margin">
+        <div class="container container_white">
+            <div class="news-full">
+                <div class="news-full__item">
+                    <div class="text">
+                        <section class="main-section">
+                            <div class="container">
+                                {% include 'frontend/components/category-block/category-block.twig' with {
+                                'list':plitka
+                                }%}
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {%  include 'frontend/components/last_news/last_news.twig' with {
+    'list':last_news
+    } %}
+
+    {%  include 'frontend/components/bottom-info/bottom-info.twig' %}
+
+    <div class="page__buffer"></div>
+{% endblock %}

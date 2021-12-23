@@ -1,0 +1,7 @@
+<ul class="sortable cats_filters">
+    {%  for item in list %}
+        <li data-id="{{ item.sprav_id }}">
+            <span>{{ item.sprav_label }}</span> {% if item.sprav_filter %}(поиск){% endif %} <i data-id="{{ item.sprav_id }}" class="fa fa-times"></i>
+        </li>
+    {% endfor %}
+</ul>

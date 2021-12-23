@@ -1,0 +1,17 @@
+{% extends "emails/global.html.twig" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    {% if type == 'callback' %}
+        <p><b>Имя:</b> {{ name }}</p>
+        <p><b>Телефон:</b> {{ phone }}</p>
+    {% elseif type == 'order'%}
+        {% include 'frontend/components/order_done/order_done.twig' %}
+    {% elseif type == 'review'%}
+        <p><b>Имя:</b> {{ name }}</p>
+        <p><b>Товар:</b> {{ item_name }}</p>
+        <p><b>Комментарий:</b> {{ feed_text }}</p>
+        <p><b>Рейтинг:</b> {{ rating }}</p>
+    {% endif %}
+
+
+{% endblock %}

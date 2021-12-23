@@ -1,0 +1,20 @@
+{% import "frontend/elements/svg/svg_macros.twig" as Svg %}
+<div class="tm-info">
+    <div class="tm-info__l">
+        <div class="tm-info__text anim-team-text">
+            {{about.about_text|raw}}
+        </div>
+    </div>
+    <div class="tm-info__r">
+        <div class="tm-info__list anim-team-list">
+            {% for skill in about.about_skills %}
+            <div class="tm-info__item">
+                <div class="tm-info__icon">
+                    <div class="tm-info__icon-inner">{{ Svg.icon(skill.about_skills_icon) }}</div>
+                </div>
+                <div class="tm-info__descr">{{skill.about_skills_title}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

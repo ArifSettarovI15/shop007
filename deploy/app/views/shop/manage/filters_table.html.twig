@@ -1,0 +1,42 @@
+{% for item in list %}
+    <tr  data-id="{{ item.field_id }}">
+        <td class="sort_field_element">
+            <div class="handle">
+                <i class="fa fa-arrows" aria-hidden="true"></i>
+            </div>
+        </td>
+        <td>
+            {% if item.value_parent=='' %}
+            <div data-type="field_filter" class="badge_status2   {% if item.cat_parent_id not in item.values_cats and item.cat_id not in item.values_cats  %}no{% else %}yes{% endif %}" data-value="{{ item.field_id }}">
+                <span class="badge badge-danger">фильтр</span>
+                <span class="badge badge-success">фильтр</span>
+            </div>
+            {% endif %}
+        </td>
+        <td>
+           {{ item.field_title }}
+        </td>
+        <td>
+            <div class="select_parent_filter">
+                {% if item.syn %}
+                    {% for s in item.syn %}
+                        <div>{{ all_filters[s]['field_title'] }} - <a class="c_update_field_parent" href="#" data-field="{{ s }}">[D]</a></div>
+                    {% endfor %}
+                {% else %}
+                <select>
+                    <option></option>
+                    {% for select in select_fields %}
+                        <option value="{{ select.field_id }}">{{ select.field_title }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            </div>
+        </td>
+        <td>
+            {{ item.count }}
+        </td>
+        <td>
+            <span title="{{ item.vvv }}">{{ item.values|length }}</span>
+        </td>
+    </tr>
+{% endfor %}
