@@ -1,0 +1,218 @@
+swagger: '2.0'
+info:
+  description: 'Тест Redoc OpenApi v3 на lumen'
+  version: DEV
+  title: ItPelag WorkStore
+  contact:
+    email: a.settarov@itpelag.com
+host: localhost:1081
+basePath: "/api/"
+tags:
+  - name: Test1
+    description: Первый тестовый раздел
+  - name: store
+    description: Access to Petstore orders
+
+schemes:
+#  - https
+  - http
+paths:
+  "/test1/{itemId}/testResuest1":
+    post:
+      tags:
+          - Test1
+      summary: Тестовый запрос 1
+      description: 'Описание тестового запроса 1 Тестовый запрос 1Тестовый запрос 1Тестовый запрос 1Тестовый запрос 1Тестовый запрос 1'
+      operationId: uploadFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet to update
+          required: true
+          type: integer
+          format: int64
+        - name: additionalMetadata
+          in: formData
+          description: Additional data to pass to server
+          required: false
+          type: string
+        - name: file
+          in: formData
+          description: file to upload
+          required: false
+          type: file
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  "/store/order":
+    post:
+      tags:
+        - store
+      summary: Place an order for a pet
+      description: ''
+      operationId: placeOrder
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - in: body
+          name: body
+          description: order placed for purchasing the pet
+          required: true
+          schema:
+            "$ref": "#/definitions/Order"
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            "$ref": "#/definitions/Order"
+        '400':
+          description: Invalid Order
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: https://petstore.swagger.io/oauth/authorize
+    flow: implicit
+    scopes:
+      read:pets: read your pets
+      write:pets: modify pets in your account
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+  Category:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    xml:
+      name: Category
+  Pet:
+    type: object
+    required:
+      - name
+      - photoUrls
+    properties:
+      id:
+        type: integer
+        format: int64
+      category:
+        "$ref": "#/definitions/Category"
+      name:
+        type: string
+        example: doggie
+      photoUrls:
+        type: array
+        xml:
+          wrapped: true
+        items:
+          type: string
+          xml:
+            name: photoUrl
+      tags:
+        type: array
+        xml:
+          wrapped: true
+        items:
+          xml:
+            name: tag
+          "$ref": "#/definitions/Tag"
+      status:
+        type: string
+        description: pet status in the store
+        enum:
+          - available
+          - pending
+          - sold
+    xml:
+      name: Pet
+  Tag:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    xml:
+      name: Tag
+  Order:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      petId:
+        type: integer
+        format: int64
+      quantity:
+        type: integer
+        format: int32
+      shipDate:
+        type: string
+        format: date-time
+      status:
+        type: string
+        description: Order Status
+        enum:
+          - placed
+          - approved
+          - delivered
+      complete:
+        type: boolean
+    xml:
+      name: Order
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    xml:
+      name: User
+externalDocs:
+  description: Еще какая то хуйня
+  url: http://swagger.io
